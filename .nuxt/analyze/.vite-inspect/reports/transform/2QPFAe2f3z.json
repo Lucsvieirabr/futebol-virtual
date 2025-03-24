@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "import { DomHandler, UniqueComponentId } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport PaginatorStyle from 'primevue/paginator/style';\nimport { openBlock, createElementBlock, mergeProps, toDisplayString, resolveDirective, withDirectives, createBlock, resolveDynamicComponent, resolveComponent, normalizeClass, createSlots, withCtx, Fragment, renderList, createTextVNode, normalizeProps, renderSlot, createCommentVNode } from 'vue';\nimport AngleDoubleLeftIcon from 'primevue/icons/angledoubleleft';\nimport Ripple from 'primevue/ripple';\nimport Dropdown from 'primevue/dropdown';\nimport InputNumber from 'primevue/inputnumber';\nimport AngleDoubleRightIcon from 'primevue/icons/angledoubleright';\nimport AngleRightIcon from 'primevue/icons/angleright';\nimport AngleLeftIcon from 'primevue/icons/angleleft';\n\nvar script$a = {\n  name: 'BasePaginator',\n  \"extends\": BaseComponent,\n  props: {\n    totalRecords: {\n      type: Number,\n      \"default\": 0\n    },\n    rows: {\n      type: Number,\n      \"default\": 0\n    },\n    first: {\n      type: Number,\n      \"default\": 0\n    },\n    pageLinkSize: {\n      type: Number,\n      \"default\": 5\n    },\n    rowsPerPageOptions: {\n      type: Array,\n      \"default\": null\n    },\n    template: {\n      type: [Object, String],\n      \"default\": 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown'\n    },\n    currentPageReportTemplate: {\n      type: null,\n      \"default\": '({currentPage} of {totalPages})'\n    },\n    alwaysShow: {\n      type: Boolean,\n      \"default\": true\n    }\n  },\n  style: PaginatorStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script$9 = {\n  name: 'CurrentPageReport',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  props: {\n    pageCount: {\n      type: Number,\n      \"default\": 0\n    },\n    currentPage: {\n      type: Number,\n      \"default\": 0\n    },\n    page: {\n      type: Number,\n      \"default\": 0\n    },\n    first: {\n      type: Number,\n      \"default\": 0\n    },\n    rows: {\n      type: Number,\n      \"default\": 0\n    },\n    totalRecords: {\n      type: Number,\n      \"default\": 0\n    },\n    template: {\n      type: String,\n      \"default\": '({currentPage} of {totalPages})'\n    }\n  },\n  computed: {\n    text: function text() {\n      var text = this.template.replace('{currentPage}', this.currentPage).replace('{totalPages}', this.pageCount).replace('{first}', this.pageCount > 0 ? this.first + 1 : 0).replace('{last}', Math.min(this.first + this.rows, this.totalRecords)).replace('{rows}', this.rows).replace('{totalRecords}', this.totalRecords);\n      return text;\n    }\n  }\n};\n\nfunction render$9(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"span\", mergeProps({\n    \"class\": _ctx.cx('current')\n  }, _ctx.ptm('current')), toDisplayString($options.text), 17);\n}\n\nscript$9.render = render$9;\n\nvar script$8 = {\n  name: 'FirstPageLink',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  props: {\n    template: {\n      type: Function,\n      \"default\": null\n    }\n  },\n  methods: {\n    getPTOptions: function getPTOptions(key) {\n      return this.ptm(key, {\n        context: {\n          disabled: this.$attrs.disabled\n        }\n      });\n    }\n  },\n  components: {\n    AngleDoubleLeftIcon: AngleDoubleLeftIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nfunction render$8(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return withDirectives((openBlock(), createElementBlock(\"button\", mergeProps({\n    \"class\": _ctx.cx('firstPageButton'),\n    type: \"button\"\n  }, $options.getPTOptions('firstPageButton'), {\n    \"data-pc-group-section\": \"pagebutton\"\n  }), [(openBlock(), createBlock(resolveDynamicComponent($props.template || 'AngleDoubleLeftIcon'), mergeProps({\n    \"class\": _ctx.cx('firstPageIcon')\n  }, $options.getPTOptions('firstPageIcon')), null, 16, [\"class\"]))], 16)), [[_directive_ripple]]);\n}\n\nscript$8.render = render$8;\n\nvar script$7 = {\n  name: 'JumpToPageDropdown',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  emits: ['page-change'],\n  props: {\n    page: Number,\n    pageCount: Number,\n    disabled: Boolean,\n    templates: null\n  },\n  methods: {\n    onChange: function onChange(value) {\n      this.$emit('page-change', value);\n    }\n  },\n  computed: {\n    pageOptions: function pageOptions() {\n      var opts = [];\n      for (var i = 0; i < this.pageCount; i++) {\n        opts.push({\n          label: String(i + 1),\n          value: i\n        });\n      }\n      return opts;\n    }\n  },\n  components: {\n    JTPDropdown: Dropdown\n  }\n};\n\nfunction render$7(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_JTPDropdown = resolveComponent(\"JTPDropdown\");\n  return openBlock(), createBlock(_component_JTPDropdown, {\n    modelValue: $props.page,\n    options: $options.pageOptions,\n    optionLabel: \"label\",\n    optionValue: \"value\",\n    \"onUpdate:modelValue\": _cache[0] || (_cache[0] = function ($event) {\n      return $options.onChange($event);\n    }),\n    \"class\": normalizeClass(_ctx.cx('jumpToPageDropdown')),\n    disabled: $props.disabled,\n    unstyled: _ctx.unstyled,\n    pt: _ctx.ptm('jumpToPageDropdown'),\n    \"data-pc-group-section\": \"pagedropdown\"\n  }, createSlots({\n    _: 2\n  }, [$props.templates['jumptopagedropdownicon'] ? {\n    name: \"dropdownicon\",\n    fn: withCtx(function (slotProps) {\n      return [(openBlock(), createBlock(resolveDynamicComponent($props.templates['jumptopagedropdownicon']), {\n        \"class\": normalizeClass(slotProps[\"class\"])\n      }, null, 8, [\"class\"]))];\n    }),\n    key: \"0\"\n  } : undefined]), 1032, [\"modelValue\", \"options\", \"class\", \"disabled\", \"unstyled\", \"pt\"]);\n}\n\nscript$7.render = render$7;\n\nvar script$6 = {\n  name: 'JumpToPageInput',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  inheritAttrs: false,\n  emits: ['page-change'],\n  props: {\n    page: Number,\n    pageCount: Number,\n    disabled: Boolean\n  },\n  data: function data() {\n    return {\n      d_page: this.page\n    };\n  },\n  watch: {\n    page: function page(newValue) {\n      this.d_page = newValue;\n    }\n  },\n  methods: {\n    onChange: function onChange(value) {\n      if (value !== this.page) {\n        this.d_page = value;\n        this.$emit('page-change', value - 1);\n      }\n    }\n  },\n  computed: {\n    inputArialabel: function inputArialabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.jumpToPageInputLabel : undefined;\n    }\n  },\n  components: {\n    JTPInput: InputNumber\n  }\n};\n\nfunction render$6(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_JTPInput = resolveComponent(\"JTPInput\");\n  return openBlock(), createBlock(_component_JTPInput, {\n    ref: \"jtpInput\",\n    modelValue: $data.d_page,\n    \"class\": normalizeClass(_ctx.cx('jumpToPageInput')),\n    \"aria-label\": $options.inputArialabel,\n    disabled: $props.disabled,\n    \"onUpdate:modelValue\": $options.onChange,\n    unstyled: _ctx.unstyled,\n    pt: _ctx.ptm('jumpToPageInput')\n  }, null, 8, [\"modelValue\", \"class\", \"aria-label\", \"disabled\", \"onUpdate:modelValue\", \"unstyled\", \"pt\"]);\n}\n\nscript$6.render = render$6;\n\nvar script$5 = {\n  name: 'LastPageLink',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  props: {\n    template: {\n      type: Function,\n      \"default\": null\n    }\n  },\n  methods: {\n    getPTOptions: function getPTOptions(key) {\n      return this.ptm(key, {\n        context: {\n          disabled: this.$attrs.disabled\n        }\n      });\n    }\n  },\n  components: {\n    AngleDoubleRightIcon: AngleDoubleRightIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nfunction render$5(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return withDirectives((openBlock(), createElementBlock(\"button\", mergeProps({\n    \"class\": _ctx.cx('lastPageButton'),\n    type: \"button\"\n  }, $options.getPTOptions('lastPageButton'), {\n    \"data-pc-group-section\": \"pagebutton\"\n  }), [(openBlock(), createBlock(resolveDynamicComponent($props.template || 'AngleDoubleRightIcon'), mergeProps({\n    \"class\": _ctx.cx('lastPageIcon')\n  }, $options.getPTOptions('lastPageIcon')), null, 16, [\"class\"]))], 16)), [[_directive_ripple]]);\n}\n\nscript$5.render = render$5;\n\nvar script$4 = {\n  name: 'NextPageLink',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  props: {\n    template: {\n      type: Function,\n      \"default\": null\n    }\n  },\n  methods: {\n    getPTOptions: function getPTOptions(key) {\n      return this.ptm(key, {\n        context: {\n          disabled: this.$attrs.disabled\n        }\n      });\n    }\n  },\n  components: {\n    AngleRightIcon: AngleRightIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nfunction render$4(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return withDirectives((openBlock(), createElementBlock(\"button\", mergeProps({\n    \"class\": _ctx.cx('nextPageButton'),\n    type: \"button\"\n  }, $options.getPTOptions('nextPageButton'), {\n    \"data-pc-group-section\": \"pagebutton\"\n  }), [(openBlock(), createBlock(resolveDynamicComponent($props.template || 'AngleRightIcon'), mergeProps({\n    \"class\": _ctx.cx('nextPageIcon')\n  }, $options.getPTOptions('nextPageIcon')), null, 16, [\"class\"]))], 16)), [[_directive_ripple]]);\n}\n\nscript$4.render = render$4;\n\nvar script$3 = {\n  name: 'PageLinks',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  inheritAttrs: false,\n  emits: ['click'],\n  props: {\n    value: Array,\n    page: Number\n  },\n  methods: {\n    getPTOptions: function getPTOptions(pageLink, key) {\n      return this.ptm(key, {\n        context: {\n          active: pageLink === this.page\n        }\n      });\n    },\n    onPageLinkClick: function onPageLinkClick(event, pageLink) {\n      this.$emit('click', {\n        originalEvent: event,\n        value: pageLink\n      });\n    },\n    ariaPageLabel: function ariaPageLabel(value) {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.pageLabel.replace(/{page}/g, value) : undefined;\n    }\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nvar _hoisted_1 = [\"aria-label\", \"aria-current\", \"onClick\", \"data-p-highlight\"];\nfunction render$3(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return openBlock(), createElementBlock(\"span\", mergeProps({\n    \"class\": _ctx.cx('pages')\n  }, _ctx.ptm('pages')), [(openBlock(true), createElementBlock(Fragment, null, renderList($props.value, function (pageLink) {\n    return withDirectives((openBlock(), createElementBlock(\"button\", mergeProps({\n      key: pageLink,\n      \"class\": _ctx.cx('pageButton', {\n        pageLink: pageLink\n      }),\n      type: \"button\",\n      \"aria-label\": $options.ariaPageLabel(pageLink),\n      \"aria-current\": pageLink - 1 === $props.page ? 'page' : undefined,\n      onClick: function onClick($event) {\n        return $options.onPageLinkClick($event, pageLink);\n      }\n    }, $options.getPTOptions(pageLink - 1, 'pageButton'), {\n      \"data-p-highlight\": pageLink - 1 === $props.page\n    }), [createTextVNode(toDisplayString(pageLink), 1)], 16, _hoisted_1)), [[_directive_ripple]]);\n  }), 128))], 16);\n}\n\nscript$3.render = render$3;\n\nvar script$2 = {\n  name: 'PrevPageLink',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  props: {\n    template: {\n      type: Function,\n      \"default\": null\n    }\n  },\n  methods: {\n    getPTOptions: function getPTOptions(key) {\n      return this.ptm(key, {\n        context: {\n          disabled: this.$attrs.disabled\n        }\n      });\n    }\n  },\n  components: {\n    AngleLeftIcon: AngleLeftIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nfunction render$2(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return withDirectives((openBlock(), createElementBlock(\"button\", mergeProps({\n    \"class\": _ctx.cx('previousPageButton'),\n    type: \"button\"\n  }, $options.getPTOptions('previousPageButton'), {\n    \"data-pc-group-section\": \"pagebutton\"\n  }), [(openBlock(), createBlock(resolveDynamicComponent($props.template || 'AngleLeftIcon'), mergeProps({\n    \"class\": _ctx.cx('previousPageIcon')\n  }, $options.getPTOptions('previousPageIcon')), null, 16, [\"class\"]))], 16)), [[_directive_ripple]]);\n}\n\nscript$2.render = render$2;\n\nvar script$1 = {\n  name: 'RowsPerPageDropdown',\n  hostName: 'Paginator',\n  \"extends\": BaseComponent,\n  emits: ['rows-change'],\n  props: {\n    options: Array,\n    rows: Number,\n    disabled: Boolean,\n    templates: null\n  },\n  methods: {\n    onChange: function onChange(value) {\n      this.$emit('rows-change', value);\n    }\n  },\n  computed: {\n    rowsOptions: function rowsOptions() {\n      var opts = [];\n      if (this.options) {\n        for (var i = 0; i < this.options.length; i++) {\n          opts.push({\n            label: String(this.options[i]),\n            value: this.options[i]\n          });\n        }\n      }\n      return opts;\n    }\n  },\n  components: {\n    RPPDropdown: Dropdown\n  }\n};\n\nfunction render$1(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_RPPDropdown = resolveComponent(\"RPPDropdown\");\n  return openBlock(), createBlock(_component_RPPDropdown, {\n    modelValue: $props.rows,\n    options: $options.rowsOptions,\n    optionLabel: \"label\",\n    optionValue: \"value\",\n    \"onUpdate:modelValue\": _cache[0] || (_cache[0] = function ($event) {\n      return $options.onChange($event);\n    }),\n    \"class\": normalizeClass(_ctx.cx('rowPerPageDropdown')),\n    disabled: $props.disabled,\n    unstyled: _ctx.unstyled,\n    pt: _ctx.ptm('rowPerPageDropdown'),\n    \"data-pc-group-section\": \"pagedropdown\"\n  }, createSlots({\n    _: 2\n  }, [$props.templates['rowsperpagedropdownicon'] ? {\n    name: \"dropdownicon\",\n    fn: withCtx(function (slotProps) {\n      return [(openBlock(), createBlock(resolveDynamicComponent($props.templates['rowsperpagedropdownicon']), {\n        \"class\": normalizeClass(slotProps[\"class\"])\n      }, null, 8, [\"class\"]))];\n    }),\n    key: \"0\"\n  } : undefined]), 1032, [\"modelValue\", \"options\", \"class\", \"disabled\", \"unstyled\", \"pt\"]);\n}\n\nscript$1.render = render$1;\n\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && iter[Symbol.iterator] != null || iter[\"@@iterator\"] != null) return Array.from(iter); }\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }\nfunction _iterableToArrayLimit(r, l) { var t = null == r ? null : \"undefined\" != typeof Symbol && r[Symbol.iterator] || r[\"@@iterator\"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t[\"return\"] && (u = t[\"return\"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\nvar script = {\n  name: 'Paginator',\n  \"extends\": script$a,\n  inheritAttrs: false,\n  emits: ['update:first', 'update:rows', 'page'],\n  data: function data() {\n    return {\n      d_first: this.first,\n      d_rows: this.rows\n    };\n  },\n  watch: {\n    first: function first(newValue) {\n      this.d_first = newValue;\n    },\n    rows: function rows(newValue) {\n      this.d_rows = newValue;\n    },\n    totalRecords: function totalRecords(newValue) {\n      if (this.page > 0 && newValue && this.d_first >= newValue) {\n        this.changePage(this.pageCount - 1);\n      }\n    }\n  },\n  mounted: function mounted() {\n    this.setPaginatorAttribute();\n    this.createStyle();\n  },\n  methods: {\n    changePage: function changePage(p) {\n      var pc = this.pageCount;\n      if (p >= 0 && p < pc) {\n        this.d_first = this.d_rows * p;\n        var state = {\n          page: p,\n          first: this.d_first,\n          rows: this.d_rows,\n          pageCount: pc\n        };\n        this.$emit('update:first', this.d_first);\n        this.$emit('update:rows', this.d_rows);\n        this.$emit('page', state);\n      }\n    },\n    changePageToFirst: function changePageToFirst(event) {\n      if (!this.isFirstPage) {\n        this.changePage(0);\n      }\n      event.preventDefault();\n    },\n    changePageToPrev: function changePageToPrev(event) {\n      this.changePage(this.page - 1);\n      event.preventDefault();\n    },\n    changePageLink: function changePageLink(event) {\n      this.changePage(event.value - 1);\n      event.originalEvent.preventDefault();\n    },\n    changePageToNext: function changePageToNext(event) {\n      this.changePage(this.page + 1);\n      event.preventDefault();\n    },\n    changePageToLast: function changePageToLast(event) {\n      if (!this.isLastPage) {\n        this.changePage(this.pageCount - 1);\n      }\n      event.preventDefault();\n    },\n    onRowChange: function onRowChange(value) {\n      this.d_rows = value;\n      this.changePage(this.page);\n    },\n    createStyle: function createStyle() {\n      var _this = this;\n      if (this.hasBreakpoints() && !this.isUnstyled) {\n        var _this$$primevue;\n        this.styleElement = document.createElement('style');\n        this.styleElement.type = 'text/css';\n        DomHandler.setAttribute(this.styleElement, 'nonce', (_this$$primevue = this.$primevue) === null || _this$$primevue === void 0 || (_this$$primevue = _this$$primevue.config) === null || _this$$primevue === void 0 || (_this$$primevue = _this$$primevue.csp) === null || _this$$primevue === void 0 ? void 0 : _this$$primevue.nonce);\n        document.head.appendChild(this.styleElement);\n        var innerHTML = '';\n        var keys = Object.keys(this.template);\n        var sortedBreakpoints = {};\n        keys.sort(function (a, b) {\n          return parseInt(a) - parseInt(b);\n        }).forEach(function (key) {\n          sortedBreakpoints[key] = _this.template[key];\n        });\n        for (var _i = 0, _Object$entries = Object.entries(Object.entries(sortedBreakpoints)); _i < _Object$entries.length; _i++) {\n          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),\n            index = _Object$entries$_i[0],\n            _Object$entries$_i$ = _slicedToArray(_Object$entries$_i[1], 1),\n            key = _Object$entries$_i$[0];\n          var minValue = void 0,\n            calculatedMinValue = void 0;\n          if (key !== 'default' && typeof Object.keys(sortedBreakpoints)[index - 1] === 'string') {\n            calculatedMinValue = Number(Object.keys(sortedBreakpoints)[index - 1].slice(0, -2)) + 1 + 'px';\n          } else {\n            calculatedMinValue = Object.keys(sortedBreakpoints)[index - 1];\n          }\n          minValue = Object.entries(sortedBreakpoints)[index - 1] ? \"and (min-width:\".concat(calculatedMinValue, \")\") : '';\n          if (key === 'default') {\n            innerHTML += \"\\n                            @media screen \".concat(minValue, \" {\\n                                .paginator[\").concat(this.attributeSelector, \"],\\n                                    display: flex;\\n                                }\\n                            }\\n                        \");\n          } else {\n            innerHTML += \"\\n.paginator[\".concat(this.attributeSelector, \"], .p-paginator-\").concat(key, \" {\\n    display: none;\\n}\\n@media screen \").concat(minValue, \" and (max-width: \").concat(key, \") {\\n    .paginator[\").concat(this.attributeSelector, \"], .p-paginator-\").concat(key, \" {\\n        display: flex;\\n    }\\n    .paginator[\").concat(this.attributeSelector, \"],\\n    .p-paginator-default{\\n        display: none;\\n    }\\n}\\n                    \");\n          }\n        }\n        this.styleElement.innerHTML = innerHTML;\n      }\n    },\n    hasBreakpoints: function hasBreakpoints() {\n      return _typeof(this.template) === 'object';\n    },\n    setPaginatorAttribute: function setPaginatorAttribute() {\n      var _this2 = this;\n      if (this.$refs.paginator && this.$refs.paginator.length >= 0) {\n        _toConsumableArray(this.$refs.paginator).forEach(function (el) {\n          el.setAttribute(_this2.attributeSelector, '');\n        });\n      }\n    },\n    getAriaLabel: function getAriaLabel(labelType) {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria[labelType] : undefined;\n    }\n  },\n  computed: {\n    templateItems: function templateItems() {\n      var keys = {};\n      if (this.hasBreakpoints()) {\n        keys = this.template;\n        if (!keys[\"default\"]) {\n          keys[\"default\"] = 'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown';\n        }\n        for (var item in keys) {\n          keys[item] = this.template[item].split(' ').map(function (value) {\n            return value.trim();\n          });\n        }\n        return keys;\n      }\n      keys['default'] = this.template.split(' ').map(function (value) {\n        return value.trim();\n      });\n      return keys;\n    },\n    page: function page() {\n      return Math.floor(this.d_first / this.d_rows);\n    },\n    pageCount: function pageCount() {\n      return Math.ceil(this.totalRecords / this.d_rows);\n    },\n    isFirstPage: function isFirstPage() {\n      return this.page === 0;\n    },\n    isLastPage: function isLastPage() {\n      return this.page === this.pageCount - 1;\n    },\n    calculatePageLinkBoundaries: function calculatePageLinkBoundaries() {\n      var numberOfPages = this.pageCount;\n      var visiblePages = Math.min(this.pageLinkSize, numberOfPages);\n\n      //calculate range, keep current in middle if necessary\n      var start = Math.max(0, Math.ceil(this.page - visiblePages / 2));\n      var end = Math.min(numberOfPages - 1, start + visiblePages - 1);\n\n      //check when approaching to last page\n      var delta = this.pageLinkSize - (end - start + 1);\n      start = Math.max(0, start - delta);\n      return [start, end];\n    },\n    pageLinks: function pageLinks() {\n      var pageLinks = [];\n      var boundaries = this.calculatePageLinkBoundaries;\n      var start = boundaries[0];\n      var end = boundaries[1];\n      for (var i = start; i <= end; i++) {\n        pageLinks.push(i + 1);\n      }\n      return pageLinks;\n    },\n    currentState: function currentState() {\n      return {\n        page: this.page,\n        first: this.d_first,\n        rows: this.d_rows\n      };\n    },\n    empty: function empty() {\n      return this.pageCount === 0;\n    },\n    currentPage: function currentPage() {\n      return this.pageCount > 0 ? this.page + 1 : 0;\n    },\n    attributeSelector: function attributeSelector() {\n      return UniqueComponentId();\n    }\n  },\n  components: {\n    CurrentPageReport: script$9,\n    FirstPageLink: script$8,\n    LastPageLink: script$5,\n    NextPageLink: script$4,\n    PageLinks: script$3,\n    PrevPageLink: script$2,\n    RowsPerPageDropdown: script$1,\n    JumpToPageDropdown: script$7,\n    JumpToPageInput: script$6\n  }\n};\n\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_FirstPageLink = resolveComponent(\"FirstPageLink\");\n  var _component_PrevPageLink = resolveComponent(\"PrevPageLink\");\n  var _component_NextPageLink = resolveComponent(\"NextPageLink\");\n  var _component_LastPageLink = resolveComponent(\"LastPageLink\");\n  var _component_PageLinks = resolveComponent(\"PageLinks\");\n  var _component_CurrentPageReport = resolveComponent(\"CurrentPageReport\");\n  var _component_RowsPerPageDropdown = resolveComponent(\"RowsPerPageDropdown\");\n  var _component_JumpToPageDropdown = resolveComponent(\"JumpToPageDropdown\");\n  var _component_JumpToPageInput = resolveComponent(\"JumpToPageInput\");\n  return (_ctx.alwaysShow ? true : $options.pageLinks && $options.pageLinks.length > 1) ? (openBlock(), createElementBlock(\"nav\", normalizeProps(mergeProps({\n    key: 0\n  }, _ctx.ptmi('paginatorWrapper'))), [(openBlock(true), createElementBlock(Fragment, null, renderList($options.templateItems, function (value, key) {\n    return openBlock(), createElementBlock(\"div\", mergeProps({\n      key: key,\n      ref_for: true,\n      ref: \"paginator\",\n      \"class\": _ctx.cx('paginator', {\n        key: key\n      })\n    }, _ctx.ptm('root')), [_ctx.$slots.start ? (openBlock(), createElementBlock(\"div\", mergeProps({\n      key: 0,\n      \"class\": _ctx.cx('start')\n    }, _ctx.ptm('start')), [renderSlot(_ctx.$slots, \"start\", {\n      state: $options.currentState\n    })], 16)) : createCommentVNode(\"\", true), (openBlock(true), createElementBlock(Fragment, null, renderList(value, function (item) {\n      return openBlock(), createElementBlock(Fragment, {\n        key: item\n      }, [item === 'FirstPageLink' ? (openBlock(), createBlock(_component_FirstPageLink, {\n        key: 0,\n        \"aria-label\": $options.getAriaLabel('firstPageLabel'),\n        template: _ctx.$slots.firstpagelinkicon,\n        onClick: _cache[0] || (_cache[0] = function ($event) {\n          return $options.changePageToFirst($event);\n        }),\n        disabled: $options.isFirstPage || $options.empty,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"template\", \"disabled\", \"unstyled\", \"pt\"])) : item === 'PrevPageLink' ? (openBlock(), createBlock(_component_PrevPageLink, {\n        key: 1,\n        \"aria-label\": $options.getAriaLabel('prevPageLabel'),\n        template: _ctx.$slots.prevpagelinkicon,\n        onClick: _cache[1] || (_cache[1] = function ($event) {\n          return $options.changePageToPrev($event);\n        }),\n        disabled: $options.isFirstPage || $options.empty,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"template\", \"disabled\", \"unstyled\", \"pt\"])) : item === 'NextPageLink' ? (openBlock(), createBlock(_component_NextPageLink, {\n        key: 2,\n        \"aria-label\": $options.getAriaLabel('nextPageLabel'),\n        template: _ctx.$slots.nextpagelinkicon,\n        onClick: _cache[2] || (_cache[2] = function ($event) {\n          return $options.changePageToNext($event);\n        }),\n        disabled: $options.isLastPage || $options.empty,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"template\", \"disabled\", \"unstyled\", \"pt\"])) : item === 'LastPageLink' ? (openBlock(), createBlock(_component_LastPageLink, {\n        key: 3,\n        \"aria-label\": $options.getAriaLabel('lastPageLabel'),\n        template: _ctx.$slots.lastpagelinkicon,\n        onClick: _cache[3] || (_cache[3] = function ($event) {\n          return $options.changePageToLast($event);\n        }),\n        disabled: $options.isLastPage || $options.empty,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"template\", \"disabled\", \"unstyled\", \"pt\"])) : item === 'PageLinks' ? (openBlock(), createBlock(_component_PageLinks, {\n        key: 4,\n        \"aria-label\": $options.getAriaLabel('pageLabel'),\n        value: $options.pageLinks,\n        page: $options.page,\n        onClick: _cache[4] || (_cache[4] = function ($event) {\n          return $options.changePageLink($event);\n        }),\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"value\", \"page\", \"pt\"])) : item === 'CurrentPageReport' ? (openBlock(), createBlock(_component_CurrentPageReport, {\n        key: 5,\n        \"aria-live\": \"polite\",\n        template: _ctx.currentPageReportTemplate,\n        currentPage: $options.currentPage,\n        page: $options.page,\n        pageCount: $options.pageCount,\n        first: $data.d_first,\n        rows: $data.d_rows,\n        totalRecords: _ctx.totalRecords,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"template\", \"currentPage\", \"page\", \"pageCount\", \"first\", \"rows\", \"totalRecords\", \"unstyled\", \"pt\"])) : item === 'RowsPerPageDropdown' && _ctx.rowsPerPageOptions ? (openBlock(), createBlock(_component_RowsPerPageDropdown, {\n        key: 6,\n        \"aria-label\": $options.getAriaLabel('rowsPerPageLabel'),\n        rows: $data.d_rows,\n        options: _ctx.rowsPerPageOptions,\n        onRowsChange: _cache[5] || (_cache[5] = function ($event) {\n          return $options.onRowChange($event);\n        }),\n        disabled: $options.empty,\n        templates: _ctx.$slots,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"rows\", \"options\", \"disabled\", \"templates\", \"unstyled\", \"pt\"])) : item === 'JumpToPageDropdown' ? (openBlock(), createBlock(_component_JumpToPageDropdown, {\n        key: 7,\n        \"aria-label\": $options.getAriaLabel('jumpToPageDropdownLabel'),\n        page: $options.page,\n        pageCount: $options.pageCount,\n        onPageChange: _cache[6] || (_cache[6] = function ($event) {\n          return $options.changePage($event);\n        }),\n        disabled: $options.empty,\n        templates: _ctx.$slots,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"aria-label\", \"page\", \"pageCount\", \"disabled\", \"templates\", \"unstyled\", \"pt\"])) : item === 'JumpToPageInput' ? (openBlock(), createBlock(_component_JumpToPageInput, {\n        key: 8,\n        page: $options.currentPage,\n        onPageChange: _cache[7] || (_cache[7] = function ($event) {\n          return $options.changePage($event);\n        }),\n        disabled: $options.empty,\n        unstyled: _ctx.unstyled,\n        pt: _ctx.pt\n      }, null, 8, [\"page\", \"disabled\", \"unstyled\", \"pt\"])) : createCommentVNode(\"\", true)], 64);\n    }), 128)), _ctx.$slots.end ? (openBlock(), createElementBlock(\"div\", mergeProps({\n      key: 1,\n      \"class\": _ctx.cx('end')\n    }, _ctx.ptm('end')), [renderSlot(_ctx.$slots, \"end\", {\n      state: $options.currentState\n    })], 16)) : createCommentVNode(\"\", true)], 16);\n  }), 128))], 16)) : createCommentVNode(\"\", true);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846400802,
-      "end": 1742846400903,
+      "start": 1742847313827,
+      "end": 1742847313905,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400903,
-      "end": 1742846400903,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400903,
-      "end": 1742846400904,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400904,
-      "end": 1742846400904,
+      "start": 1742847313905,
+      "end": 1742847313905,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400904,
-      "end": 1742846400905,
+      "start": 1742847313905,
+      "end": 1742847313907,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400905,
-      "end": 1742846400905,
+      "start": 1742847313907,
+      "end": 1742847313907,
       "order": "normal"
     }
   ]

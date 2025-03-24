@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import ChevronDownIcon from 'primevue/icons/chevrondown';\nimport ChevronRightIcon from 'primevue/icons/chevronright';\nimport Ripple from 'primevue/ripple';\nimport { UniqueComponentId, DomHandler } from 'primevue/utils';\nimport { mergeProps, openBlock, createElementBlock, Fragment, renderList, createElementVNode, createBlock, resolveDynamicComponent, toDisplayString, createCommentVNode, createVNode, Transition, withCtx, withDirectives, vShow } from 'vue';\nimport AccordionStyle from 'primevue/accordion/style';\nimport BaseComponent from 'primevue/basecomponent';\n\nvar script$1 = {\n  name: 'BaseAccordion',\n  \"extends\": BaseComponent,\n  props: {\n    multiple: {\n      type: Boolean,\n      \"default\": false\n    },\n    activeIndex: {\n      type: [Number, Array],\n      \"default\": null\n    },\n    lazy: {\n      type: Boolean,\n      \"default\": false\n    },\n    expandIcon: {\n      type: String,\n      \"default\": undefined\n    },\n    collapseIcon: {\n      type: String,\n      \"default\": undefined\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    },\n    selectOnFocus: {\n      type: Boolean,\n      \"default\": false\n    }\n  },\n  style: AccordionStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Accordion',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:activeIndex', 'tab-open', 'tab-close', 'tab-click'],\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      d_activeIndex: this.activeIndex\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    },\n    activeIndex: function activeIndex(newValue) {\n      this.d_activeIndex = newValue;\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n  },\n  methods: {\n    isAccordionTab: function isAccordionTab(child) {\n      return child.type.name === 'AccordionTab';\n    },\n    isTabActive: function isTabActive(index) {\n      return this.multiple ? this.d_activeIndex && this.d_activeIndex.includes(index) : this.d_activeIndex === index;\n    },\n    getTabProp: function getTabProp(tab, name) {\n      return tab.props ? tab.props[name] : undefined;\n    },\n    getKey: function getKey(tab, index) {\n      return this.getTabProp(tab, 'header') || index;\n    },\n    getTabHeaderActionId: function getTabHeaderActionId(index) {\n      return \"\".concat(this.id, \"_\").concat(index, \"_header_action\");\n    },\n    getTabContentId: function getTabContentId(index) {\n      return \"\".concat(this.id, \"_\").concat(index, \"_content\");\n    },\n    getTabPT: function getTabPT(tab, key, index) {\n      var count = this.tabs.length;\n      var tabMetaData = {\n        props: tab.props || {},\n        parent: {\n          instance: this,\n          props: this.$props,\n          state: this.$data\n        },\n        context: {\n          index: index,\n          count: count,\n          first: index === 0,\n          last: index === count - 1,\n          active: this.isTabActive(index)\n        }\n      };\n      return mergeProps(this.ptm(\"tab.\".concat(key), {\n        tab: tabMetaData\n      }), this.ptm(\"accordiontab.\".concat(key), {\n        accordiontab: tabMetaData\n      }), this.ptm(\"accordiontab.\".concat(key), tabMetaData), this.ptmo(this.getTabProp(tab, 'pt'), key, tabMetaData));\n    },\n    onTabClick: function onTabClick(event, tab, index) {\n      this.changeActiveIndex(event, tab, index);\n      this.$emit('tab-click', {\n        originalEvent: event,\n        index: index\n      });\n    },\n    onTabKeyDown: function onTabKeyDown(event, tab, index) {\n      switch (event.code) {\n        case 'ArrowDown':\n          this.onTabArrowDownKey(event);\n          break;\n        case 'ArrowUp':\n          this.onTabArrowUpKey(event);\n          break;\n        case 'Home':\n          this.onTabHomeKey(event);\n          break;\n        case 'End':\n          this.onTabEndKey(event);\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n        case 'Space':\n          this.onTabEnterKey(event, tab, index);\n          break;\n      }\n    },\n    onTabArrowDownKey: function onTabArrowDownKey(event) {\n      var nextHeaderAction = this.findNextHeaderAction(event.target.parentElement.parentElement);\n      nextHeaderAction ? this.changeFocusedTab(event, nextHeaderAction) : this.onTabHomeKey(event);\n      event.preventDefault();\n    },\n    onTabArrowUpKey: function onTabArrowUpKey(event) {\n      var prevHeaderAction = this.findPrevHeaderAction(event.target.parentElement.parentElement);\n      prevHeaderAction ? this.changeFocusedTab(event, prevHeaderAction) : this.onTabEndKey(event);\n      event.preventDefault();\n    },\n    onTabHomeKey: function onTabHomeKey(event) {\n      var firstHeaderAction = this.findFirstHeaderAction();\n      this.changeFocusedTab(event, firstHeaderAction);\n      event.preventDefault();\n    },\n    onTabEndKey: function onTabEndKey(event) {\n      var lastHeaderAction = this.findLastHeaderAction();\n      this.changeFocusedTab(event, lastHeaderAction);\n      event.preventDefault();\n    },\n    onTabEnterKey: function onTabEnterKey(event, tab, index) {\n      this.changeActiveIndex(event, tab, index);\n      event.preventDefault();\n    },\n    findNextHeaderAction: function findNextHeaderAction(tabElement) {\n      var selfCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n      var nextTabElement = selfCheck ? tabElement : tabElement.nextElementSibling;\n      var headerElement = DomHandler.findSingle(nextTabElement, '[data-pc-section=\"header\"]');\n      return headerElement ? DomHandler.getAttribute(headerElement, 'data-p-disabled') ? this.findNextHeaderAction(headerElement.parentElement) : DomHandler.findSingle(headerElement, '[data-pc-section=\"headeraction\"]') : null;\n    },\n    findPrevHeaderAction: function findPrevHeaderAction(tabElement) {\n      var selfCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n      var prevTabElement = selfCheck ? tabElement : tabElement.previousElementSibling;\n      var headerElement = DomHandler.findSingle(prevTabElement, '[data-pc-section=\"header\"]');\n      return headerElement ? DomHandler.getAttribute(headerElement, 'data-p-disabled') ? this.findPrevHeaderAction(headerElement.parentElement) : DomHandler.findSingle(headerElement, '[data-pc-section=\"headeraction\"]') : null;\n    },\n    findFirstHeaderAction: function findFirstHeaderAction() {\n      return this.findNextHeaderAction(this.$el.firstElementChild, true);\n    },\n    findLastHeaderAction: function findLastHeaderAction() {\n      return this.findPrevHeaderAction(this.$el.lastElementChild, true);\n    },\n    changeActiveIndex: function changeActiveIndex(event, tab, index) {\n      if (!this.getTabProp(tab, 'disabled')) {\n        var active = this.isTabActive(index);\n        var eventName = active ? 'tab-close' : 'tab-open';\n        if (this.multiple) {\n          if (active) {\n            this.d_activeIndex = this.d_activeIndex.filter(function (i) {\n              return i !== index;\n            });\n          } else {\n            if (this.d_activeIndex) this.d_activeIndex.push(index);else this.d_activeIndex = [index];\n          }\n        } else {\n          this.d_activeIndex = this.d_activeIndex === index ? null : index;\n        }\n        this.$emit('update:activeIndex', this.d_activeIndex);\n        this.$emit(eventName, {\n          originalEvent: event,\n          index: index\n        });\n      }\n    },\n    changeFocusedTab: function changeFocusedTab(event, element) {\n      if (element) {\n        DomHandler.focus(element);\n        if (this.selectOnFocus) {\n          var index = parseInt(element.parentElement.parentElement.dataset.pcIndex, 10);\n          var tab = this.tabs[index];\n          this.changeActiveIndex(event, tab, index);\n        }\n      }\n    }\n  },\n  computed: {\n    tabs: function tabs() {\n      var _this = this;\n      return this.$slots[\"default\"]().reduce(function (tabs, child) {\n        if (_this.isAccordionTab(child)) {\n          tabs.push(child);\n        } else if (child.children && child.children instanceof Array) {\n          child.children.forEach(function (nestedChild) {\n            if (_this.isAccordionTab(nestedChild)) {\n              tabs.push(nestedChild);\n            }\n          });\n        }\n        return tabs;\n      }, []);\n    }\n  },\n  components: {\n    ChevronDownIcon: ChevronDownIcon,\n    ChevronRightIcon: ChevronRightIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }\nfunction _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : String(i); }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar _hoisted_1 = [\"data-pc-index\", \"data-p-active\"];\nvar _hoisted_2 = [\"data-p-highlight\", \"data-p-disabled\"];\nvar _hoisted_3 = [\"id\", \"tabindex\", \"aria-disabled\", \"aria-expanded\", \"aria-controls\", \"onClick\", \"onKeydown\"];\nvar _hoisted_4 = [\"id\", \"aria-labelledby\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [(openBlock(true), createElementBlock(Fragment, null, renderList($options.tabs, function (tab, i) {\n    return openBlock(), createElementBlock(\"div\", mergeProps({\n      key: $options.getKey(tab, i),\n      \"class\": _ctx.cx('tab.root', {\n        tab: tab,\n        index: i\n      })\n    }, $options.getTabPT(tab, 'root', i), {\n      \"data-pc-name\": \"accordiontab\",\n      \"data-pc-index\": i,\n      \"data-p-active\": $options.isTabActive(i)\n    }), [createElementVNode(\"div\", mergeProps({\n      style: $options.getTabProp(tab, 'headerStyle'),\n      \"class\": [_ctx.cx('tab.header', {\n        tab: tab,\n        index: i\n      }), $options.getTabProp(tab, 'headerClass')]\n    }, _objectSpread(_objectSpread({}, $options.getTabProp(tab, 'headerProps')), $options.getTabPT(tab, 'header', i)), {\n      \"data-p-highlight\": $options.isTabActive(i),\n      \"data-p-disabled\": $options.getTabProp(tab, 'disabled')\n    }), [createElementVNode(\"a\", mergeProps({\n      id: $options.getTabHeaderActionId(i),\n      \"class\": _ctx.cx('tab.headerAction'),\n      tabindex: $options.getTabProp(tab, 'disabled') ? -1 : _ctx.tabindex,\n      role: \"button\",\n      \"aria-disabled\": $options.getTabProp(tab, 'disabled'),\n      \"aria-expanded\": $options.isTabActive(i),\n      \"aria-controls\": $options.getTabContentId(i),\n      onClick: function onClick($event) {\n        return $options.onTabClick($event, tab, i);\n      },\n      onKeydown: function onKeydown($event) {\n        return $options.onTabKeyDown($event, tab, i);\n      }\n    }, _objectSpread(_objectSpread({}, $options.getTabProp(tab, 'headeractionprops')), $options.getTabPT(tab, 'headeraction', i))), [tab.children && tab.children.headericon ? (openBlock(), createBlock(resolveDynamicComponent(tab.children.headericon), {\n      key: 0,\n      isTabActive: $options.isTabActive(i),\n      active: $options.isTabActive(i),\n      index: i\n    }, null, 8, [\"isTabActive\", \"active\", \"index\"])) : $options.isTabActive(i) ? (openBlock(), createBlock(resolveDynamicComponent(_ctx.$slots.collapseicon ? _ctx.$slots.collapseicon : _ctx.collapseIcon ? 'span' : 'ChevronDownIcon'), mergeProps({\n      key: 1,\n      \"class\": [_ctx.cx('tab.headerIcon'), _ctx.collapseIcon],\n      \"aria-hidden\": \"true\"\n    }, $options.getTabPT(tab, 'headericon', i)), null, 16, [\"class\"])) : (openBlock(), createBlock(resolveDynamicComponent(_ctx.$slots.expandicon ? _ctx.$slots.expandicon : _ctx.expandIcon ? 'span' : 'ChevronRightIcon'), mergeProps({\n      key: 2,\n      \"class\": [_ctx.cx('tab.headerIcon'), _ctx.expandIcon],\n      \"aria-hidden\": \"true\"\n    }, $options.getTabPT(tab, 'headericon', i)), null, 16, [\"class\"])), tab.props && tab.props.header ? (openBlock(), createElementBlock(\"span\", mergeProps({\n      key: 3,\n      \"class\": _ctx.cx('tab.headerTitle')\n    }, $options.getTabPT(tab, 'headertitle', i)), toDisplayString(tab.props.header), 17)) : createCommentVNode(\"\", true), tab.children && tab.children.header ? (openBlock(), createBlock(resolveDynamicComponent(tab.children.header), {\n      key: 4\n    })) : createCommentVNode(\"\", true)], 16, _hoisted_3)], 16, _hoisted_2), createVNode(Transition, mergeProps({\n      name: \"p-toggleable-content\"\n    }, $options.getTabPT(tab, 'transition', i)), {\n      \"default\": withCtx(function () {\n        return [(_ctx.lazy ? $options.isTabActive(i) : true) ? withDirectives((openBlock(), createElementBlock(\"div\", mergeProps({\n          key: 0,\n          id: $options.getTabContentId(i),\n          style: $options.getTabProp(tab, 'contentStyle'),\n          \"class\": [_ctx.cx('tab.toggleableContent'), $options.getTabProp(tab, 'contentClass')],\n          role: \"region\",\n          \"aria-labelledby\": $options.getTabHeaderActionId(i)\n        }, _objectSpread(_objectSpread({}, $options.getTabProp(tab, 'contentProps')), $options.getTabPT(tab, 'toggleablecontent', i))), [createElementVNode(\"div\", mergeProps({\n          \"class\": _ctx.cx('tab.content')\n        }, $options.getTabPT(tab, 'content', i)), [(openBlock(), createBlock(resolveDynamicComponent(tab)))], 16)], 16, _hoisted_4)), [[vShow, _ctx.lazy ? true : $options.isTabActive(i)]]) : createCommentVNode(\"\", true)];\n      }),\n      _: 2\n    }, 1040)], 16, _hoisted_1);\n  }), 128))], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846400437,
-      "end": 1742846400452,
+      "start": 1742847313474,
+      "end": 1742847313489,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/accordion/accordion.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313489,
+      "end": 1742847313489,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400452,
-      "end": 1742846400452,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400452,
-      "end": 1742846400453,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400453,
-      "end": 1742846400453,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400453,
-      "end": 1742846400453,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400453,
-      "end": 1742846400453,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/accordion/accordion.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400453,
-      "end": 1742846400453,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400453,
-      "end": 1742846400453,
+      "start": 1742847313490,
+      "end": 1742847313490,
       "order": "normal"
     }
   ]

@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import MinusIcon from 'primevue/icons/minus';\nimport PlusIcon from 'primevue/icons/plus';\nimport Ripple from 'primevue/ripple';\nimport { UniqueComponentId } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport FieldsetStyle from 'primevue/fieldset/style';\nimport { resolveDirective, openBlock, createElementBlock, mergeProps, createElementVNode, renderSlot, toDisplayString, createCommentVNode, withDirectives, createBlock, resolveDynamicComponent, createVNode, Transition, withCtx, vShow } from 'vue';\n\nvar script$1 = {\n  name: 'BaseFieldset',\n  \"extends\": BaseComponent,\n  props: {\n    legend: String,\n    toggleable: Boolean,\n    collapsed: Boolean,\n    toggleButtonProps: {\n      type: null,\n      \"default\": null\n    }\n  },\n  style: FieldsetStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Fieldset',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:collapsed', 'toggle'],\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      d_collapsed: this.collapsed\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    },\n    collapsed: function collapsed(newValue) {\n      this.d_collapsed = newValue;\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n  },\n  methods: {\n    toggle: function toggle(event) {\n      this.d_collapsed = !this.d_collapsed;\n      this.$emit('update:collapsed', this.d_collapsed);\n      this.$emit('toggle', {\n        originalEvent: event,\n        value: this.d_collapsed\n      });\n    },\n    onKeyDown: function onKeyDown(event) {\n      if (event.code === 'Enter' || event.code === 'NumpadEnter' || event.code === 'Space') {\n        this.toggle(event);\n        event.preventDefault();\n      }\n    }\n  },\n  computed: {\n    buttonAriaLabel: function buttonAriaLabel() {\n      return this.toggleButtonProps && this.toggleButtonProps.ariaLabel ? this.toggleButtonProps.ariaLabel : this.legend;\n    }\n  },\n  directives: {\n    ripple: Ripple\n  },\n  components: {\n    PlusIcon: PlusIcon,\n    MinusIcon: MinusIcon\n  }\n};\n\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }\nfunction _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : String(i); }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar _hoisted_1 = [\"id\"];\nvar _hoisted_2 = [\"id\", \"aria-controls\", \"aria-expanded\", \"aria-label\"];\nvar _hoisted_3 = [\"id\", \"aria-labelledby\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return openBlock(), createElementBlock(\"fieldset\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [createElementVNode(\"legend\", mergeProps({\n    \"class\": _ctx.cx('legend')\n  }, _ctx.ptm('legend')), [!_ctx.toggleable ? renderSlot(_ctx.$slots, \"legend\", {\n    key: 0\n  }, function () {\n    return [createElementVNode(\"span\", mergeProps({\n      id: $data.id + '_header',\n      \"class\": _ctx.cx('legendtitle')\n    }, _ctx.ptm('legendtitle')), toDisplayString(_ctx.legend), 17, _hoisted_1)];\n  }) : createCommentVNode(\"\", true), _ctx.toggleable ? withDirectives((openBlock(), createElementBlock(\"a\", mergeProps({\n    key: 1,\n    id: $data.id + '_header',\n    tabindex: \"0\",\n    role: \"button\",\n    \"aria-controls\": $data.id + '_content',\n    \"aria-expanded\": !$data.d_collapsed,\n    \"aria-label\": $options.buttonAriaLabel,\n    onClick: _cache[0] || (_cache[0] = function () {\n      return $options.toggle && $options.toggle.apply($options, arguments);\n    }),\n    onKeydown: _cache[1] || (_cache[1] = function () {\n      return $options.onKeyDown && $options.onKeyDown.apply($options, arguments);\n    })\n  }, _objectSpread(_objectSpread({}, _ctx.toggleButtonProps), _ctx.ptm('toggler'))), [renderSlot(_ctx.$slots, \"togglericon\", {\n    collapsed: $data.d_collapsed\n  }, function () {\n    return [(openBlock(), createBlock(resolveDynamicComponent($data.d_collapsed ? 'PlusIcon' : 'MinusIcon'), mergeProps({\n      \"class\": _ctx.cx('togglericon')\n    }, _ctx.ptm('togglericon')), null, 16, [\"class\"]))];\n  }), renderSlot(_ctx.$slots, \"legend\", {}, function () {\n    return [createElementVNode(\"span\", mergeProps({\n      \"class\": _ctx.cx('legendtitle')\n    }, _ctx.ptm('legendtitle')), toDisplayString(_ctx.legend), 17)];\n  })], 16, _hoisted_2)), [[_directive_ripple]]) : createCommentVNode(\"\", true)], 16), createVNode(Transition, mergeProps({\n    name: \"p-toggleable-content\"\n  }, _ctx.ptm('transition')), {\n    \"default\": withCtx(function () {\n      return [withDirectives(createElementVNode(\"div\", mergeProps({\n        id: $data.id + '_content',\n        \"class\": _ctx.cx('toggleablecontent'),\n        role: \"region\",\n        \"aria-labelledby\": $data.id + '_header'\n      }, _ctx.ptm('toggleablecontent')), [createElementVNode(\"div\", mergeProps({\n        \"class\": _ctx.cx('content')\n      }, _ctx.ptm('content')), [renderSlot(_ctx.$slots, \"default\")], 16)], 16, _hoisted_3), [[vShow, !$data.d_collapsed]])];\n    }),\n    _: 3\n  }, 16)], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846400445,
-      "end": 1742846400460,
+      "start": 1742847313477,
+      "end": 1742847313493,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/fieldset/fieldset.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/fieldset/fieldset.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400460,
-      "end": 1742846400460,
+      "start": 1742847313493,
+      "end": 1742847313493,
       "order": "normal"
     }
   ]

@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import OverlayEventBus from 'primevue/overlayeventbus';\nimport Portal from 'primevue/portal';\nimport { ObjectUtils, DomHandler, UniqueComponentId, ZIndexUtils, ConnectedOverlayScrollHandler } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport TieredMenuStyle from 'primevue/tieredmenu/style';\nimport AngleRightIcon from 'primevue/icons/angleright';\nimport Ripple from 'primevue/ripple';\nimport { mergeProps, resolveComponent, resolveDirective, openBlock, createBlock, Transition, withCtx, createElementBlock, Fragment, renderList, createElementVNode, withDirectives, resolveDynamicComponent, normalizeClass, createCommentVNode, toDisplayString, normalizeStyle, createVNode, renderSlot } from 'vue';\n\nvar script$2 = {\n  name: 'BaseTieredMenu',\n  \"extends\": BaseComponent,\n  props: {\n    popup: {\n      type: Boolean,\n      \"default\": false\n    },\n    model: {\n      type: Array,\n      \"default\": null\n    },\n    appendTo: {\n      type: [String, Object],\n      \"default\": 'body'\n    },\n    autoZIndex: {\n      type: Boolean,\n      \"default\": true\n    },\n    baseZIndex: {\n      type: Number,\n      \"default\": 0\n    },\n    disabled: {\n      type: Boolean,\n      \"default\": false\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    },\n    ariaLabelledby: {\n      type: String,\n      \"default\": null\n    },\n    ariaLabel: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: TieredMenuStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script$1 = {\n  name: 'TieredMenuSub',\n  hostName: 'TieredMenu',\n  \"extends\": BaseComponent,\n  emits: ['item-click', 'item-mouseenter', 'item-mousemove'],\n  container: null,\n  props: {\n    menuId: {\n      type: String,\n      \"default\": null\n    },\n    focusedItemId: {\n      type: String,\n      \"default\": null\n    },\n    items: {\n      type: Array,\n      \"default\": null\n    },\n    visible: {\n      type: Boolean,\n      \"default\": false\n    },\n    level: {\n      type: Number,\n      \"default\": 0\n    },\n    templates: {\n      type: Object,\n      \"default\": null\n    },\n    activeItemPath: {\n      type: Object,\n      \"default\": null\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    }\n  },\n  methods: {\n    getItemId: function getItemId(processedItem) {\n      return \"\".concat(this.menuId, \"_\").concat(processedItem.key);\n    },\n    getItemKey: function getItemKey(processedItem) {\n      return this.getItemId(processedItem);\n    },\n    getItemProp: function getItemProp(processedItem, name, params) {\n      return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name], params) : undefined;\n    },\n    getItemLabel: function getItemLabel(processedItem) {\n      return this.getItemProp(processedItem, 'label');\n    },\n    getItemLabelId: function getItemLabelId(processedItem) {\n      return \"\".concat(this.menuId, \"_\").concat(processedItem.key, \"_label\");\n    },\n    getPTOptions: function getPTOptions(processedItem, index, key) {\n      return this.ptm(key, {\n        context: {\n          item: processedItem,\n          index: index,\n          active: this.isItemActive(processedItem),\n          focused: this.isItemFocused(processedItem),\n          disabled: this.isItemDisabled(processedItem)\n        }\n      });\n    },\n    isItemActive: function isItemActive(processedItem) {\n      return this.activeItemPath.some(function (path) {\n        return path.key === processedItem.key;\n      });\n    },\n    isItemVisible: function isItemVisible(processedItem) {\n      return this.getItemProp(processedItem, 'visible') !== false;\n    },\n    isItemDisabled: function isItemDisabled(processedItem) {\n      return this.getItemProp(processedItem, 'disabled');\n    },\n    isItemFocused: function isItemFocused(processedItem) {\n      return this.focusedItemId === this.getItemId(processedItem);\n    },\n    isItemGroup: function isItemGroup(processedItem) {\n      return ObjectUtils.isNotEmpty(processedItem.items);\n    },\n    onEnter: function onEnter() {\n      DomHandler.nestedPosition(this.container, this.level);\n    },\n    onItemClick: function onItemClick(event, processedItem) {\n      this.getItemProp(processedItem, 'command', {\n        originalEvent: event,\n        item: processedItem.item\n      });\n      this.$emit('item-click', {\n        originalEvent: event,\n        processedItem: processedItem,\n        isFocus: true\n      });\n    },\n    onItemMouseEnter: function onItemMouseEnter(event, processedItem) {\n      this.$emit('item-mouseenter', {\n        originalEvent: event,\n        processedItem: processedItem\n      });\n    },\n    onItemMouseMove: function onItemMouseMove(event, processedItem) {\n      this.$emit('item-mousemove', {\n        originalEvent: event,\n        processedItem: processedItem\n      });\n    },\n    getAriaSetSize: function getAriaSetSize() {\n      var _this = this;\n      return this.items.filter(function (processedItem) {\n        return _this.isItemVisible(processedItem) && !_this.getItemProp(processedItem, 'separator');\n      }).length;\n    },\n    getAriaPosInset: function getAriaPosInset(index) {\n      var _this2 = this;\n      return index - this.items.slice(0, index).filter(function (processedItem) {\n        return _this2.isItemVisible(processedItem) && _this2.getItemProp(processedItem, 'separator');\n      }).length + 1;\n    },\n    getMenuItemProps: function getMenuItemProps(processedItem, index) {\n      return {\n        action: mergeProps({\n          \"class\": this.cx('action'),\n          tabindex: -1,\n          'aria-hidden': true\n        }, this.getPTOptions(processedItem, index, 'action')),\n        icon: mergeProps({\n          \"class\": [this.cx('icon'), this.getItemProp(processedItem, 'icon')]\n        }, this.getPTOptions(processedItem, index, 'icon')),\n        label: mergeProps({\n          \"class\": this.cx('label')\n        }, this.getPTOptions(processedItem, index, 'label')),\n        submenuicon: mergeProps({\n          \"class\": this.cx('submenuIcon')\n        }, this.getPTOptions(processedItem, index, 'submenuIcon'))\n      };\n    },\n    containerRef: function containerRef(el) {\n      this.container = el;\n    }\n  },\n  components: {\n    AngleRightIcon: AngleRightIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nvar _hoisted_1$1 = [\"tabindex\"];\nvar _hoisted_2 = [\"id\", \"aria-label\", \"aria-disabled\", \"aria-expanded\", \"aria-haspopup\", \"aria-level\", \"aria-setsize\", \"aria-posinset\", \"data-p-highlight\", \"data-p-focused\", \"data-p-disabled\"];\nvar _hoisted_3 = [\"onClick\", \"onMouseenter\", \"onMousemove\"];\nvar _hoisted_4 = [\"href\", \"target\"];\nvar _hoisted_5 = [\"id\"];\nvar _hoisted_6 = [\"id\"];\nfunction render$1(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_AngleRightIcon = resolveComponent(\"AngleRightIcon\");\n  var _component_TieredMenuSub = resolveComponent(\"TieredMenuSub\", true);\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return openBlock(), createBlock(Transition, mergeProps({\n    name: \"p-tieredmenu\",\n    onEnter: $options.onEnter\n  }, _ctx.ptm('menu.transition')), {\n    \"default\": withCtx(function () {\n      return [($props.level === 0 ? true : $props.visible) ? (openBlock(), createElementBlock(\"ul\", mergeProps({\n        key: 0,\n        ref: $options.containerRef,\n        \"class\": $props.level === 0 ? _ctx.cx('menu') : _ctx.cx('submenu'),\n        tabindex: $props.tabindex\n      }, $props.level === 0 ? _ctx.ptm('menu') : _ctx.ptm('submenu')), [(openBlock(true), createElementBlock(Fragment, null, renderList($props.items, function (processedItem, index) {\n        return openBlock(), createElementBlock(Fragment, {\n          key: $options.getItemKey(processedItem)\n        }, [$options.isItemVisible(processedItem) && !$options.getItemProp(processedItem, 'separator') ? (openBlock(), createElementBlock(\"li\", mergeProps({\n          key: 0,\n          id: $options.getItemId(processedItem),\n          style: $options.getItemProp(processedItem, 'style'),\n          \"class\": [_ctx.cx('menuitem', {\n            processedItem: processedItem\n          }), $options.getItemProp(processedItem, 'class')],\n          role: \"menuitem\",\n          \"aria-label\": $options.getItemLabel(processedItem),\n          \"aria-disabled\": $options.isItemDisabled(processedItem) || undefined,\n          \"aria-expanded\": $options.isItemGroup(processedItem) ? $options.isItemActive(processedItem) : undefined,\n          \"aria-haspopup\": $options.isItemGroup(processedItem) && !$options.getItemProp(processedItem, 'to') ? 'menu' : undefined,\n          \"aria-level\": $props.level + 1,\n          \"aria-setsize\": $options.getAriaSetSize(),\n          \"aria-posinset\": $options.getAriaPosInset(index)\n        }, $options.getPTOptions(processedItem, index, 'menuitem'), {\n          \"data-p-highlight\": $options.isItemActive(processedItem),\n          \"data-p-focused\": $options.isItemFocused(processedItem),\n          \"data-p-disabled\": $options.isItemDisabled(processedItem)\n        }), [createElementVNode(\"div\", mergeProps({\n          \"class\": _ctx.cx('content'),\n          onClick: function onClick($event) {\n            return $options.onItemClick($event, processedItem);\n          },\n          onMouseenter: function onMouseenter($event) {\n            return $options.onItemMouseEnter($event, processedItem);\n          },\n          onMousemove: function onMousemove($event) {\n            return $options.onItemMouseMove($event, processedItem);\n          }\n        }, $options.getPTOptions(processedItem, index, 'content')), [!$props.templates.item ? withDirectives((openBlock(), createElementBlock(\"a\", mergeProps({\n          key: 0,\n          href: $options.getItemProp(processedItem, 'url'),\n          \"class\": _ctx.cx('action'),\n          target: $options.getItemProp(processedItem, 'target'),\n          tabindex: \"-1\",\n          \"aria-hidden\": \"true\"\n        }, $options.getPTOptions(processedItem, index, 'action')), [$props.templates.itemicon ? (openBlock(), createBlock(resolveDynamicComponent($props.templates.itemicon), {\n          key: 0,\n          item: processedItem.item,\n          \"class\": normalizeClass(_ctx.cx('icon'))\n        }, null, 8, [\"item\", \"class\"])) : $options.getItemProp(processedItem, 'icon') ? (openBlock(), createElementBlock(\"span\", mergeProps({\n          key: 1,\n          \"class\": [_ctx.cx('icon'), $options.getItemProp(processedItem, 'icon')]\n        }, $options.getPTOptions(processedItem, index, 'icon')), null, 16)) : createCommentVNode(\"\", true), createElementVNode(\"span\", mergeProps({\n          id: $options.getItemLabelId(processedItem),\n          \"class\": _ctx.cx('label')\n        }, $options.getPTOptions(processedItem, index, 'label')), toDisplayString($options.getItemLabel(processedItem)), 17, _hoisted_5), $options.getItemProp(processedItem, 'items') ? (openBlock(), createElementBlock(Fragment, {\n          key: 2\n        }, [$props.templates.submenuicon ? (openBlock(), createBlock(resolveDynamicComponent($props.templates.submenuicon), mergeProps({\n          key: 0,\n          \"class\": _ctx.cx('submenuIcon'),\n          active: $options.isItemActive(processedItem)\n        }, $options.getPTOptions(processedItem, index, 'submenuIcon')), null, 16, [\"class\", \"active\"])) : (openBlock(), createBlock(_component_AngleRightIcon, mergeProps({\n          key: 1,\n          \"class\": _ctx.cx('submenuIcon')\n        }, $options.getPTOptions(processedItem, index, 'submenuIcon')), null, 16, [\"class\"]))], 64)) : createCommentVNode(\"\", true)], 16, _hoisted_4)), [[_directive_ripple]]) : (openBlock(), createBlock(resolveDynamicComponent($props.templates.item), {\n          key: 1,\n          item: processedItem.item,\n          hasSubmenu: $options.getItemProp(processedItem, 'items'),\n          label: $options.getItemLabel(processedItem),\n          props: $options.getMenuItemProps(processedItem, index)\n        }, null, 8, [\"item\", \"hasSubmenu\", \"label\", \"props\"]))], 16, _hoisted_3), $options.isItemVisible(processedItem) && $options.isItemGroup(processedItem) ? (openBlock(), createBlock(_component_TieredMenuSub, {\n          key: 0,\n          id: $options.getItemId(processedItem) + '_list',\n          style: normalizeStyle(_ctx.sx('submenu', true, {\n            processedItem: processedItem\n          })),\n          \"aria-labelledby\": $options.getItemLabelId(processedItem),\n          role: \"menu\",\n          menuId: $props.menuId,\n          focusedItemId: $props.focusedItemId,\n          items: processedItem.items,\n          templates: $props.templates,\n          activeItemPath: $props.activeItemPath,\n          level: $props.level + 1,\n          visible: $options.isItemActive(processedItem) && $options.isItemGroup(processedItem),\n          pt: _ctx.pt,\n          unstyled: _ctx.unstyled,\n          onItemClick: _cache[0] || (_cache[0] = function ($event) {\n            return _ctx.$emit('item-click', $event);\n          }),\n          onItemMouseenter: _cache[1] || (_cache[1] = function ($event) {\n            return _ctx.$emit('item-mouseenter', $event);\n          }),\n          onItemMousemove: _cache[2] || (_cache[2] = function ($event) {\n            return _ctx.$emit('item-mousemove', $event);\n          })\n        }, null, 8, [\"id\", \"style\", \"aria-labelledby\", \"menuId\", \"focusedItemId\", \"items\", \"templates\", \"activeItemPath\", \"level\", \"visible\", \"pt\", \"unstyled\"])) : createCommentVNode(\"\", true)], 16, _hoisted_2)) : createCommentVNode(\"\", true), $options.isItemVisible(processedItem) && $options.getItemProp(processedItem, 'separator') ? (openBlock(), createElementBlock(\"li\", mergeProps({\n          key: 1,\n          id: $options.getItemId(processedItem),\n          style: $options.getItemProp(processedItem, 'style'),\n          \"class\": [_ctx.cx('separator'), $options.getItemProp(processedItem, 'class')],\n          role: \"separator\"\n        }, _ctx.ptm('separator')), null, 16, _hoisted_6)) : createCommentVNode(\"\", true)], 64);\n      }), 128))], 16, _hoisted_1$1)) : createCommentVNode(\"\", true)];\n    }),\n    _: 1\n  }, 16, [\"onEnter\"]);\n}\n\nscript$1.render = render$1;\n\nvar script = {\n  name: 'TieredMenu',\n  \"extends\": script$2,\n  inheritAttrs: false,\n  emits: ['focus', 'blur', 'before-show', 'before-hide', 'hide', 'show'],\n  outsideClickListener: null,\n  scrollHandler: null,\n  resizeListener: null,\n  target: null,\n  container: null,\n  menubar: null,\n  searchTimeout: null,\n  searchValue: null,\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      focused: false,\n      focusedItemInfo: {\n        index: -1,\n        level: 0,\n        parentKey: ''\n      },\n      activeItemPath: [],\n      visible: !this.popup,\n      submenuVisible: false,\n      dirty: false\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    },\n    activeItemPath: function activeItemPath(newPath) {\n      if (!this.popup) {\n        if (ObjectUtils.isNotEmpty(newPath)) {\n          this.bindOutsideClickListener();\n          this.bindResizeListener();\n        } else {\n          this.unbindOutsideClickListener();\n          this.unbindResizeListener();\n        }\n      }\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n  },\n  beforeUnmount: function beforeUnmount() {\n    this.unbindOutsideClickListener();\n    this.unbindResizeListener();\n    if (this.scrollHandler) {\n      this.scrollHandler.destroy();\n      this.scrollHandler = null;\n    }\n    if (this.container && this.autoZIndex) {\n      ZIndexUtils.clear(this.container);\n    }\n    this.target = null;\n    this.container = null;\n  },\n  methods: {\n    getItemProp: function getItemProp(item, name) {\n      return item ? ObjectUtils.getItemValue(item[name]) : undefined;\n    },\n    getItemLabel: function getItemLabel(item) {\n      return this.getItemProp(item, 'label');\n    },\n    isItemDisabled: function isItemDisabled(item) {\n      return this.getItemProp(item, 'disabled');\n    },\n    isItemVisible: function isItemVisible(item) {\n      return this.getItemProp(item, 'visible') !== false;\n    },\n    isItemGroup: function isItemGroup(item) {\n      return ObjectUtils.isNotEmpty(this.getItemProp(item, 'items'));\n    },\n    isItemSeparator: function isItemSeparator(item) {\n      return this.getItemProp(item, 'separator');\n    },\n    getProccessedItemLabel: function getProccessedItemLabel(processedItem) {\n      return processedItem ? this.getItemLabel(processedItem.item) : undefined;\n    },\n    isProccessedItemGroup: function isProccessedItemGroup(processedItem) {\n      return processedItem && ObjectUtils.isNotEmpty(processedItem.items);\n    },\n    toggle: function toggle(event) {\n      this.visible ? this.hide(event, true) : this.show(event);\n    },\n    show: function show(event, isFocus) {\n      if (this.popup) {\n        this.$emit('before-show');\n        this.visible = true;\n        this.target = this.target || event.currentTarget;\n        this.relatedTarget = event.relatedTarget || null;\n      }\n      isFocus && DomHandler.focus(this.menubar);\n    },\n    hide: function hide(event, isFocus) {\n      if (this.popup) {\n        this.$emit('before-hide');\n        this.visible = false;\n      }\n      this.activeItemPath = [];\n      this.focusedItemInfo = {\n        index: -1,\n        level: 0,\n        parentKey: ''\n      };\n      isFocus && DomHandler.focus(this.relatedTarget || this.target || this.menubar);\n      this.dirty = false;\n    },\n    onFocus: function onFocus(event) {\n      this.focused = true;\n      if (!this.popup) {\n        this.focusedItemInfo = this.focusedItemInfo.index !== -1 ? this.focusedItemInfo : {\n          index: this.findFirstFocusedItemIndex(),\n          level: 0,\n          parentKey: ''\n        };\n      }\n      this.$emit('focus', event);\n    },\n    onBlur: function onBlur(event) {\n      this.focused = false;\n      this.focusedItemInfo = {\n        index: -1,\n        level: 0,\n        parentKey: ''\n      };\n      this.searchValue = '';\n      this.dirty = false;\n      this.$emit('blur', event);\n    },\n    onKeyDown: function onKeyDown(event) {\n      if (this.disabled) {\n        event.preventDefault();\n        return;\n      }\n      var metaKey = event.metaKey || event.ctrlKey;\n      switch (event.code) {\n        case 'ArrowDown':\n          this.onArrowDownKey(event);\n          break;\n        case 'ArrowUp':\n          this.onArrowUpKey(event);\n          break;\n        case 'ArrowLeft':\n          this.onArrowLeftKey(event);\n          break;\n        case 'ArrowRight':\n          this.onArrowRightKey(event);\n          break;\n        case 'Home':\n          this.onHomeKey(event);\n          break;\n        case 'End':\n          this.onEndKey(event);\n          break;\n        case 'Space':\n          this.onSpaceKey(event);\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n          this.onEnterKey(event);\n          break;\n        case 'Escape':\n          this.onEscapeKey(event);\n          break;\n        case 'Tab':\n          this.onTabKey(event);\n          break;\n        case 'PageDown':\n        case 'PageUp':\n        case 'Backspace':\n        case 'ShiftLeft':\n        case 'ShiftRight':\n          //NOOP\n          break;\n        default:\n          if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {\n            this.searchItems(event, event.key);\n          }\n          break;\n      }\n    },\n    onItemChange: function onItemChange(event) {\n      var processedItem = event.processedItem,\n        isFocus = event.isFocus;\n      if (ObjectUtils.isEmpty(processedItem)) return;\n      var index = processedItem.index,\n        key = processedItem.key,\n        level = processedItem.level,\n        parentKey = processedItem.parentKey,\n        items = processedItem.items;\n      var grouped = ObjectUtils.isNotEmpty(items);\n      var activeItemPath = this.activeItemPath.filter(function (p) {\n        return p.parentKey !== parentKey && p.parentKey !== key;\n      });\n      if (grouped) {\n        activeItemPath.push(processedItem);\n        this.submenuVisible = true;\n      }\n      this.focusedItemInfo = {\n        index: index,\n        level: level,\n        parentKey: parentKey\n      };\n      this.activeItemPath = activeItemPath;\n      grouped && (this.dirty = true);\n      isFocus && DomHandler.focus(this.menubar);\n    },\n    onOverlayClick: function onOverlayClick(event) {\n      OverlayEventBus.emit('overlay-click', {\n        originalEvent: event,\n        target: this.target\n      });\n    },\n    onItemClick: function onItemClick(event) {\n      var originalEvent = event.originalEvent,\n        processedItem = event.processedItem;\n      var grouped = this.isProccessedItemGroup(processedItem);\n      var root = ObjectUtils.isEmpty(processedItem.parent);\n      var selected = this.isSelected(processedItem);\n      if (selected) {\n        var index = processedItem.index,\n          key = processedItem.key,\n          level = processedItem.level,\n          parentKey = processedItem.parentKey;\n        this.activeItemPath = this.activeItemPath.filter(function (p) {\n          return key !== p.key && key.startsWith(p.key);\n        });\n        this.focusedItemInfo = {\n          index: index,\n          level: level,\n          parentKey: parentKey\n        };\n        this.dirty = !root;\n        DomHandler.focus(this.menubar);\n      } else {\n        if (grouped) {\n          this.onItemChange(event);\n        } else {\n          var rootProcessedItem = root ? processedItem : this.activeItemPath.find(function (p) {\n            return p.parentKey === '';\n          });\n          this.hide(originalEvent);\n          this.changeFocusedItemIndex(originalEvent, rootProcessedItem ? rootProcessedItem.index : -1);\n          DomHandler.focus(this.menubar);\n        }\n      }\n    },\n    onItemMouseEnter: function onItemMouseEnter(event) {\n      if (this.dirty) {\n        this.onItemChange(event);\n      }\n    },\n    onItemMouseMove: function onItemMouseMove(event) {\n      if (this.focused) {\n        this.changeFocusedItemIndex(event, event.processedItem.index);\n      }\n    },\n    onArrowDownKey: function onArrowDownKey(event) {\n      var itemIndex = this.focusedItemInfo.index !== -1 ? this.findNextItemIndex(this.focusedItemInfo.index) : this.findFirstFocusedItemIndex();\n      this.changeFocusedItemIndex(event, itemIndex);\n      event.preventDefault();\n    },\n    onArrowUpKey: function onArrowUpKey(event) {\n      if (event.altKey) {\n        if (this.focusedItemInfo.index !== -1) {\n          var processedItem = this.visibleItems[this.focusedItemInfo.index];\n          var grouped = this.isProccessedItemGroup(processedItem);\n          !grouped && this.onItemChange({\n            originalEvent: event,\n            processedItem: processedItem\n          });\n        }\n        this.popup && this.hide(event, true);\n        event.preventDefault();\n      } else {\n        var itemIndex = this.focusedItemInfo.index !== -1 ? this.findPrevItemIndex(this.focusedItemInfo.index) : this.findLastFocusedItemIndex();\n        this.changeFocusedItemIndex(event, itemIndex);\n        event.preventDefault();\n      }\n    },\n    onArrowLeftKey: function onArrowLeftKey(event) {\n      var _this = this;\n      var processedItem = this.visibleItems[this.focusedItemInfo.index];\n      var parentItem = this.activeItemPath.find(function (p) {\n        return p.key === processedItem.parentKey;\n      });\n      var root = ObjectUtils.isEmpty(processedItem.parent);\n      if (!root) {\n        this.focusedItemInfo = {\n          index: -1,\n          parentKey: parentItem ? parentItem.parentKey : ''\n        };\n        this.searchValue = '';\n        this.onArrowDownKey(event);\n      }\n      this.activeItemPath = this.activeItemPath.filter(function (p) {\n        return p.parentKey !== _this.focusedItemInfo.parentKey;\n      });\n      event.preventDefault();\n    },\n    onArrowRightKey: function onArrowRightKey(event) {\n      var processedItem = this.visibleItems[this.focusedItemInfo.index];\n      var grouped = this.isProccessedItemGroup(processedItem);\n      if (grouped) {\n        this.onItemChange({\n          originalEvent: event,\n          processedItem: processedItem\n        });\n        this.focusedItemInfo = {\n          index: -1,\n          parentKey: processedItem.key\n        };\n        this.searchValue = '';\n        this.onArrowDownKey(event);\n      }\n      event.preventDefault();\n    },\n    onHomeKey: function onHomeKey(event) {\n      this.changeFocusedItemIndex(event, this.findFirstItemIndex());\n      event.preventDefault();\n    },\n    onEndKey: function onEndKey(event) {\n      this.changeFocusedItemIndex(event, this.findLastItemIndex());\n      event.preventDefault();\n    },\n    onEnterKey: function onEnterKey(event) {\n      if (this.focusedItemInfo.index !== -1) {\n        var element = DomHandler.findSingle(this.menubar, \"li[id=\\\"\".concat(\"\".concat(this.focusedItemId), \"\\\"]\"));\n        var anchorElement = element && DomHandler.findSingle(element, '[data-pc-section=\"action\"]');\n        anchorElement ? anchorElement.click() : element && element.click();\n        if (!this.popup) {\n          var processedItem = this.visibleItems[this.focusedItemInfo.index];\n          var grouped = this.isProccessedItemGroup(processedItem);\n          !grouped && (this.focusedItemInfo.index = this.findFirstFocusedItemIndex());\n        }\n      }\n      event.preventDefault();\n    },\n    onSpaceKey: function onSpaceKey(event) {\n      this.onEnterKey(event);\n    },\n    onEscapeKey: function onEscapeKey(event) {\n      if (this.popup || this.focusedItemInfo.level !== 0) {\n        var _focusedItemInfo = this.focusedItemInfo;\n        this.hide(event, false);\n        this.focusedItemInfo = {\n          index: Number(_focusedItemInfo.parentKey.split('_')[0]),\n          level: 0,\n          parentKey: ''\n        };\n        this.popup && DomHandler.focus(this.target);\n      }\n      event.preventDefault();\n    },\n    onTabKey: function onTabKey(event) {\n      if (this.focusedItemInfo.index !== -1) {\n        var processedItem = this.visibleItems[this.focusedItemInfo.index];\n        var grouped = this.isProccessedItemGroup(processedItem);\n        !grouped && this.onItemChange({\n          originalEvent: event,\n          processedItem: processedItem\n        });\n      }\n      this.hide();\n    },\n    onEnter: function onEnter(el) {\n      if (this.autoZIndex) {\n        ZIndexUtils.set('menu', el, this.baseZIndex + this.$primevue.config.zIndex.menu);\n      }\n      DomHandler.addStyles(el, {\n        position: 'absolute',\n        top: '0',\n        left: '0'\n      });\n      this.alignOverlay();\n      DomHandler.focus(this.menubar);\n      this.scrollInView();\n    },\n    onAfterEnter: function onAfterEnter() {\n      this.bindOutsideClickListener();\n      this.bindScrollListener();\n      this.bindResizeListener();\n      this.$emit('show');\n    },\n    onLeave: function onLeave() {\n      this.unbindOutsideClickListener();\n      this.unbindScrollListener();\n      this.unbindResizeListener();\n      this.$emit('hide');\n      this.container = null;\n      this.dirty = false;\n    },\n    onAfterLeave: function onAfterLeave(el) {\n      if (this.autoZIndex) {\n        ZIndexUtils.clear(el);\n      }\n    },\n    alignOverlay: function alignOverlay() {\n      DomHandler.absolutePosition(this.container, this.target);\n      var targetWidth = DomHandler.getOuterWidth(this.target);\n      if (targetWidth > DomHandler.getOuterWidth(this.container)) {\n        this.container.style.minWidth = DomHandler.getOuterWidth(this.target) + 'px';\n      }\n    },\n    bindOutsideClickListener: function bindOutsideClickListener() {\n      var _this2 = this;\n      if (!this.outsideClickListener) {\n        this.outsideClickListener = function (event) {\n          var isOutsideContainer = _this2.container && !_this2.container.contains(event.target);\n          var isOutsideTarget = _this2.popup ? !(_this2.target && (_this2.target === event.target || _this2.target.contains(event.target))) : true;\n          if (isOutsideContainer && isOutsideTarget) {\n            _this2.hide();\n          }\n        };\n        document.addEventListener('click', this.outsideClickListener);\n      }\n    },\n    unbindOutsideClickListener: function unbindOutsideClickListener() {\n      if (this.outsideClickListener) {\n        document.removeEventListener('click', this.outsideClickListener);\n        this.outsideClickListener = null;\n      }\n    },\n    bindScrollListener: function bindScrollListener() {\n      var _this3 = this;\n      if (!this.scrollHandler) {\n        this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, function (event) {\n          _this3.hide(event, true);\n        });\n      }\n      this.scrollHandler.bindScrollListener();\n    },\n    unbindScrollListener: function unbindScrollListener() {\n      if (this.scrollHandler) {\n        this.scrollHandler.unbindScrollListener();\n      }\n    },\n    bindResizeListener: function bindResizeListener() {\n      var _this4 = this;\n      if (!this.resizeListener) {\n        this.resizeListener = function (event) {\n          if (!DomHandler.isTouchDevice()) {\n            _this4.hide(event, true);\n          }\n        };\n        window.addEventListener('resize', this.resizeListener);\n      }\n    },\n    unbindResizeListener: function unbindResizeListener() {\n      if (this.resizeListener) {\n        window.removeEventListener('resize', this.resizeListener);\n        this.resizeListener = null;\n      }\n    },\n    isItemMatched: function isItemMatched(processedItem) {\n      var _this$getProccessedIt;\n      return this.isValidItem(processedItem) && ((_this$getProccessedIt = this.getProccessedItemLabel(processedItem)) === null || _this$getProccessedIt === void 0 ? void 0 : _this$getProccessedIt.toLocaleLowerCase().startsWith(this.searchValue.toLocaleLowerCase()));\n    },\n    isValidItem: function isValidItem(processedItem) {\n      return !!processedItem && !this.isItemDisabled(processedItem.item) && !this.isItemSeparator(processedItem.item) && this.isItemVisible(processedItem.item);\n    },\n    isValidSelectedItem: function isValidSelectedItem(processedItem) {\n      return this.isValidItem(processedItem) && this.isSelected(processedItem);\n    },\n    isSelected: function isSelected(processedItem) {\n      return this.activeItemPath.some(function (p) {\n        return p.key === processedItem.key;\n      });\n    },\n    findFirstItemIndex: function findFirstItemIndex() {\n      var _this5 = this;\n      return this.visibleItems.findIndex(function (processedItem) {\n        return _this5.isValidItem(processedItem);\n      });\n    },\n    findLastItemIndex: function findLastItemIndex() {\n      var _this6 = this;\n      return ObjectUtils.findLastIndex(this.visibleItems, function (processedItem) {\n        return _this6.isValidItem(processedItem);\n      });\n    },\n    findNextItemIndex: function findNextItemIndex(index) {\n      var _this7 = this;\n      var matchedItemIndex = index < this.visibleItems.length - 1 ? this.visibleItems.slice(index + 1).findIndex(function (processedItem) {\n        return _this7.isValidItem(processedItem);\n      }) : -1;\n      return matchedItemIndex > -1 ? matchedItemIndex + index + 1 : index;\n    },\n    findPrevItemIndex: function findPrevItemIndex(index) {\n      var _this8 = this;\n      var matchedItemIndex = index > 0 ? ObjectUtils.findLastIndex(this.visibleItems.slice(0, index), function (processedItem) {\n        return _this8.isValidItem(processedItem);\n      }) : -1;\n      return matchedItemIndex > -1 ? matchedItemIndex : index;\n    },\n    findSelectedItemIndex: function findSelectedItemIndex() {\n      var _this9 = this;\n      return this.visibleItems.findIndex(function (processedItem) {\n        return _this9.isValidSelectedItem(processedItem);\n      });\n    },\n    findFirstFocusedItemIndex: function findFirstFocusedItemIndex() {\n      var selectedIndex = this.findSelectedItemIndex();\n      return selectedIndex < 0 ? this.findFirstItemIndex() : selectedIndex;\n    },\n    findLastFocusedItemIndex: function findLastFocusedItemIndex() {\n      var selectedIndex = this.findSelectedItemIndex();\n      return selectedIndex < 0 ? this.findLastItemIndex() : selectedIndex;\n    },\n    searchItems: function searchItems(event, _char) {\n      var _this10 = this;\n      this.searchValue = (this.searchValue || '') + _char;\n      var itemIndex = -1;\n      var matched = false;\n      if (this.focusedItemInfo.index !== -1) {\n        itemIndex = this.visibleItems.slice(this.focusedItemInfo.index).findIndex(function (processedItem) {\n          return _this10.isItemMatched(processedItem);\n        });\n        itemIndex = itemIndex === -1 ? this.visibleItems.slice(0, this.focusedItemInfo.index).findIndex(function (processedItem) {\n          return _this10.isItemMatched(processedItem);\n        }) : itemIndex + this.focusedItemInfo.index;\n      } else {\n        itemIndex = this.visibleItems.findIndex(function (processedItem) {\n          return _this10.isItemMatched(processedItem);\n        });\n      }\n      if (itemIndex !== -1) {\n        matched = true;\n      }\n      if (itemIndex === -1 && this.focusedItemInfo.index === -1) {\n        itemIndex = this.findFirstFocusedItemIndex();\n      }\n      if (itemIndex !== -1) {\n        this.changeFocusedItemIndex(event, itemIndex);\n      }\n      if (this.searchTimeout) {\n        clearTimeout(this.searchTimeout);\n      }\n      this.searchTimeout = setTimeout(function () {\n        _this10.searchValue = '';\n        _this10.searchTimeout = null;\n      }, 500);\n      return matched;\n    },\n    changeFocusedItemIndex: function changeFocusedItemIndex(event, index) {\n      if (this.focusedItemInfo.index !== index) {\n        this.focusedItemInfo.index = index;\n        this.scrollInView();\n      }\n    },\n    scrollInView: function scrollInView() {\n      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;\n      var id = index !== -1 ? \"\".concat(this.id, \"_\").concat(index) : this.focusedItemId;\n      var element = DomHandler.findSingle(this.menubar, \"li[id=\\\"\".concat(id, \"\\\"]\"));\n      if (element) {\n        element.scrollIntoView && element.scrollIntoView({\n          block: 'nearest',\n          inline: 'start'\n        });\n      }\n    },\n    createProcessedItems: function createProcessedItems(items) {\n      var _this11 = this;\n      var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;\n      var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};\n      var parentKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';\n      var processedItems = [];\n      items && items.forEach(function (item, index) {\n        var key = (parentKey !== '' ? parentKey + '_' : '') + index;\n        var newItem = {\n          item: item,\n          index: index,\n          level: level,\n          key: key,\n          parent: parent,\n          parentKey: parentKey\n        };\n        newItem['items'] = _this11.createProcessedItems(item.items, level + 1, newItem, key);\n        processedItems.push(newItem);\n      });\n      return processedItems;\n    },\n    containerRef: function containerRef(el) {\n      this.container = el;\n    },\n    menubarRef: function menubarRef(el) {\n      this.menubar = el ? el.$el : undefined;\n    }\n  },\n  computed: {\n    processedItems: function processedItems() {\n      return this.createProcessedItems(this.model || []);\n    },\n    visibleItems: function visibleItems() {\n      var _this12 = this;\n      var processedItem = this.activeItemPath.find(function (p) {\n        return p.key === _this12.focusedItemInfo.parentKey;\n      });\n      return processedItem ? processedItem.items : this.processedItems;\n    },\n    focusedItemId: function focusedItemId() {\n      return this.focusedItemInfo.index !== -1 ? \"\".concat(this.id).concat(ObjectUtils.isNotEmpty(this.focusedItemInfo.parentKey) ? '_' + this.focusedItemInfo.parentKey : '', \"_\").concat(this.focusedItemInfo.index) : null;\n    }\n  },\n  components: {\n    TieredMenuSub: script$1,\n    Portal: Portal\n  }\n};\n\nvar _hoisted_1 = [\"id\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_TieredMenuSub = resolveComponent(\"TieredMenuSub\");\n  var _component_Portal = resolveComponent(\"Portal\");\n  return openBlock(), createBlock(_component_Portal, {\n    appendTo: _ctx.appendTo,\n    disabled: !_ctx.popup\n  }, {\n    \"default\": withCtx(function () {\n      return [createVNode(Transition, mergeProps({\n        name: \"p-connected-overlay\",\n        onEnter: $options.onEnter,\n        onAfterEnter: $options.onAfterEnter,\n        onLeave: $options.onLeave,\n        onAfterLeave: $options.onAfterLeave\n      }, _ctx.ptm('transition')), {\n        \"default\": withCtx(function () {\n          return [$data.visible ? (openBlock(), createElementBlock(\"div\", mergeProps({\n            key: 0,\n            ref: $options.containerRef,\n            id: $data.id,\n            \"class\": _ctx.cx('root'),\n            onClick: _cache[0] || (_cache[0] = function () {\n              return $options.onOverlayClick && $options.onOverlayClick.apply($options, arguments);\n            })\n          }, _ctx.ptmi('root')), [_ctx.$slots.start ? (openBlock(), createElementBlock(\"div\", mergeProps({\n            key: 0,\n            \"class\": _ctx.cx('start')\n          }, _ctx.ptm('start')), [renderSlot(_ctx.$slots, \"start\")], 16)) : createCommentVNode(\"\", true), createVNode(_component_TieredMenuSub, {\n            ref: $options.menubarRef,\n            id: $data.id + '_list',\n            tabindex: !_ctx.disabled ? _ctx.tabindex : -1,\n            role: \"menubar\",\n            \"aria-label\": _ctx.ariaLabel,\n            \"aria-labelledby\": _ctx.ariaLabelledby,\n            \"aria-disabled\": _ctx.disabled || undefined,\n            \"aria-orientation\": \"vertical\",\n            \"aria-activedescendant\": $data.focused ? $options.focusedItemId : undefined,\n            menuId: $data.id,\n            focusedItemId: $data.focused ? $options.focusedItemId : undefined,\n            items: $options.processedItems,\n            templates: _ctx.$slots,\n            activeItemPath: $data.activeItemPath,\n            level: 0,\n            visible: $data.submenuVisible,\n            pt: _ctx.pt,\n            unstyled: _ctx.unstyled,\n            onFocus: $options.onFocus,\n            onBlur: $options.onBlur,\n            onKeydown: $options.onKeyDown,\n            onItemClick: $options.onItemClick,\n            onItemMouseenter: $options.onItemMouseEnter,\n            onItemMousemove: $options.onItemMouseMove\n          }, null, 8, [\"id\", \"tabindex\", \"aria-label\", \"aria-labelledby\", \"aria-disabled\", \"aria-activedescendant\", \"menuId\", \"focusedItemId\", \"items\", \"templates\", \"activeItemPath\", \"visible\", \"pt\", \"unstyled\", \"onFocus\", \"onBlur\", \"onKeydown\", \"onItemClick\", \"onItemMouseenter\", \"onItemMousemove\"]), _ctx.$slots.end ? (openBlock(), createElementBlock(\"div\", mergeProps({\n            key: 1,\n            \"class\": _ctx.cx('end')\n          }, _ctx.ptm('end')), [renderSlot(_ctx.$slots, \"end\")], 16)) : createCommentVNode(\"\", true)], 16, _hoisted_1)) : createCommentVNode(\"\", true)];\n        }),\n        _: 3\n      }, 16, [\"onEnter\", \"onAfterEnter\", \"onLeave\", \"onAfterLeave\"])];\n    }),\n    _: 3\n  }, 8, [\"appendTo\", \"disabled\"]);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846400464,
-      "end": 1742846400479,
+      "start": 1742847313499,
+      "end": 1742847313516,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/tieredmenu/tieredmenu.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/tieredmenu/tieredmenu.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400479,
-      "end": 1742846400479,
+      "start": 1742847313516,
+      "end": 1742847313516,
       "order": "normal"
     }
   ]

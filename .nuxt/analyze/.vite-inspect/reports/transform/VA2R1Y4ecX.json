@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.string = exports.object = exports.number = exports.mixed = exports.default = exports.date = exports.boolean = exports.array = void 0;\n\nvar _printValue = _interopRequireDefault(require(\"./printValue\"));\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nconst mixed = {\n  default: 'O campo é inválido.',\n  required: 'O campo é obrigatório.',\n  oneOf: 'O campo deve ter um dos seguintes valores: ${values}.',\n  notOneOf: 'O campo não deve ter nenhum dos seguintes valores: ${values}.',\n  notType: ({\n    type,\n    value,\n    originalValue\n  }) => {\n    const isCast = originalValue != null && originalValue !== value;\n    let msg = `${`O campo deve ser do tipo \\`${type}\\`, ` + `mas o valor final é: \\`${(0, _printValue.default)(value, true)}\\``}${isCast ? ` (cast do valor \\`${(0, _printValue.default)(originalValue, true)}\\`).` : '.'}`;\n\n    if (value === null) {\n      msg += '\\nSe a intenção era usar \"null\" como um valor em branco marque o esquema como `.nullable()`.';\n    }\n\n    return msg;\n  },\n  defined: 'O campo não deve ser indefinido.'\n};\nexports.mixed = mixed;\nconst string = {\n  length: ({\n    length\n  }) => `O campo deve ter exatamente ${length} ${length === 1 ? 'caractere' : 'caracteres'}.`,\n  min: ({\n    min\n  }) => `O campo deve ter pelo menos ${min} ${min === 1 ? 'caractere' : 'caracteres'}.`,\n  max: ({\n    max\n  }) => `O campo deve ter no máximo ${max} ${max === 1 ? 'caractere' : 'caracteres'}.`,\n  matches: 'O campo deve corresponder ao padrão: \"${regex}\".',\n  email: 'O campo deve ser um e-mail válido.',\n  url: 'O campo deve ser uma URL válida.',\n  trim: 'O campo não deve conter espaços adicionais no início nem no fim.',\n  lowercase: 'O campo deve estar em letras minúsculas.',\n  uppercase: 'O campo deve estar em letras maiúsculas.'\n};\nexports.string = string;\nconst number = {\n  min: 'O campo deve ser maior ou igual a ${min}.',\n  max: 'O campo deve menor ou igual a ${max}.',\n  lessThan: 'O campo deve ser menor que ${less}.',\n  moreThan: 'O campo deve ser maior que ${more}.',\n  notEqual: 'O campo não deve ser igual a ${notEqual}.',\n  positive: 'O campo deve ser um número positivo.',\n  negative: 'O campo deve ser um número negativo.',\n  integer: 'O campo deve ser um número inteiro.'\n};\nexports.number = number;\nconst date = {\n  min: 'O campo deve ser posterior a ${min}.',\n  max: 'O campo deve ser anterior a ${max}.'\n};\nexports.date = date;\nconst boolean = {};\nexports.boolean = boolean;\nconst object = {\n  noUnknown: 'O campo tem chaves desconhecidas: ${unknown}.'\n};\nexports.object = object;\nconst array = {\n  min: ({\n    min\n  }) => `O campo deve ter pelo menos ${min} ${min === 1 ? 'item' : 'itens'}.`,\n  max: ({\n    max\n  }) => `O campo deve ter no máximo ${max} ${max === 1 ? 'item' : 'itens'}.`\n};\nexports.array = array;\nvar _default = {\n  mixed,\n  string,\n  number,\n  date,\n  object,\n  array,\n  boolean\n};\nexports.default = _default;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9sb2NhbGVGb3JtLnRzIl0sIm5hbWVzIjpbIm1peGVkIiwiZGVmYXVsdCIsInJlcXVpcmVkIiwib25lT2YiLCJub3RPbmVPZiIsIm5vdFR5cGUiLCJ0eXBlIiwidmFsdWUiLCJvcmlnaW5hbFZhbHVlIiwiaXNDYXN0IiwibXNnIiwiZGVmaW5lZCIsInN0cmluZyIsImxlbmd0aCIsIm1pbiIsIm1heCIsIm1hdGNoZXMiLCJlbWFpbCIsInVybCIsInRyaW0iLCJsb3dlcmNhc2UiLCJ1cHBlcmNhc2UiLCJudW1iZXIiLCJsZXNzVGhhbiIsIm1vcmVUaGFuIiwibm90RXF1YWwiLCJwb3NpdGl2ZSIsIm5lZ2F0aXZlIiwiaW50ZWdlciIsImRhdGUiLCJib29sZWFuIiwib2JqZWN0Iiwibm9Vbmtub3duIiwiYXJyYXkiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7OztBQUVPLE1BQU1BLEtBQUssR0FBRztBQUNuQkMsRUFBQUEsT0FBTyxFQUFFLHFCQURVO0FBRW5CQyxFQUFBQSxRQUFRLEVBQUUsd0JBRlM7QUFHbkJDLEVBQUFBLEtBQUssRUFBRSx1REFIWTtBQUluQkMsRUFBQUEsUUFBUSxFQUFFLCtEQUpTO0FBS25CQyxFQUFBQSxPQUFPLEVBQUUsQ0FBQztBQUNSQyxJQUFBQSxJQURRO0FBQ0ZDLElBQUFBLEtBREU7QUFDS0MsSUFBQUE7QUFETCxHQUFELEtBRUU7QUFDVCxVQUFNQyxNQUFNLEdBQUdELGFBQWEsSUFBSSxJQUFqQixJQUF5QkEsYUFBYSxLQUFLRCxLQUExRDtBQUNBLFFBQUlHLEdBQUcsR0FBSSxHQUFHLDhCQUE2QkosSUFBSyxNQUFuQyxHQUNSLDBCQUF5Qix5QkFBV0MsS0FBWCxFQUFrQixJQUFsQixDQUF3QixJQUFJLEdBQ3hERSxNQUFNLEdBQ0QscUJBQW9CLHlCQUFXRCxhQUFYLEVBQTBCLElBQTFCLENBQWdDLE1BRG5ELEdBRUYsR0FBSSxFQUpWOztBQU1BLFFBQUlELEtBQUssS0FBSyxJQUFkLEVBQW9CO0FBQ2xCRyxNQUFBQSxHQUFHLElBQUksOEZBQVA7QUFDRDs7QUFFRCxXQUFPQSxHQUFQO0FBQ0QsR0FwQmtCO0FBcUJuQkMsRUFBQUEsT0FBTyxFQUFFO0FBckJVLENBQWQ7O0FBd0JBLE1BQU1DLE1BQU0sR0FBRztBQUNwQkMsRUFBQUEsTUFBTSxFQUFFLENBQUM7QUFBRUEsSUFBQUE7QUFBRixHQUFELEtBQXNCLCtCQUE4QkEsTUFBTyxJQUFHQSxNQUFNLEtBQUssQ0FBWCxHQUFlLFdBQWYsR0FBNkIsWUFBYSxHQUQ1RjtBQUVwQkMsRUFBQUEsR0FBRyxFQUFFLENBQUM7QUFBRUEsSUFBQUE7QUFBRixHQUFELEtBQW1CLCtCQUE4QkEsR0FBSSxJQUFHQSxHQUFHLEtBQUssQ0FBUixHQUFZLFdBQVosR0FBMEIsWUFBYSxHQUZoRjtBQUdwQkMsRUFBQUEsR0FBRyxFQUFFLENBQUM7QUFBRUEsSUFBQUE7QUFBRixHQUFELEtBQW1CLDhCQUE2QkEsR0FBSSxJQUFHQSxHQUFHLEtBQUssQ0FBUixHQUFZLFdBQVosR0FBMEIsWUFBYSxHQUgvRTtBQUlwQkMsRUFBQUEsT0FBTyxFQUFFLGtEQUpXO0FBS3BCQyxFQUFBQSxLQUFLLEVBQUUsb0NBTGE7QUFNcEJDLEVBQUFBLEdBQUcsRUFBRSxrQ0FOZTtBQU9wQkMsRUFBQUEsSUFBSSxFQUFFLGtFQVBjO0FBUXBCQyxFQUFBQSxTQUFTLEVBQUUsMENBUlM7QUFTcEJDLEVBQUFBLFNBQVMsRUFBRTtBQVRTLENBQWY7O0FBWUEsTUFBTUMsTUFBTSxHQUFHO0FBQ3BCUixFQUFBQSxHQUFHLEVBQUUsMkNBRGU7QUFFcEJDLEVBQUFBLEdBQUcsRUFBRSx1Q0FGZTtBQUdwQlEsRUFBQUEsUUFBUSxFQUFFLHFDQUhVO0FBSXBCQyxFQUFBQSxRQUFRLEVBQUUscUNBSlU7QUFLcEJDLEVBQUFBLFFBQVEsRUFBRSwyQ0FMVTtBQU1wQkMsRUFBQUEsUUFBUSxFQUFFLHNDQU5VO0FBT3BCQyxFQUFBQSxRQUFRLEVBQUUsc0NBUFU7QUFRcEJDLEVBQUFBLE9BQU8sRUFBRTtBQVJXLENBQWY7O0FBV0EsTUFBTUMsSUFBSSxHQUFHO0FBQ2xCZixFQUFBQSxHQUFHLEVBQUUsc0NBRGE7QUFFbEJDLEVBQUFBLEdBQUcsRUFBRTtBQUZhLENBQWI7O0FBS0EsTUFBTWUsT0FBTyxHQUFHLEVBQWhCOztBQUVBLE1BQU1DLE1BQU0sR0FBRztBQUNwQkMsRUFBQUEsU0FBUyxFQUFFO0FBRFMsQ0FBZjs7QUFJQSxNQUFNQyxLQUFLLEdBQUc7QUFDbkJuQixFQUFBQSxHQUFHLEVBQUUsQ0FBQztBQUFFQSxJQUFBQTtBQUFGLEdBQUQsS0FBbUIsK0JBQThCQSxHQUFJLElBQUdBLEdBQUcsS0FBSyxDQUFSLEdBQVksTUFBWixHQUFvQixPQUFRLEdBRHRFO0FBRW5CQyxFQUFBQSxHQUFHLEVBQUUsQ0FBQztBQUFFQSxJQUFBQTtBQUFGLEdBQUQsS0FBbUIsOEJBQTZCQSxHQUFJLElBQUdBLEdBQUcsS0FBSyxDQUFSLEdBQVksTUFBWixHQUFvQixPQUFRO0FBRnJFLENBQWQ7O2VBS1E7QUFDYmYsRUFBQUEsS0FEYTtBQUViWSxFQUFBQSxNQUZhO0FBR2JVLEVBQUFBLE1BSGE7QUFJYk8sRUFBQUEsSUFKYTtBQUtiRSxFQUFBQSxNQUxhO0FBTWJFLEVBQUFBLEtBTmE7QUFPYkgsRUFBQUE7QUFQYSxDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHByaW50VmFsdWUgZnJvbSAnLi9wcmludFZhbHVlJztcblxuZXhwb3J0IGNvbnN0IG1peGVkID0ge1xuICBkZWZhdWx0OiAnTyBjYW1wbyDDqSBpbnbDoWxpZG8uJyxcbiAgcmVxdWlyZWQ6ICdPIGNhbXBvIMOpIG9icmlnYXTDs3Jpby4nLFxuICBvbmVPZjogJ08gY2FtcG8gZGV2ZSB0ZXIgdW0gZG9zIHNlZ3VpbnRlcyB2YWxvcmVzOiAke3ZhbHVlc30uJyxcbiAgbm90T25lT2Y6ICdPIGNhbXBvIG7Do28gZGV2ZSB0ZXIgbmVuaHVtIGRvcyBzZWd1aW50ZXMgdmFsb3JlczogJHt2YWx1ZXN9LicsXG4gIG5vdFR5cGU6ICh7XG4gICAgdHlwZSwgdmFsdWUsIG9yaWdpbmFsVmFsdWUsXG4gIH06IGFueSkgPT4ge1xuICAgIGNvbnN0IGlzQ2FzdCA9IG9yaWdpbmFsVmFsdWUgIT0gbnVsbCAmJiBvcmlnaW5hbFZhbHVlICE9PSB2YWx1ZTtcbiAgICBsZXQgbXNnID0gYCR7YE8gY2FtcG8gZGV2ZSBzZXIgZG8gdGlwbyBcXGAke3R5cGV9XFxgLCBgXG4gICAgICArIGBtYXMgbyB2YWxvciBmaW5hbCDDqTogXFxgJHtwcmludFZhbHVlKHZhbHVlLCB0cnVlKX1cXGBgfSR7XG4gICAgICBpc0Nhc3RcbiAgICAgICAgPyBgIChjYXN0IGRvIHZhbG9yIFxcYCR7cHJpbnRWYWx1ZShvcmlnaW5hbFZhbHVlLCB0cnVlKX1cXGApLmBcbiAgICAgICAgOiAnLid9YDtcblxuICAgIGlmICh2YWx1ZSA9PT0gbnVsbCkge1xuICAgICAgbXNnICs9ICdcXG5TZSBhIGludGVuw6fDo28gZXJhIHVzYXIgXCJudWxsXCIgY29tbyB1bSB2YWxvciBlbSBicmFuY28gbWFycXVlIG8gZXNxdWVtYSBjb21vIGAubnVsbGFibGUoKWAuJztcbiAgICB9XG5cbiAgICByZXR1cm4gbXNnO1xuICB9LFxuICBkZWZpbmVkOiAnTyBjYW1wbyBuw6NvIGRldmUgc2VyIGluZGVmaW5pZG8uJyxcbn07XG5cbmV4cG9ydCBjb25zdCBzdHJpbmcgPSB7XG4gIGxlbmd0aDogKHsgbGVuZ3RoIH06IGFueSkgPT4gYE8gY2FtcG8gZGV2ZSB0ZXIgZXhhdGFtZW50ZSAke2xlbmd0aH0gJHtsZW5ndGggPT09IDEgPyAnY2FyYWN0ZXJlJyA6ICdjYXJhY3RlcmVzJ30uYCxcbiAgbWluOiAoeyBtaW4gfTogYW55KSA9PiBgTyBjYW1wbyBkZXZlIHRlciBwZWxvIG1lbm9zICR7bWlufSAke21pbiA9PT0gMSA/ICdjYXJhY3RlcmUnIDogJ2NhcmFjdGVyZXMnfS5gLFxuICBtYXg6ICh7IG1heCB9OiBhbnkpID0+IGBPIGNhbXBvIGRldmUgdGVyIG5vIG3DoXhpbW8gJHttYXh9ICR7bWF4ID09PSAxID8gJ2NhcmFjdGVyZScgOiAnY2FyYWN0ZXJlcyd9LmAsXG4gIG1hdGNoZXM6ICdPIGNhbXBvIGRldmUgY29ycmVzcG9uZGVyIGFvIHBhZHLDo286IFwiJHtyZWdleH1cIi4nLFxuICBlbWFpbDogJ08gY2FtcG8gZGV2ZSBzZXIgdW0gZS1tYWlsIHbDoWxpZG8uJyxcbiAgdXJsOiAnTyBjYW1wbyBkZXZlIHNlciB1bWEgVVJMIHbDoWxpZGEuJyxcbiAgdHJpbTogJ08gY2FtcG8gbsOjbyBkZXZlIGNvbnRlciBlc3Bhw6dvcyBhZGljaW9uYWlzIG5vIGluw61jaW8gbmVtIG5vIGZpbS4nLFxuICBsb3dlcmNhc2U6ICdPIGNhbXBvIGRldmUgZXN0YXIgZW0gbGV0cmFzIG1pbsO6c2N1bGFzLicsXG4gIHVwcGVyY2FzZTogJ08gY2FtcG8gZGV2ZSBlc3RhciBlbSBsZXRyYXMgbWFpw7pzY3VsYXMuJyxcbn07XG5cbmV4cG9ydCBjb25zdCBudW1iZXIgPSB7XG4gIG1pbjogJ08gY2FtcG8gZGV2ZSBzZXIgbWFpb3Igb3UgaWd1YWwgYSAke21pbn0uJyxcbiAgbWF4OiAnTyBjYW1wbyBkZXZlIG1lbm9yIG91IGlndWFsIGEgJHttYXh9LicsXG4gIGxlc3NUaGFuOiAnTyBjYW1wbyBkZXZlIHNlciBtZW5vciBxdWUgJHtsZXNzfS4nLFxuICBtb3JlVGhhbjogJ08gY2FtcG8gZGV2ZSBzZXIgbWFpb3IgcXVlICR7bW9yZX0uJyxcbiAgbm90RXF1YWw6ICdPIGNhbXBvIG7Do28gZGV2ZSBzZXIgaWd1YWwgYSAke25vdEVxdWFsfS4nLFxuICBwb3NpdGl2ZTogJ08gY2FtcG8gZGV2ZSBzZXIgdW0gbsO6bWVybyBwb3NpdGl2by4nLFxuICBuZWdhdGl2ZTogJ08gY2FtcG8gZGV2ZSBzZXIgdW0gbsO6bWVybyBuZWdhdGl2by4nLFxuICBpbnRlZ2VyOiAnTyBjYW1wbyBkZXZlIHNlciB1bSBuw7ptZXJvIGludGVpcm8uJyxcbn07XG5cbmV4cG9ydCBjb25zdCBkYXRlID0ge1xuICBtaW46ICdPIGNhbXBvIGRldmUgc2VyIHBvc3RlcmlvciBhICR7bWlufS4nLFxuICBtYXg6ICdPIGNhbXBvIGRldmUgc2VyIGFudGVyaW9yIGEgJHttYXh9LicsXG59O1xuXG5leHBvcnQgY29uc3QgYm9vbGVhbiA9IHt9O1xuXG5leHBvcnQgY29uc3Qgb2JqZWN0ID0ge1xuICBub1Vua25vd246ICdPIGNhbXBvIHRlbSBjaGF2ZXMgZGVzY29uaGVjaWRhczogJHt1bmtub3dufS4nLFxufTtcblxuZXhwb3J0IGNvbnN0IGFycmF5ID0ge1xuICBtaW46ICh7IG1pbiB9OiBhbnkpID0+IGBPIGNhbXBvIGRldmUgdGVyIHBlbG8gbWVub3MgJHttaW59ICR7bWluID09PSAxID8gJ2l0ZW0nOiAnaXRlbnMnfS5gLFxuICBtYXg6ICh7IG1heCB9OiBhbnkpID0+IGBPIGNhbXBvIGRldmUgdGVyIG5vIG3DoXhpbW8gJHttYXh9ICR7bWF4ID09PSAxID8gJ2l0ZW0nOiAnaXRlbnMnfS5gLFxufTtcblxuZXhwb3J0IGRlZmF1bHQge1xuICBtaXhlZCxcbiAgc3RyaW5nLFxuICBudW1iZXIsXG4gIGRhdGUsXG4gIG9iamVjdCxcbiAgYXJyYXksXG4gIGJvb2xlYW4sXG59O1xuIl19",
-      "start": 1742846401500,
-      "end": 1742846401527,
+      "start": 1742847314812,
+      "end": 1742847314847,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846401527,
-      "end": 1742846401527,
+      "start": 1742847314847,
+      "end": 1742847314847,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "import * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\nimport { __exports as localeForm } from \"\\u0000/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/yup-locale-pt/lib/localeForm.js?commonjs-exports\";\nimport require$$0 from \"\\u0000/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/yup-locale-pt/lib/printValue.js?commonjs-proxy\";\n\n\"use strict\";\n\nObject.defineProperty(localeForm, \"__esModule\", {\n  value: true\n});\nvar string_1 = localeForm.string = object_1 = localeForm.object = number_1 = localeForm.number = mixed_1 = localeForm.mixed = default_1 = localeForm.default = date_1 = localeForm.date = boolean_1 = localeForm.boolean = array_1 = localeForm.array = void 0;\n\nvar _printValue = _interopRequireDefault(require$$0);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nconst mixed = {\n  default: 'O campo é inválido.',\n  required: 'O campo é obrigatório.',\n  oneOf: 'O campo deve ter um dos seguintes valores: ${values}.',\n  notOneOf: 'O campo não deve ter nenhum dos seguintes valores: ${values}.',\n  notType: ({\n    type,\n    value,\n    originalValue\n  }) => {\n    const isCast = originalValue != null && originalValue !== value;\n    let msg = `${`O campo deve ser do tipo \\`${type}\\`, ` + `mas o valor final é: \\`${(0, _printValue.default)(value, true)}\\``}${isCast ? ` (cast do valor \\`${(0, _printValue.default)(originalValue, true)}\\`).` : '.'}`;\n\n    if (value === null) {\n      msg += '\\nSe a intenção era usar \"null\" como um valor em branco marque o esquema como `.nullable()`.';\n    }\n\n    return msg;\n  },\n  defined: 'O campo não deve ser indefinido.'\n};\nvar mixed_1 = localeForm.mixed = mixed;\nconst string = {\n  length: ({\n    length\n  }) => `O campo deve ter exatamente ${length} ${length === 1 ? 'caractere' : 'caracteres'}.`,\n  min: ({\n    min\n  }) => `O campo deve ter pelo menos ${min} ${min === 1 ? 'caractere' : 'caracteres'}.`,\n  max: ({\n    max\n  }) => `O campo deve ter no máximo ${max} ${max === 1 ? 'caractere' : 'caracteres'}.`,\n  matches: 'O campo deve corresponder ao padrão: \"${regex}\".',\n  email: 'O campo deve ser um e-mail válido.',\n  url: 'O campo deve ser uma URL válida.',\n  trim: 'O campo não deve conter espaços adicionais no início nem no fim.',\n  lowercase: 'O campo deve estar em letras minúsculas.',\n  uppercase: 'O campo deve estar em letras maiúsculas.'\n};\nstring_1 = localeForm.string = string;\nconst number = {\n  min: 'O campo deve ser maior ou igual a ${min}.',\n  max: 'O campo deve menor ou igual a ${max}.',\n  lessThan: 'O campo deve ser menor que ${less}.',\n  moreThan: 'O campo deve ser maior que ${more}.',\n  notEqual: 'O campo não deve ser igual a ${notEqual}.',\n  positive: 'O campo deve ser um número positivo.',\n  negative: 'O campo deve ser um número negativo.',\n  integer: 'O campo deve ser um número inteiro.'\n};\nvar number_1 = localeForm.number = number;\nconst date = {\n  min: 'O campo deve ser posterior a ${min}.',\n  max: 'O campo deve ser anterior a ${max}.'\n};\nvar date_1 = localeForm.date = date;\nconst boolean = {};\nvar boolean_1 = localeForm.boolean = boolean;\nconst object = {\n  noUnknown: 'O campo tem chaves desconhecidas: ${unknown}.'\n};\nvar object_1 = localeForm.object = object;\nconst array = {\n  min: ({\n    min\n  }) => `O campo deve ter pelo menos ${min} ${min === 1 ? 'item' : 'itens'}.`,\n  max: ({\n    max\n  }) => `O campo deve ter no máximo ${max} ${max === 1 ? 'item' : 'itens'}.`\n};\nvar array_1 = localeForm.array = array;\nvar _default = {\n  mixed,\n  string,\n  number,\n  date,\n  object,\n  array,\n  boolean\n};\nvar default_1 = localeForm.default = _default;\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9sb2NhbGVGb3JtLnRzIl0sIm5hbWVzIjpbIm1peGVkIiwiZGVmYXVsdCIsInJlcXVpcmVkIiwib25lT2YiLCJub3RPbmVPZiIsIm5vdFR5cGUiLCJ0eXBlIiwidmFsdWUiLCJvcmlnaW5hbFZhbHVlIiwiaXNDYXN0IiwibXNnIiwiZGVmaW5lZCIsInN0cmluZyIsImxlbmd0aCIsIm1pbiIsIm1heCIsIm1hdGNoZXMiLCJlbWFpbCIsInVybCIsInRyaW0iLCJsb3dlcmNhc2UiLCJ1cHBlcmNhc2UiLCJudW1iZXIiLCJsZXNzVGhhbiIsIm1vcmVUaGFuIiwibm90RXF1YWwiLCJwb3NpdGl2ZSIsIm5lZ2F0aXZlIiwiaW50ZWdlciIsImRhdGUiLCJib29sZWFuIiwib2JqZWN0Iiwibm9Vbmtub3duIiwiYXJyYXkiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7OztBQUVPLE1BQU1BLEtBQUssR0FBRztBQUNuQkMsRUFBQUEsT0FBTyxFQUFFLHFCQURVO0FBRW5CQyxFQUFBQSxRQUFRLEVBQUUsd0JBRlM7QUFHbkJDLEVBQUFBLEtBQUssRUFBRSx1REFIWTtBQUluQkMsRUFBQUEsUUFBUSxFQUFFLCtEQUpTO0FBS25CQyxFQUFBQSxPQUFPLEVBQUUsQ0FBQztBQUNSQyxJQUFBQSxJQURRO0FBQ0ZDLElBQUFBLEtBREU7QUFDS0MsSUFBQUE7QUFETCxHQUFELEtBRUU7QUFDVCxVQUFNQyxNQUFNLEdBQUdELGFBQWEsSUFBSSxJQUFqQixJQUF5QkEsYUFBYSxLQUFLRCxLQUExRDtBQUNBLFFBQUlHLEdBQUcsR0FBSSxHQUFHLDhCQUE2QkosSUFBSyxNQUFuQyxHQUNSLDBCQUF5Qix5QkFBV0MsS0FBWCxFQUFrQixJQUFsQixDQUF3QixJQUFJLEdBQ3hERSxNQUFNLEdBQ0QscUJBQW9CLHlCQUFXRCxhQUFYLEVBQTBCLElBQTFCLENBQWdDLE1BRG5ELEdBRUYsR0FBSSxFQUpWOztBQU1BLFFBQUlELEtBQUssS0FBSyxJQUFkLEVBQW9CO0FBQ2xCRyxNQUFBQSxHQUFHLElBQUksOEZBQVA7QUFDRDs7QUFFRCxXQUFPQSxHQUFQO0FBQ0QsR0FwQmtCO0FBcUJuQkMsRUFBQUEsT0FBTyxFQUFFO0FBckJVLENBQWQ7O0FBd0JBLE1BQU1DLE1BQU0sR0FBRztBQUNwQkMsRUFBQUEsTUFBTSxFQUFFLENBQUM7QUFBRUEsSUFBQUE7QUFBRixHQUFELEtBQXNCLCtCQUE4QkEsTUFBTyxJQUFHQSxNQUFNLEtBQUssQ0FBWCxHQUFlLFdBQWYsR0FBNkIsWUFBYSxHQUQ1RjtBQUVwQkMsRUFBQUEsR0FBRyxFQUFFLENBQUM7QUFBRUEsSUFBQUE7QUFBRixHQUFELEtBQW1CLCtCQUE4QkEsR0FBSSxJQUFHQSxHQUFHLEtBQUssQ0FBUixHQUFZLFdBQVosR0FBMEIsWUFBYSxHQUZoRjtBQUdwQkMsRUFBQUEsR0FBRyxFQUFFLENBQUM7QUFBRUEsSUFBQUE7QUFBRixHQUFELEtBQW1CLDhCQUE2QkEsR0FBSSxJQUFHQSxHQUFHLEtBQUssQ0FBUixHQUFZLFdBQVosR0FBMEIsWUFBYSxHQUgvRTtBQUlwQkMsRUFBQUEsT0FBTyxFQUFFLGtEQUpXO0FBS3BCQyxFQUFBQSxLQUFLLEVBQUUsb0NBTGE7QUFNcEJDLEVBQUFBLEdBQUcsRUFBRSxrQ0FOZTtBQU9wQkMsRUFBQUEsSUFBSSxFQUFFLGtFQVBjO0FBUXBCQyxFQUFBQSxTQUFTLEVBQUUsMENBUlM7QUFTcEJDLEVBQUFBLFNBQVMsRUFBRTtBQVRTLENBQWY7O0FBWUEsTUFBTUMsTUFBTSxHQUFHO0FBQ3BCUixFQUFBQSxHQUFHLEVBQUUsMkNBRGU7QUFFcEJDLEVBQUFBLEdBQUcsRUFBRSx1Q0FGZTtBQUdwQlEsRUFBQUEsUUFBUSxFQUFFLHFDQUhVO0FBSXBCQyxFQUFBQSxRQUFRLEVBQUUscUNBSlU7QUFLcEJDLEVBQUFBLFFBQVEsRUFBRSwyQ0FMVTtBQU1wQkMsRUFBQUEsUUFBUSxFQUFFLHNDQU5VO0FBT3BCQyxFQUFBQSxRQUFRLEVBQUUsc0NBUFU7QUFRcEJDLEVBQUFBLE9BQU8sRUFBRTtBQVJXLENBQWY7O0FBV0EsTUFBTUMsSUFBSSxHQUFHO0FBQ2xCZixFQUFBQSxHQUFHLEVBQUUsc0NBRGE7QUFFbEJDLEVBQUFBLEdBQUcsRUFBRTtBQUZhLENBQWI7O0FBS0EsTUFBTWUsT0FBTyxHQUFHLEVBQWhCOztBQUVBLE1BQU1DLE1BQU0sR0FBRztBQUNwQkMsRUFBQUEsU0FBUyxFQUFFO0FBRFMsQ0FBZjs7QUFJQSxNQUFNQyxLQUFLLEdBQUc7QUFDbkJuQixFQUFBQSxHQUFHLEVBQUUsQ0FBQztBQUFFQSxJQUFBQTtBQUFGLEdBQUQsS0FBbUIsK0JBQThCQSxHQUFJLElBQUdBLEdBQUcsS0FBSyxDQUFSLEdBQVksTUFBWixHQUFvQixPQUFRLEdBRHRFO0FBRW5CQyxFQUFBQSxHQUFHLEVBQUUsQ0FBQztBQUFFQSxJQUFBQTtBQUFGLEdBQUQsS0FBbUIsOEJBQTZCQSxHQUFJLElBQUdBLEdBQUcsS0FBSyxDQUFSLEdBQVksTUFBWixHQUFvQixPQUFRO0FBRnJFLENBQWQ7O2VBS1E7QUFDYmYsRUFBQUEsS0FEYTtBQUViWSxFQUFBQSxNQUZhO0FBR2JVLEVBQUFBLE1BSGE7QUFJYk8sRUFBQUEsSUFKYTtBQUtiRSxFQUFBQSxNQUxhO0FBTWJFLEVBQUFBLEtBTmE7QUFPYkgsRUFBQUE7QUFQYSxDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHByaW50VmFsdWUgZnJvbSAnLi9wcmludFZhbHVlJztcblxuZXhwb3J0IGNvbnN0IG1peGVkID0ge1xuICBkZWZhdWx0OiAnTyBjYW1wbyDDqSBpbnbDoWxpZG8uJyxcbiAgcmVxdWlyZWQ6ICdPIGNhbXBvIMOpIG9icmlnYXTDs3Jpby4nLFxuICBvbmVPZjogJ08gY2FtcG8gZGV2ZSB0ZXIgdW0gZG9zIHNlZ3VpbnRlcyB2YWxvcmVzOiAke3ZhbHVlc30uJyxcbiAgbm90T25lT2Y6ICdPIGNhbXBvIG7Do28gZGV2ZSB0ZXIgbmVuaHVtIGRvcyBzZWd1aW50ZXMgdmFsb3JlczogJHt2YWx1ZXN9LicsXG4gIG5vdFR5cGU6ICh7XG4gICAgdHlwZSwgdmFsdWUsIG9yaWdpbmFsVmFsdWUsXG4gIH06IGFueSkgPT4ge1xuICAgIGNvbnN0IGlzQ2FzdCA9IG9yaWdpbmFsVmFsdWUgIT0gbnVsbCAmJiBvcmlnaW5hbFZhbHVlICE9PSB2YWx1ZTtcbiAgICBsZXQgbXNnID0gYCR7YE8gY2FtcG8gZGV2ZSBzZXIgZG8gdGlwbyBcXGAke3R5cGV9XFxgLCBgXG4gICAgICArIGBtYXMgbyB2YWxvciBmaW5hbCDDqTogXFxgJHtwcmludFZhbHVlKHZhbHVlLCB0cnVlKX1cXGBgfSR7XG4gICAgICBpc0Nhc3RcbiAgICAgICAgPyBgIChjYXN0IGRvIHZhbG9yIFxcYCR7cHJpbnRWYWx1ZShvcmlnaW5hbFZhbHVlLCB0cnVlKX1cXGApLmBcbiAgICAgICAgOiAnLid9YDtcblxuICAgIGlmICh2YWx1ZSA9PT0gbnVsbCkge1xuICAgICAgbXNnICs9ICdcXG5TZSBhIGludGVuw6fDo28gZXJhIHVzYXIgXCJudWxsXCIgY29tbyB1bSB2YWxvciBlbSBicmFuY28gbWFycXVlIG8gZXNxdWVtYSBjb21vIGAubnVsbGFibGUoKWAuJztcbiAgICB9XG5cbiAgICByZXR1cm4gbXNnO1xuICB9LFxuICBkZWZpbmVkOiAnTyBjYW1wbyBuw6NvIGRldmUgc2VyIGluZGVmaW5pZG8uJyxcbn07XG5cbmV4cG9ydCBjb25zdCBzdHJpbmcgPSB7XG4gIGxlbmd0aDogKHsgbGVuZ3RoIH06IGFueSkgPT4gYE8gY2FtcG8gZGV2ZSB0ZXIgZXhhdGFtZW50ZSAke2xlbmd0aH0gJHtsZW5ndGggPT09IDEgPyAnY2FyYWN0ZXJlJyA6ICdjYXJhY3RlcmVzJ30uYCxcbiAgbWluOiAoeyBtaW4gfTogYW55KSA9PiBgTyBjYW1wbyBkZXZlIHRlciBwZWxvIG1lbm9zICR7bWlufSAke21pbiA9PT0gMSA/ICdjYXJhY3RlcmUnIDogJ2NhcmFjdGVyZXMnfS5gLFxuICBtYXg6ICh7IG1heCB9OiBhbnkpID0+IGBPIGNhbXBvIGRldmUgdGVyIG5vIG3DoXhpbW8gJHttYXh9ICR7bWF4ID09PSAxID8gJ2NhcmFjdGVyZScgOiAnY2FyYWN0ZXJlcyd9LmAsXG4gIG1hdGNoZXM6ICdPIGNhbXBvIGRldmUgY29ycmVzcG9uZGVyIGFvIHBhZHLDo286IFwiJHtyZWdleH1cIi4nLFxuICBlbWFpbDogJ08gY2FtcG8gZGV2ZSBzZXIgdW0gZS1tYWlsIHbDoWxpZG8uJyxcbiAgdXJsOiAnTyBjYW1wbyBkZXZlIHNlciB1bWEgVVJMIHbDoWxpZGEuJyxcbiAgdHJpbTogJ08gY2FtcG8gbsOjbyBkZXZlIGNvbnRlciBlc3Bhw6dvcyBhZGljaW9uYWlzIG5vIGluw61jaW8gbmVtIG5vIGZpbS4nLFxuICBsb3dlcmNhc2U6ICdPIGNhbXBvIGRldmUgZXN0YXIgZW0gbGV0cmFzIG1pbsO6c2N1bGFzLicsXG4gIHVwcGVyY2FzZTogJ08gY2FtcG8gZGV2ZSBlc3RhciBlbSBsZXRyYXMgbWFpw7pzY3VsYXMuJyxcbn07XG5cbmV4cG9ydCBjb25zdCBudW1iZXIgPSB7XG4gIG1pbjogJ08gY2FtcG8gZGV2ZSBzZXIgbWFpb3Igb3UgaWd1YWwgYSAke21pbn0uJyxcbiAgbWF4OiAnTyBjYW1wbyBkZXZlIG1lbm9yIG91IGlndWFsIGEgJHttYXh9LicsXG4gIGxlc3NUaGFuOiAnTyBjYW1wbyBkZXZlIHNlciBtZW5vciBxdWUgJHtsZXNzfS4nLFxuICBtb3JlVGhhbjogJ08gY2FtcG8gZGV2ZSBzZXIgbWFpb3IgcXVlICR7bW9yZX0uJyxcbiAgbm90RXF1YWw6ICdPIGNhbXBvIG7Do28gZGV2ZSBzZXIgaWd1YWwgYSAke25vdEVxdWFsfS4nLFxuICBwb3NpdGl2ZTogJ08gY2FtcG8gZGV2ZSBzZXIgdW0gbsO6bWVybyBwb3NpdGl2by4nLFxuICBuZWdhdGl2ZTogJ08gY2FtcG8gZGV2ZSBzZXIgdW0gbsO6bWVybyBuZWdhdGl2by4nLFxuICBpbnRlZ2VyOiAnTyBjYW1wbyBkZXZlIHNlciB1bSBuw7ptZXJvIGludGVpcm8uJyxcbn07XG5cbmV4cG9ydCBjb25zdCBkYXRlID0ge1xuICBtaW46ICdPIGNhbXBvIGRldmUgc2VyIHBvc3RlcmlvciBhICR7bWlufS4nLFxuICBtYXg6ICdPIGNhbXBvIGRldmUgc2VyIGFudGVyaW9yIGEgJHttYXh9LicsXG59O1xuXG5leHBvcnQgY29uc3QgYm9vbGVhbiA9IHt9O1xuXG5leHBvcnQgY29uc3Qgb2JqZWN0ID0ge1xuICBub1Vua25vd246ICdPIGNhbXBvIHRlbSBjaGF2ZXMgZGVzY29uaGVjaWRhczogJHt1bmtub3dufS4nLFxufTtcblxuZXhwb3J0IGNvbnN0IGFycmF5ID0ge1xuICBtaW46ICh7IG1pbiB9OiBhbnkpID0+IGBPIGNhbXBvIGRldmUgdGVyIHBlbG8gbWVub3MgJHttaW59ICR7bWluID09PSAxID8gJ2l0ZW0nOiAnaXRlbnMnfS5gLFxuICBtYXg6ICh7IG1heCB9OiBhbnkpID0+IGBPIGNhbXBvIGRldmUgdGVyIG5vIG3DoXhpbW8gJHttYXh9ICR7bWF4ID09PSAxID8gJ2l0ZW0nOiAnaXRlbnMnfS5gLFxufTtcblxuZXhwb3J0IGRlZmF1bHQge1xuICBtaXhlZCxcbiAgc3RyaW5nLFxuICBudW1iZXIsXG4gIGRhdGUsXG4gIG9iamVjdCxcbiAgYXJyYXksXG4gIGJvb2xlYW4sXG59O1xuIl19\n\nexport { localeForm as __moduleExports, string_1 as string, object_1 as object, number_1 as number, mixed_1 as mixed, date_1 as date, boolean_1 as boolean, array_1 as array, default_1 as default };",
-      "start": 1742846401527,
-      "end": 1742846401551,
+      "start": 1742847314847,
+      "end": 1742847314903,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -145,74 +145,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846401551,
-      "end": 1742846401551,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846401551,
-      "end": 1742846401551,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846401551,
-      "end": 1742846401551,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846401552,
-      "end": 1742846401552,
+      "start": 1742847314904,
+      "end": 1742847314904,
       "order": "normal"
     }
   ]

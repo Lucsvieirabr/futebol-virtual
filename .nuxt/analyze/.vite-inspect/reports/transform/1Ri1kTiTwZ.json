@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import { UniqueComponentId, DomHandler } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport ScrollPanelStyle from 'primevue/scrollpanel/style';\nimport { openBlock, createElementBlock, mergeProps, createElementVNode, renderSlot } from 'vue';\n\nvar script$1 = {\n  name: 'BaseScrollPanel',\n  \"extends\": BaseComponent,\n  props: {\n    step: {\n      type: Number,\n      \"default\": 5\n    }\n  },\n  style: ScrollPanelStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'ScrollPanel',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  initialized: false,\n  documentResizeListener: null,\n  documentMouseMoveListener: null,\n  documentMouseUpListener: null,\n  frame: null,\n  scrollXRatio: null,\n  scrollYRatio: null,\n  isXBarClicked: false,\n  isYBarClicked: false,\n  lastPageX: null,\n  lastPageY: null,\n  timer: null,\n  outsideClickListener: null,\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      orientation: 'vertical',\n      lastScrollTop: 0,\n      lastScrollLeft: 0\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n    if (this.$el.offsetParent) {\n      this.initialize();\n    }\n  },\n  updated: function updated() {\n    if (!this.initialized && this.$el.offsetParent) {\n      this.initialize();\n    }\n  },\n  beforeUnmount: function beforeUnmount() {\n    this.unbindDocumentResizeListener();\n    if (this.frame) {\n      window.cancelAnimationFrame(this.frame);\n    }\n  },\n  methods: {\n    initialize: function initialize() {\n      this.moveBar();\n      this.bindDocumentResizeListener();\n      this.calculateContainerHeight();\n    },\n    calculateContainerHeight: function calculateContainerHeight() {\n      var containerStyles = getComputedStyle(this.$el),\n        xBarStyles = getComputedStyle(this.$refs.xBar),\n        pureContainerHeight = DomHandler.getHeight(this.$el) - parseInt(xBarStyles['height'], 10);\n      if (containerStyles['max-height'] !== 'none' && pureContainerHeight === 0) {\n        if (this.$refs.content.offsetHeight + parseInt(xBarStyles['height'], 10) > parseInt(containerStyles['max-height'], 10)) {\n          this.$el.style.height = containerStyles['max-height'];\n        } else {\n          this.$el.style.height = this.$refs.content.offsetHeight + parseFloat(containerStyles.paddingTop) + parseFloat(containerStyles.paddingBottom) + parseFloat(containerStyles.borderTopWidth) + parseFloat(containerStyles.borderBottomWidth) + 'px';\n        }\n      }\n    },\n    moveBar: function moveBar() {\n      var _this = this;\n      if (this.$refs.content) {\n        /* horizontal scroll */\n        var totalWidth = this.$refs.content.scrollWidth;\n        var ownWidth = this.$refs.content.clientWidth;\n        var bottom = (this.$el.clientHeight - this.$refs.xBar.clientHeight) * -1;\n        this.scrollXRatio = ownWidth / totalWidth;\n\n        /* vertical scroll */\n        var totalHeight = this.$refs.content.scrollHeight;\n        var ownHeight = this.$refs.content.clientHeight;\n        var right = (this.$el.clientWidth - this.$refs.yBar.clientWidth) * -1;\n        this.scrollYRatio = ownHeight / totalHeight;\n        this.frame = this.requestAnimationFrame(function () {\n          if (_this.$refs.xBar) {\n            if (_this.scrollXRatio >= 1) {\n              _this.$refs.xBar.setAttribute('data-p-scrollpanel-hidden', 'true');\n              !_this.isUnstyled && DomHandler.addClass(_this.$refs.xBar, 'p-scrollpanel-hidden');\n            } else {\n              _this.$refs.xBar.setAttribute('data-p-scrollpanel-hidden', 'false');\n              !_this.isUnstyled && DomHandler.removeClass(_this.$refs.xBar, 'p-scrollpanel-hidden');\n              _this.$refs.xBar.style.cssText = 'width:' + Math.max(_this.scrollXRatio * 100, 10) + '%; left:' + _this.$refs.content.scrollLeft / totalWidth * 100 + '%;bottom:' + bottom + 'px;';\n            }\n          }\n          if (_this.$refs.yBar) {\n            if (_this.scrollYRatio >= 1) {\n              _this.$refs.yBar.setAttribute('data-p-scrollpanel-hidden', 'true');\n              !_this.isUnstyled && DomHandler.addClass(_this.$refs.yBar, 'p-scrollpanel-hidden');\n            } else {\n              _this.$refs.yBar.setAttribute('data-p-scrollpanel-hidden', 'false');\n              !_this.isUnstyled && DomHandler.removeClass(_this.$refs.yBar, 'p-scrollpanel-hidden');\n              _this.$refs.yBar.style.cssText = 'height:' + Math.max(_this.scrollYRatio * 100, 10) + '%; top: calc(' + _this.$refs.content.scrollTop / totalHeight * 100 + '% - ' + _this.$refs.xBar.clientHeight + 'px);right:' + right + 'px;';\n            }\n          }\n        });\n      }\n    },\n    onYBarMouseDown: function onYBarMouseDown(e) {\n      this.isYBarClicked = true;\n      this.$refs.yBar.focus();\n      this.lastPageY = e.pageY;\n      this.$refs.yBar.setAttribute('data-p-scrollpanel-grabbed', 'true');\n      !this.isUnstyled && DomHandler.addClass(this.$refs.yBar, 'p-scrollpanel-grabbed');\n      document.body.setAttribute('data-p-scrollpanel-grabbed', 'true');\n      !this.isUnstyled && DomHandler.addClass(document.body, 'p-scrollpanel-grabbed');\n      this.bindDocumentMouseListeners();\n      e.preventDefault();\n    },\n    onXBarMouseDown: function onXBarMouseDown(e) {\n      this.isXBarClicked = true;\n      this.$refs.xBar.focus();\n      this.lastPageX = e.pageX;\n      this.$refs.yBar.setAttribute('data-p-scrollpanel-grabbed', 'false');\n      !this.isUnstyled && DomHandler.addClass(this.$refs.xBar, 'p-scrollpanel-grabbed');\n      document.body.setAttribute('data-p-scrollpanel-grabbed', 'false');\n      !this.isUnstyled && DomHandler.addClass(document.body, 'p-scrollpanel-grabbed');\n      this.bindDocumentMouseListeners();\n      e.preventDefault();\n    },\n    onScroll: function onScroll(event) {\n      if (this.lastScrollLeft !== event.target.scrollLeft) {\n        this.lastScrollLeft = event.target.scrollLeft;\n        this.orientation = 'horizontal';\n      } else if (this.lastScrollTop !== event.target.scrollTop) {\n        this.lastScrollTop = event.target.scrollTop;\n        this.orientation = 'vertical';\n      }\n      this.moveBar();\n    },\n    onKeyDown: function onKeyDown(event) {\n      if (this.orientation === 'vertical') {\n        switch (event.code) {\n          case 'ArrowDown':\n            {\n              this.setTimer('scrollTop', this.step);\n              event.preventDefault();\n              break;\n            }\n          case 'ArrowUp':\n            {\n              this.setTimer('scrollTop', this.step * -1);\n              event.preventDefault();\n              break;\n            }\n          case 'ArrowLeft':\n          case 'ArrowRight':\n            {\n              event.preventDefault();\n              break;\n            }\n        }\n      } else if (this.orientation === 'horizontal') {\n        switch (event.code) {\n          case 'ArrowRight':\n            {\n              this.setTimer('scrollLeft', this.step);\n              event.preventDefault();\n              break;\n            }\n          case 'ArrowLeft':\n            {\n              this.setTimer('scrollLeft', this.step * -1);\n              event.preventDefault();\n              break;\n            }\n          case 'ArrowDown':\n          case 'ArrowUp':\n            {\n              event.preventDefault();\n              break;\n            }\n        }\n      }\n    },\n    onKeyUp: function onKeyUp() {\n      this.clearTimer();\n    },\n    repeat: function repeat(bar, step) {\n      this.$refs.content[bar] += step;\n      this.moveBar();\n    },\n    setTimer: function setTimer(bar, step) {\n      var _this2 = this;\n      this.clearTimer();\n      this.timer = setTimeout(function () {\n        _this2.repeat(bar, step);\n      }, 40);\n    },\n    clearTimer: function clearTimer() {\n      if (this.timer) {\n        clearTimeout(this.timer);\n      }\n    },\n    onDocumentMouseMove: function onDocumentMouseMove(e) {\n      if (this.isXBarClicked) {\n        this.onMouseMoveForXBar(e);\n      } else if (this.isYBarClicked) {\n        this.onMouseMoveForYBar(e);\n      } else {\n        this.onMouseMoveForXBar(e);\n        this.onMouseMoveForYBar(e);\n      }\n    },\n    onMouseMoveForXBar: function onMouseMoveForXBar(e) {\n      var _this3 = this;\n      var deltaX = e.pageX - this.lastPageX;\n      this.lastPageX = e.pageX;\n      this.frame = this.requestAnimationFrame(function () {\n        _this3.$refs.content.scrollLeft += deltaX / _this3.scrollXRatio;\n      });\n    },\n    onMouseMoveForYBar: function onMouseMoveForYBar(e) {\n      var _this4 = this;\n      var deltaY = e.pageY - this.lastPageY;\n      this.lastPageY = e.pageY;\n      this.frame = this.requestAnimationFrame(function () {\n        _this4.$refs.content.scrollTop += deltaY / _this4.scrollYRatio;\n      });\n    },\n    onFocus: function onFocus(event) {\n      if (this.$refs.xBar.isSameNode(event.target)) {\n        this.orientation = 'horizontal';\n      } else if (this.$refs.yBar.isSameNode(event.target)) {\n        this.orientation = 'vertical';\n      }\n    },\n    onBlur: function onBlur() {\n      if (this.orientation === 'horizontal') {\n        this.orientation = 'vertical';\n      }\n    },\n    onDocumentMouseUp: function onDocumentMouseUp() {\n      this.$refs.yBar.setAttribute('data-p-scrollpanel-grabbed', 'false');\n      !this.isUnstyled && DomHandler.removeClass(this.$refs.yBar, 'p-scrollpanel-grabbed');\n      this.$refs.xBar.setAttribute('data-p-scrollpanel-grabbed', 'false');\n      !this.isUnstyled && DomHandler.removeClass(this.$refs.xBar, 'p-scrollpanel-grabbed');\n      document.body.setAttribute('data-p-scrollpanel-grabbed', 'false');\n      !this.isUnstyled && DomHandler.removeClass(document.body, 'p-scrollpanel-grabbed');\n      this.unbindDocumentMouseListeners();\n      this.isXBarClicked = false;\n      this.isYBarClicked = false;\n    },\n    requestAnimationFrame: function requestAnimationFrame(f) {\n      var frame = window.requestAnimationFrame || this.timeoutFrame;\n      return frame(f);\n    },\n    refresh: function refresh() {\n      this.moveBar();\n    },\n    scrollTop: function scrollTop(_scrollTop) {\n      var scrollableHeight = this.$refs.content.scrollHeight - this.$refs.content.clientHeight;\n      _scrollTop = _scrollTop > scrollableHeight ? scrollableHeight : _scrollTop > 0 ? _scrollTop : 0;\n      this.$refs.content.scrollTop = _scrollTop;\n    },\n    timeoutFrame: function timeoutFrame(fn) {\n      setTimeout(fn, 0);\n    },\n    bindDocumentMouseListeners: function bindDocumentMouseListeners() {\n      var _this5 = this;\n      if (!this.documentMouseMoveListener) {\n        this.documentMouseMoveListener = function (e) {\n          _this5.onDocumentMouseMove(e);\n        };\n        document.addEventListener('mousemove', this.documentMouseMoveListener);\n      }\n      if (!this.documentMouseUpListener) {\n        this.documentMouseUpListener = function (e) {\n          _this5.onDocumentMouseUp(e);\n        };\n        document.addEventListener('mouseup', this.documentMouseUpListener);\n      }\n    },\n    unbindDocumentMouseListeners: function unbindDocumentMouseListeners() {\n      if (this.documentMouseMoveListener) {\n        document.removeEventListener('mousemove', this.documentMouseMoveListener);\n        this.documentMouseMoveListener = null;\n      }\n      if (this.documentMouseUpListener) {\n        document.removeEventListener('mouseup', this.documentMouseUpListener);\n        this.documentMouseUpListener = null;\n      }\n    },\n    bindDocumentResizeListener: function bindDocumentResizeListener() {\n      var _this6 = this;\n      if (!this.documentResizeListener) {\n        this.documentResizeListener = function () {\n          _this6.moveBar();\n        };\n        window.addEventListener('resize', this.documentResizeListener);\n      }\n    },\n    unbindDocumentResizeListener: function unbindDocumentResizeListener() {\n      if (this.documentResizeListener) {\n        window.removeEventListener('resize', this.documentResizeListener);\n        this.documentResizeListener = null;\n      }\n    }\n  },\n  computed: {\n    contentId: function contentId() {\n      return this.id + '_content';\n    }\n  }\n};\n\nvar _hoisted_1 = [\"id\"];\nvar _hoisted_2 = [\"aria-controls\", \"aria-valuenow\"];\nvar _hoisted_3 = [\"aria-controls\", \"aria-valuenow\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('wrapper')\n  }, _ctx.ptm('wrapper')), [createElementVNode(\"div\", mergeProps({\n    ref: \"content\",\n    id: $options.contentId,\n    \"class\": _ctx.cx('content'),\n    onScroll: _cache[0] || (_cache[0] = function () {\n      return $options.onScroll && $options.onScroll.apply($options, arguments);\n    }),\n    onMouseenter: _cache[1] || (_cache[1] = function () {\n      return $options.moveBar && $options.moveBar.apply($options, arguments);\n    })\n  }, _ctx.ptm('content')), [renderSlot(_ctx.$slots, \"default\")], 16, _hoisted_1)], 16), createElementVNode(\"div\", mergeProps({\n    ref: \"xBar\",\n    \"class\": _ctx.cx('barx'),\n    tabindex: \"0\",\n    role: \"scrollbar\",\n    \"aria-orientation\": \"horizontal\",\n    \"aria-controls\": $options.contentId,\n    \"aria-valuenow\": $data.lastScrollLeft,\n    onMousedown: _cache[2] || (_cache[2] = function () {\n      return $options.onXBarMouseDown && $options.onXBarMouseDown.apply($options, arguments);\n    }),\n    onKeydown: _cache[3] || (_cache[3] = function ($event) {\n      return $options.onKeyDown($event);\n    }),\n    onKeyup: _cache[4] || (_cache[4] = function () {\n      return $options.onKeyUp && $options.onKeyUp.apply($options, arguments);\n    }),\n    onFocus: _cache[5] || (_cache[5] = function () {\n      return $options.onFocus && $options.onFocus.apply($options, arguments);\n    }),\n    onBlur: _cache[6] || (_cache[6] = function () {\n      return $options.onBlur && $options.onBlur.apply($options, arguments);\n    })\n  }, _ctx.ptm('barx'), {\n    \"data-pc-group-section\": \"bar\"\n  }), null, 16, _hoisted_2), createElementVNode(\"div\", mergeProps({\n    ref: \"yBar\",\n    \"class\": _ctx.cx('bary'),\n    tabindex: \"0\",\n    role: \"scrollbar\",\n    \"aria-orientation\": \"vertical\",\n    \"aria-controls\": $options.contentId,\n    \"aria-valuenow\": $data.lastScrollTop,\n    onMousedown: _cache[7] || (_cache[7] = function () {\n      return $options.onYBarMouseDown && $options.onYBarMouseDown.apply($options, arguments);\n    }),\n    onKeydown: _cache[8] || (_cache[8] = function ($event) {\n      return $options.onKeyDown($event);\n    }),\n    onKeyup: _cache[9] || (_cache[9] = function () {\n      return $options.onKeyUp && $options.onKeyUp.apply($options, arguments);\n    }),\n    onFocus: _cache[10] || (_cache[10] = function () {\n      return $options.onFocus && $options.onFocus.apply($options, arguments);\n    })\n  }, _ctx.ptm('bary'), {\n    \"data-pc-group-section\": \"bar\"\n  }), null, 16, _hoisted_3)], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846400447,
-      "end": 1742846400461,
+      "start": 1742847313479,
+      "end": 1742847313496,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400461,
-      "end": 1742846400461,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400461,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/scrollpanel/scrollpanel.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/scrollpanel/scrollpanel.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400462,
-      "end": 1742846400462,
+      "start": 1742847313496,
+      "end": 1742847313496,
       "order": "normal"
     }
   ]

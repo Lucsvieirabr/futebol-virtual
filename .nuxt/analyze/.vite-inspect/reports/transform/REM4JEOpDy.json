@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "export const PAGE_USUARIOS = {\n  path: \"/sistema/controle-acesso/usuarios\",\n  roles: {\n    listar: \"usuarios-listar\",\n    visualizar: \"usuarios-visualizar\",\n    criar: \"usuarios-criar\",\n    editar: \"usuarios-editar\",\n    excluir: \"usuarios-excluir\",\n    \"associar-grupo\": \"usuarios-associar-grupo\",\n    \"desassociar-grupo\": \"usuarios-desassociar-grupo\",\n    \"associar-organizacao\": \"usuarios-associar-organizacao\",\n    \"desassociar-organizacao\": \"usuarios-desassociar-organizacao\",\n  },\n};\n\nexport const PAGE_GRUPOS = {\n  path: \"/sistema/controle-acesso/grupos\",\n  roles: {\n    listar: \"grupos-listar\",\n    visualizar: \"grupos-visualizar\",\n    criar: \"grupos-criar\",\n    editar: \"grupos-editar\",\n    excluir: \"grupos-excluir\",\n    \"associar-usuario\": \"grupos-associar-usuario\",\n    \"desassociar-usuario\": \"grupos-desassociar-usuario\",\n    \"associar-permissao\": \"grupos-associar-permissao\",\n    \"desassociar-permissao\": \"grupos-desassociar-permissao\",\n  },\n};\n\nexport const PAGE_ORGANIZACOES = {\n  path: \"/sistema/controle-acesso/organizacoes\",\n  roles: {\n    listar: \"organizacoes-listar\",\n    visualizar: \"organizacoes-visualizar\",\n    criar: \"organizacoes-criar\",\n    editar: \"organizacoes-editar\",\n    excluir: \"organizacoes-excluir\",\n    \"associar-usuario\": \"organizacoes-associar-usuario\",\n    \"desassociar-usuario\": \"organizacoes-desassociar-usuario\",\n  },\n};\n\nexport const PAGE_PERMISSOES = {\n  path: \"/sistema/controle-acesso/permissoes\",\n  roles: {\n    listar: \"permissoes-listar\",\n    visualizar: \"permissoes-visualizar\",\n    criar: \"permissoes-criar\",\n    editar: \"permissoes-editar\",\n    excluir: \"permissoes-excluir\",\n    \"associar-grupo\": \"permissoes-associar-grupo\",\n    \"desassociar-grupo\": \"permissoes-desassociar-grupo\",\n  },\n};\n\nexport const PAGE_PAISES = {\n  path: \"/sistema/cadastro-geral/paises\",\n  roles: {\n    listar: \"paises-listar\",\n    visualizar: \"paises-visualizar\",\n    criar: \"paises-criar\",\n    editar: \"paises-editar\",\n    excluir: \"paises-excluir\",\n  },\n};\n\nexport const PAGE_ESTADOS = {\n  path: \"/sistema/cadastro-geral/estados\",\n  roles: {\n    listar: \"estados-listar\",\n    visualizar: \"estados-visualizar\",\n    criar: \"estados-criar\",\n    editar: \"estados-editar\",\n    excluir: \"estados-excluir\",\n  },\n};\n\nexport const PAGE_CIDADES = {\n  path: \"/sistema/cadastro-geral/cidades\",\n  roles: {\n    listar: \"cidades-listar\",\n    visualizar: \"cidades-visualizar\",\n    criar: \"cidades-criar\",\n    editar: \"cidades-editar\",\n    excluir: \"cidades-excluir\",\n  },\n};\n\nexport const PAGE_PESSOAS = {\n  path: \"/sistema/cadastro/pessoas\",\n  roles: {\n    listar: \"pessoas-listar\",\n    visualizar: \"pessoas-visualizar\",\n    criar: \"pessoas-criar\",\n    editar: \"pessoas-editar\",\n    excluir: \"pessoas-excluir\",\n  },\n};\n\nexport const PAGE_PESSOAS_CONTATOS = {\n  path: \"/sistema/cadastro/pessoas\",\n  roles: {\n    listar: \"pessoas-contatos-listar\",\n    visualizar: \"pessoas-contatos-visualizar\",\n    criar: \"pessoas-contatos-criar\",\n    editar: \"pessoas-contatos-editar\",\n    excluir: \"pessoas-contatos-excluir\",\n  },\n};\n\nexport const PAGE_PESSOAS_ENDERECOS = {\n  path: \"/sistema/cadastro/pessoas\",\n  roles: {\n    listar: \"pessoas-enderecos-listar\",\n    visualizar: \"pessoas-enderecos-visualizar\",\n    criar: \"pessoas-enderecos-criar\",\n    editar: \"pessoas-enderecos-editar\",\n    excluir: \"pessoas-enderecos-excluir\",\n  },\n};\n\nexport const PAGE_PRODUTOS = {\n  path: \"/sistema/cadastro/produtos\",\n  roles: {\n    listar: \"produtos-listar\",\n    visualizar: \"produtos-visualizar\",\n    criar: \"produtos-criar\",\n    editar: \"produtos-editar\",\n    excluir: \"produtos-excluir\",\n  },\n};\n\nexport const PAGE_PRODUTOS_CATEGORIAS = {\n  path: \"/sistema/cadastro/produtos-categorias\",\n  roles: {\n    listar: \"produtos-categorias-listar\",\n    visualizar: \"produtos-categorias-visualizar\",\n    criar: \"produtos-categorias-criar\",\n    editar: \"produtos-categorias-editar\",\n    excluir: \"produtos-categorias-excluir\",\n  },\n};\n\nexport const PAGE_PEDIDOS = {\n  path: \"/sistema/cadastro/pedidos\",\n  roles: {\n    listar: \"pedidos-listar\",\n    visualizar: \"pedidos-visualizar\",\n    criar: \"pedidos-criar\",\n    editar: \"pedidos-editar\",\n    excluir: \"pedidos-excluir\",\n  },\n};\n\nexport const PAGE_CONTAS = {\n  path: \"/sistema/financeiro/contas\",\n  roles: {\n    listar: \"contas-listar\",\n    visualizar: \"contas-visualizar\",\n    criar: \"contas-criar\",\n    editar: \"contas-editar\",\n    excluir: \"contas-excluir\",\n  },\n};\n\nexport const PAGE_TRANSACOES_CATEGORIAS = {\n  path: \"/sistema/financeiro/transacoes-categorias\",\n  roles: {\n    listar: \"transacoes-categorias-listar\",\n    visualizar: \"transacoes-categorias-visualizar\",\n    criar: \"transacoes-categorias-criar\",\n    editar: \"transacoes-categorias-editar\",\n    excluir: \"transacoes-categorias-excluir\",\n  },\n};\n\nexport const PAGE_TRANSACOES = {\n  path: \"/sistema/financeiro/transacoes\",\n  roles: {\n    listar: \"transacoes-listar\",\n    visualizar: \"transacoes-visualizar\",\n    criar: \"transacoes-criar\",\n    editar: \"transacoes-editar\",\n    excluir: \"transacoes-excluir\",\n  },\n};\n\nexport const PAGE_FORMAS_PAGAMENTOS = {\n  path: \"/sistema/cadastro-geral/formas-pagamentos\",\n  roles: {\n    listar: \"formas-pagamentos-listar\",\n    visualizar: \"formas-pagamentos-visualizar\",\n    criar: \"formas-pagamentos-criar\",\n    editar: \"formas-pagamentos-editar\",\n    excluir: \"formas-pagamentos-excluir\",\n  },\n};\n\nexport const PAGE_FATURAS = {\n  path: \"/sistema/financeiro/faturas\",\n  roles: {\n    listar: \"faturas-listar\",\n    visualizar: \"faturas-visualizar\",\n    criar: \"faturas-criar\",\n    editar: \"faturas-editar\",\n    excluir: \"faturas-excluir\",\n  },\n};\n\nexport const PAGE_ASSINATURAS = {\n  path: \"/sistema/cadastro-geral/assinatura\",\n  roles: {\n    listar: \"assinaturas-listar\",\n    visualizar: \"assinaturas-visualizar\",\n    criar: \"assinaturas-criar\",\n    editar: \"assinaturas-editar\",\n    excluir: \"assinaturas-excluir\",\n  },\n};\n\n\nexport const PAGE_PLANOS = {\n  path: \"/sistema/cadastro-geral/planos\",\n  roles: {\n    listar: \"planos-listar\",\n    visualizar: \"planos-visualizar\",\n    criar: \"planos-criar\",\n    editar: \"planos-editar\",\n    excluir: \"planos-excluir\",\n  },\n};\n\nexport const PAGE_CUPONS = {\n  'path': '/sistema/cadastro/cupons',\n  'roles': {\n      'criar': 'cupons-criar',\n      'buscar': 'cupons-listar',\n      'editar': 'cupons-editar',\n      'excluir': 'cupons-excluir',\n      'visualizar': 'cupons-visualizar',\n  },\n};\n\nexport const PAGE_CARRINHOS = {\n  'path': '/cart',\n  'roles': {\n      'criar': 'carrinhos-criar',\n      'buscar': 'carrinhos-listar',\n      'editar': 'carrinhos-editar',\n      'excluir': 'carrinhos-excluir',\n      'visualizar': 'carrinhos-visualizar',\n  },\n};",
-      "start": 1742846401584,
-      "end": 1742846401599,
+      "start": 1742847314969,
+      "end": 1742847314975,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846401599,
-      "end": 1742846401599,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314975,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314975,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846401600,
-      "end": 1742846401600,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846401600,
-      "end": 1742846401601,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846401601,
-      "end": 1742846401601,
+      "start": 1742847314977,
+      "end": 1742847314977,
       "order": "normal"
     }
   ]

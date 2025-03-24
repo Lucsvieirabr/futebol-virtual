@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import BaseComponent from 'primevue/basecomponent';\nimport TextareaStyle from 'primevue/textarea/style';\nimport { openBlock, createElementBlock, mergeProps } from 'vue';\n\nvar script$1 = {\n  name: 'BaseTextarea',\n  \"extends\": BaseComponent,\n  props: {\n    modelValue: null,\n    autoResize: Boolean,\n    invalid: {\n      type: Boolean,\n      \"default\": false\n    },\n    variant: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: TextareaStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Textarea',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:modelValue'],\n  mounted: function mounted() {\n    if (this.$el.offsetParent && this.autoResize) {\n      this.resize();\n    }\n  },\n  updated: function updated() {\n    if (this.$el.offsetParent && this.autoResize) {\n      this.resize();\n    }\n  },\n  methods: {\n    resize: function resize() {\n      this.$el.style.height = 'auto';\n      this.$el.style.height = this.$el.scrollHeight + 'px';\n      if (parseFloat(this.$el.style.height) >= parseFloat(this.$el.style.maxHeight)) {\n        this.$el.style.overflowY = 'scroll';\n        this.$el.style.height = this.$el.style.maxHeight;\n      } else {\n        this.$el.style.overflow = 'hidden';\n      }\n    },\n    onInput: function onInput(event) {\n      if (this.autoResize) {\n        this.resize();\n      }\n      this.$emit('update:modelValue', event.target.value);\n    }\n  },\n  computed: {\n    filled: function filled() {\n      return this.modelValue != null && this.modelValue.toString().length > 0;\n    },\n    ptmParams: function ptmParams() {\n      return {\n        context: {\n          disabled: this.$attrs.disabled || this.$attrs.disabled === ''\n        }\n      };\n    }\n  }\n};\n\nvar _hoisted_1 = [\"value\", \"aria-invalid\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"textarea\", mergeProps({\n    \"class\": _ctx.cx('root'),\n    value: _ctx.modelValue,\n    \"aria-invalid\": _ctx.invalid || undefined,\n    onInput: _cache[0] || (_cache[0] = function () {\n      return $options.onInput && $options.onInput.apply($options, arguments);\n    })\n  }, _ctx.ptmi('root', $options.ptmParams)), null, 16, _hoisted_1);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846399836,
-      "end": 1742846400435,
+      "start": 1742847312802,
+      "end": 1742847313473,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313473,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313473,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/textarea/textarea.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400435,
-      "end": 1742846400435,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400435,
-      "end": 1742846400436,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/textarea/textarea.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742846400436,
-      "end": 1742846400436,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400436,
-      "end": 1742846400436,
+      "start": 1742847313474,
+      "end": 1742847313474,
       "order": "normal"
     }
   ]

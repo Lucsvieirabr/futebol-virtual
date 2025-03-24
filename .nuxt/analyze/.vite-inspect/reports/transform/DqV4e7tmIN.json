@@ -4,87 +4,87 @@
     {
       "name": "virtual",
       "result": "import { defineNuxtPlugin } from '#app/nuxt'\nimport { LazyPrimeAutoComplete, LazyPrimeCalendar, LazyPrimeCascadeSelect, LazyPrimeCheckbox, LazyPrimeChips, LazyPrimeColorPicker, LazyPrimeDropdown, LazyPrimeFloatLabel, LazyPrimeIconField, LazyPrimeInputGroup, LazyPrimeInputGroupAddon, LazyPrimeInputIcon, LazyPrimeInputMask, LazyPrimeInputNumber, LazyPrimeInputOtp, LazyPrimeInputSwitch, LazyPrimeInputText, LazyPrimeKnob, LazyPrimeListbox, LazyPrimeMultiSelect, LazyPrimePassword, LazyPrimeRadioButton, LazyPrimeRating, LazyPrimeSelectButton, LazyPrimeSlider, LazyPrimeTextarea, LazyPrimeToggleButton, LazyPrimeTreeSelect, LazyPrimeTriStateCheckbox, LazyPrimeButton, LazyPrimeButtonGroup, LazyPrimeSpeedDial, LazyPrimeSplitButton, LazyPrimeColumn, LazyPrimeRow, LazyPrimeColumnGroup, LazyPrimeDataTable, LazyPrimeDataView, LazyPrimeDataViewLayoutOptions, LazyPrimeOrderList, LazyPrimeOrganizationChart, LazyPrimePaginator, LazyPrimePickList, LazyPrimeTree, LazyPrimeTreeTable, LazyPrimeTimeline, LazyPrimeVirtualScroller, LazyPrimeAccordion, LazyPrimeAccordionTab, LazyPrimeCard, LazyPrimeDeferredContent, LazyPrimeDivider, LazyPrimeFieldset, LazyPrimePanel, LazyPrimeScrollPanel, LazyPrimeSplitter, LazyPrimeSplitterPanel, LazyPrimeStepper, LazyPrimeStepperPanel, LazyPrimeTabView, LazyPrimeTabPanel, LazyPrimeToolbar, LazyPrimeConfirmDialog, LazyPrimeConfirmPopup, LazyPrimeDialog, LazyPrimeDynamicDialog, LazyPrimeOverlayPanel, LazyPrimeSidebar, LazyPrimeFileUpload, LazyPrimeBreadcrumb, LazyPrimeContextMenu, LazyPrimeDock, LazyPrimeMenu, LazyPrimeMenubar, LazyPrimeMegaMenu, LazyPrimePanelMenu, LazyPrimeSteps, LazyPrimeTabMenu, LazyPrimeTieredMenu, LazyPrimeChart, LazyPrimeMessage, LazyPrimeInlineMessage, LazyPrimeToast, LazyPrimeCarousel, LazyPrimeGalleria, LazyPrimeImage, LazyPrimeAvatar, LazyPrimeAvatarGroup, LazyPrimeBadge, LazyPrimeBlockUI, LazyPrimeChip, LazyPrimeInplace, LazyPrimeMeterGroup, LazyPrimeScrollTop, LazyPrimeSkeleton, LazyPrimeProgressBar, LazyPrimeProgressSpinner, LazyPrimeTag, LazyPrimeTerminal } from '#components'\nconst lazyGlobalComponents = [\n  [\"PrimeAutoComplete\", LazyPrimeAutoComplete],\n[\"PrimeCalendar\", LazyPrimeCalendar],\n[\"PrimeCascadeSelect\", LazyPrimeCascadeSelect],\n[\"PrimeCheckbox\", LazyPrimeCheckbox],\n[\"PrimeChips\", LazyPrimeChips],\n[\"PrimeColorPicker\", LazyPrimeColorPicker],\n[\"PrimeDropdown\", LazyPrimeDropdown],\n[\"PrimeFloatLabel\", LazyPrimeFloatLabel],\n[\"PrimeIconField\", LazyPrimeIconField],\n[\"PrimeInputGroup\", LazyPrimeInputGroup],\n[\"PrimeInputGroupAddon\", LazyPrimeInputGroupAddon],\n[\"PrimeInputIcon\", LazyPrimeInputIcon],\n[\"PrimeInputMask\", LazyPrimeInputMask],\n[\"PrimeInputNumber\", LazyPrimeInputNumber],\n[\"PrimeInputOtp\", LazyPrimeInputOtp],\n[\"PrimeInputSwitch\", LazyPrimeInputSwitch],\n[\"PrimeInputText\", LazyPrimeInputText],\n[\"PrimeKnob\", LazyPrimeKnob],\n[\"PrimeListbox\", LazyPrimeListbox],\n[\"PrimeMultiSelect\", LazyPrimeMultiSelect],\n[\"PrimePassword\", LazyPrimePassword],\n[\"PrimeRadioButton\", LazyPrimeRadioButton],\n[\"PrimeRating\", LazyPrimeRating],\n[\"PrimeSelectButton\", LazyPrimeSelectButton],\n[\"PrimeSlider\", LazyPrimeSlider],\n[\"PrimeTextarea\", LazyPrimeTextarea],\n[\"PrimeToggleButton\", LazyPrimeToggleButton],\n[\"PrimeTreeSelect\", LazyPrimeTreeSelect],\n[\"PrimeTriStateCheckbox\", LazyPrimeTriStateCheckbox],\n[\"PrimeButton\", LazyPrimeButton],\n[\"PrimeButtonGroup\", LazyPrimeButtonGroup],\n[\"PrimeSpeedDial\", LazyPrimeSpeedDial],\n[\"PrimeSplitButton\", LazyPrimeSplitButton],\n[\"PrimeColumn\", LazyPrimeColumn],\n[\"PrimeRow\", LazyPrimeRow],\n[\"PrimeColumnGroup\", LazyPrimeColumnGroup],\n[\"PrimeDataTable\", LazyPrimeDataTable],\n[\"PrimeDataView\", LazyPrimeDataView],\n[\"PrimeDataViewLayoutOptions\", LazyPrimeDataViewLayoutOptions],\n[\"PrimeOrderList\", LazyPrimeOrderList],\n[\"PrimeOrganizationChart\", LazyPrimeOrganizationChart],\n[\"PrimePaginator\", LazyPrimePaginator],\n[\"PrimePickList\", LazyPrimePickList],\n[\"PrimeTree\", LazyPrimeTree],\n[\"PrimeTreeTable\", LazyPrimeTreeTable],\n[\"PrimeTimeline\", LazyPrimeTimeline],\n[\"PrimeVirtualScroller\", LazyPrimeVirtualScroller],\n[\"PrimeAccordion\", LazyPrimeAccordion],\n[\"PrimeAccordionTab\", LazyPrimeAccordionTab],\n[\"PrimeCard\", LazyPrimeCard],\n[\"PrimeDeferredContent\", LazyPrimeDeferredContent],\n[\"PrimeDivider\", LazyPrimeDivider],\n[\"PrimeFieldset\", LazyPrimeFieldset],\n[\"PrimePanel\", LazyPrimePanel],\n[\"PrimeScrollPanel\", LazyPrimeScrollPanel],\n[\"PrimeSplitter\", LazyPrimeSplitter],\n[\"PrimeSplitterPanel\", LazyPrimeSplitterPanel],\n[\"PrimeStepper\", LazyPrimeStepper],\n[\"PrimeStepperPanel\", LazyPrimeStepperPanel],\n[\"PrimeTabView\", LazyPrimeTabView],\n[\"PrimeTabPanel\", LazyPrimeTabPanel],\n[\"PrimeToolbar\", LazyPrimeToolbar],\n[\"PrimeConfirmDialog\", LazyPrimeConfirmDialog],\n[\"PrimeConfirmPopup\", LazyPrimeConfirmPopup],\n[\"PrimeDialog\", LazyPrimeDialog],\n[\"PrimeDynamicDialog\", LazyPrimeDynamicDialog],\n[\"PrimeOverlayPanel\", LazyPrimeOverlayPanel],\n[\"PrimeSidebar\", LazyPrimeSidebar],\n[\"PrimeFileUpload\", LazyPrimeFileUpload],\n[\"PrimeBreadcrumb\", LazyPrimeBreadcrumb],\n[\"PrimeContextMenu\", LazyPrimeContextMenu],\n[\"PrimeDock\", LazyPrimeDock],\n[\"PrimeMenu\", LazyPrimeMenu],\n[\"PrimeMenubar\", LazyPrimeMenubar],\n[\"PrimeMegaMenu\", LazyPrimeMegaMenu],\n[\"PrimePanelMenu\", LazyPrimePanelMenu],\n[\"PrimeSteps\", LazyPrimeSteps],\n[\"PrimeTabMenu\", LazyPrimeTabMenu],\n[\"PrimeTieredMenu\", LazyPrimeTieredMenu],\n[\"PrimeChart\", LazyPrimeChart],\n[\"PrimeMessage\", LazyPrimeMessage],\n[\"PrimeInlineMessage\", LazyPrimeInlineMessage],\n[\"PrimeToast\", LazyPrimeToast],\n[\"PrimeCarousel\", LazyPrimeCarousel],\n[\"PrimeGalleria\", LazyPrimeGalleria],\n[\"PrimeImage\", LazyPrimeImage],\n[\"PrimeAvatar\", LazyPrimeAvatar],\n[\"PrimeAvatarGroup\", LazyPrimeAvatarGroup],\n[\"PrimeBadge\", LazyPrimeBadge],\n[\"PrimeBlockUI\", LazyPrimeBlockUI],\n[\"PrimeChip\", LazyPrimeChip],\n[\"PrimeInplace\", LazyPrimeInplace],\n[\"PrimeMeterGroup\", LazyPrimeMeterGroup],\n[\"PrimeScrollTop\", LazyPrimeScrollTop],\n[\"PrimeSkeleton\", LazyPrimeSkeleton],\n[\"PrimeProgressBar\", LazyPrimeProgressBar],\n[\"PrimeProgressSpinner\", LazyPrimeProgressSpinner],\n[\"PrimeTag\", LazyPrimeTag],\n[\"PrimeTerminal\", LazyPrimeTerminal],\n  \n]\n\nexport default defineNuxtPlugin({\n  name: 'nuxt:global-components',\n  setup (nuxtApp) {\n    for (const [name, component] of lazyGlobalComponents) {\n      nuxtApp.vueApp.component(name, component)\n      nuxtApp.vueApp.component('Lazy' + name, component)\n    }\n  }\n})\n",
-      "start": 1742846399442,
-      "end": 1742846399442,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846399443,
-      "end": 1742846399443,
+      "start": 1742847312317,
+      "end": 1742847312317,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import LazyPrimeAutoComplete from 'primevue/autocomplete?nuxt_component=async&nuxt_component_name=PrimeAutoComplete&nuxt_component_export=default';\nimport LazyPrimeCalendar from 'primevue/calendar?nuxt_component=async&nuxt_component_name=PrimeCalendar&nuxt_component_export=default';\nimport LazyPrimeCascadeSelect from 'primevue/cascadeselect?nuxt_component=async&nuxt_component_name=PrimeCascadeSelect&nuxt_component_export=default';\nimport LazyPrimeCheckbox from 'primevue/checkbox?nuxt_component=async&nuxt_component_name=PrimeCheckbox&nuxt_component_export=default';\nimport LazyPrimeChips from 'primevue/chips?nuxt_component=async&nuxt_component_name=PrimeChips&nuxt_component_export=default';\nimport LazyPrimeColorPicker from 'primevue/colorpicker?nuxt_component=async&nuxt_component_name=PrimeColorPicker&nuxt_component_export=default';\nimport LazyPrimeDropdown from 'primevue/dropdown?nuxt_component=async&nuxt_component_name=PrimeDropdown&nuxt_component_export=default';\nimport LazyPrimeFloatLabel from 'primevue/floatlabel?nuxt_component=async&nuxt_component_name=PrimeFloatLabel&nuxt_component_export=default';\nimport LazyPrimeIconField from 'primevue/iconfield?nuxt_component=async&nuxt_component_name=PrimeIconField&nuxt_component_export=default';\nimport LazyPrimeInputGroup from 'primevue/inputgroup?nuxt_component=async&nuxt_component_name=PrimeInputGroup&nuxt_component_export=default';\nimport LazyPrimeInputGroupAddon from 'primevue/inputgroupaddon?nuxt_component=async&nuxt_component_name=PrimeInputGroupAddon&nuxt_component_export=default';\nimport LazyPrimeInputIcon from 'primevue/inputicon?nuxt_component=async&nuxt_component_name=PrimeInputIcon&nuxt_component_export=default';\nimport LazyPrimeInputMask from 'primevue/inputmask?nuxt_component=async&nuxt_component_name=PrimeInputMask&nuxt_component_export=default';\nimport LazyPrimeInputNumber from 'primevue/inputnumber?nuxt_component=async&nuxt_component_name=PrimeInputNumber&nuxt_component_export=default';\nimport LazyPrimeInputOtp from 'primevue/inputotp?nuxt_component=async&nuxt_component_name=PrimeInputOtp&nuxt_component_export=default';\nimport LazyPrimeInputSwitch from 'primevue/inputswitch?nuxt_component=async&nuxt_component_name=PrimeInputSwitch&nuxt_component_export=default';\nimport LazyPrimeInputText from 'primevue/inputtext?nuxt_component=async&nuxt_component_name=PrimeInputText&nuxt_component_export=default';\nimport LazyPrimeKnob from 'primevue/knob?nuxt_component=async&nuxt_component_name=PrimeKnob&nuxt_component_export=default';\nimport LazyPrimeListbox from 'primevue/listbox?nuxt_component=async&nuxt_component_name=PrimeListbox&nuxt_component_export=default';\nimport LazyPrimeMultiSelect from 'primevue/multiselect?nuxt_component=async&nuxt_component_name=PrimeMultiSelect&nuxt_component_export=default';\nimport LazyPrimePassword from 'primevue/password?nuxt_component=async&nuxt_component_name=PrimePassword&nuxt_component_export=default';\nimport LazyPrimeRadioButton from 'primevue/radiobutton?nuxt_component=async&nuxt_component_name=PrimeRadioButton&nuxt_component_export=default';\nimport LazyPrimeRating from 'primevue/rating?nuxt_component=async&nuxt_component_name=PrimeRating&nuxt_component_export=default';\nimport LazyPrimeSelectButton from 'primevue/selectbutton?nuxt_component=async&nuxt_component_name=PrimeSelectButton&nuxt_component_export=default';\nimport LazyPrimeSlider from 'primevue/slider?nuxt_component=async&nuxt_component_name=PrimeSlider&nuxt_component_export=default';\nimport LazyPrimeTextarea from 'primevue/textarea?nuxt_component=async&nuxt_component_name=PrimeTextarea&nuxt_component_export=default';\nimport LazyPrimeToggleButton from 'primevue/togglebutton?nuxt_component=async&nuxt_component_name=PrimeToggleButton&nuxt_component_export=default';\nimport LazyPrimeTreeSelect from 'primevue/treeselect?nuxt_component=async&nuxt_component_name=PrimeTreeSelect&nuxt_component_export=default';\nimport LazyPrimeTriStateCheckbox from 'primevue/tristatecheckbox?nuxt_component=async&nuxt_component_name=PrimeTriStateCheckbox&nuxt_component_export=default';\nimport LazyPrimeButton from 'primevue/button?nuxt_component=async&nuxt_component_name=PrimeButton&nuxt_component_export=default';\nimport LazyPrimeButtonGroup from 'primevue/buttongroup?nuxt_component=async&nuxt_component_name=PrimeButtonGroup&nuxt_component_export=default';\nimport LazyPrimeSpeedDial from 'primevue/speeddial?nuxt_component=async&nuxt_component_name=PrimeSpeedDial&nuxt_component_export=default';\nimport LazyPrimeSplitButton from 'primevue/splitbutton?nuxt_component=async&nuxt_component_name=PrimeSplitButton&nuxt_component_export=default';\nimport LazyPrimeColumn from 'primevue/column?nuxt_component=async&nuxt_component_name=PrimeColumn&nuxt_component_export=default';\nimport LazyPrimeRow from 'primevue/row?nuxt_component=async&nuxt_component_name=PrimeRow&nuxt_component_export=default';\nimport LazyPrimeColumnGroup from 'primevue/columngroup?nuxt_component=async&nuxt_component_name=PrimeColumnGroup&nuxt_component_export=default';\nimport LazyPrimeDataTable from 'primevue/datatable?nuxt_component=async&nuxt_component_name=PrimeDataTable&nuxt_component_export=default';\nimport LazyPrimeDataView from 'primevue/dataview?nuxt_component=async&nuxt_component_name=PrimeDataView&nuxt_component_export=default';\nimport LazyPrimeDataViewLayoutOptions from 'primevue/dataviewlayoutoptions?nuxt_component=async&nuxt_component_name=PrimeDataViewLayoutOptions&nuxt_component_export=default';\nimport LazyPrimeOrderList from 'primevue/orderlist?nuxt_component=async&nuxt_component_name=PrimeOrderList&nuxt_component_export=default';\nimport LazyPrimeOrganizationChart from 'primevue/organizationchart?nuxt_component=async&nuxt_component_name=PrimeOrganizationChart&nuxt_component_export=default';\nimport LazyPrimePaginator from 'primevue/paginator?nuxt_component=async&nuxt_component_name=PrimePaginator&nuxt_component_export=default';\nimport LazyPrimePickList from 'primevue/picklist?nuxt_component=async&nuxt_component_name=PrimePickList&nuxt_component_export=default';\nimport LazyPrimeTree from 'primevue/tree?nuxt_component=async&nuxt_component_name=PrimeTree&nuxt_component_export=default';\nimport LazyPrimeTreeTable from 'primevue/treetable?nuxt_component=async&nuxt_component_name=PrimeTreeTable&nuxt_component_export=default';\nimport LazyPrimeTimeline from 'primevue/timeline?nuxt_component=async&nuxt_component_name=PrimeTimeline&nuxt_component_export=default';\nimport LazyPrimeVirtualScroller from 'primevue/virtualscroller?nuxt_component=async&nuxt_component_name=PrimeVirtualScroller&nuxt_component_export=default';\nimport LazyPrimeAccordion from 'primevue/accordion?nuxt_component=async&nuxt_component_name=PrimeAccordion&nuxt_component_export=default';\nimport LazyPrimeAccordionTab from 'primevue/accordiontab?nuxt_component=async&nuxt_component_name=PrimeAccordionTab&nuxt_component_export=default';\nimport LazyPrimeCard from 'primevue/card?nuxt_component=async&nuxt_component_name=PrimeCard&nuxt_component_export=default';\nimport LazyPrimeDeferredContent from 'primevue/deferredcontent?nuxt_component=async&nuxt_component_name=PrimeDeferredContent&nuxt_component_export=default';\nimport LazyPrimeDivider from 'primevue/divider?nuxt_component=async&nuxt_component_name=PrimeDivider&nuxt_component_export=default';\nimport LazyPrimeFieldset from 'primevue/fieldset?nuxt_component=async&nuxt_component_name=PrimeFieldset&nuxt_component_export=default';\nimport LazyPrimePanel from 'primevue/panel?nuxt_component=async&nuxt_component_name=PrimePanel&nuxt_component_export=default';\nimport LazyPrimeScrollPanel from 'primevue/scrollpanel?nuxt_component=async&nuxt_component_name=PrimeScrollPanel&nuxt_component_export=default';\nimport LazyPrimeSplitter from 'primevue/splitter?nuxt_component=async&nuxt_component_name=PrimeSplitter&nuxt_component_export=default';\nimport LazyPrimeSplitterPanel from 'primevue/splitterpanel?nuxt_component=async&nuxt_component_name=PrimeSplitterPanel&nuxt_component_export=default';\nimport LazyPrimeStepper from 'primevue/stepper?nuxt_component=async&nuxt_component_name=PrimeStepper&nuxt_component_export=default';\nimport LazyPrimeStepperPanel from 'primevue/stepperpanel?nuxt_component=async&nuxt_component_name=PrimeStepperPanel&nuxt_component_export=default';\nimport LazyPrimeTabView from 'primevue/tabview?nuxt_component=async&nuxt_component_name=PrimeTabView&nuxt_component_export=default';\nimport LazyPrimeTabPanel from 'primevue/tabpanel?nuxt_component=async&nuxt_component_name=PrimeTabPanel&nuxt_component_export=default';\nimport LazyPrimeToolbar from 'primevue/toolbar?nuxt_component=async&nuxt_component_name=PrimeToolbar&nuxt_component_export=default';\nimport LazyPrimeConfirmDialog from 'primevue/confirmdialog?nuxt_component=async&nuxt_component_name=PrimeConfirmDialog&nuxt_component_export=default';\nimport LazyPrimeConfirmPopup from 'primevue/confirmpopup?nuxt_component=async&nuxt_component_name=PrimeConfirmPopup&nuxt_component_export=default';\nimport LazyPrimeDialog from 'primevue/dialog?nuxt_component=async&nuxt_component_name=PrimeDialog&nuxt_component_export=default';\nimport LazyPrimeDynamicDialog from 'primevue/dynamicdialog?nuxt_component=async&nuxt_component_name=PrimeDynamicDialog&nuxt_component_export=default';\nimport LazyPrimeOverlayPanel from 'primevue/overlaypanel?nuxt_component=async&nuxt_component_name=PrimeOverlayPanel&nuxt_component_export=default';\nimport LazyPrimeSidebar from 'primevue/sidebar?nuxt_component=async&nuxt_component_name=PrimeSidebar&nuxt_component_export=default';\nimport LazyPrimeFileUpload from 'primevue/fileupload?nuxt_component=async&nuxt_component_name=PrimeFileUpload&nuxt_component_export=default';\nimport LazyPrimeBreadcrumb from 'primevue/breadcrumb?nuxt_component=async&nuxt_component_name=PrimeBreadcrumb&nuxt_component_export=default';\nimport LazyPrimeContextMenu from 'primevue/contextmenu?nuxt_component=async&nuxt_component_name=PrimeContextMenu&nuxt_component_export=default';\nimport LazyPrimeDock from 'primevue/dock?nuxt_component=async&nuxt_component_name=PrimeDock&nuxt_component_export=default';\nimport LazyPrimeMenu from 'primevue/menu?nuxt_component=async&nuxt_component_name=PrimeMenu&nuxt_component_export=default';\nimport LazyPrimeMenubar from 'primevue/menubar?nuxt_component=async&nuxt_component_name=PrimeMenubar&nuxt_component_export=default';\nimport LazyPrimeMegaMenu from 'primevue/megamenu?nuxt_component=async&nuxt_component_name=PrimeMegaMenu&nuxt_component_export=default';\nimport LazyPrimePanelMenu from 'primevue/panelmenu?nuxt_component=async&nuxt_component_name=PrimePanelMenu&nuxt_component_export=default';\nimport LazyPrimeSteps from 'primevue/steps?nuxt_component=async&nuxt_component_name=PrimeSteps&nuxt_component_export=default';\nimport LazyPrimeTabMenu from 'primevue/tabmenu?nuxt_component=async&nuxt_component_name=PrimeTabMenu&nuxt_component_export=default';\nimport LazyPrimeTieredMenu from 'primevue/tieredmenu?nuxt_component=async&nuxt_component_name=PrimeTieredMenu&nuxt_component_export=default';\nimport LazyPrimeChart from 'primevue/chart?nuxt_component=async&nuxt_component_name=PrimeChart&nuxt_component_export=default';\nimport LazyPrimeMessage from 'primevue/message?nuxt_component=async&nuxt_component_name=PrimeMessage&nuxt_component_export=default';\nimport LazyPrimeInlineMessage from 'primevue/inlinemessage?nuxt_component=async&nuxt_component_name=PrimeInlineMessage&nuxt_component_export=default';\nimport LazyPrimeToast from 'primevue/toast?nuxt_component=async&nuxt_component_name=PrimeToast&nuxt_component_export=default';\nimport LazyPrimeCarousel from 'primevue/carousel?nuxt_component=async&nuxt_component_name=PrimeCarousel&nuxt_component_export=default';\nimport LazyPrimeGalleria from 'primevue/galleria?nuxt_component=async&nuxt_component_name=PrimeGalleria&nuxt_component_export=default';\nimport LazyPrimeImage from 'primevue/image?nuxt_component=async&nuxt_component_name=PrimeImage&nuxt_component_export=default';\nimport LazyPrimeAvatar from 'primevue/avatar?nuxt_component=async&nuxt_component_name=PrimeAvatar&nuxt_component_export=default';\nimport LazyPrimeAvatarGroup from 'primevue/avatargroup?nuxt_component=async&nuxt_component_name=PrimeAvatarGroup&nuxt_component_export=default';\nimport LazyPrimeBadge from 'primevue/badge?nuxt_component=async&nuxt_component_name=PrimeBadge&nuxt_component_export=default';\nimport LazyPrimeBlockUI from 'primevue/blockui?nuxt_component=async&nuxt_component_name=PrimeBlockUI&nuxt_component_export=default';\nimport LazyPrimeChip from 'primevue/chip?nuxt_component=async&nuxt_component_name=PrimeChip&nuxt_component_export=default';\nimport LazyPrimeInplace from 'primevue/inplace?nuxt_component=async&nuxt_component_name=PrimeInplace&nuxt_component_export=default';\nimport LazyPrimeMeterGroup from 'primevue/metergroup?nuxt_component=async&nuxt_component_name=PrimeMeterGroup&nuxt_component_export=default';\nimport LazyPrimeScrollTop from 'primevue/scrolltop?nuxt_component=async&nuxt_component_name=PrimeScrollTop&nuxt_component_export=default';\nimport LazyPrimeSkeleton from 'primevue/skeleton?nuxt_component=async&nuxt_component_name=PrimeSkeleton&nuxt_component_export=default';\nimport LazyPrimeProgressBar from 'primevue/progressbar?nuxt_component=async&nuxt_component_name=PrimeProgressBar&nuxt_component_export=default';\nimport LazyPrimeProgressSpinner from 'primevue/progressspinner?nuxt_component=async&nuxt_component_name=PrimeProgressSpinner&nuxt_component_export=default';\nimport LazyPrimeTag from 'primevue/tag?nuxt_component=async&nuxt_component_name=PrimeTag&nuxt_component_export=default';\nimport LazyPrimeTerminal from 'primevue/terminal?nuxt_component=async&nuxt_component_name=PrimeTerminal&nuxt_component_export=default';\nimport { defineNuxtPlugin } from '#app/nuxt'\nconst lazyGlobalComponents = [\n  [\"PrimeAutoComplete\", LazyPrimeAutoComplete],\n[\"PrimeCalendar\", LazyPrimeCalendar],\n[\"PrimeCascadeSelect\", LazyPrimeCascadeSelect],\n[\"PrimeCheckbox\", LazyPrimeCheckbox],\n[\"PrimeChips\", LazyPrimeChips],\n[\"PrimeColorPicker\", LazyPrimeColorPicker],\n[\"PrimeDropdown\", LazyPrimeDropdown],\n[\"PrimeFloatLabel\", LazyPrimeFloatLabel],\n[\"PrimeIconField\", LazyPrimeIconField],\n[\"PrimeInputGroup\", LazyPrimeInputGroup],\n[\"PrimeInputGroupAddon\", LazyPrimeInputGroupAddon],\n[\"PrimeInputIcon\", LazyPrimeInputIcon],\n[\"PrimeInputMask\", LazyPrimeInputMask],\n[\"PrimeInputNumber\", LazyPrimeInputNumber],\n[\"PrimeInputOtp\", LazyPrimeInputOtp],\n[\"PrimeInputSwitch\", LazyPrimeInputSwitch],\n[\"PrimeInputText\", LazyPrimeInputText],\n[\"PrimeKnob\", LazyPrimeKnob],\n[\"PrimeListbox\", LazyPrimeListbox],\n[\"PrimeMultiSelect\", LazyPrimeMultiSelect],\n[\"PrimePassword\", LazyPrimePassword],\n[\"PrimeRadioButton\", LazyPrimeRadioButton],\n[\"PrimeRating\", LazyPrimeRating],\n[\"PrimeSelectButton\", LazyPrimeSelectButton],\n[\"PrimeSlider\", LazyPrimeSlider],\n[\"PrimeTextarea\", LazyPrimeTextarea],\n[\"PrimeToggleButton\", LazyPrimeToggleButton],\n[\"PrimeTreeSelect\", LazyPrimeTreeSelect],\n[\"PrimeTriStateCheckbox\", LazyPrimeTriStateCheckbox],\n[\"PrimeButton\", LazyPrimeButton],\n[\"PrimeButtonGroup\", LazyPrimeButtonGroup],\n[\"PrimeSpeedDial\", LazyPrimeSpeedDial],\n[\"PrimeSplitButton\", LazyPrimeSplitButton],\n[\"PrimeColumn\", LazyPrimeColumn],\n[\"PrimeRow\", LazyPrimeRow],\n[\"PrimeColumnGroup\", LazyPrimeColumnGroup],\n[\"PrimeDataTable\", LazyPrimeDataTable],\n[\"PrimeDataView\", LazyPrimeDataView],\n[\"PrimeDataViewLayoutOptions\", LazyPrimeDataViewLayoutOptions],\n[\"PrimeOrderList\", LazyPrimeOrderList],\n[\"PrimeOrganizationChart\", LazyPrimeOrganizationChart],\n[\"PrimePaginator\", LazyPrimePaginator],\n[\"PrimePickList\", LazyPrimePickList],\n[\"PrimeTree\", LazyPrimeTree],\n[\"PrimeTreeTable\", LazyPrimeTreeTable],\n[\"PrimeTimeline\", LazyPrimeTimeline],\n[\"PrimeVirtualScroller\", LazyPrimeVirtualScroller],\n[\"PrimeAccordion\", LazyPrimeAccordion],\n[\"PrimeAccordionTab\", LazyPrimeAccordionTab],\n[\"PrimeCard\", LazyPrimeCard],\n[\"PrimeDeferredContent\", LazyPrimeDeferredContent],\n[\"PrimeDivider\", LazyPrimeDivider],\n[\"PrimeFieldset\", LazyPrimeFieldset],\n[\"PrimePanel\", LazyPrimePanel],\n[\"PrimeScrollPanel\", LazyPrimeScrollPanel],\n[\"PrimeSplitter\", LazyPrimeSplitter],\n[\"PrimeSplitterPanel\", LazyPrimeSplitterPanel],\n[\"PrimeStepper\", LazyPrimeStepper],\n[\"PrimeStepperPanel\", LazyPrimeStepperPanel],\n[\"PrimeTabView\", LazyPrimeTabView],\n[\"PrimeTabPanel\", LazyPrimeTabPanel],\n[\"PrimeToolbar\", LazyPrimeToolbar],\n[\"PrimeConfirmDialog\", LazyPrimeConfirmDialog],\n[\"PrimeConfirmPopup\", LazyPrimeConfirmPopup],\n[\"PrimeDialog\", LazyPrimeDialog],\n[\"PrimeDynamicDialog\", LazyPrimeDynamicDialog],\n[\"PrimeOverlayPanel\", LazyPrimeOverlayPanel],\n[\"PrimeSidebar\", LazyPrimeSidebar],\n[\"PrimeFileUpload\", LazyPrimeFileUpload],\n[\"PrimeBreadcrumb\", LazyPrimeBreadcrumb],\n[\"PrimeContextMenu\", LazyPrimeContextMenu],\n[\"PrimeDock\", LazyPrimeDock],\n[\"PrimeMenu\", LazyPrimeMenu],\n[\"PrimeMenubar\", LazyPrimeMenubar],\n[\"PrimeMegaMenu\", LazyPrimeMegaMenu],\n[\"PrimePanelMenu\", LazyPrimePanelMenu],\n[\"PrimeSteps\", LazyPrimeSteps],\n[\"PrimeTabMenu\", LazyPrimeTabMenu],\n[\"PrimeTieredMenu\", LazyPrimeTieredMenu],\n[\"PrimeChart\", LazyPrimeChart],\n[\"PrimeMessage\", LazyPrimeMessage],\n[\"PrimeInlineMessage\", LazyPrimeInlineMessage],\n[\"PrimeToast\", LazyPrimeToast],\n[\"PrimeCarousel\", LazyPrimeCarousel],\n[\"PrimeGalleria\", LazyPrimeGalleria],\n[\"PrimeImage\", LazyPrimeImage],\n[\"PrimeAvatar\", LazyPrimeAvatar],\n[\"PrimeAvatarGroup\", LazyPrimeAvatarGroup],\n[\"PrimeBadge\", LazyPrimeBadge],\n[\"PrimeBlockUI\", LazyPrimeBlockUI],\n[\"PrimeChip\", LazyPrimeChip],\n[\"PrimeInplace\", LazyPrimeInplace],\n[\"PrimeMeterGroup\", LazyPrimeMeterGroup],\n[\"PrimeScrollTop\", LazyPrimeScrollTop],\n[\"PrimeSkeleton\", LazyPrimeSkeleton],\n[\"PrimeProgressBar\", LazyPrimeProgressBar],\n[\"PrimeProgressSpinner\", LazyPrimeProgressSpinner],\n[\"PrimeTag\", LazyPrimeTag],\n[\"PrimeTerminal\", LazyPrimeTerminal],\n  \n]\n\nexport default defineNuxtPlugin({\n  name: 'nuxt:global-components',\n  setup (nuxtApp) {\n    for (const [name, component] of lazyGlobalComponents) {\n      nuxtApp.vueApp.component(name, component)\n      nuxtApp.vueApp.component('Lazy' + name, component)\n    }\n  }\n})\n",
-      "start": 1742846399443,
-      "end": 1742846399447,
+      "start": 1742847312317,
+      "end": 1742847312321,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -97,122 +97,122 @@
     },
     {
       "name": "replace",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846399447,
-      "end": 1742846399447,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846399448,
-      "end": 1742846399448,
+      "start": 1742847312321,
+      "end": 1742847312321,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846399448,
-      "end": 1742846399451,
+      "start": 1742847312321,
+      "end": 1742847312324,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846399451,
-      "end": 1742846399454,
+      "start": 1742847312324,
+      "end": 1742847312327,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846399454,
-      "end": 1742846399454,
+      "start": 1742847312327,
+      "end": 1742847312327,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846399454,
-      "end": 1742846399454,
+      "start": 1742847312327,
+      "end": 1742847312327,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846399454,
-      "end": 1742846399454,
+      "start": 1742847312327,
+      "end": 1742847312327,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846399454,
-      "end": 1742846399454,
+      "start": 1742847312327,
+      "end": 1742847312327,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846399454,
-      "end": 1742846399454,
+      "start": 1742847312327,
+      "end": 1742847312328,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846399454,
-      "end": 1742846399456,
+      "start": 1742847312328,
+      "end": 1742847312329,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846399456,
-      "end": 1742846399456,
+      "start": 1742847312330,
+      "end": 1742847312330,
       "order": "normal"
     }
   ]

@@ -4,135 +4,135 @@
     {
       "name": "vite:load-fallback",
       "result": "\n/**\n * Topological sorting function\n *\n * @param {Array} edges\n * @returns {Array}\n */\n\nmodule.exports = function(edges) {\n  return toposort(uniqueNodes(edges), edges)\n}\n\nmodule.exports.array = toposort\n\nfunction toposort(nodes, edges) {\n  var cursor = nodes.length\n    , sorted = new Array(cursor)\n    , visited = {}\n    , i = cursor\n    // Better data structures make algorithm much faster.\n    , outgoingEdges = makeOutgoingEdges(edges)\n    , nodesHash = makeNodesHash(nodes)\n\n  // check for unknown nodes\n  edges.forEach(function(edge) {\n    if (!nodesHash.has(edge[0]) || !nodesHash.has(edge[1])) {\n      throw new Error('Unknown node. There is an unknown node in the supplied edges.')\n    }\n  })\n\n  while (i--) {\n    if (!visited[i]) visit(nodes[i], i, new Set())\n  }\n\n  return sorted\n\n  function visit(node, i, predecessors) {\n    if(predecessors.has(node)) {\n      var nodeRep\n      try {\n        nodeRep = \", node was:\" + JSON.stringify(node)\n      } catch(e) {\n        nodeRep = \"\"\n      }\n      throw new Error('Cyclic dependency' + nodeRep)\n    }\n\n    if (!nodesHash.has(node)) {\n      throw new Error('Found unknown node. Make sure to provided all involved nodes. Unknown node: '+JSON.stringify(node))\n    }\n\n    if (visited[i]) return;\n    visited[i] = true\n\n    var outgoing = outgoingEdges.get(node) || new Set()\n    outgoing = Array.from(outgoing)\n\n    if (i = outgoing.length) {\n      predecessors.add(node)\n      do {\n        var child = outgoing[--i]\n        visit(child, nodesHash.get(child), predecessors)\n      } while (i)\n      predecessors.delete(node)\n    }\n\n    sorted[--cursor] = node\n  }\n}\n\nfunction uniqueNodes(arr){\n  var res = new Set()\n  for (var i = 0, len = arr.length; i < len; i++) {\n    var edge = arr[i]\n    res.add(edge[0])\n    res.add(edge[1])\n  }\n  return Array.from(res)\n}\n\nfunction makeOutgoingEdges(arr){\n  var edges = new Map()\n  for (var i = 0, len = arr.length; i < len; i++) {\n    var edge = arr[i]\n    if (!edges.has(edge[0])) edges.set(edge[0], new Set())\n    if (!edges.has(edge[1])) edges.set(edge[1], new Set())\n    edges.get(edge[0]).add(edge[1])\n  }\n  return edges\n}\n\nfunction makeNodesHash(arr){\n  var res = new Map()\n  for (var i = 0, len = arr.length; i < len; i++) {\n    res.set(arr[i], i)\n  }\n  return res\n}\n",
-      "start": 1742846401505,
-      "end": 1742846401538,
+      "start": 1742847314822,
+      "end": 1742847314886,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314886,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314886,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846401538,
-      "end": 1742846401538,
+      "start": 1742847314887,
+      "end": 1742847314887,
       "order": "normal"
     },
     {
       "name": "commonjs",
       "result": "import * as commonjsHelpers from \"\u0000commonjsHelpers.js\";\nimport { __module as toposortModule } from \"\\u0000/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/toposort/index.js?commonjs-module\";\nvar toposort_1 = toposortModule.exports;\n\n/**\n * Topological sorting function\n *\n * @param {Array} edges\n * @returns {Array}\n */\n\ntoposortModule.exports = function(edges) {\n  return toposort(uniqueNodes(edges), edges)\n}\n\nvar array = toposortModule.exports.array = toposort\n\nfunction toposort(nodes, edges) {\n  var cursor = nodes.length\n    , sorted = new Array(cursor)\n    , visited = {}\n    , i = cursor\n    // Better data structures make algorithm much faster.\n    , outgoingEdges = makeOutgoingEdges(edges)\n    , nodesHash = makeNodesHash(nodes)\n\n  // check for unknown nodes\n  edges.forEach(function(edge) {\n    if (!nodesHash.has(edge[0]) || !nodesHash.has(edge[1])) {\n      throw new Error('Unknown node. There is an unknown node in the supplied edges.')\n    }\n  })\n\n  while (i--) {\n    if (!visited[i]) visit(nodes[i], i, new Set())\n  }\n\n  return sorted\n\n  function visit(node, i, predecessors) {\n    if(predecessors.has(node)) {\n      var nodeRep\n      try {\n        nodeRep = \", node was:\" + JSON.stringify(node)\n      } catch(e) {\n        nodeRep = \"\"\n      }\n      throw new Error('Cyclic dependency' + nodeRep)\n    }\n\n    if (!nodesHash.has(node)) {\n      throw new Error('Found unknown node. Make sure to provided all involved nodes. Unknown node: '+JSON.stringify(node))\n    }\n\n    if (visited[i]) return;\n    visited[i] = true\n\n    var outgoing = outgoingEdges.get(node) || new Set()\n    outgoing = Array.from(outgoing)\n\n    if (i = outgoing.length) {\n      predecessors.add(node)\n      do {\n        var child = outgoing[--i]\n        visit(child, nodesHash.get(child), predecessors)\n      } while (i)\n      predecessors.delete(node)\n    }\n\n    sorted[--cursor] = node\n  }\n}\n\nfunction uniqueNodes(arr){\n  var res = new Set()\n  for (var i = 0, len = arr.length; i < len; i++) {\n    var edge = arr[i]\n    res.add(edge[0])\n    res.add(edge[1])\n  }\n  return Array.from(res)\n}\n\nfunction makeOutgoingEdges(arr){\n  var edges = new Map()\n  for (var i = 0, len = arr.length; i < len; i++) {\n    var edge = arr[i]\n    if (!edges.has(edge[0])) edges.set(edge[0], new Set())\n    if (!edges.has(edge[1])) edges.set(edge[1], new Set())\n    edges.get(edge[0]).add(edge[1])\n  }\n  return edges\n}\n\nfunction makeNodesHash(arr){\n  var res = new Map()\n  for (var i = 0, len = arr.length; i < len; i++) {\n    res.set(arr[i], i)\n  }\n  return res\n}\n\nvar toposortExports = toposortModule.exports;\nexport default /*@__PURE__*/commonjsHelpers.getDefaultExportFromCjs(toposortExports);\nexport { toposortExports as __moduleExports, array };",
-      "start": 1742846401538,
-      "end": 1742846401540,
+      "start": 1742847314887,
+      "end": 1742847314888,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -145,74 +145,74 @@
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314888,
+      "end": 1742847314888,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314889,
+      "end": 1742847314889,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314889,
+      "end": 1742847314889,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846401540,
-      "end": 1742846401540,
+      "start": 1742847314889,
+      "end": 1742847314889,
       "order": "normal"
     }
   ]

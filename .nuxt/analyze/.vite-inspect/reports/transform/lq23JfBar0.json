@@ -4,33 +4,33 @@
     {
       "name": "vite:load-fallback",
       "result": "html {\n  font-size: 14px;\n  line-height: normal;\n  overflow-x: scroll;\n}\n.loginWallpaper {\n  background-image: url(\"@/assets/images/loginWallpaper.jpg\");\n  background-repeat: no-repeat;\n  background-attachment: fixed;\n  background-position: center;\n  background-size: cover;\n}\n.backgroundWallpaper {\n  background: url(\"@/assets/images/backgroundWallpaper.jpg\") no-repeat center\n    center fixed;\n  background-size: cover;\n}\n.p-float-label label {\n  margin-top: -0.8rem;\n}\n.primary-color-text {\n  color: var(--primary-color);\n}\n.p-toast .p-toast-message .p-toast-message-content {\n  border: 0;\n}\n.p-inputtext.p-invalid.p-component {\n  border-style: solid;\n}\n.p-panel.no-header .p-panel-header {\n  display: none;\n}\n.p-datatable .p-datatable-thead > tr > th {\n  padding: 0.5rem 1rem !important;\n}\n.p-panel-content {\n  padding: 0.25rem;\n}\n.p-button:not(.p-button-icon-only) {\n  padding: 0.65rem 1.15rem !important;\n}\n.p-datepicker table td {\n  padding: 0.1rem;\n}\n.p-datepicker .p-datepicker-buttonbar,\n.p-datepicker .p-datepicker-header,\n.p-datepicker .p-datepicker-title button {\n  padding: 0.25rem 0;\n}\n.p-button-label {\n  font-weight: 500;\n}\n.p-datatable-footer {\n  padding: 0.5rem 1rem !important;\n  font-weight: 500;\n  font-size: 12px;\n}\n.p-datatable .p-tag-value {\n  font-size: 0.85rem;\n}\n.p-dropdown-panel .p-dropdown-header {\n  padding: 0.5rem !important;\n}\n.p-button.p-button-secondary,\n.p-button-group.p-button-secondary > .p-button,\n.p-splitbutton.p-button-secondary > .p-button {\n  color: #475569;\n  background: #f1f5f9;\n  border: 1px solid #f1f5f9;\n}\n.p-rowgroup-header td,\n.p-rowgroup-footer td {\n  padding: 0.5rem 1rem;\n}\nhtml,\nbody {\n  width: 100%;\n  overflow-x: hidden;\n  background-color: #f9fbfd;\n  padding: 0;\n}\n\n* {\n  box-sizing: border-box ! important;\n}\n\n.hidden {\n  visibility: hidden;\n  opacity: 0;\n  height: 0;\n  overflow: hidden;\n  transition: opacity 0.3s ease;\n}\n\n.visible {\n  visibility: visible;\n  opacity: 1;\n  height: auto;\n  transition: opacity 0.3s ease;\n}\n\ntabltable {\n  width: 100% !important;\n  cursor: pointer;\n  table-layout: auto !important;\n  overflow-x: auto; /* Mantém a rolagem horizontal */\n}\n\ntable th,\ntable td {\n  border: 1px solid #ddd;\n  padding: 4px !important;\n  text-align: center !important;\n  font-size: 12px !important;\n  color: #ffffff;\n  letter-spacing: 1px;\n  word-wrap: break-word;\n  word-break: break-all; /* Quebra palavras longas em qualquer ponto */\n  white-space: normal;\n  min-width: 60px; /* Reduz a largura mínima */\n  overflow-wrap: break-word;\n}\n\n/* Media Queries para telas menores */\n@media (max-width: 768px) {\n  table th,\n  table td {\n    font-size: 10px !important; /* Reduz o tamanho da fonte */\n    padding: 8px !important; /* Reduz o padding */\n  }\n\n  /* Oculta colunas menos importantes */\n  table td:nth-child(n + 17),\n  table th:nth-child(n + 17) {\n    display: none;\n  }\n}\n\n@media (max-width: 480px) {\n  table th,\n  table td {\n    font-size: 10px !important; /* Reduz ainda mais o tamanho da fonte */\n    padding: 5px !important; /* Reduz ainda mais o padding */\n  }\n\n  /* Oculta mais colunas */\n  table td:nth-child(n + 11),\n  table th:nth-child(n + 11) {\n    display: none;\n  }\n}\n\ntable th {\n  position: sticky;\n  top: 0;\n  background-color: #3e3d3d;\n  color: #f1f1ff;\n  z-index: 1;\n  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);\n  width: auto;\n}\n\n.table,\n#graficos {\n  position: sticky;\n  width: auto;\n}\n\n#graficos canvas {\n  max-height: 400px;\n  width: auto;\n}\n\n#graficos {\n  display: none;\n}\n\n.firstCollumn {\n  color: #181818 !important;\n}\n\n.btnTables {\n  padding: 10px;\n  font-size: 1rem;\n  cursor: pointer;\n  background-color: #2e86de;\n  color: #e2e8ee;\n  border: none;\n  border-radius: 4px;\n  margin-bottom: 20px;\n}\n\n.btnTables:hover {\n  background-color: #194877;\n}\n\ntable span.pontosGraficos {\n  display: block;\n  right: 1;\n  margin-top: 15px;\n}\n\n.highlight {\n  box-shadow: inset 0 0 5px 6px #000000;\n}\n\ntable tr td:nth-last-child(-n + 6) {\n  color: black;\n  font-weight: bold;\n}\n\ntable tr:first-child,\ntable th:first-child {\n  border: none !important;\n}\n\ntable tr:first-child th,\ntable tr:first-child td {\n  border: none;\n}\n\ntable tr td:nth-child(6),\ntable tr td:nth-child(11),\ntable tr td:nth-child(16) {\n  border-right: 5px solid #2d0bf1 !important;\n}\n\ntable tr th:nth-child(6),\ntable tr th:nth-child(11),\ntable tr th:nth-child(16) {\n  border-right: 5px solid #2d0bf1 !important;\n}\n\n.percentCell {\n  text-align: center;\n  font-weight: bold;\n  color: #000;\n}\n\n.green {\n  background-color: #28a745;\n}\n\n.red {\n  background-color: #dc3545;\n}\n\n.text-green {\n  color: #28a745 !important;\n  font-size: 0.95rem !important;\n}\n\n.text-red {\n  color: #dc3545 !important;\n  font-size: 0.70rem !important;\n}\n\n#tabelao25mediaColunaPorcentagens,\n#tabelaambasmediaColunaSubidas,\n#tabelao25mediaColunaLateralizacoesOver,\n#tabelao25mediaColunaDescidas,\n#tabelao25mediaColunaLateralizacoesUnder,\n#tabelao25mediaColunaGols {\n  font-size: 0.95rem !important;\n}\n\n.somaGolsCell {\n  color: #000000;\n  font-size: 0.95rem !important;\n  padding: 0;\n}\n",
-      "start": 1742846399440,
-      "end": 1742846399519,
+      "start": 1742847312316,
+      "end": 1742847312390,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846399519,
-      "end": 1742846399519,
+      "start": 1742847312390,
+      "end": 1742847312390,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846399519,
-      "end": 1742846399519,
+      "start": 1742847312390,
+      "end": 1742847312390,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846399519,
-      "end": 1742846399519,
+      "start": 1742847312390,
+      "end": 1742847312390,
       "order": "pre"
     },
     {
       "name": "vite:css",
       "result": "html{font-size:14px;line-height:normal;overflow-x:scroll}.loginWallpaper{background-attachment:fixed;background-image:url(__VITE_ASSET__Cj7ZcAKH__);background-position:50%;background-repeat:no-repeat;background-size:cover}.backgroundWallpaper{background:url(__VITE_ASSET__WF3EMFKx__) no-repeat 50% fixed;background-size:cover}.p-float-label label{margin-top:-.8rem}.primary-color-text{color:var(--primary-color)}.p-toast .p-toast-message .p-toast-message-content{border:0}.p-inputtext.p-invalid.p-component{border-style:solid}.p-panel.no-header .p-panel-header{display:none}.p-datatable .p-datatable-thead>tr>th{padding:.5rem 1rem!important}.p-panel-content{padding:.25rem}.p-button:not(.p-button-icon-only){padding:.65rem 1.15rem!important}.p-datepicker table td{padding:.1rem}.p-datepicker .p-datepicker-buttonbar,.p-datepicker .p-datepicker-header,.p-datepicker .p-datepicker-title button{padding:.25rem 0}.p-button-label{font-weight:500}.p-datatable-footer{font-size:12px;font-weight:500;padding:.5rem 1rem!important}.p-datatable .p-tag-value{font-size:.85rem}.p-dropdown-panel .p-dropdown-header{padding:.5rem!important}.p-button-group.p-button-secondary>.p-button,.p-button.p-button-secondary,.p-splitbutton.p-button-secondary>.p-button{background:#f1f5f9;border:1px solid #f1f5f9;color:#475569}.p-rowgroup-footer td,.p-rowgroup-header td{padding:.5rem 1rem}body,html{background-color:#f9fbfd;overflow-x:hidden;padding:0;width:100%}*{box-sizing:border-box!important}.hidden{height:0;opacity:0;overflow:hidden;visibility:hidden}.hidden,.visible{transition:opacity .3s ease}.visible{height:auto;opacity:1;visibility:visible}tabltable{cursor:pointer;overflow-x:auto;table-layout:auto!important;width:100%!important}table td,table th{border:1px solid #ddd;color:#fff;font-size:12px!important;letter-spacing:1px;padding:4px!important;text-align:center!important;word-wrap:break-word;min-width:60px;overflow-wrap:break-word;white-space:normal;word-break:break-all}@media (max-width:768px){table td,table th{font-size:10px!important;padding:8px!important}table td:nth-child(n+17),table th:nth-child(n+17){display:none}}@media (max-width:480px){table td,table th{font-size:10px!important;padding:5px!important}table td:nth-child(n+11),table th:nth-child(n+11){display:none}}table th{background-color:#3e3d3d;box-shadow:0 2px 2px -1px rgba(0,0,0,.4);color:#f1f1ff;top:0;z-index:1}#graficos,.table,table th{position:sticky;width:auto}#graficos canvas{max-height:400px;width:auto}#graficos{display:none}.firstCollumn{color:#181818!important}.btnTables{background-color:#2e86de;border:none;border-radius:4px;color:#e2e8ee;cursor:pointer;font-size:1rem;margin-bottom:20px;padding:10px}.btnTables:hover{background-color:#194877}table span.pontosGraficos{display:block;margin-top:15px;right:1}.highlight{box-shadow:inset 0 0 5px 6px #000}table tr td:nth-last-child(-n+6){color:#000;font-weight:700}table th:first-child,table tr:first-child{border:none!important}table tr:first-child td,table tr:first-child th{border:none}table tr td:nth-child(11),table tr td:nth-child(16),table tr td:nth-child(6),table tr th:nth-child(11),table tr th:nth-child(16),table tr th:nth-child(6){border-right:5px solid #2d0bf1!important}.percentCell{color:#000;font-weight:700;text-align:center}.green{background-color:#28a745}.red{background-color:#dc3545}.text-green{color:#28a745!important;font-size:.95rem!important}.text-red{color:#dc3545!important;font-size:.7rem!important}#tabelaambasmediaColunaSubidas,#tabelao25mediaColunaDescidas,#tabelao25mediaColunaGols,#tabelao25mediaColunaLateralizacoesOver,#tabelao25mediaColunaLateralizacoesUnder,#tabelao25mediaColunaPorcentagens,.somaGolsCell{font-size:.95rem!important}.somaGolsCell{color:#000;padding:0}",
-      "start": 1742846399519,
-      "end": 1742846400430,
+      "start": 1742847312390,
+      "end": 1742847313462,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -38,81 +38,81 @@
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
       "result": "",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -120,98 +120,98 @@
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400430,
-      "end": 1742846400430,
+      "start": 1742847313462,
+      "end": 1742847313462,
       "order": "normal"
     }
   ]

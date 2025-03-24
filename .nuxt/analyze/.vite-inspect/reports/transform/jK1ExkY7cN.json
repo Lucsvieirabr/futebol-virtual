@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "import Button from 'primevue/button';\nimport AngleDoubleDownIcon from 'primevue/icons/angledoubledown';\nimport AngleDoubleUpIcon from 'primevue/icons/angledoubleup';\nimport AngleDownIcon from 'primevue/icons/angledown';\nimport AngleUpIcon from 'primevue/icons/angleup';\nimport Ripple from 'primevue/ripple';\nimport { UniqueComponentId, ObjectUtils, DomHandler } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport OrderListStyle from 'primevue/orderlist/style';\nimport { resolveComponent, resolveDirective, openBlock, createElementBlock, mergeProps, createElementVNode, renderSlot, createVNode, withCtx, createCommentVNode, TransitionGroup, Fragment, renderList, withDirectives } from 'vue';\n\nvar script$1 = {\n  name: 'BaseOrderList',\n  \"extends\": BaseComponent,\n  props: {\n    modelValue: {\n      type: Array,\n      \"default\": null\n    },\n    selection: {\n      type: Array,\n      \"default\": null\n    },\n    dataKey: {\n      type: String,\n      \"default\": null\n    },\n    listStyle: {\n      type: null,\n      \"default\": null\n    },\n    metaKeySelection: {\n      type: Boolean,\n      \"default\": false\n    },\n    autoOptionFocus: {\n      type: Boolean,\n      \"default\": true\n    },\n    focusOnHover: {\n      type: Boolean,\n      \"default\": true\n    },\n    responsive: {\n      type: Boolean,\n      \"default\": true\n    },\n    breakpoint: {\n      type: String,\n      \"default\": '960px'\n    },\n    stripedRows: {\n      type: Boolean,\n      \"default\": false\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    },\n    listProps: {\n      type: null,\n      \"default\": null\n    },\n    moveUpButtonProps: {\n      type: null,\n      \"default\": null\n    },\n    moveTopButtonProps: {\n      type: null,\n      \"default\": null\n    },\n    moveDownButtonProps: {\n      type: null,\n      \"default\": null\n    },\n    moveBottomButtonProps: {\n      type: null,\n      \"default\": null\n    },\n    ariaLabelledby: {\n      type: String,\n      \"default\": null\n    },\n    ariaLabel: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: OrderListStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && iter[Symbol.iterator] != null || iter[\"@@iterator\"] != null) return Array.from(iter); }\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }\nvar script = {\n  name: 'OrderList',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:modelValue', 'reorder', 'update:selection', 'selection-change', 'focus', 'blur'],\n  itemTouched: false,\n  reorderDirection: null,\n  styleElement: null,\n  list: null,\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      d_selection: this.selection,\n      focused: false,\n      focusedOptionIndex: -1\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    }\n  },\n  beforeUnmount: function beforeUnmount() {\n    this.destroyStyle();\n  },\n  updated: function updated() {\n    if (this.reorderDirection) {\n      this.updateListScroll();\n      this.reorderDirection = null;\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n    if (this.responsive) {\n      this.createStyle();\n    }\n  },\n  methods: {\n    getItemKey: function getItemKey(item, index) {\n      return this.dataKey ? ObjectUtils.resolveFieldData(item, this.dataKey) : index;\n    },\n    getPTOptions: function getPTOptions(item, key, index) {\n      return this.ptm(key, {\n        context: {\n          active: this.isSelected(item),\n          focused: \"\".concat(this.id, \"_\").concat(index) === this.focusedOptionId\n        }\n      });\n    },\n    isSelected: function isSelected(item) {\n      return ObjectUtils.findIndexInList(item, this.d_selection) != -1;\n    },\n    onListFocus: function onListFocus(event) {\n      this.focused = true;\n      this.findCurrentFocusedIndex();\n      this.scrollInView(this.focusedOptionIndex);\n      this.$emit('focus', event);\n    },\n    onListBlur: function onListBlur(event) {\n      this.focused = false;\n      this.focusedOptionIndex = -1;\n      this.$emit('blur', event);\n    },\n    onListKeyDown: function onListKeyDown(event) {\n      switch (event.code) {\n        case 'ArrowDown':\n          this.onArrowDownKey(event);\n          break;\n        case 'ArrowUp':\n          this.onArrowUpKey(event);\n          break;\n        case 'Home':\n          this.onHomeKey(event);\n          break;\n        case 'End':\n          this.onEndKey(event);\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n          this.onEnterKey(event);\n          break;\n        case 'Space':\n          this.onSpaceKey(event);\n          break;\n        case 'KeyA':\n          if (event.ctrlKey) {\n            this.d_selection = _toConsumableArray(this.modelValue);\n            this.$emit('update:selection', this.d_selection);\n            event.preventDefault();\n          }\n      }\n    },\n    onOptionMouseDown: function onOptionMouseDown(event, index) {\n      this.changeFocusedOptionIndex(index);\n    },\n    onOptionMouseMove: function onOptionMouseMove(index) {\n      if (this.focusOnHover && this.focused) {\n        this.changeFocusedOptionIndex(index);\n      }\n    },\n    onArrowDownKey: function onArrowDownKey(event) {\n      var optionIndex = this.focusedOptionIndex !== -1 ? this.findNextOptionIndex() : this.findFirstSelectedOptionIndex();\n      this.changeFocusedOptionIndex(optionIndex);\n      if (event.shiftKey) {\n        this.onEnterKey(event);\n      }\n      event.preventDefault();\n    },\n    onArrowUpKey: function onArrowUpKey(event) {\n      var optionIndex = this.focusedOptionIndex !== -1 ? this.findPrevOptionIndex() : this.findLastSelectedOptionIndex();\n      this.changeFocusedOptionIndex(optionIndex);\n      if (event.shiftKey) {\n        this.onEnterKey(event);\n      }\n      event.preventDefault();\n    },\n    onHomeKey: function onHomeKey(event) {\n      if (event.ctrlKey && event.shiftKey) {\n        var matchedOptionIndex = this.findMatchedOptionIndex();\n        this.d_selection = _toConsumableArray(this.modelValue).slice(0, matchedOptionIndex + 1);\n        this.$emit('update:selection', this.d_selection);\n        this.$emit('selection-change', {\n          originalEvent: event,\n          value: this.d_selection\n        });\n      } else {\n        this.changeFocusedOptionIndex(0);\n      }\n      event.preventDefault();\n    },\n    onEndKey: function onEndKey(event) {\n      if (event.ctrlKey && event.shiftKey) {\n        var matchedOptionIndex = this.findMatchedOptionIndex();\n        this.d_selection = _toConsumableArray(this.modelValue).slice(matchedOptionIndex, items.length);\n        this.$emit('update:selection', this.d_selection);\n        this.$emit('selection-change', {\n          originalEvent: event,\n          value: this.d_selection\n        });\n      } else {\n        this.changeFocusedOptionIndex(this.findAllItems().length - 1);\n      }\n      event.preventDefault();\n    },\n    onEnterKey: function onEnterKey(event) {\n      var matchedOptionIndex = this.findMatchedOptionIndex();\n      this.onItemClick(event, this.modelValue[matchedOptionIndex], matchedOptionIndex);\n      event.preventDefault();\n    },\n    onSpaceKey: function onSpaceKey(event) {\n      event.preventDefault();\n      if (event.shiftKey && this.d_selection && this.d_selection.length > 0) {\n        var selectedItemIndex = ObjectUtils.findIndexInList(this.d_selection[0], _toConsumableArray(this.modelValue));\n        var matchedOptionIndex = this.findMatchedOptionIndex();\n        this.d_selection = _toConsumableArray(this.modelValue).slice(Math.min(selectedItemIndex, matchedOptionIndex), Math.max(selectedItemIndex, matchedOptionIndex) + 1);\n        this.$emit('update:selection', this.d_selection);\n        this.$emit('selection-change', {\n          originalEvent: event,\n          value: this.d_selection\n        });\n      } else {\n        this.onEnterKey(event);\n      }\n    },\n    findAllItems: function findAllItems() {\n      return DomHandler.find(this.list, '[data-pc-section=\"item\"]');\n    },\n    findFocusedItem: function findFocusedItem() {\n      return DomHandler.findSingle(this.list, \"[data-pc-section=\\\"item\\\"][id=\".concat(this.focusedOptionIndex, \"]\"));\n    },\n    findCurrentFocusedIndex: function findCurrentFocusedIndex() {\n      if (this.focusedOptionIndex === -1) {\n        this.focusedOptionIndex = this.findFirstSelectedOptionIndex();\n        if (this.autoOptionFocus && this.focusedOptionIndex === -1) {\n          this.focusedOptionIndex = this.findFirstFocusedOptionIndex();\n        }\n      }\n    },\n    findFirstFocusedOptionIndex: function findFirstFocusedOptionIndex() {\n      var firstFocusableItem = DomHandler.findSingle(this.list, '[data-pc-section=\"item\"]');\n      return DomHandler.getAttribute(firstFocusableItem, 'id');\n    },\n    findFirstSelectedOptionIndex: function findFirstSelectedOptionIndex() {\n      if (this.hasSelectedOption) {\n        var selectedFirstItem = DomHandler.findSingle(this.list, '[data-p-highlight=\"true\"]');\n        return DomHandler.getAttribute(selectedFirstItem, 'id');\n      }\n      return -1;\n    },\n    findLastSelectedOptionIndex: function findLastSelectedOptionIndex() {\n      if (this.hasSelectedOption) {\n        var selectedItems = DomHandler.find(this.list, '[data-p-highlight=\"true\"]');\n        return ObjectUtils.findIndexInList(selectedItems[selectedItems.length - 1], this.list.children);\n      }\n      return -1;\n    },\n    findMatchedOptionIndex: function findMatchedOptionIndex() {\n      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.focusedOptionIndex;\n      var items = this.findAllItems();\n      return _toConsumableArray(items).findIndex(function (link) {\n        return link.id === id;\n      });\n    },\n    findNextOptionIndex: function findNextOptionIndex() {\n      var matchedOptionIndex = this.findMatchedOptionIndex();\n      return matchedOptionIndex > -1 ? matchedOptionIndex + 1 : 0;\n    },\n    findPrevOptionIndex: function findPrevOptionIndex() {\n      var matchedOptionIndex = this.findMatchedOptionIndex();\n      return matchedOptionIndex > -1 ? matchedOptionIndex - 1 : 0;\n    },\n    changeFocusedOptionIndex: function changeFocusedOptionIndex(index) {\n      var items = this.findAllItems();\n      var order = index >= items.length ? items.length - 1 : index < 0 ? 0 : index;\n      this.focusedOptionIndex = items[order] ? items[order].getAttribute('id') : -1;\n      this.scrollInView(this.focusedOptionIndex);\n    },\n    scrollInView: function scrollInView(id) {\n      var element = DomHandler.findSingle(this.list, \"[data-pc-section=\\\"item\\\"][id=\\\"\".concat(id, \"\\\"]\"));\n      if (element) {\n        element.scrollIntoView && element.scrollIntoView({\n          block: 'nearest',\n          inline: 'start',\n          behavior: 'smooth'\n        });\n      }\n    },\n    moveUp: function moveUp(event) {\n      if (this.d_selection) {\n        var value = _toConsumableArray(this.modelValue);\n        for (var i = 0; i < this.d_selection.length; i++) {\n          var selectedItem = this.d_selection[i];\n          var selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);\n          if (selectedItemIndex !== 0) {\n            var movedItem = value[selectedItemIndex];\n            var temp = value[selectedItemIndex - 1];\n            value[selectedItemIndex - 1] = movedItem;\n            value[selectedItemIndex] = temp;\n          } else {\n            break;\n          }\n        }\n        this.reorderDirection = 'up';\n        this.$emit('update:modelValue', value);\n        this.$emit('reorder', {\n          originalEvent: event,\n          value: value,\n          direction: this.reorderDirection\n        });\n      }\n    },\n    moveTop: function moveTop(event) {\n      if (this.d_selection) {\n        var value = _toConsumableArray(this.modelValue);\n        for (var i = 0; i < this.d_selection.length; i++) {\n          var selectedItem = this.d_selection[i];\n          var selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);\n          if (selectedItemIndex !== 0) {\n            var movedItem = value.splice(selectedItemIndex, 1)[0];\n            value.unshift(movedItem);\n          } else {\n            break;\n          }\n        }\n        this.reorderDirection = 'top';\n        this.$emit('update:modelValue', value);\n        this.$emit('reorder', {\n          originalEvent: event,\n          value: value,\n          direction: this.reorderDirection\n        });\n      }\n    },\n    moveDown: function moveDown(event) {\n      if (this.d_selection) {\n        var value = _toConsumableArray(this.modelValue);\n        for (var i = this.d_selection.length - 1; i >= 0; i--) {\n          var selectedItem = this.d_selection[i];\n          var selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);\n          if (selectedItemIndex !== value.length - 1) {\n            var movedItem = value[selectedItemIndex];\n            var temp = value[selectedItemIndex + 1];\n            value[selectedItemIndex + 1] = movedItem;\n            value[selectedItemIndex] = temp;\n          } else {\n            break;\n          }\n        }\n        this.reorderDirection = 'down';\n        this.$emit('update:modelValue', value);\n        this.$emit('reorder', {\n          originalEvent: event,\n          value: value,\n          direction: this.reorderDirection\n        });\n      }\n    },\n    moveBottom: function moveBottom(event) {\n      if (this.d_selection) {\n        var value = _toConsumableArray(this.modelValue);\n        for (var i = this.d_selection.length - 1; i >= 0; i--) {\n          var selectedItem = this.d_selection[i];\n          var selectedItemIndex = ObjectUtils.findIndexInList(selectedItem, value);\n          if (selectedItemIndex !== value.length - 1) {\n            var movedItem = value.splice(selectedItemIndex, 1)[0];\n            value.push(movedItem);\n          } else {\n            break;\n          }\n        }\n        this.reorderDirection = 'bottom';\n        this.$emit('update:modelValue', value);\n        this.$emit('reorder', {\n          originalEvent: event,\n          value: value,\n          direction: this.reorderDirection\n        });\n      }\n    },\n    onItemClick: function onItemClick(event, item, index) {\n      this.itemTouched = false;\n      var selectedIndex = ObjectUtils.findIndexInList(item, this.d_selection);\n      var selected = selectedIndex != -1;\n      var metaSelection = this.itemTouched ? false : this.metaKeySelection;\n      var selectedId = this.findAllItems()[index].getAttribute('id');\n      this.focusedOptionIndex = selectedId;\n      if (metaSelection) {\n        var metaKey = event.metaKey || event.ctrlKey;\n        if (selected && metaKey) {\n          this.d_selection = this.d_selection.filter(function (val, index) {\n            return index !== selectedIndex;\n          });\n        } else {\n          this.d_selection = metaKey ? this.d_selection ? _toConsumableArray(this.d_selection) : [] : [];\n          ObjectUtils.insertIntoOrderedArray(item, index, this.d_selection, this.modelValue);\n        }\n      } else {\n        if (selected) {\n          this.d_selection = this.d_selection.filter(function (val, index) {\n            return index !== selectedIndex;\n          });\n        } else {\n          this.d_selection = this.d_selection ? _toConsumableArray(this.d_selection) : [];\n          ObjectUtils.insertIntoOrderedArray(item, index, this.d_selection, this.modelValue);\n        }\n      }\n      this.$emit('update:selection', this.d_selection);\n      this.$emit('selection-change', {\n        originalEvent: event,\n        value: this.d_selection\n      });\n    },\n    onItemTouchEnd: function onItemTouchEnd() {\n      this.itemTouched = true;\n    },\n    updateListScroll: function updateListScroll() {\n      var listItems = DomHandler.find(this.list, '[data-pc-section=\"item\"][data-p-highlight=\"true\"]');\n      if (listItems && listItems.length) {\n        switch (this.reorderDirection) {\n          case 'up':\n            DomHandler.scrollInView(this.list, listItems[0]);\n            break;\n          case 'top':\n            this.list.scrollTop = 0;\n            break;\n          case 'down':\n            DomHandler.scrollInView(this.list, listItems[listItems.length - 1]);\n            break;\n          case 'bottom':\n            this.list.scrollTop = this.list.scrollHeight;\n            break;\n        }\n      }\n    },\n    createStyle: function createStyle() {\n      if (!this.styleElement && !this.isUnstyled) {\n        var _this$$primevue;\n        this.$el.setAttribute(this.attributeSelector, '');\n        this.styleElement = document.createElement('style');\n        this.styleElement.type = 'text/css';\n        DomHandler.setAttribute(this.styleElement, 'nonce', (_this$$primevue = this.$primevue) === null || _this$$primevue === void 0 || (_this$$primevue = _this$$primevue.config) === null || _this$$primevue === void 0 || (_this$$primevue = _this$$primevue.csp) === null || _this$$primevue === void 0 ? void 0 : _this$$primevue.nonce);\n        document.head.appendChild(this.styleElement);\n        var innerHTML = \"\\n@media screen and (max-width: \".concat(this.breakpoint, \") {\\n    .p-orderlist[\").concat(this.attributeSelector, \"] {\\n        flex-direction: column;\\n    }\\n\\n    .p-orderlist[\").concat(this.attributeSelector, \"] .p-orderlist-controls {\\n        padding: var(--content-padding);\\n        flex-direction: row;\\n    }\\n\\n    .p-orderlist[\").concat(this.attributeSelector, \"] .p-orderlist-controls .p-button {\\n        margin-right: var(--inline-spacing);\\n        margin-bottom: 0;\\n    }\\n\\n    .p-orderlist[\").concat(this.attributeSelector, \"] .p-orderlist-controls .p-button:last-child {\\n        margin-right: 0;\\n    }\\n}\\n\");\n        this.styleElement.innerHTML = innerHTML;\n      }\n    },\n    destroyStyle: function destroyStyle() {\n      if (this.styleElement) {\n        document.head.removeChild(this.styleElement);\n        this.styleElement = null;\n      }\n    },\n    moveDisabled: function moveDisabled() {\n      if (!this.d_selection || !this.d_selection.length) {\n        return true;\n      }\n    },\n    listRef: function listRef(el) {\n      this.list = el ? el.$el : undefined;\n    }\n  },\n  computed: {\n    attributeSelector: function attributeSelector() {\n      return UniqueComponentId();\n    },\n    focusedOptionId: function focusedOptionId() {\n      return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;\n    },\n    moveUpAriaLabel: function moveUpAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.moveUp : undefined;\n    },\n    moveTopAriaLabel: function moveTopAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.moveTop : undefined;\n    },\n    moveDownAriaLabel: function moveDownAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.moveDown : undefined;\n    },\n    moveBottomAriaLabel: function moveBottomAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.moveBottom : undefined;\n    },\n    hasSelectedOption: function hasSelectedOption() {\n      return ObjectUtils.isNotEmpty(this.d_selection);\n    }\n  },\n  components: {\n    OLButton: Button,\n    AngleUpIcon: AngleUpIcon,\n    AngleDownIcon: AngleDownIcon,\n    AngleDoubleUpIcon: AngleDoubleUpIcon,\n    AngleDoubleDownIcon: AngleDoubleDownIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }\nfunction _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : String(i); }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar _hoisted_1 = [\"id\", \"onClick\", \"onMousedown\", \"onMousemove\", \"aria-selected\", \"data-p-highlight\", \"data-p-focused\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_AngleUpIcon = resolveComponent(\"AngleUpIcon\");\n  var _component_OLButton = resolveComponent(\"OLButton\");\n  var _component_AngleDoubleUpIcon = resolveComponent(\"AngleDoubleUpIcon\");\n  var _component_AngleDownIcon = resolveComponent(\"AngleDownIcon\");\n  var _component_AngleDoubleDownIcon = resolveComponent(\"AngleDoubleDownIcon\");\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('controls')\n  }, _ctx.ptm('controls')), [renderSlot(_ctx.$slots, \"controlsstart\"), createVNode(_component_OLButton, mergeProps({\n    type: \"button\",\n    onClick: $options.moveUp,\n    \"aria-label\": $options.moveUpAriaLabel,\n    disabled: $options.moveDisabled()\n  }, _ctx.moveUpButtonProps, {\n    pt: _ctx.ptm('moveUpButton'),\n    unstyled: _ctx.unstyled\n  }), {\n    icon: withCtx(function () {\n      return [renderSlot(_ctx.$slots, \"moveupicon\", {}, function () {\n        return [createVNode(_component_AngleUpIcon, mergeProps(_ctx.ptm('moveUpButton')['icon'], {\n          \"data-pc-section\": \"moveupicon\"\n        }), null, 16)];\n      })];\n    }),\n    _: 3\n  }, 16, [\"onClick\", \"aria-label\", \"disabled\", \"pt\", \"unstyled\"]), createVNode(_component_OLButton, mergeProps({\n    type: \"button\",\n    onClick: $options.moveTop,\n    \"aria-label\": $options.moveTopAriaLabel,\n    disabled: $options.moveDisabled()\n  }, _ctx.moveTopButtonProps, {\n    pt: _ctx.ptm('moveTopButton'),\n    unstyled: _ctx.unstyled\n  }), {\n    icon: withCtx(function () {\n      return [renderSlot(_ctx.$slots, \"movetopicon\", {}, function () {\n        return [createVNode(_component_AngleDoubleUpIcon, mergeProps(_ctx.ptm('moveTopButton')['icon'], {\n          \"data-pc-section\": \"movetopicon\"\n        }), null, 16)];\n      })];\n    }),\n    _: 3\n  }, 16, [\"onClick\", \"aria-label\", \"disabled\", \"pt\", \"unstyled\"]), createVNode(_component_OLButton, mergeProps({\n    type: \"button\",\n    onClick: $options.moveDown,\n    \"aria-label\": $options.moveDownAriaLabel,\n    disabled: $options.moveDisabled()\n  }, _ctx.moveDownButtonProps, {\n    pt: _ctx.ptm('moveDownButton'),\n    unstyled: _ctx.unstyled\n  }), {\n    icon: withCtx(function () {\n      return [renderSlot(_ctx.$slots, \"movedownicon\", {}, function () {\n        return [createVNode(_component_AngleDownIcon, mergeProps(_ctx.ptm('moveDownButton')['icon'], {\n          \"data-pc-section\": \"movedownicon\"\n        }), null, 16)];\n      })];\n    }),\n    _: 3\n  }, 16, [\"onClick\", \"aria-label\", \"disabled\", \"pt\", \"unstyled\"]), createVNode(_component_OLButton, mergeProps({\n    type: \"button\",\n    onClick: $options.moveBottom,\n    \"aria-label\": $options.moveBottomAriaLabel,\n    disabled: $options.moveDisabled()\n  }, _ctx.moveBottomButtonProps, {\n    pt: _ctx.ptm('moveBottomButton'),\n    unstyled: _ctx.unstyled\n  }), {\n    icon: withCtx(function () {\n      return [renderSlot(_ctx.$slots, \"movebottomicon\", {}, function () {\n        return [createVNode(_component_AngleDoubleDownIcon, mergeProps(_ctx.ptm('moveBottomButton')['icon'], {\n          \"data-pc-section\": \"movebottomicon\"\n        }), null, 16)];\n      })];\n    }),\n    _: 3\n  }, 16, [\"onClick\", \"aria-label\", \"disabled\", \"pt\", \"unstyled\"]), renderSlot(_ctx.$slots, \"controlsend\")], 16), createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('container')\n  }, _ctx.ptm('container')), [_ctx.$slots.header ? (openBlock(), createElementBlock(\"div\", mergeProps({\n    key: 0,\n    \"class\": _ctx.cx('header')\n  }, _ctx.ptm('header')), [renderSlot(_ctx.$slots, \"header\")], 16)) : createCommentVNode(\"\", true), createVNode(TransitionGroup, mergeProps({\n    ref: $options.listRef,\n    id: $data.id + '_list',\n    name: \"p-orderlist-flip\",\n    tag: \"ul\",\n    \"class\": _ctx.cx('list'),\n    style: _ctx.listStyle,\n    role: \"listbox\",\n    \"aria-multiselectable\": \"true\",\n    tabindex: _ctx.tabindex,\n    \"aria-activedescendant\": $data.focused ? $options.focusedOptionId : undefined,\n    \"aria-label\": _ctx.ariaLabel,\n    \"aria-labelledby\": _ctx.ariaLabelledby,\n    onFocus: $options.onListFocus,\n    onBlur: $options.onListBlur,\n    onKeydown: $options.onListKeyDown\n  }, _objectSpread(_objectSpread(_objectSpread({}, _ctx.listProps), _ctx.ptm('list')), _ctx.ptm('transition'))), {\n    \"default\": withCtx(function () {\n      return [(openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.modelValue, function (item, i) {\n        return withDirectives((openBlock(), createElementBlock(\"li\", mergeProps({\n          key: $options.getItemKey(item, i),\n          id: $data.id + '_' + i,\n          role: \"option\",\n          \"class\": _ctx.cx('item', {\n            item: item,\n            id: \"\".concat($data.id, \"_\").concat(i)\n          }),\n          onClick: function onClick($event) {\n            return $options.onItemClick($event, item, i);\n          },\n          onTouchend: _cache[0] || (_cache[0] = function () {\n            return $options.onItemTouchEnd && $options.onItemTouchEnd.apply($options, arguments);\n          }),\n          onMousedown: function onMousedown($event) {\n            return $options.onOptionMouseDown($event, i);\n          },\n          onMousemove: function onMousemove($event) {\n            return $options.onOptionMouseMove(i);\n          },\n          \"aria-selected\": $options.isSelected(item)\n        }, $options.getPTOptions(item, 'item', i), {\n          \"data-p-highlight\": $options.isSelected(item),\n          \"data-p-focused\": \"\".concat($data.id, \"_\").concat(i) === $options.focusedOptionId\n        }), [renderSlot(_ctx.$slots, \"item\", {\n          item: item,\n          index: i\n        })], 16, _hoisted_1)), [[_directive_ripple]]);\n      }), 128))];\n    }),\n    _: 3\n  }, 16, [\"id\", \"class\", \"style\", \"tabindex\", \"aria-activedescendant\", \"aria-label\", \"aria-labelledby\", \"onFocus\", \"onBlur\", \"onKeydown\"])], 16)], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742846400754,
-      "end": 1742846400832,
+      "start": 1742847313824,
+      "end": 1742847313902,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742846400832,
-      "end": 1742846400832,
+      "start": 1742847313902,
+      "end": 1742847313902,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742846400832,
-      "end": 1742846400836,
+      "start": 1742847313902,
+      "end": 1742847313904,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742846400836,
-      "end": 1742846400836,
+      "start": 1742847313904,
+      "end": 1742847313904,
       "order": "normal"
     }
   ]
