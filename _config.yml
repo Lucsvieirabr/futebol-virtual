@@ -1,0 +1,18 @@
+# _config.yml
+
+destination: ./_site
+baseurl: ""  # Deixe vazio ou configure conforme necessário
+url: "https://humbertleonardo.github.io"  # Substitua pelo seu domínio
+
+# Configuração de arquivos estáticos
+include:
+  - .output/public
+
+# Outros ajustes específicos, dependendo das necessidades do seu projeto
+theme: jekyll-theme-primer
+plugins:
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-paginate
+
+# Outros ajustes que você pode precisar
