@@ -56,7 +56,19 @@
             <tr class="bg-gray-100">
               <th class="border border-gray-300 px-2 py-2">#</th>
               <th class="border border-gray-300 px-2 py-2">Time</th>
-              <th class="border border-gray-300 px-2 py-2">Valor</th>
+              <th
+                class="border border-gray-300 px-2 py-2"
+                v-if="rank.title === 'Máxima de Mercado'"
+              >
+                Atual
+              </th>
+              <th
+                class="border border-gray-300 px-2 py-2"
+                v-if="rank.title === 'Máxima de Mercado'"
+              >
+                Máxima
+              </th>
+              <th class="border border-gray-300 px-2 py-2" v-else>Valor</th>
             </tr>
           </thead>
           <tbody>
@@ -69,7 +81,19 @@
                 {{ i + 1 }}
               </td>
               <td class="border border-gray-300 px-2 py-2">{{ team.team }}</td>
-              <td class="border border-gray-300 px-2 py-2 text-center">
+              <td
+                class="border border-gray-300 px-2 py-2 text-center"
+                v-if="rank.title === 'Máxima de Mercado'"
+              >
+                {{ team.currentUnder2_5 }}
+              </td>
+              <td
+                class="border border-gray-300 px-2 py-2 text-center"
+                v-if="rank.title === 'Máxima de Mercado'"
+              >
+                {{ team.maxUnder2_5 }}
+              </td>
+              <td class="border border-gray-300 px-2 py-2 text-center" v-else>
                 {{ team.value }}
               </td>
             </tr>
@@ -84,7 +108,11 @@
         <div id="controlesUnderOver" style="margin-bottom: 20px"></div>
         <canvas id="graficoUnderOver"></canvas>
         <div class="table">
-          <PrimeButton type="button" class="btnTables" @click="showTable1 = !showTable1">
+          <PrimeButton
+            type="button"
+            class="btnTables"
+            @click="showTable1 = !showTable1"
+          >
             Mostrar/Esconder Tabela
           </PrimeButton>
           <table id="tabelao25" v-show="showTable1"></table>
@@ -94,7 +122,11 @@
         <div id="controlesAmbas" style="margin-bottom: 20px"></div>
         <canvas id="graficoAmbas"></canvas>
         <div class="table">
-          <PrimeButton type="button" class="btnTables" @click="showTable2 = !showTable2">
+          <PrimeButton
+            type="button"
+            class="btnTables"
+            @click="showTable2 = !showTable2"
+          >
             Mostrar/Esconder Tabela
           </PrimeButton>
           <table id="tabelaambas" v-show="showTable2"></table>
@@ -154,22 +186,74 @@ const calculateChamaGol = (matches) => {
 };
 
 const calculateMaximaMercado = (matches) => {
-  const resultados = matches.map((rodada) =>
-    rodada.slice(1).map((partida) => {
-      const times = partida.split(" x ");
-      return { team: times[0] };
-    })
-  );
+  const teamStats = {};
 
-  const medias = resultados.flat().map((partida) => {
-    const streak = Math.floor(Math.random() * 6);
-    const avg = (streak + Math.random() * 5).toFixed(2);
-    return { team: partida.team, value: `${streak} / ${avg}` };
+  // Processar os jogos
+  matches.forEach((rodada) => {
+    rodada.slice(1).forEach((partida) => {
+      console.log(partida.split(" x "));
+      const [teams, score] = partida.split(" ");
+      const [team1, team2] = teams.split(" x ");
+      const [score1, score2] = score.split("-").map(Number);
+      const totalGols = score1 + score2;
+
+      // Inicializando estatísticas para os times, caso ainda não existam
+      if (!teamStats[team1]) {
+        teamStats[team1] = {
+          currentUnder2_5: 0,
+          maxUnder2_5: 0,
+          gamesPlayed: 0,
+        };
+      }
+      if (!teamStats[team2]) {
+        teamStats[team2] = {
+          currentUnder2_5: 0,
+          maxUnder2_5: 0,
+          gamesPlayed: 0,
+        };
+      }
+
+      // Contabilizando as partidas jogadas
+      teamStats[team1].gamesPlayed++;
+      teamStats[team2].gamesPlayed++;
+
+      // Atualizando estatísticas de Under 2.5
+      if (totalGols < 2.5) {
+        // Incrementa a quantidade de jogos consecutivos "under 2.5"
+        teamStats[team1].currentUnder2_5++;
+        teamStats[team2].currentUnder2_5++;
+
+        // Atualiza o máximo de jogos consecutivos "under 2.5"
+        teamStats[team1].maxUnder2_5 = Math.max(
+          teamStats[team1].maxUnder2_5,
+          teamStats[team1].currentUnder2_5
+        );
+        teamStats[team2].maxUnder2_5 = Math.max(
+          teamStats[team2].maxUnder2_5,
+          teamStats[team2].currentUnder2_5
+        );
+      } else {
+        // Resetar os contadores de jogos consecutivos "under 2.5"
+        teamStats[team1].currentUnder2_5 = 0;
+        teamStats[team2].currentUnder2_5 = 0;
+      }
+    });
   });
 
-  return medias
-    .sort((a, b) => b.value.split(" / ")[1] - a.value.split(" / ")[1])
-    .slice(0, 5);
+  // Transformando as estatísticas em formato de resultados
+  const medias = Object.entries(teamStats).map(([team, stats]) => {
+    const currentUnder2_5 = stats.currentUnder2_5;
+    const maxUnder2_5 = stats.maxUnder2_5;
+
+    return {
+      team,
+      currentUnder2_5,
+      maxUnder2_5,
+    };
+  });
+
+  // Ordenando e retornando as 5 melhores equipes com base na "Máxima < 2.5"
+  return medias.sort((a, b) => b.maxUnder2_5 - a.maxUnder2_5).slice(0, 5);
 };
 
 const calculateAncoraMercado = (matches) => {
@@ -224,7 +308,6 @@ const onClickAnalisar = () => {
 let chartUnderOver = null;
 let chartAmbas = null;
 
-
 // for (let index = 0; index < tables.length; index++) {
 //   buttons[index].addEventListener("click", () => {
 //     mostrarEsconderTabela(tables[index]);
@@ -243,9 +326,11 @@ const todasCores = {
 
 function gerarTabelaEGraficos() {
   let dadosAnaliseTmp = dadosAnalise.value;
-  dadosAnaliseTmp = dadosAnalise.value.replace(/\r?\n|\r/g, ' ').replace(/\s{2,}/g, ' ');
-  dadosAnaliseTmp = dadosAnaliseTmp.replace(/(\d+)(?=\s)/g, '\n$1');
-  dadosAnaliseTmp = dadosAnaliseTmp.replaceAll("\"", "");
+  dadosAnaliseTmp = dadosAnalise.value
+    .replace(/\r?\n|\r/g, " ")
+    .replace(/\s{2,}/g, " ");
+  dadosAnaliseTmp = dadosAnaliseTmp.replace(/(\d+)(?=\s)/g, "\n$1");
+  dadosAnaliseTmp = dadosAnaliseTmp.replaceAll('"', "");
   const dataInput = dadosAnaliseTmp.trim();
   if (!dataInput) return;
 
@@ -253,10 +338,10 @@ function gerarTabelaEGraficos() {
   const minutos = gerarMinutosPorLiga(liga);
   const mosaico = sanitizarDados(dataInput);
   rankings.value = [
-  { title: "Chama Gol", data: calculateChamaGol(mosaico) },
-  { title: "Máxima de Mercado", data: calculateMaximaMercado(mosaico) },
-  { title: "Âncora de Mercado", data: calculateAncoraMercado(mosaico) },
-];
+    { title: "Chama Gol", data: calculateChamaGol(mosaico) },
+    { title: "Máxima de Mercado", data: calculateMaximaMercado(mosaico) },
+    { title: "Âncora de Mercado", data: calculateAncoraMercado(mosaico) },
+  ];
   const resultadosMercados = {};
   [...mercadosUnderOver, ...mercadosAmbas].forEach((mercado) => {
     resultadosMercados[mercado] = verificarResultadosMercado(mosaico, mercado);
@@ -312,7 +397,6 @@ function sanitizarDados(data) {
   });
 }
 
-
 function verificarResultadosMercado(mosaico, mercado) {
   return mosaico.map((row) => {
     const hora = row[0]; // Mantemos a hora na primeira posição
@@ -344,14 +428,21 @@ function verificarResultadosMercado(mosaico, mercado) {
   });
 }
 
-function calcularOscilacaoPorMercadoEspecifico(resultadosMercados, mercadosAlvo) {
+function calcularOscilacaoPorMercadoEspecifico(
+  resultadosMercados,
+  mercadosAlvo
+) {
   const oscilacoesMercado = {};
 
   mercadosAlvo.forEach((mercado) => {
     let acumulado = 0;
     const oscilacoes = [];
 
-    for (let rowIndex = resultadosMercados[mercado].length - 2; rowIndex >= 0; rowIndex--) {
+    for (
+      let rowIndex = resultadosMercados[mercado].length - 2;
+      rowIndex >= 0;
+      rowIndex--
+    ) {
       const currentRow = resultadosMercados[mercado][rowIndex].slice(1); // Ignorar a hora
       const nextRow = resultadosMercados[mercado][rowIndex + 1].slice(1); // Ignorar a hora
 
@@ -374,7 +465,6 @@ function calcularOscilacaoPorMercadoEspecifico(resultadosMercados, mercadosAlvo)
 
   return oscilacoesMercado;
 }
-
 
 function gerarContagensTabela(resultadosMercados, tabelas) {
   tabelas.forEach((mercadoTabela) => {
@@ -655,9 +745,7 @@ function calcularMediaGols(tabelaId) {
 
   const media = contador > 0 ? `${Math.ceil(soma / contador)}` : 0;
 
-  const mediaColunaGols = document.getElementById(
-    `${tabelaId}mediaColunaGols`
-  );
+  const mediaColunaGols = document.getElementById(`${tabelaId}mediaColunaGols`);
   mediaColunaGols.innerText = media;
 }
 
@@ -712,7 +800,9 @@ function adicionarLinhaOscilacaoColunas(tabelaId, mosaico) {
   const LinhaOscilacaoColunasPorcentagem = document.createElement("tr");
   const LinhaOscilacaoColunasPorcentagemIcone = document.createElement("td");
   LinhaOscilacaoColunasPorcentagemIcone.innerHTML = "📈"; // Ícone de gráfico
-  LinhaOscilacaoColunasPorcentagem.appendChild(LinhaOscilacaoColunasPorcentagemIcone);
+  LinhaOscilacaoColunasPorcentagem.appendChild(
+    LinhaOscilacaoColunasPorcentagemIcone
+  );
 
   // Insere a linha logo abaixo da linha de porcentagens
   const linhas = tabela.getElementsByTagName("tr");
@@ -722,7 +812,9 @@ function adicionarLinhaOscilacaoColunas(tabelaId, mosaico) {
   let acumulado = 0; // Variável para acumular os valores de oscilação
 
   porcentagens.forEach((porcentagemCelula, index) => {
-    const porcentagem = parseFloat(porcentagemCelula.innerText.replace("%", "").trim()); // Obtém a porcentagem como número
+    const porcentagem = parseFloat(
+      porcentagemCelula.innerText.replace("%", "").trim()
+    ); // Obtém a porcentagem como número
     const resultado = resultados[index]; // Resultado atual da coluna
     const cell = document.createElement("td"); // Nova célula para a linha de oscilação
 
@@ -771,7 +863,6 @@ function adicionarLinhaOscilacaoColunas(tabelaId, mosaico) {
     tabela.querySelector("tr:nth-child(3)")
   );
 }
-
 
 function gerarTabela(
   minutos,
@@ -903,16 +994,16 @@ function gerarTabela(
 
     // Linhas
     mosaico.forEach((row, rowIndex) => {
-  const tableRow = document.createElement("tr");
-  const hourCell = document.createElement("td");
-  hourCell.innerText = row[0] < 10 ? `0${row[0]}` : row[0];
-  hourCell.classList.add("firstCollumn");
-  tableRow.appendChild(hourCell);
+      const tableRow = document.createElement("tr");
+      const hourCell = document.createElement("td");
+      hourCell.innerText = row[0] < 10 ? `0${row[0]}` : row[0];
+      hourCell.classList.add("firstCollumn");
+      tableRow.appendChild(hourCell);
 
-  let rodadaClasse = ""; // Classe que será aplicada à linha
+      let rodadaClasse = ""; // Classe que será aplicada à linha
 
-  // Adiciona células para os resultados
-  row.slice(1).forEach((value, colIndex) => {
+      // Adiciona células para os resultados
+      row.slice(1).forEach((value, colIndex) => {
         const cell = document.createElement("td");
         cell.innerText = value || "";
 
@@ -935,73 +1026,72 @@ function gerarTabela(
         tableRow.appendChild(cell);
       });
 
-  // Aplica a classe da rodada para toda a linha
-  if (rodadaClasse) {
-    tableRow.classList.add(rodadaClasse);
-  }
+      // Aplica a classe da rodada para toda a linha
+      if (rodadaClasse) {
+        tableRow.classList.add(rodadaClasse);
+      }
 
-  // Preenche células vazias se a linha não tiver o número total de minutos
-  const colunasRestantes = minutos.length - row.slice(1).length;
-  for (let i = 0; i < colunasRestantes; i++) {
-    const emptyCell = document.createElement("td");
-    emptyCell.innerText = "";
-    tableRow.appendChild(emptyCell);
-  }
+      // Preenche células vazias se a linha não tiver o número total de minutos
+      const colunasRestantes = minutos.length - row.slice(1).length;
+      for (let i = 0; i < colunasRestantes; i++) {
+        const emptyCell = document.createElement("td");
+        emptyCell.innerText = "";
+        tableRow.appendChild(emptyCell);
+      }
 
-  // Adiciona as colunas adicionais ao final da linha
-  const porcentagemMercadoCell = document.createElement("td");
-  porcentagemMercadoCell.innerText = calcularPorcentagemLinha(
-    rowIndex,
-    resultadosMercados[mercado]
-  );
-  tableRow.appendChild(porcentagemMercadoCell);
+      // Adiciona as colunas adicionais ao final da linha
+      const porcentagemMercadoCell = document.createElement("td");
+      porcentagemMercadoCell.innerText = calcularPorcentagemLinha(
+        rowIndex,
+        resultadosMercados[mercado]
+      );
+      tableRow.appendChild(porcentagemMercadoCell);
 
-  const subidasCell = document.createElement("td");
-  subidasCell.classList.add("subidasCell");
-  subidasCell.innerText = calcularSubidasLinha(
-    rowIndex,
-    resultadosMercados,
-    mercado
-  );
-  tableRow.appendChild(subidasCell);
+      const subidasCell = document.createElement("td");
+      subidasCell.classList.add("subidasCell");
+      subidasCell.innerText = calcularSubidasLinha(
+        rowIndex,
+        resultadosMercados,
+        mercado
+      );
+      tableRow.appendChild(subidasCell);
 
-  const lateralizacoesOverCell = document.createElement("td");
-  lateralizacoesOverCell.classList.add("lateralizacoesOverCell");
-  lateralizacoesOverCell.innerText = calcularLateralizacaoVerde(
-    rowIndex,
-    resultadosMercados,
-    mercado,
-    mercado
-  );
-  tableRow.appendChild(lateralizacoesOverCell);
+      const lateralizacoesOverCell = document.createElement("td");
+      lateralizacoesOverCell.classList.add("lateralizacoesOverCell");
+      lateralizacoesOverCell.innerText = calcularLateralizacaoVerde(
+        rowIndex,
+        resultadosMercados,
+        mercado,
+        mercado
+      );
+      tableRow.appendChild(lateralizacoesOverCell);
 
-  const descidasCell = document.createElement("td");
-  descidasCell.classList.add("descidasCell");
-  descidasCell.innerText = calcularDescidasLinha(
-    rowIndex,
-    resultadosMercados,
-    mercado
-  );
-  tableRow.appendChild(descidasCell);
+      const descidasCell = document.createElement("td");
+      descidasCell.classList.add("descidasCell");
+      descidasCell.innerText = calcularDescidasLinha(
+        rowIndex,
+        resultadosMercados,
+        mercado
+      );
+      tableRow.appendChild(descidasCell);
 
-  const lateralizacoesUnderCell = document.createElement("td");
-  lateralizacoesUnderCell.classList.add("lateralizacoesUnderCell");
-  lateralizacoesUnderCell.innerText = calcularLateralizacaoVermelho(
-    rowIndex,
-    resultadosMercados,
-    mercado,
-    mercado
-  );
-  tableRow.appendChild(lateralizacoesUnderCell);
+      const lateralizacoesUnderCell = document.createElement("td");
+      lateralizacoesUnderCell.classList.add("lateralizacoesUnderCell");
+      lateralizacoesUnderCell.innerText = calcularLateralizacaoVermelho(
+        rowIndex,
+        resultadosMercados,
+        mercado,
+        mercado
+      );
+      tableRow.appendChild(lateralizacoesUnderCell);
 
-  const golsCell = document.createElement("td");
-  golsCell.classList.add("golsCell");
-  golsCell.innerText = calcularGolsLinha(row);
-  tableRow.appendChild(golsCell);
+      const golsCell = document.createElement("td");
+      golsCell.classList.add("golsCell");
+      golsCell.innerText = calcularGolsLinha(row);
+      tableRow.appendChild(golsCell);
 
-  table.appendChild(tableRow);
-});
-
+      table.appendChild(tableRow);
+    });
 
     calcularMediaPorcetagensLinhas(mercadoTabela);
     calcularMediaSubidas(mercadoTabela);
@@ -1069,7 +1159,6 @@ function calcularLateralizacaoVermelho(rowIndex, resultadosMercados, mercado) {
 //     return calcularMovimentosLinha(rowIndex, resultadosMercados, mercadoAtual, mercadoComparado, mercadoComparado);
 // }
 
-
 function calcularGolsLinha(row) {
   return row.slice(1).reduce((total, value) => {
     // Extrai os placares usando uma expressão regular
@@ -1083,9 +1172,6 @@ function calcularGolsLinha(row) {
     }
   }, 0);
 }
-
-
-
 
 function calcularMovimentosLinha(
   rowIndex,
@@ -1364,6 +1450,4 @@ function atualizarGrafico(dadosOscilacao, chart, controlesId) {
   chart.data.datasets = datasets;
   chart.update();
 }
-
-
 </script>
