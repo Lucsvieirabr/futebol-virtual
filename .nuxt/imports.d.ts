@@ -43,4 +43,5 @@ export { useToast } from 'primevue/usetoast';
 export { useDialog } from 'primevue/usedialog';
 export { useField, useForm, useFieldArray, useFieldError, useFieldValue, useFormErrors, useFormValues, useIsFieldDirty, useIsFieldTouched, useIsFieldValid, useIsFormDirty, useIsFormTouched, useIsFormValid, useIsSubmitting, useResetForm, useSubmitCount, useSubmitForm, useValidateField, useValidateForm } from 'vee-validate';
 export { toTypedSchema } from '@vee-validate/yup';
+export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';
