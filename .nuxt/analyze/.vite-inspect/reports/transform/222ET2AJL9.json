@@ -4,39 +4,39 @@
     {
       "name": "vite:load-fallback",
       "result": "import { formatCalendarAsDate, formatMaskAsNumber } from '~/utils/functions/formatData.js';\n\nexport const useAuthRequest = () => {\n    const config = useRuntimeConfig();\n    const request = useRequest();\n    const token = useCookie('token');\n\n    const login = async (data: any) => {\n        try {\n            const response: any = await $fetch('login', {\n                baseURL: config.public.apiBase,\n                headers: { \"Content-type\": \"application/json\" },\n                method: 'POST',\n                body: JSON.stringify(data),\n            });\n            return response;\n        } catch (e) {\n            request.errorLoginRequest(e);\n            throw e;\n        }\n    };\n\n    const logout = async () => {\n        try {\n            const response: any = await $fetch('logout', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'POST',\n            });\n            token.value = null;\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n        }\n    };\n\n    const validarSessao = async () => {\n        try {\n            const response = await $fetch('validar-sessao', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            throw e;\n        }\n    };\n\n    const recuperarSenha = async (data: any) => {\n        try {\n            const response: any = await $fetch('recuperar-senha', {\n                baseURL: config.public.apiBase,\n                headers: { \"Content-type\": \"application/json\" },\n                method: 'POST',\n                body: JSON.stringify(data),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n        }\n    };\n\n    const validarTokenRedefinicao = async (data: any) => {\n        try {\n            const queryString = new URLSearchParams(data).toString();\n            const url = 'validar-token-redefinicao?' + queryString;\n\n            const response = await $fetch(url, {\n                baseURL: config.public.apiBase,\n                headers: { \"Content-type\": \"application/json\" },\n                method: 'GET',\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n        }\n    };\n\n    const redefinirSenha = async (data: any) => {\n        try {\n            const response: any = await $fetch('redefinir-senha', {\n                baseURL: config.public.apiBase,\n                headers: { \"Content-type\": \"application/json\" },\n                method: 'POST',\n                body: JSON.stringify(data),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n        }\n    };\n\n    const gerarSenha = () => {\n        const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';\n        const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';\n        const numberChars = '0123456789';\n        const specialChars = '!@#$%&?';\n        const length = 8;\n      \n        const allChars = lowercaseChars + uppercaseChars + numberChars + specialChars;\n      \n        const getRandomChar = (charset: string) => charset[Math.floor(Math.random() * charset.length)];\n        const getRandomItem = <T>(array: T[]) => array[Math.floor(Math.random() * array.length)];\n      \n        const passwordArray = [\n            getRandomChar(uppercaseChars),\n            getRandomChar(lowercaseChars),\n            getRandomChar(numberChars),\n            getRandomChar(specialChars),\n        ];\n        \n        while (passwordArray.length < length) {\n        passwordArray.push(getRandomItem(allChars.split('')));\n        }\n    \n        passwordArray.sort(() => Math.random() - 0.5);\n        return passwordArray.join('');\n    };\n\n    const cadastrarNovoUsuario = async (data: any) => {\n        try {\n            const response: any = await $fetch('cadastrar-usuario', {\n                baseURL: config.public.apiBase,\n                headers: { \"Content-type\": \"application/json\" },\n                method: 'POST',\n                body: JSON.stringify(formatData(data)),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            throw e;\n        }\n    };\n\n    return {\n        login,\n        logout,\n        validarSessao,\n        recuperarSenha,\n        validarTokenRedefinicao,\n        redefinirSenha,\n        gerarSenha,\n        cadastrarNovoUsuario,\n    };\n};\n\nconst formatData = (data: any) => {\n    data.cpf_cnpj = data.cpf_cnpj ? formatMaskAsNumber(data.cpf_cnpj) : null;\n    data.data_nascimento = data.data_nascimento ? formatCalendarAsDate(data.data_nascimento) : null;\n    data.data_abertura = data.data_abertura ? formatCalendarAsDate(data.data_abertura) : null;\n    return data;\n};",
-      "start": 1742841400186,
-      "end": 1742841400228,
+      "start": 1742846401416,
+      "end": 1742846401456,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400228,
-      "end": 1742841400228,
+      "start": 1742846401456,
+      "end": 1742846401456,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400228,
-      "end": 1742841400228,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400228,
-      "end": 1742841400228,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400228,
-      "end": 1742841400228,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { formatCalendarAsDate, formatMaskAsNumber } from \"~/utils/functions/formatData.js\";\nexport const useAuthRequest = () => {\n  const config = useRuntimeConfig();\n  const request = useRequest();\n  const token = useCookie(\"token\");\n  const login = async (data) => {\n    try {\n      const response = await $fetch(\"login\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorLoginRequest(e);\n      throw e;\n    }\n  };\n  const logout = async () => {\n    try {\n      const response = await $fetch(\"logout\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\"\n      });\n      token.value = null;\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const validarSessao = async () => {\n    try {\n      const response = await $fetch(\"validar-sessao\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      throw e;\n    }\n  };\n  const recuperarSenha = async (data) => {\n    try {\n      const response = await $fetch(\"recuperar-senha\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const validarTokenRedefinicao = async (data) => {\n    try {\n      const queryString = new URLSearchParams(data).toString();\n      const url = \"validar-token-redefinicao?\" + queryString;\n      const response = await $fetch(url, {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"GET\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const redefinirSenha = async (data) => {\n    try {\n      const response = await $fetch(\"redefinir-senha\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const gerarSenha = () => {\n    const lowercaseChars = \"abcdefghijklmnopqrstuvwxyz\";\n    const uppercaseChars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n    const numberChars = \"0123456789\";\n    const specialChars = \"!@#$%&?\";\n    const length = 8;\n    const allChars = lowercaseChars + uppercaseChars + numberChars + specialChars;\n    const getRandomChar = (charset) => charset[Math.floor(Math.random() * charset.length)];\n    const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];\n    const passwordArray = [\n      getRandomChar(uppercaseChars),\n      getRandomChar(lowercaseChars),\n      getRandomChar(numberChars),\n      getRandomChar(specialChars)\n    ];\n    while (passwordArray.length < length) {\n      passwordArray.push(getRandomItem(allChars.split(\"\")));\n    }\n    passwordArray.sort(() => Math.random() - 0.5);\n    return passwordArray.join(\"\");\n  };\n  const cadastrarNovoUsuario = async (data) => {\n    try {\n      const response = await $fetch(\"cadastrar-usuario\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(formatData(data))\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      throw e;\n    }\n  };\n  return {\n    login,\n    logout,\n    validarSessao,\n    recuperarSenha,\n    validarTokenRedefinicao,\n    redefinirSenha,\n    gerarSenha,\n    cadastrarNovoUsuario\n  };\n};\nconst formatData = (data) => {\n  data.cpf_cnpj = data.cpf_cnpj ? formatMaskAsNumber(data.cpf_cnpj) : null;\n  data.data_nascimento = data.data_nascimento ? formatCalendarAsDate(data.data_nascimento) : null;\n  data.data_abertura = data.data_abertura ? formatCalendarAsDate(data.data_abertura) : null;\n  return data;\n};\n",
-      "start": 1742841400228,
-      "end": 1742841400348,
+      "start": 1742846401457,
+      "end": 1742846401585,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -52,123 +52,123 @@
     },
     {
       "name": "vite:json",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400348,
-      "end": 1742841400348,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400348,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400349,
-      "end": 1742841400349,
+      "start": 1742846401585,
+      "end": 1742846401585,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRuntimeConfig } from '#app/nuxt';\nimport { useRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/common/request.ts';\nimport { useCookie } from '#app/composables/cookie';\nimport { formatCalendarAsDate, formatMaskAsNumber } from \"~/utils/functions/formatData.js\";\nexport const useAuthRequest = () => {\n  const config = useRuntimeConfig();\n  const request = useRequest();\n  const token = useCookie(\"token\");\n  const login = async (data) => {\n    try {\n      const response = await $fetch(\"login\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorLoginRequest(e);\n      throw e;\n    }\n  };\n  const logout = async () => {\n    try {\n      const response = await $fetch(\"logout\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\"\n      });\n      token.value = null;\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const validarSessao = async () => {\n    try {\n      const response = await $fetch(\"validar-sessao\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      throw e;\n    }\n  };\n  const recuperarSenha = async (data) => {\n    try {\n      const response = await $fetch(\"recuperar-senha\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const validarTokenRedefinicao = async (data) => {\n    try {\n      const queryString = new URLSearchParams(data).toString();\n      const url = \"validar-token-redefinicao?\" + queryString;\n      const response = await $fetch(url, {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"GET\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const redefinirSenha = async (data) => {\n    try {\n      const response = await $fetch(\"redefinir-senha\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n    }\n  };\n  const gerarSenha = () => {\n    const lowercaseChars = \"abcdefghijklmnopqrstuvwxyz\";\n    const uppercaseChars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n    const numberChars = \"0123456789\";\n    const specialChars = \"!@#$%&?\";\n    const length = 8;\n    const allChars = lowercaseChars + uppercaseChars + numberChars + specialChars;\n    const getRandomChar = (charset) => charset[Math.floor(Math.random() * charset.length)];\n    const getRandomItem = (array) => array[Math.floor(Math.random() * array.length)];\n    const passwordArray = [\n      getRandomChar(uppercaseChars),\n      getRandomChar(lowercaseChars),\n      getRandomChar(numberChars),\n      getRandomChar(specialChars)\n    ];\n    while (passwordArray.length < length) {\n      passwordArray.push(getRandomItem(allChars.split(\"\")));\n    }\n    passwordArray.sort(() => Math.random() - 0.5);\n    return passwordArray.join(\"\");\n  };\n  const cadastrarNovoUsuario = async (data) => {\n    try {\n      const response = await $fetch(\"cadastrar-usuario\", {\n        baseURL: config.public.apiBase,\n        headers: { \"Content-type\": \"application/json\" },\n        method: \"POST\",\n        body: JSON.stringify(formatData(data))\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      throw e;\n    }\n  };\n  return {\n    login,\n    logout,\n    validarSessao,\n    recuperarSenha,\n    validarTokenRedefinicao,\n    redefinirSenha,\n    gerarSenha,\n    cadastrarNovoUsuario\n  };\n};\nconst formatData = (data) => {\n  data.cpf_cnpj = data.cpf_cnpj ? formatMaskAsNumber(data.cpf_cnpj) : null;\n  data.data_nascimento = data.data_nascimento ? formatCalendarAsDate(data.data_nascimento) : null;\n  data.data_abertura = data.data_abertura ? formatCalendarAsDate(data.data_abertura) : null;\n  return data;\n};\n",
-      "start": 1742841400349,
-      "end": 1742841400351,
+      "start": 1742846401585,
+      "end": 1742846401586,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -181,50 +181,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400351,
-      "end": 1742841400351,
+      "start": 1742846401586,
+      "end": 1742846401586,
       "order": "normal"
     }
   ]

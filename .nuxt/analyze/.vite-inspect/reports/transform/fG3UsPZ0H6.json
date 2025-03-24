@@ -4,208 +4,208 @@
     {
       "name": "virtual",
       "result": "import { default as acesso_45negadoeFrm7Z9Cy5Meta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/acesso-negado.vue?macro=true\";\nimport { default as cadastrar3zXMnZww80Meta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/cadastrar.vue?macro=true\";\nimport { default as homeGHeslPO7vBMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/home.vue?macro=true\";\nimport { default as loginnWVxiBJd5QMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/login.vue?macro=true\";\nimport { default as recuperar_45senhaGk5F7mkGtyMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/recuperar-senha.vue?macro=true\";\nimport { default as redefinir_45senhaExojW8P6umMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/redefinir-senha.vue?macro=true\";\nexport default [\n  {\n    name: acesso_45negadoeFrm7Z9Cy5Meta?.name ?? \"acesso-negado\",\n    path: acesso_45negadoeFrm7Z9Cy5Meta?.path ?? \"/acesso-negado\",\n    meta: acesso_45negadoeFrm7Z9Cy5Meta || {},\n    alias: acesso_45negadoeFrm7Z9Cy5Meta?.alias || [],\n    redirect: acesso_45negadoeFrm7Z9Cy5Meta?.redirect,\n    component: () => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/acesso-negado.vue\").then(m => m.default || m)\n  },\n  {\n    name: cadastrar3zXMnZww80Meta?.name ?? \"cadastrar\",\n    path: cadastrar3zXMnZww80Meta?.path ?? \"/cadastrar\",\n    meta: cadastrar3zXMnZww80Meta || {},\n    alias: cadastrar3zXMnZww80Meta?.alias || [],\n    redirect: cadastrar3zXMnZww80Meta?.redirect,\n    component: () => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/cadastrar.vue\").then(m => m.default || m)\n  },\n  {\n    name: homeGHeslPO7vBMeta?.name ?? \"home\",\n    path: homeGHeslPO7vBMeta?.path ?? \"/home\",\n    meta: homeGHeslPO7vBMeta || {},\n    alias: homeGHeslPO7vBMeta?.alias || [],\n    redirect: homeGHeslPO7vBMeta?.redirect,\n    component: () => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/home.vue\").then(m => m.default || m)\n  },\n  {\n    name: loginnWVxiBJd5QMeta?.name ?? \"login\",\n    path: loginnWVxiBJd5QMeta?.path ?? \"/login\",\n    meta: loginnWVxiBJd5QMeta || {},\n    alias: loginnWVxiBJd5QMeta?.alias || [],\n    redirect: loginnWVxiBJd5QMeta?.redirect,\n    component: () => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/login.vue\").then(m => m.default || m)\n  },\n  {\n    name: recuperar_45senhaGk5F7mkGtyMeta?.name ?? \"recuperar-senha\",\n    path: recuperar_45senhaGk5F7mkGtyMeta?.path ?? \"/recuperar-senha\",\n    meta: recuperar_45senhaGk5F7mkGtyMeta || {},\n    alias: recuperar_45senhaGk5F7mkGtyMeta?.alias || [],\n    redirect: recuperar_45senhaGk5F7mkGtyMeta?.redirect,\n    component: () => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/recuperar-senha.vue\").then(m => m.default || m)\n  },\n  {\n    name: redefinir_45senhaExojW8P6umMeta?.name ?? \"redefinir-senha\",\n    path: redefinir_45senhaExojW8P6umMeta?.path ?? \"/redefinir-senha\",\n    meta: redefinir_45senhaExojW8P6umMeta || {},\n    alias: redefinir_45senhaExojW8P6umMeta?.alias || [],\n    redirect: redefinir_45senhaExojW8P6umMeta?.redirect,\n    component: () => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/redefinir-senha.vue\").then(m => m.default || m)\n  }\n]",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841399267,
-      "end": 1742841399267,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400489,
+      "end": 1742846400489,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400490,
+      "end": 1742846400490,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400490,
+      "end": 1742846400490,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841399268,
-      "end": 1742841399268,
+      "start": 1742846400490,
+      "end": 1742846400490,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841399268,
-      "end": 1742841399269,
+      "start": 1742846400490,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400491,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { default as acesso_45negadoeFrm7Z9Cy5Meta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/acesso-negado.vue?macro=true\";\nimport { default as cadastrar3zXMnZww80Meta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/cadastrar.vue?macro=true\";\nimport { default as homeGHeslPO7vBMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/home.vue?macro=true\";\nimport { default as loginnWVxiBJd5QMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/login.vue?macro=true\";\nimport { default as recuperar_45senhaGk5F7mkGtyMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/recuperar-senha.vue?macro=true\";\nimport { default as redefinir_45senhaExojW8P6umMeta } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/redefinir-senha.vue?macro=true\";\nexport default [\n  {\n    name: acesso_45negadoeFrm7Z9Cy5Meta?.name ?? \"acesso-negado\",\n    path: acesso_45negadoeFrm7Z9Cy5Meta?.path ?? \"/acesso-negado\",\n    meta: acesso_45negadoeFrm7Z9Cy5Meta || {},\n    alias: acesso_45negadoeFrm7Z9Cy5Meta?.alias || [],\n    redirect: acesso_45negadoeFrm7Z9Cy5Meta?.redirect,\n    component: () => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/acesso-negado.vue\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(m => m.default || m)\n  },\n  {\n    name: cadastrar3zXMnZww80Meta?.name ?? \"cadastrar\",\n    path: cadastrar3zXMnZww80Meta?.path ?? \"/cadastrar\",\n    meta: cadastrar3zXMnZww80Meta || {},\n    alias: cadastrar3zXMnZww80Meta?.alias || [],\n    redirect: cadastrar3zXMnZww80Meta?.redirect,\n    component: () => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/cadastrar.vue\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(m => m.default || m)\n  },\n  {\n    name: homeGHeslPO7vBMeta?.name ?? \"home\",\n    path: homeGHeslPO7vBMeta?.path ?? \"/home\",\n    meta: homeGHeslPO7vBMeta || {},\n    alias: homeGHeslPO7vBMeta?.alias || [],\n    redirect: homeGHeslPO7vBMeta?.redirect,\n    component: () => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/home.vue\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(m => m.default || m)\n  },\n  {\n    name: loginnWVxiBJd5QMeta?.name ?? \"login\",\n    path: loginnWVxiBJd5QMeta?.path ?? \"/login\",\n    meta: loginnWVxiBJd5QMeta || {},\n    alias: loginnWVxiBJd5QMeta?.alias || [],\n    redirect: loginnWVxiBJd5QMeta?.redirect,\n    component: () => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/login.vue\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(m => m.default || m)\n  },\n  {\n    name: recuperar_45senhaGk5F7mkGtyMeta?.name ?? \"recuperar-senha\",\n    path: recuperar_45senhaGk5F7mkGtyMeta?.path ?? \"/recuperar-senha\",\n    meta: recuperar_45senhaGk5F7mkGtyMeta || {},\n    alias: recuperar_45senhaGk5F7mkGtyMeta?.alias || [],\n    redirect: recuperar_45senhaGk5F7mkGtyMeta?.redirect,\n    component: () => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/recuperar-senha.vue\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(m => m.default || m)\n  },\n  {\n    name: redefinir_45senhaExojW8P6umMeta?.name ?? \"redefinir-senha\",\n    path: redefinir_45senhaExojW8P6umMeta?.path ?? \"/redefinir-senha\",\n    meta: redefinir_45senhaExojW8P6umMeta || {},\n    alias: redefinir_45senhaExojW8P6umMeta?.alias || [],\n    redirect: redefinir_45senhaExojW8P6umMeta?.redirect,\n    component: () => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/pages/redefinir-senha.vue\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(m => m.default || m)\n  }\n]",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400491,
+      "end": 1742846400492,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742841399269,
-      "end": 1742841399269,
+      "start": 1742846400492,
+      "end": 1742846400492,
       "order": "normal"
     }
   ]

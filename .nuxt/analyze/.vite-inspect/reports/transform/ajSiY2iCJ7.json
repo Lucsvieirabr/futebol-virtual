@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "import ChevronDownIcon from 'primevue/icons/chevrondown';\nimport ChevronRightIcon from 'primevue/icons/chevronright';\nimport { ObjectUtils, DomHandler, UniqueComponentId } from 'primevue/utils';\nimport { mergeProps, resolveComponent, resolveDirective, openBlock, createElementBlock, normalizeClass, Fragment, renderList, createElementVNode, withDirectives, createBlock, resolveDynamicComponent, createCommentVNode, toDisplayString, createVNode, Transition, withCtx, vShow, renderSlot } from 'vue';\nimport BaseComponent from 'primevue/basecomponent';\nimport PanelMenuStyle from 'primevue/panelmenu/style';\nimport Ripple from 'primevue/ripple';\n\nvar script$3 = {\n  name: 'BasePanelMenu',\n  \"extends\": BaseComponent,\n  props: {\n    model: {\n      type: Array,\n      \"default\": null\n    },\n    expandedKeys: {\n      type: Object,\n      \"default\": null\n    },\n    multiple: {\n      type: Boolean,\n      \"default\": false\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    }\n  },\n  style: PanelMenuStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script$2 = {\n  name: 'PanelMenuSub',\n  hostName: 'PanelMenu',\n  \"extends\": BaseComponent,\n  emits: ['item-toggle', 'item-mousemove'],\n  props: {\n    panelId: {\n      type: String,\n      \"default\": null\n    },\n    focusedItemId: {\n      type: String,\n      \"default\": null\n    },\n    items: {\n      type: Array,\n      \"default\": null\n    },\n    level: {\n      type: Number,\n      \"default\": 0\n    },\n    templates: {\n      type: Object,\n      \"default\": null\n    },\n    activeItemPath: {\n      type: Object,\n      \"default\": null\n    },\n    tabindex: {\n      type: Number,\n      \"default\": -1\n    }\n  },\n  methods: {\n    getItemId: function getItemId(processedItem) {\n      return \"\".concat(this.panelId, \"_\").concat(processedItem.key);\n    },\n    getItemKey: function getItemKey(processedItem) {\n      return this.getItemId(processedItem);\n    },\n    getItemProp: function getItemProp(processedItem, name, params) {\n      return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name], params) : undefined;\n    },\n    getItemLabel: function getItemLabel(processedItem) {\n      return this.getItemProp(processedItem, 'label');\n    },\n    getPTOptions: function getPTOptions(key, processedItem, index) {\n      return this.ptm(key, {\n        context: {\n          item: processedItem,\n          index: index,\n          active: this.isItemActive(processedItem),\n          focused: this.isItemFocused(processedItem),\n          disabled: this.isItemDisabled(processedItem)\n        }\n      });\n    },\n    isItemActive: function isItemActive(processedItem) {\n      return this.activeItemPath.some(function (path) {\n        return path.key === processedItem.key;\n      });\n    },\n    isItemVisible: function isItemVisible(processedItem) {\n      return this.getItemProp(processedItem, 'visible') !== false;\n    },\n    isItemDisabled: function isItemDisabled(processedItem) {\n      return this.getItemProp(processedItem, 'disabled');\n    },\n    isItemFocused: function isItemFocused(processedItem) {\n      return this.focusedItemId === this.getItemId(processedItem);\n    },\n    isItemGroup: function isItemGroup(processedItem) {\n      return ObjectUtils.isNotEmpty(processedItem.items);\n    },\n    onItemClick: function onItemClick(event, processedItem) {\n      this.getItemProp(processedItem, 'command', {\n        originalEvent: event,\n        item: processedItem.item\n      });\n      this.$emit('item-toggle', {\n        processedItem: processedItem,\n        expanded: !this.isItemActive(processedItem)\n      });\n    },\n    onItemToggle: function onItemToggle(event) {\n      this.$emit('item-toggle', event);\n    },\n    onItemMouseMove: function onItemMouseMove(event, processedItem) {\n      this.$emit('item-mousemove', {\n        originalEvent: event,\n        processedItem: processedItem\n      });\n    },\n    getAriaSetSize: function getAriaSetSize() {\n      var _this = this;\n      return this.items.filter(function (processedItem) {\n        return _this.isItemVisible(processedItem) && !_this.getItemProp(processedItem, 'separator');\n      }).length;\n    },\n    getAriaPosInset: function getAriaPosInset(index) {\n      var _this2 = this;\n      return index - this.items.slice(0, index).filter(function (processedItem) {\n        return _this2.isItemVisible(processedItem) && _this2.getItemProp(processedItem, 'separator');\n      }).length + 1;\n    },\n    getMenuItemProps: function getMenuItemProps(processedItem, index) {\n      return {\n        action: mergeProps({\n          \"class\": this.cx('action'),\n          tabindex: -1,\n          'aria-hidden': true\n        }, this.getPTOptions('action', processedItem, index)),\n        icon: mergeProps({\n          \"class\": [this.cx('icon'), this.getItemProp(processedItem, 'icon')]\n        }, this.getPTOptions('icon', processedItem, index)),\n        label: mergeProps({\n          \"class\": this.cx('label')\n        }, this.getPTOptions('label', processedItem, index)),\n        submenuicon: mergeProps({\n          \"class\": this.cx('submenuIcon')\n        }, this.getPTOptions('submenuicon', processedItem, index))\n      };\n    }\n  },\n  components: {\n    ChevronRightIcon: ChevronRightIcon,\n    ChevronDownIcon: ChevronDownIcon\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nvar _hoisted_1$1 = [\"tabindex\"];\nvar _hoisted_2$1 = [\"id\", \"aria-label\", \"aria-expanded\", \"aria-level\", \"aria-setsize\", \"aria-posinset\", \"data-p-focused\", \"data-p-disabled\"];\nvar _hoisted_3$1 = [\"onClick\", \"onMousemove\"];\nvar _hoisted_4$1 = [\"href\", \"target\"];\nfunction render$2(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_PanelMenuSub = resolveComponent(\"PanelMenuSub\", true);\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return openBlock(), createElementBlock(\"ul\", {\n    \"class\": normalizeClass(_ctx.cx('submenu')),\n    tabindex: $props.tabindex\n  }, [(openBlock(true), createElementBlock(Fragment, null, renderList($props.items, function (processedItem, index) {\n    return openBlock(), createElementBlock(Fragment, {\n      key: $options.getItemKey(processedItem)\n    }, [$options.isItemVisible(processedItem) && !$options.getItemProp(processedItem, 'separator') ? (openBlock(), createElementBlock(\"li\", mergeProps({\n      key: 0,\n      id: $options.getItemId(processedItem),\n      \"class\": [_ctx.cx('menuitem', {\n        processedItem: processedItem\n      }), $options.getItemProp(processedItem, 'class')],\n      style: $options.getItemProp(processedItem, 'style'),\n      role: \"treeitem\",\n      \"aria-label\": $options.getItemLabel(processedItem),\n      \"aria-expanded\": $options.isItemGroup(processedItem) ? $options.isItemActive(processedItem) : undefined,\n      \"aria-level\": $props.level + 1,\n      \"aria-setsize\": $options.getAriaSetSize(),\n      \"aria-posinset\": $options.getAriaPosInset(index)\n    }, $options.getPTOptions('menuitem', processedItem, index), {\n      \"data-p-focused\": $options.isItemFocused(processedItem),\n      \"data-p-disabled\": $options.isItemDisabled(processedItem)\n    }), [createElementVNode(\"div\", mergeProps({\n      \"class\": _ctx.cx('content'),\n      onClick: function onClick($event) {\n        return $options.onItemClick($event, processedItem);\n      },\n      onMousemove: function onMousemove($event) {\n        return $options.onItemMouseMove($event, processedItem);\n      }\n    }, $options.getPTOptions('content', processedItem, index)), [!$props.templates.item ? withDirectives((openBlock(), createElementBlock(\"a\", mergeProps({\n      key: 0,\n      href: $options.getItemProp(processedItem, 'url'),\n      \"class\": _ctx.cx('action'),\n      target: $options.getItemProp(processedItem, 'target'),\n      tabindex: \"-1\",\n      \"aria-hidden\": \"true\"\n    }, $options.getPTOptions('action', processedItem, index)), [$options.isItemGroup(processedItem) ? (openBlock(), createElementBlock(Fragment, {\n      key: 0\n    }, [$props.templates.submenuicon ? (openBlock(), createBlock(resolveDynamicComponent($props.templates.submenuicon), mergeProps({\n      key: 0,\n      \"class\": _ctx.cx('submenuIcon'),\n      active: $options.isItemActive(processedItem)\n    }, $options.getPTOptions('submenuIcon', processedItem, index)), null, 16, [\"class\", \"active\"])) : (openBlock(), createBlock(resolveDynamicComponent($options.isItemActive(processedItem) ? 'ChevronDownIcon' : 'ChevronRightIcon'), mergeProps({\n      key: 1,\n      \"class\": _ctx.cx('submenuIcon')\n    }, $options.getPTOptions('submenuIcon', processedItem, index)), null, 16, [\"class\"]))], 64)) : createCommentVNode(\"\", true), $props.templates.itemicon ? (openBlock(), createBlock(resolveDynamicComponent($props.templates.itemicon), {\n      key: 1,\n      item: processedItem.item,\n      \"class\": normalizeClass(_ctx.cx('icon'))\n    }, null, 8, [\"item\", \"class\"])) : $options.getItemProp(processedItem, 'icon') ? (openBlock(), createElementBlock(\"span\", mergeProps({\n      key: 2,\n      \"class\": [_ctx.cx('icon'), $options.getItemProp(processedItem, 'icon')]\n    }, $options.getPTOptions('icon', processedItem, index)), null, 16)) : createCommentVNode(\"\", true), createElementVNode(\"span\", mergeProps({\n      \"class\": _ctx.cx('label')\n    }, $options.getPTOptions('label', processedItem, index)), toDisplayString($options.getItemLabel(processedItem)), 17)], 16, _hoisted_4$1)), [[_directive_ripple]]) : (openBlock(), createBlock(resolveDynamicComponent($props.templates.item), {\n      key: 1,\n      item: processedItem.item,\n      root: false,\n      active: $options.isItemActive(processedItem),\n      hasSubmenu: $options.isItemGroup(processedItem),\n      label: $options.getItemLabel(processedItem),\n      props: $options.getMenuItemProps(processedItem, index)\n    }, null, 8, [\"item\", \"active\", \"hasSubmenu\", \"label\", \"props\"]))], 16, _hoisted_3$1), createVNode(Transition, mergeProps({\n      name: \"p-toggleable-content\"\n    }, _ctx.ptm('transition')), {\n      \"default\": withCtx(function () {\n        return [withDirectives(createElementVNode(\"div\", mergeProps({\n          \"class\": _ctx.cx('toggleableContent')\n        }, _ctx.ptm('toggleableContent')), [$options.isItemVisible(processedItem) && $options.isItemGroup(processedItem) ? (openBlock(), createBlock(_component_PanelMenuSub, mergeProps({\n          key: 0,\n          id: $options.getItemId(processedItem) + '_list',\n          role: \"group\",\n          panelId: $props.panelId,\n          focusedItemId: $props.focusedItemId,\n          items: processedItem.items,\n          level: $props.level + 1,\n          templates: $props.templates,\n          activeItemPath: $props.activeItemPath,\n          onItemToggle: $options.onItemToggle,\n          onItemMousemove: _cache[0] || (_cache[0] = function ($event) {\n            return _ctx.$emit('item-mousemove', $event);\n          }),\n          pt: _ctx.pt,\n          unstyled: _ctx.unstyled\n        }, _ctx.ptm('submenu')), null, 16, [\"id\", \"panelId\", \"focusedItemId\", \"items\", \"level\", \"templates\", \"activeItemPath\", \"onItemToggle\", \"pt\", \"unstyled\"])) : createCommentVNode(\"\", true)], 16), [[vShow, $options.isItemActive(processedItem)]])];\n      }),\n      _: 2\n    }, 1040)], 16, _hoisted_2$1)) : createCommentVNode(\"\", true), $options.isItemVisible(processedItem) && $options.getItemProp(processedItem, 'separator') ? (openBlock(), createElementBlock(\"li\", mergeProps({\n      key: 1,\n      style: $options.getItemProp(processedItem, 'style'),\n      \"class\": [_ctx.cx('separator'), $options.getItemProp(processedItem, 'class')],\n      role: \"separator\"\n    }, _ctx.ptm('separator')), null, 16)) : createCommentVNode(\"\", true)], 64);\n  }), 128))], 10, _hoisted_1$1);\n}\n\nscript$2.render = render$2;\n\nfunction _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }\nfunction _nonIterableRest() { throw new TypeError(\"Invalid attempt to destructure non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }\nfunction _iterableToArrayLimit(r, l) { var t = null == r ? null : \"undefined\" != typeof Symbol && r[Symbol.iterator] || r[\"@@iterator\"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t[\"return\"] && (u = t[\"return\"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }\nfunction _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }\nvar script$1 = {\n  name: 'PanelMenuList',\n  hostName: 'PanelMenu',\n  \"extends\": BaseComponent,\n  emits: ['item-toggle', 'header-focus'],\n  props: {\n    panelId: {\n      type: String,\n      \"default\": null\n    },\n    items: {\n      type: Array,\n      \"default\": null\n    },\n    templates: {\n      type: Object,\n      \"default\": null\n    },\n    expandedKeys: {\n      type: Object,\n      \"default\": null\n    }\n  },\n  searchTimeout: null,\n  searchValue: null,\n  data: function data() {\n    return {\n      focused: false,\n      focusedItem: null,\n      activeItemPath: []\n    };\n  },\n  watch: {\n    expandedKeys: function expandedKeys(newValue) {\n      this.autoUpdateActiveItemPath(newValue);\n    }\n  },\n  mounted: function mounted() {\n    this.autoUpdateActiveItemPath(this.expandedKeys);\n  },\n  methods: {\n    getItemProp: function getItemProp(processedItem, name) {\n      return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name]) : undefined;\n    },\n    getItemLabel: function getItemLabel(processedItem) {\n      return this.getItemProp(processedItem, 'label');\n    },\n    isItemVisible: function isItemVisible(processedItem) {\n      return this.getItemProp(processedItem, 'visible') !== false;\n    },\n    isItemDisabled: function isItemDisabled(processedItem) {\n      return this.getItemProp(processedItem, 'disabled');\n    },\n    isItemActive: function isItemActive(processedItem) {\n      return this.activeItemPath.some(function (path) {\n        return path.key === processedItem.parentKey;\n      });\n    },\n    isItemGroup: function isItemGroup(processedItem) {\n      return ObjectUtils.isNotEmpty(processedItem.items);\n    },\n    onFocus: function onFocus(event) {\n      this.focused = true;\n      this.focusedItem = this.focusedItem || (this.isElementInPanel(event, event.relatedTarget) ? this.findFirstItem() : this.findLastItem());\n    },\n    onBlur: function onBlur() {\n      this.focused = false;\n      this.focusedItem = null;\n      this.searchValue = '';\n    },\n    onKeyDown: function onKeyDown(event) {\n      var metaKey = event.metaKey || event.ctrlKey;\n      switch (event.code) {\n        case 'ArrowDown':\n          this.onArrowDownKey(event);\n          break;\n        case 'ArrowUp':\n          this.onArrowUpKey(event);\n          break;\n        case 'ArrowLeft':\n          this.onArrowLeftKey(event);\n          break;\n        case 'ArrowRight':\n          this.onArrowRightKey(event);\n          break;\n        case 'Home':\n          this.onHomeKey(event);\n          break;\n        case 'End':\n          this.onEndKey(event);\n          break;\n        case 'Space':\n          this.onSpaceKey(event);\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n          this.onEnterKey(event);\n          break;\n        case 'Escape':\n        case 'Tab':\n        case 'PageDown':\n        case 'PageUp':\n        case 'Backspace':\n        case 'ShiftLeft':\n        case 'ShiftRight':\n          //NOOP\n          break;\n        default:\n          if (!metaKey && ObjectUtils.isPrintableCharacter(event.key)) {\n            this.searchItems(event, event.key);\n          }\n          break;\n      }\n    },\n    onArrowDownKey: function onArrowDownKey(event) {\n      var processedItem = ObjectUtils.isNotEmpty(this.focusedItem) ? this.findNextItem(this.focusedItem) : this.findFirstItem();\n      this.changeFocusedItem({\n        originalEvent: event,\n        processedItem: processedItem,\n        focusOnNext: true\n      });\n      event.preventDefault();\n    },\n    onArrowUpKey: function onArrowUpKey(event) {\n      var processedItem = ObjectUtils.isNotEmpty(this.focusedItem) ? this.findPrevItem(this.focusedItem) : this.findLastItem();\n      this.changeFocusedItem({\n        originalEvent: event,\n        processedItem: processedItem,\n        selfCheck: true\n      });\n      event.preventDefault();\n    },\n    onArrowLeftKey: function onArrowLeftKey(event) {\n      var _this = this;\n      if (ObjectUtils.isNotEmpty(this.focusedItem)) {\n        var matched = this.activeItemPath.some(function (p) {\n          return p.key === _this.focusedItem.key;\n        });\n        if (matched) {\n          this.activeItemPath = this.activeItemPath.filter(function (p) {\n            return p.key !== _this.focusedItem.key;\n          });\n        } else {\n          this.focusedItem = ObjectUtils.isNotEmpty(this.focusedItem.parent) ? this.focusedItem.parent : this.focusedItem;\n        }\n        event.preventDefault();\n      }\n    },\n    onArrowRightKey: function onArrowRightKey(event) {\n      var _this2 = this;\n      if (ObjectUtils.isNotEmpty(this.focusedItem)) {\n        var grouped = this.isItemGroup(this.focusedItem);\n        if (grouped) {\n          var matched = this.activeItemPath.some(function (p) {\n            return p.key === _this2.focusedItem.key;\n          });\n          if (matched) {\n            this.onArrowDownKey(event);\n          } else {\n            this.activeItemPath = this.activeItemPath.filter(function (p) {\n              return p.parentKey !== _this2.focusedItem.parentKey;\n            });\n            this.activeItemPath.push(this.focusedItem);\n          }\n        }\n        event.preventDefault();\n      }\n    },\n    onHomeKey: function onHomeKey(event) {\n      this.changeFocusedItem({\n        originalEvent: event,\n        processedItem: this.findFirstItem(),\n        allowHeaderFocus: false\n      });\n      event.preventDefault();\n    },\n    onEndKey: function onEndKey(event) {\n      this.changeFocusedItem({\n        originalEvent: event,\n        processedItem: this.findLastItem(),\n        focusOnNext: true,\n        allowHeaderFocus: false\n      });\n      event.preventDefault();\n    },\n    onEnterKey: function onEnterKey(event) {\n      if (ObjectUtils.isNotEmpty(this.focusedItem)) {\n        var element = DomHandler.findSingle(this.$el, \"li[id=\\\"\".concat(\"\".concat(this.focusedItemId), \"\\\"]\"));\n        var anchorElement = element && (DomHandler.findSingle(element, '[data-pc-section=\"action\"]') || DomHandler.findSingle(element, 'a,button'));\n        anchorElement ? anchorElement.click() : element && element.click();\n      }\n      event.preventDefault();\n    },\n    onSpaceKey: function onSpaceKey(event) {\n      this.onEnterKey(event);\n    },\n    onItemToggle: function onItemToggle(event) {\n      var processedItem = event.processedItem,\n        expanded = event.expanded;\n      if (this.expandedKeys) {\n        this.$emit('item-toggle', {\n          item: processedItem.item,\n          expanded: expanded\n        });\n      } else {\n        this.activeItemPath = this.activeItemPath.filter(function (p) {\n          return p.parentKey !== processedItem.parentKey;\n        });\n        expanded && this.activeItemPath.push(processedItem);\n      }\n      this.focusedItem = processedItem;\n      DomHandler.focus(this.$el);\n    },\n    onItemMouseMove: function onItemMouseMove(event) {\n      if (this.focused) {\n        this.focusedItem = event.processedItem;\n      }\n    },\n    isElementInPanel: function isElementInPanel(event, element) {\n      var panel = event.currentTarget.closest('[data-pc-section=\"panel\"]');\n      return panel && panel.contains(element);\n    },\n    isItemMatched: function isItemMatched(processedItem) {\n      var _this$getItemLabel;\n      return this.isValidItem(processedItem) && ((_this$getItemLabel = this.getItemLabel(processedItem)) === null || _this$getItemLabel === void 0 ? void 0 : _this$getItemLabel.toLocaleLowerCase(this.searchLocale).startsWith(this.searchValue.toLocaleLowerCase(this.searchLocale)));\n    },\n    isVisibleItem: function isVisibleItem(processedItem) {\n      return !!processedItem && (processedItem.level === 0 || this.isItemActive(processedItem)) && this.isItemVisible(processedItem);\n    },\n    isValidItem: function isValidItem(processedItem) {\n      return !!processedItem && !this.isItemDisabled(processedItem) && !this.getItemProp(processedItem, 'separator');\n    },\n    findFirstItem: function findFirstItem() {\n      var _this3 = this;\n      return this.visibleItems.find(function (processedItem) {\n        return _this3.isValidItem(processedItem);\n      });\n    },\n    findLastItem: function findLastItem() {\n      var _this4 = this;\n      return ObjectUtils.findLast(this.visibleItems, function (processedItem) {\n        return _this4.isValidItem(processedItem);\n      });\n    },\n    findNextItem: function findNextItem(processedItem) {\n      var _this5 = this;\n      var index = this.visibleItems.findIndex(function (item) {\n        return item.key === processedItem.key;\n      });\n      var matchedItem = index < this.visibleItems.length - 1 ? this.visibleItems.slice(index + 1).find(function (pItem) {\n        return _this5.isValidItem(pItem);\n      }) : undefined;\n      return matchedItem || processedItem;\n    },\n    findPrevItem: function findPrevItem(processedItem) {\n      var _this6 = this;\n      var index = this.visibleItems.findIndex(function (item) {\n        return item.key === processedItem.key;\n      });\n      var matchedItem = index > 0 ? ObjectUtils.findLast(this.visibleItems.slice(0, index), function (pItem) {\n        return _this6.isValidItem(pItem);\n      }) : undefined;\n      return matchedItem || processedItem;\n    },\n    searchItems: function searchItems(event, _char) {\n      var _this7 = this;\n      this.searchValue = (this.searchValue || '') + _char;\n      var matchedItem = null;\n      var matched = false;\n      if (ObjectUtils.isNotEmpty(this.focusedItem)) {\n        var focusedItemIndex = this.visibleItems.findIndex(function (processedItem) {\n          return processedItem.key === _this7.focusedItem.key;\n        });\n        matchedItem = this.visibleItems.slice(focusedItemIndex).find(function (processedItem) {\n          return _this7.isItemMatched(processedItem);\n        });\n        matchedItem = ObjectUtils.isEmpty(matchedItem) ? this.visibleItems.slice(0, focusedItemIndex).find(function (processedItem) {\n          return _this7.isItemMatched(processedItem);\n        }) : matchedItem;\n      } else {\n        matchedItem = this.visibleItems.find(function (processedItem) {\n          return _this7.isItemMatched(processedItem);\n        });\n      }\n      if (ObjectUtils.isNotEmpty(matchedItem)) {\n        matched = true;\n      }\n      if (ObjectUtils.isEmpty(matchedItem) && ObjectUtils.isEmpty(this.focusedItem)) {\n        matchedItem = this.findFirstItem();\n      }\n      if (ObjectUtils.isNotEmpty(matchedItem)) {\n        this.changeFocusedItem({\n          originalEvent: event,\n          processedItem: matchedItem,\n          allowHeaderFocus: false\n        });\n      }\n      if (this.searchTimeout) {\n        clearTimeout(this.searchTimeout);\n      }\n      this.searchTimeout = setTimeout(function () {\n        _this7.searchValue = '';\n        _this7.searchTimeout = null;\n      }, 500);\n      return matched;\n    },\n    changeFocusedItem: function changeFocusedItem(event) {\n      var originalEvent = event.originalEvent,\n        processedItem = event.processedItem,\n        focusOnNext = event.focusOnNext,\n        selfCheck = event.selfCheck,\n        _event$allowHeaderFoc = event.allowHeaderFocus,\n        allowHeaderFocus = _event$allowHeaderFoc === void 0 ? true : _event$allowHeaderFoc;\n      if (ObjectUtils.isNotEmpty(this.focusedItem) && this.focusedItem.key !== processedItem.key) {\n        this.focusedItem = processedItem;\n        this.scrollInView();\n      } else if (allowHeaderFocus) {\n        this.$emit('header-focus', {\n          originalEvent: originalEvent,\n          focusOnNext: focusOnNext,\n          selfCheck: selfCheck\n        });\n      }\n    },\n    scrollInView: function scrollInView() {\n      var element = DomHandler.findSingle(this.$el, \"li[id=\\\"\".concat(\"\".concat(this.focusedItemId), \"\\\"]\"));\n      if (element) {\n        element.scrollIntoView && element.scrollIntoView({\n          block: 'nearest',\n          inline: 'start'\n        });\n      }\n    },\n    autoUpdateActiveItemPath: function autoUpdateActiveItemPath(expandedKeys) {\n      var _this8 = this;\n      this.activeItemPath = Object.entries(expandedKeys || {}).reduce(function (acc, _ref) {\n        var _ref2 = _slicedToArray(_ref, 2),\n          key = _ref2[0],\n          val = _ref2[1];\n        if (val) {\n          var processedItem = _this8.findProcessedItemByItemKey(key);\n          processedItem && acc.push(processedItem);\n        }\n        return acc;\n      }, []);\n    },\n    findProcessedItemByItemKey: function findProcessedItemByItemKey(key, processedItems) {\n      var level = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;\n      processedItems = processedItems || level === 0 && this.processedItems;\n      if (!processedItems) return null;\n      for (var i = 0; i < processedItems.length; i++) {\n        var processedItem = processedItems[i];\n        if (this.getItemProp(processedItem, 'key') === key) return processedItem;\n        var matchedItem = this.findProcessedItemByItemKey(key, processedItem.items, level + 1);\n        if (matchedItem) return matchedItem;\n      }\n    },\n    createProcessedItems: function createProcessedItems(items) {\n      var _this9 = this;\n      var level = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;\n      var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};\n      var parentKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';\n      var processedItems = [];\n      items && items.forEach(function (item, index) {\n        var key = (parentKey !== '' ? parentKey + '_' : '') + index;\n        var newItem = {\n          item: item,\n          index: index,\n          level: level,\n          key: key,\n          parent: parent,\n          parentKey: parentKey\n        };\n        newItem['items'] = _this9.createProcessedItems(item.items, level + 1, newItem, key);\n        processedItems.push(newItem);\n      });\n      return processedItems;\n    },\n    flatItems: function flatItems(processedItems) {\n      var _this10 = this;\n      var processedFlattenItems = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];\n      processedItems && processedItems.forEach(function (processedItem) {\n        if (_this10.isVisibleItem(processedItem)) {\n          processedFlattenItems.push(processedItem);\n          _this10.flatItems(processedItem.items, processedFlattenItems);\n        }\n      });\n      return processedFlattenItems;\n    }\n  },\n  computed: {\n    processedItems: function processedItems() {\n      return this.createProcessedItems(this.items || []);\n    },\n    visibleItems: function visibleItems() {\n      return this.flatItems(this.processedItems);\n    },\n    focusedItemId: function focusedItemId() {\n      return ObjectUtils.isNotEmpty(this.focusedItem) ? \"\".concat(this.panelId, \"_\").concat(this.focusedItem.key) : null;\n    }\n  },\n  components: {\n    PanelMenuSub: script$2\n  }\n};\n\nfunction render$1(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_PanelMenuSub = resolveComponent(\"PanelMenuSub\");\n  return openBlock(), createBlock(_component_PanelMenuSub, mergeProps({\n    id: $props.panelId + '_list',\n    \"class\": _ctx.cx('menu'),\n    role: \"tree\",\n    tabindex: -1,\n    \"aria-activedescendant\": $data.focused ? $options.focusedItemId : undefined,\n    panelId: $props.panelId,\n    focusedItemId: $data.focused ? $options.focusedItemId : undefined,\n    items: $options.processedItems,\n    templates: $props.templates,\n    activeItemPath: $data.activeItemPath,\n    onFocus: $options.onFocus,\n    onBlur: $options.onBlur,\n    onKeydown: $options.onKeyDown,\n    onItemToggle: $options.onItemToggle,\n    onItemMousemove: $options.onItemMouseMove,\n    pt: _ctx.pt,\n    unstyled: _ctx.unstyled\n  }, _ctx.ptm('menu')), null, 16, [\"id\", \"class\", \"aria-activedescendant\", \"panelId\", \"focusedItemId\", \"items\", \"templates\", \"activeItemPath\", \"onFocus\", \"onBlur\", \"onKeydown\", \"onItemToggle\", \"onItemMousemove\", \"pt\", \"unstyled\"]);\n}\n\nscript$1.render = render$1;\n\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }\nfunction _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : String(i); }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar script = {\n  name: 'PanelMenu',\n  \"extends\": script$3,\n  inheritAttrs: false,\n  emits: ['update:expandedKeys', 'panel-open', 'panel-close'],\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      activeItem: null,\n      activeItems: []\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n  },\n  methods: {\n    getItemProp: function getItemProp(item, name) {\n      return item ? ObjectUtils.getItemValue(item[name]) : undefined;\n    },\n    getItemLabel: function getItemLabel(item) {\n      return this.getItemProp(item, 'label');\n    },\n    getPTOptions: function getPTOptions(key, item, index) {\n      return this.ptm(key, {\n        context: {\n          index: index,\n          active: this.isItemActive(item),\n          focused: this.isItemFocused(item),\n          disabled: this.isItemDisabled(item)\n        }\n      });\n    },\n    isItemActive: function isItemActive(item) {\n      return this.expandedKeys ? this.expandedKeys[this.getItemProp(item, 'key')] : this.multiple ? this.activeItems.some(function (subItem) {\n        return ObjectUtils.equals(item, subItem);\n      }) : ObjectUtils.equals(item, this.activeItem);\n    },\n    isItemVisible: function isItemVisible(item) {\n      return this.getItemProp(item, 'visible') !== false;\n    },\n    isItemDisabled: function isItemDisabled(item) {\n      return this.getItemProp(item, 'disabled');\n    },\n    isItemFocused: function isItemFocused(item) {\n      return ObjectUtils.equals(item, this.activeItem);\n    },\n    getPanelId: function getPanelId(index) {\n      return \"\".concat(this.id, \"_\").concat(index);\n    },\n    getPanelKey: function getPanelKey(index) {\n      return this.getPanelId(index);\n    },\n    getHeaderId: function getHeaderId(index) {\n      return \"\".concat(this.getPanelId(index), \"_header\");\n    },\n    getContentId: function getContentId(index) {\n      return \"\".concat(this.getPanelId(index), \"_content\");\n    },\n    onHeaderClick: function onHeaderClick(event, item) {\n      if (this.isItemDisabled(item)) {\n        event.preventDefault();\n        return;\n      }\n      if (item.command) {\n        item.command({\n          originalEvent: event,\n          item: item\n        });\n      }\n      this.changeActiveItem(event, item);\n      DomHandler.focus(event.currentTarget);\n    },\n    onHeaderKeyDown: function onHeaderKeyDown(event, item) {\n      switch (event.code) {\n        case 'ArrowDown':\n          this.onHeaderArrowDownKey(event);\n          break;\n        case 'ArrowUp':\n          this.onHeaderArrowUpKey(event);\n          break;\n        case 'Home':\n          this.onHeaderHomeKey(event);\n          break;\n        case 'End':\n          this.onHeaderEndKey(event);\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n        case 'Space':\n          this.onHeaderEnterKey(event, item);\n          break;\n      }\n    },\n    onHeaderArrowDownKey: function onHeaderArrowDownKey(event) {\n      var rootList = DomHandler.getAttribute(event.currentTarget, 'data-p-highlight') === true ? DomHandler.findSingle(event.currentTarget.nextElementSibling, '[data-pc-section=\"menu\"]') : null;\n      rootList ? DomHandler.focus(rootList) : this.updateFocusedHeader({\n        originalEvent: event,\n        focusOnNext: true\n      });\n      event.preventDefault();\n    },\n    onHeaderArrowUpKey: function onHeaderArrowUpKey(event) {\n      var prevHeader = this.findPrevHeader(event.currentTarget.parentElement) || this.findLastHeader();\n      var rootList = DomHandler.getAttribute(prevHeader, 'data-p-highlight') === true ? DomHandler.findSingle(prevHeader.nextElementSibling, '[data-pc-section=\"menu\"]') : null;\n      rootList ? DomHandler.focus(rootList) : this.updateFocusedHeader({\n        originalEvent: event,\n        focusOnNext: false\n      });\n      event.preventDefault();\n    },\n    onHeaderHomeKey: function onHeaderHomeKey(event) {\n      this.changeFocusedHeader(event, this.findFirstHeader());\n      event.preventDefault();\n    },\n    onHeaderEndKey: function onHeaderEndKey(event) {\n      this.changeFocusedHeader(event, this.findLastHeader());\n      event.preventDefault();\n    },\n    onHeaderEnterKey: function onHeaderEnterKey(event, item) {\n      var headerAction = DomHandler.findSingle(event.currentTarget, '[data-pc-section=\"headeraction\"]');\n      headerAction ? headerAction.click() : this.onHeaderClick(event, item);\n      event.preventDefault();\n    },\n    findNextHeader: function findNextHeader(panelElement) {\n      var selfCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n      var nextPanelElement = selfCheck ? panelElement : panelElement.nextElementSibling;\n      var headerElement = DomHandler.findSingle(nextPanelElement, '[data-pc-section=\"header\"]');\n      return headerElement ? DomHandler.getAttribute(headerElement, 'data-p-disabled') ? this.findNextHeader(headerElement.parentElement) : headerElement : null;\n    },\n    findPrevHeader: function findPrevHeader(panelElement) {\n      var selfCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n      var prevPanelElement = selfCheck ? panelElement : panelElement.previousElementSibling;\n      var headerElement = DomHandler.findSingle(prevPanelElement, '[data-pc-section=\"header\"]');\n      return headerElement ? DomHandler.getAttribute(headerElement, 'data-p-disabled') ? this.findPrevHeader(headerElement.parentElement) : headerElement : null;\n    },\n    findFirstHeader: function findFirstHeader() {\n      return this.findNextHeader(this.$el.firstElementChild, true);\n    },\n    findLastHeader: function findLastHeader() {\n      return this.findPrevHeader(this.$el.lastElementChild, true);\n    },\n    updateFocusedHeader: function updateFocusedHeader(event) {\n      var originalEvent = event.originalEvent,\n        focusOnNext = event.focusOnNext,\n        selfCheck = event.selfCheck;\n      var panelElement = originalEvent.currentTarget.closest('[data-pc-section=\"panel\"]');\n      var header = selfCheck ? DomHandler.findSingle(panelElement, '[data-pc-section=\"header\"]') : focusOnNext ? this.findNextHeader(panelElement) : this.findPrevHeader(panelElement);\n      header ? this.changeFocusedHeader(originalEvent, header) : focusOnNext ? this.onHeaderHomeKey(originalEvent) : this.onHeaderEndKey(originalEvent);\n    },\n    changeActiveItem: function changeActiveItem(event, item) {\n      var selfActive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;\n      if (!this.isItemDisabled(item)) {\n        var active = this.isItemActive(item);\n        var eventName = !active ? 'panel-open' : 'panel-close';\n        this.activeItem = selfActive ? item : this.activeItem && ObjectUtils.equals(item, this.activeItem) ? null : item;\n        if (this.multiple) {\n          // activeItem and activeItems should be separated because it should be only one focused root item\n          if (this.activeItems.some(function (subItem) {\n            return ObjectUtils.equals(item, subItem);\n          })) {\n            this.activeItems = this.activeItems.filter(function (subItem) {\n              return !ObjectUtils.equals(item, subItem);\n            });\n          } else {\n            this.activeItems.push(item);\n          }\n        }\n        this.changeExpandedKeys({\n          item: item,\n          expanded: !active\n        });\n        this.$emit(eventName, {\n          originalEvent: event,\n          item: item\n        });\n      }\n    },\n    changeExpandedKeys: function changeExpandedKeys(_ref) {\n      var item = _ref.item,\n        _ref$expanded = _ref.expanded,\n        expanded = _ref$expanded === void 0 ? false : _ref$expanded;\n      if (this.expandedKeys) {\n        var _keys = _objectSpread({}, this.expandedKeys);\n        if (expanded) _keys[item.key] = true;else delete _keys[item.key];\n        this.$emit('update:expandedKeys', _keys);\n      }\n    },\n    changeFocusedHeader: function changeFocusedHeader(event, element) {\n      element && DomHandler.focus(element);\n    },\n    getMenuItemProps: function getMenuItemProps(item, index) {\n      return {\n        icon: mergeProps({\n          \"class\": [this.cx('headerIcon'), this.getItemProp(item, 'icon')]\n        }, this.getPTOptions('headerIcon', item, index)),\n        label: mergeProps({\n          \"class\": this.cx('headerLabel')\n        }, this.getPTOptions('headerLabel', item, index))\n      };\n    }\n  },\n  components: {\n    PanelMenuList: script$1,\n    ChevronRightIcon: ChevronRightIcon,\n    ChevronDownIcon: ChevronDownIcon\n  }\n};\n\nvar _hoisted_1 = [\"id\"];\nvar _hoisted_2 = [\"id\", \"tabindex\", \"aria-label\", \"aria-expanded\", \"aria-controls\", \"aria-disabled\", \"onClick\", \"onKeydown\", \"data-p-highlight\", \"data-p-disabled\"];\nvar _hoisted_3 = [\"href\"];\nvar _hoisted_4 = [\"id\", \"aria-labelledby\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_PanelMenuList = resolveComponent(\"PanelMenuList\");\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    id: $data.id,\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [(openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.model, function (item, index) {\n    return openBlock(), createElementBlock(Fragment, {\n      key: $options.getPanelKey(index)\n    }, [$options.isItemVisible(item) ? (openBlock(), createElementBlock(\"div\", mergeProps({\n      key: 0,\n      style: $options.getItemProp(item, 'style'),\n      \"class\": [_ctx.cx('panel'), $options.getItemProp(item, 'class')]\n    }, _ctx.ptm('panel')), [createElementVNode(\"div\", mergeProps({\n      id: $options.getHeaderId(index),\n      \"class\": [_ctx.cx('header', {\n        item: item\n      }), $options.getItemProp(item, 'headerClass')],\n      tabindex: $options.isItemDisabled(item) ? -1 : _ctx.tabindex,\n      role: \"button\",\n      \"aria-label\": $options.getItemLabel(item),\n      \"aria-expanded\": $options.isItemActive(item),\n      \"aria-controls\": $options.getContentId(index),\n      \"aria-disabled\": $options.isItemDisabled(item),\n      onClick: function onClick($event) {\n        return $options.onHeaderClick($event, item);\n      },\n      onKeydown: function onKeydown($event) {\n        return $options.onHeaderKeyDown($event, item);\n      }\n    }, $options.getPTOptions('header', item, index), {\n      \"data-p-highlight\": $options.isItemActive(item),\n      \"data-p-disabled\": $options.isItemDisabled(item)\n    }), [createElementVNode(\"div\", mergeProps({\n      \"class\": _ctx.cx('headerContent')\n    }, $options.getPTOptions('headerContent', item, index)), [!_ctx.$slots.item ? (openBlock(), createElementBlock(\"a\", mergeProps({\n      key: 0,\n      href: $options.getItemProp(item, 'url'),\n      \"class\": _ctx.cx('headerAction'),\n      tabindex: -1\n    }, $options.getPTOptions('headerAction', item, index)), [$options.getItemProp(item, 'items') ? renderSlot(_ctx.$slots, \"submenuicon\", {\n      key: 0,\n      active: $options.isItemActive(item)\n    }, function () {\n      return [(openBlock(), createBlock(resolveDynamicComponent($options.isItemActive(item) ? 'ChevronDownIcon' : 'ChevronRightIcon'), mergeProps({\n        \"class\": _ctx.cx('submenuIcon')\n      }, $options.getPTOptions('submenuIcon', item, index)), null, 16, [\"class\"]))];\n    }) : createCommentVNode(\"\", true), _ctx.$slots.headericon ? (openBlock(), createBlock(resolveDynamicComponent(_ctx.$slots.headericon), {\n      key: 1,\n      item: item,\n      \"class\": normalizeClass([_ctx.cx('headerIcon'), $options.getItemProp(item, 'icon')])\n    }, null, 8, [\"item\", \"class\"])) : $options.getItemProp(item, 'icon') ? (openBlock(), createElementBlock(\"span\", mergeProps({\n      key: 2,\n      \"class\": [_ctx.cx('headerIcon'), $options.getItemProp(item, 'icon')]\n    }, $options.getPTOptions('headerIcon', item, index)), null, 16)) : createCommentVNode(\"\", true), createElementVNode(\"span\", mergeProps({\n      \"class\": _ctx.cx('headerLabel')\n    }, $options.getPTOptions('headerLabel', item, index)), toDisplayString($options.getItemLabel(item)), 17)], 16, _hoisted_3)) : (openBlock(), createBlock(resolveDynamicComponent(_ctx.$slots.item), {\n      key: 1,\n      item: item,\n      root: true,\n      active: $options.isItemActive(item),\n      hasSubmenu: $options.getItemProp(item, 'items'),\n      label: $options.getItemLabel(item),\n      props: $options.getMenuItemProps(item, index)\n    }, null, 8, [\"item\", \"active\", \"hasSubmenu\", \"label\", \"props\"]))], 16)], 16, _hoisted_2), createVNode(Transition, mergeProps({\n      name: \"p-toggleable-content\"\n    }, _ctx.ptm('transition')), {\n      \"default\": withCtx(function () {\n        return [withDirectives(createElementVNode(\"div\", mergeProps({\n          id: $options.getContentId(index),\n          \"class\": _ctx.cx('toggleableContent'),\n          role: \"region\",\n          \"aria-labelledby\": $options.getHeaderId(index)\n        }, _ctx.ptm('toggleableContent')), [$options.getItemProp(item, 'items') ? (openBlock(), createElementBlock(\"div\", mergeProps({\n          key: 0,\n          \"class\": _ctx.cx('menuContent')\n        }, _ctx.ptm('menuContent')), [createVNode(_component_PanelMenuList, {\n          panelId: $options.getPanelId(index),\n          items: $options.getItemProp(item, 'items'),\n          templates: _ctx.$slots,\n          expandedKeys: _ctx.expandedKeys,\n          onItemToggle: $options.changeExpandedKeys,\n          onHeaderFocus: $options.updateFocusedHeader,\n          pt: _ctx.pt,\n          unstyled: _ctx.unstyled\n        }, null, 8, [\"panelId\", \"items\", \"templates\", \"expandedKeys\", \"onItemToggle\", \"onHeaderFocus\", \"pt\", \"unstyled\"])], 16)) : createCommentVNode(\"\", true)], 16, _hoisted_4), [[vShow, $options.isItemActive(item)]])];\n      }),\n      _: 2\n    }, 1040)], 16)) : createCommentVNode(\"\", true)], 64);\n  }), 128))], 16, _hoisted_1);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742841399703,
-      "end": 1742841399772,
+      "start": 1742846400939,
+      "end": 1742846401013,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841399772,
-      "end": 1742841399772,
+      "start": 1742846401013,
+      "end": 1742846401013,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841399772,
-      "end": 1742841399774,
+      "start": 1742846401013,
+      "end": 1742846401015,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841399774,
-      "end": 1742841399774,
+      "start": 1742846401015,
+      "end": 1742846401015,
       "order": "normal"
     }
   ]

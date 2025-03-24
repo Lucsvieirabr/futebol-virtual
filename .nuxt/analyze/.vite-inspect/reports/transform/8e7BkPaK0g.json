@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import BaseComponent from 'primevue/basecomponent';\nimport ColumnGroupStyle from 'primevue/columngroup/style';\n\nvar script$1 = {\n  name: 'BaseColumnGroup',\n  \"extends\": BaseComponent,\n  props: {\n    type: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: ColumnGroupStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'ColumnGroup',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  inject: ['$columnGroups'],\n  mounted: function mounted() {\n    var _this$$columnGroups;\n    (_this$$columnGroups = this.$columnGroups) === null || _this$$columnGroups === void 0 || _this$$columnGroups.add(this.$);\n  },\n  unmounted: function unmounted() {\n    var _this$$columnGroups2;\n    (_this$$columnGroups2 = this.$columnGroups) === null || _this$$columnGroups2 === void 0 || _this$$columnGroups2[\"delete\"](this.$);\n  },\n  render: function render() {\n    return null;\n  }\n};\n\nexport { script as default };\n",
-      "start": 1742841399210,
-      "end": 1742841399228,
+      "start": 1742846400430,
+      "end": 1742846400447,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/columngroup/columngroup.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/columngroup/columngroup.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742841399228,
-      "end": 1742841399228,
+      "start": 1742846400447,
+      "end": 1742846400447,
       "order": "normal"
     }
   ]

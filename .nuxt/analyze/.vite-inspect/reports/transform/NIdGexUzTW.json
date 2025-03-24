@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import BaseComponent from 'primevue/basecomponent';\nimport SkeletonStyle from 'primevue/skeleton/style';\nimport { openBlock, createElementBlock, mergeProps } from 'vue';\n\nvar script$1 = {\n  name: 'BaseSkeleton',\n  \"extends\": BaseComponent,\n  props: {\n    shape: {\n      type: String,\n      \"default\": 'rectangle'\n    },\n    size: {\n      type: String,\n      \"default\": null\n    },\n    width: {\n      type: String,\n      \"default\": '100%'\n    },\n    height: {\n      type: String,\n      \"default\": '1rem'\n    },\n    borderRadius: {\n      type: String,\n      \"default\": null\n    },\n    animation: {\n      type: String,\n      \"default\": 'wave'\n    }\n  },\n  style: SkeletonStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Skeleton',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  computed: {\n    containerStyle: function containerStyle() {\n      if (this.size) return {\n        width: this.size,\n        height: this.size,\n        borderRadius: this.borderRadius\n      };else return {\n        width: this.width,\n        height: this.height,\n        borderRadius: this.borderRadius\n      };\n    }\n  }\n};\n\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root'),\n    style: [_ctx.sx('root'), $options.containerStyle],\n    \"aria-hidden\": \"true\"\n  }, _ctx.ptmi('root')), null, 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742841399259,
-      "end": 1742841399281,
+      "start": 1742846400477,
+      "end": 1742846400504,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/skeleton/skeleton.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/skeleton/skeleton.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742841399281,
-      "end": 1742841399281,
+      "start": 1742846400504,
+      "end": 1742846400504,
       "order": "normal"
     }
   ]

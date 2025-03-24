@@ -4,39 +4,39 @@
     {
       "name": "vite:load-fallback",
       "result": "import { PAGE_USUARIOS } from '~/utils/constants/pages.js';\n\nexport const useUserRequest = () => {\n    const config = useRuntimeConfig();\n    const token = useCookie('token');\n    const request = useRequest();\n\n    const getAll = async (params: any) => {\n        try {\n            const response = await $fetch('controle-acesso/users/buscar', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'POST',\n                body: JSON.stringify(params),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const get = async (id: number) => {\n        try {\n            const response = await $fetch(`controle-acesso/users/${id}`, {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e, PAGE_USUARIOS.path);\n            return;\n        }\n    };\n\n    const post = async (data: any) => {\n        try {\n            const response = await $fetch('controle-acesso/users', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'POST',\n                body: JSON.stringify(data),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e, PAGE_USUARIOS.path + '/cadastrar');\n            return;\n        }\n    };\n    \n    const put = async (id: number, data: any) => {\n        try {\n            const response = await $fetch(`controle-acesso/users/${id}`, {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'PUT',\n                body: JSON.stringify(data),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e, PAGE_USUARIOS.path + '/' + id);\n            return;\n        }\n    };\n\n    const destroy = async (id: number) => {\n        try {\n            const response = await $fetch(`controle-acesso/users/${id}`, {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'DELETE',\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e, PAGE_USUARIOS.path);\n            return;\n        }\n    };\n\n    const retornarPerfilUsuario = async () => {\n        try {\n            const response = await $fetch('controle-acesso/users/perfil', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            throw e;\n        }\n    };\n\n    const getGrupos = async (id: number, params: any) => {\n        try {\n            const response = await $fetch('controle-acesso/users/'+id+'/grupos', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'POST',\n                body: JSON.stringify(params),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const desassociarGrupo = async (id: number, idGrupo: number) => {\n        try {\n            const response = await $fetch('controle-acesso/users/'+id+'/grupos/'+idGrupo, {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'DELETE',\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const associarGrupo = async (id: number, idGrupo: number) => {\n        try {\n            const response = await $fetch('controle-acesso/users/'+id+'/grupos/'+idGrupo, {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'POST',\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const getGruposDisponiveis = async (id: number) => {\n        try {\n            const response = await $fetch('controle-acesso/users/'+id+'/gruposDisponiveis', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const getOrganizacoes = async (id: number, params: any) => {\n        try {\n            const response = await $fetch('controle-acesso/users/'+id+'/organizacoes', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n                method: 'POST',\n                body: JSON.stringify(params),\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const getOrganizacoesDisponiveis = async (id: number) => {\n        try {\n            const response = await $fetch('controle-acesso/users/'+id+'/organizacoesDisponiveis', {\n                baseURL: config.public.apiBase,\n                headers: {\n                    \"Accept\": \"application/json\",\n                    \"Content-type\": \"application/json\",\n                    \"Authorization\": \"Bearer \" + token.value,\n                },\n            });\n            return response;\n        } catch (e) {\n            request.errorRequest(e);\n            return;\n        }\n    };\n\n    const getOptions = async () => {\n            try {\n                const response = await $fetch('controle-acesso/users/options', {\n                    baseURL: config.public.apiBase,\n                    headers: {\n                        \"Accept\": \"application/json\",\n                        \"Content-type\": \"application/json\",\n                        \"Authorization\": \"Bearer \" + token.value,\n                    },\n                });\n                return response;\n            } catch (e) {\n                return;\n            }\n        };\n\n    return {\n        getAll,\n        get,\n        post,\n        put,\n        destroy,\n        retornarPerfilUsuario,\n        getGrupos,\n        desassociarGrupo,\n        associarGrupo,\n        getGruposDisponiveis,\n        getOrganizacoes,\n        getOrganizacoesDisponiveis,\n        getOptions,\n    };\n};",
-      "start": 1742841400204,
-      "end": 1742841400237,
+      "start": 1742846401438,
+      "end": 1742846401464,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400237,
-      "end": 1742841400237,
+      "start": 1742846401464,
+      "end": 1742846401464,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400237,
-      "end": 1742841400237,
+      "start": 1742846401464,
+      "end": 1742846401464,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400237,
-      "end": 1742841400237,
+      "start": 1742846401465,
+      "end": 1742846401465,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400237,
-      "end": 1742841400237,
+      "start": 1742846401465,
+      "end": 1742846401465,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
       "result": "import { PAGE_USUARIOS } from \"~/utils/constants/pages.js\";\nexport const useUserRequest = () => {\n  const config = useRuntimeConfig();\n  const token = useCookie(\"token\");\n  const request = useRequest();\n  const getAll = async (params) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/buscar\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(params)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const get = async (id) => {\n    try {\n      const response = await $fetch(`controle-acesso/users/${id}`, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path);\n      return;\n    }\n  };\n  const post = async (data) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path + \"/cadastrar\");\n      return;\n    }\n  };\n  const put = async (id, data) => {\n    try {\n      const response = await $fetch(`controle-acesso/users/${id}`, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"PUT\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path + \"/\" + id);\n      return;\n    }\n  };\n  const destroy = async (id) => {\n    try {\n      const response = await $fetch(`controle-acesso/users/${id}`, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"DELETE\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path);\n      return;\n    }\n  };\n  const retornarPerfilUsuario = async () => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/perfil\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      throw e;\n    }\n  };\n  const getGrupos = async (id, params) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/grupos\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(params)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const desassociarGrupo = async (id, idGrupo) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/grupos/\" + idGrupo, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"DELETE\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const associarGrupo = async (id, idGrupo) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/grupos/\" + idGrupo, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getGruposDisponiveis = async (id) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/gruposDisponiveis\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getOrganizacoes = async (id, params) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/organizacoes\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(params)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getOrganizacoesDisponiveis = async (id) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/organizacoesDisponiveis\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getOptions = async () => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/options\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      return;\n    }\n  };\n  return {\n    getAll,\n    get,\n    post,\n    put,\n    destroy,\n    retornarPerfilUsuario,\n    getGrupos,\n    desassociarGrupo,\n    associarGrupo,\n    getGruposDisponiveis,\n    getOrganizacoes,\n    getOrganizacoesDisponiveis,\n    getOptions\n  };\n};\n",
-      "start": 1742841400237,
-      "end": 1742841400361,
+      "start": 1742846401465,
+      "end": 1742846401569,
       "order": "normal",
       "sourcemaps": {
         "version": 3,
@@ -52,123 +52,123 @@
     },
     {
       "name": "vite:json",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400361,
-      "end": 1742841400361,
+      "start": 1742846401569,
+      "end": 1742846401569,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { useRuntimeConfig } from '#app/nuxt';\nimport { useCookie } from '#app/composables/cookie';\nimport { useRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/common/request.ts';\nimport { PAGE_USUARIOS } from \"~/utils/constants/pages.js\";\nexport const useUserRequest = () => {\n  const config = useRuntimeConfig();\n  const token = useCookie(\"token\");\n  const request = useRequest();\n  const getAll = async (params) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/buscar\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(params)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const get = async (id) => {\n    try {\n      const response = await $fetch(`controle-acesso/users/${id}`, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path);\n      return;\n    }\n  };\n  const post = async (data) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path + \"/cadastrar\");\n      return;\n    }\n  };\n  const put = async (id, data) => {\n    try {\n      const response = await $fetch(`controle-acesso/users/${id}`, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"PUT\",\n        body: JSON.stringify(data)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path + \"/\" + id);\n      return;\n    }\n  };\n  const destroy = async (id) => {\n    try {\n      const response = await $fetch(`controle-acesso/users/${id}`, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"DELETE\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e, PAGE_USUARIOS.path);\n      return;\n    }\n  };\n  const retornarPerfilUsuario = async () => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/perfil\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      throw e;\n    }\n  };\n  const getGrupos = async (id, params) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/grupos\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(params)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const desassociarGrupo = async (id, idGrupo) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/grupos/\" + idGrupo, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"DELETE\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const associarGrupo = async (id, idGrupo) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/grupos/\" + idGrupo, {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\"\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getGruposDisponiveis = async (id) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/gruposDisponiveis\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getOrganizacoes = async (id, params) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/organizacoes\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        },\n        method: \"POST\",\n        body: JSON.stringify(params)\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getOrganizacoesDisponiveis = async (id) => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/\" + id + \"/organizacoesDisponiveis\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      request.errorRequest(e);\n      return;\n    }\n  };\n  const getOptions = async () => {\n    try {\n      const response = await $fetch(\"controle-acesso/users/options\", {\n        baseURL: config.public.apiBase,\n        headers: {\n          \"Accept\": \"application/json\",\n          \"Content-type\": \"application/json\",\n          \"Authorization\": \"Bearer \" + token.value\n        }\n      });\n      return response;\n    } catch (e) {\n      return;\n    }\n  };\n  return {\n    getAll,\n    get,\n    post,\n    put,\n    destroy,\n    retornarPerfilUsuario,\n    getGrupos,\n    desassociarGrupo,\n    associarGrupo,\n    getGruposDisponiveis,\n    getOrganizacoes,\n    getOrganizacoesDisponiveis,\n    getOptions\n  };\n};\n",
-      "start": 1742841400361,
-      "end": 1742841400362,
+      "start": 1742846401569,
+      "end": 1742846401572,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -181,50 +181,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400362,
-      "end": 1742841400362,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400362,
-      "end": 1742841400362,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400362,
-      "end": 1742841400362,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400362,
-      "end": 1742841400362,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841400362,
-      "end": 1742841400362,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841400362,
-      "end": 1742841400362,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400362,
-      "end": 1742841400363,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400363,
-      "end": 1742841400363,
+      "start": 1742846401572,
+      "end": 1742846401572,
       "order": "normal"
     }
   ]

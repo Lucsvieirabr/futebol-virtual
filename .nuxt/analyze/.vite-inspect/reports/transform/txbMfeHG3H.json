@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "import BaseStyle from 'primevue/base/style';\n\nvar classes = {\n  mask: function mask(_ref) {\n    var instance = _ref.instance;\n    return ['p-galleria-mask p-component-overlay p-component-overlay-enter', {\n      'p-ripple-disabled': instance.$primevue.config.ripple === false\n    }];\n  },\n  root: function root(_ref2) {\n    var instance = _ref2.instance;\n    var thumbnailsPosClass = instance.$attrs.showThumbnails && instance.getPositionClass('p-galleria-thumbnails', instance.$attrs.thumbnailsPosition);\n    var indicatorPosClass = instance.$attrs.showIndicators && instance.getPositionClass('p-galleria-indicators', instance.$attrs.indicatorsPosition);\n    return ['p-galleria p-component', {\n      'p-galleria-fullscreen': instance.$attrs.fullScreen,\n      'p-galleria-indicator-onitem': instance.$attrs.showIndicatorsOnItem,\n      'p-galleria-item-nav-onhover': instance.$attrs.showItemNavigatorsOnHover && !instance.$attrs.fullScreen\n    }, thumbnailsPosClass, indicatorPosClass];\n  },\n  closeButton: 'p-galleria-close p-link',\n  closeIcon: 'p-galleria-close-icon',\n  header: 'p-galleria-header',\n  content: 'p-galleria-content',\n  footer: 'p-galleria-footer',\n  itemWrapper: 'p-galleria-item-wrapper',\n  itemContainer: 'p-galleria-item-container',\n  previousItemButton: function previousItemButton(_ref3) {\n    var instance = _ref3.instance;\n    return ['p-galleria-item-prev p-galleria-item-nav p-link', {\n      'p-disabled': instance.isNavBackwardDisabled()\n    }];\n  },\n  previousItemIcon: 'p-galleria-item-prev-icon',\n  item: 'p-galleria-item',\n  nextItemButton: function nextItemButton(_ref4) {\n    var instance = _ref4.instance;\n    return ['p-galleria-item-next p-galleria-item-nav p-link', {\n      'p-disabled': instance.isNavForwardDisabled()\n    }];\n  },\n  nextItemIcon: 'p-galleria-item-next-icon',\n  caption: 'p-galleria-caption',\n  indicators: 'p-galleria-indicators p-reset',\n  indicator: function indicator(_ref5) {\n    var instance = _ref5.instance,\n      index = _ref5.index;\n    return ['p-galleria-indicator', {\n      'p-highlight': instance.isIndicatorItemActive(index)\n    }];\n  },\n  indicatorButton: 'p-link',\n  thumbnailWrapper: 'p-galleria-thumbnail-wrapper',\n  thumbnailContainer: 'p-galleria-thumbnail-container',\n  previousThumbnailButton: function previousThumbnailButton(_ref6) {\n    var instance = _ref6.instance;\n    return ['p-galleria-thumbnail-prev p-link', {\n      'p-disabled': instance.isNavBackwardDisabled()\n    }];\n  },\n  previousThumbnailIcon: 'p-galleria-thumbnail-prev-icon',\n  thumbnailItemsContainer: 'p-galleria-thumbnail-items-container',\n  thumbnailItems: 'p-galleria-thumbnail-items',\n  thumbnailItem: function thumbnailItem(_ref7) {\n    var instance = _ref7.instance,\n      index = _ref7.index,\n      activeIndex = _ref7.activeIndex;\n    return ['p-galleria-thumbnail-item', {\n      'p-galleria-thumbnail-item-current': activeIndex === index,\n      'p-galleria-thumbnail-item-active': instance.isItemActive(index),\n      'p-galleria-thumbnail-item-start': instance.firstItemAciveIndex() === index,\n      'p-galleria-thumbnail-item-end': instance.lastItemActiveIndex() === index\n    }];\n  },\n  thumbnailItemContent: 'p-galleria-thumbnail-item-content',\n  nextThumbnailButton: function nextThumbnailButton(_ref8) {\n    var instance = _ref8.instance;\n    return ['p-galleria-thumbnail-next p-link', {\n      'p-disabled': instance.isNavForwardDisabled()\n    }];\n  },\n  nextThumbnailIcon: 'p-galleria-thumbnail-next-icon'\n};\nvar GalleriaStyle = BaseStyle.extend({\n  name: 'galleria',\n  classes: classes\n});\n\nexport { GalleriaStyle as default };\n",
-      "start": 1742841400175,
-      "end": 1742841400208,
+      "start": 1742846401411,
+      "end": 1742846401444,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400208,
-      "end": 1742841400208,
+      "start": 1742846401444,
+      "end": 1742846401444,
       "order": "normal"
     }
   ]

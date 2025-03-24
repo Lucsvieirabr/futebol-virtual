@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n  <div class=\"text-center\">\n    <h1 class=\"text-8xl\tfont-bold text-slate-500\">\n      403\n    </h1>\n    <h3 class=\"text-uppercase text-3xl text-slate-500\">\n      Acesso negado\n    </h3>\n    <p class=\"text-muted mb-5 text-lg mt-10 text-slate-500\">\n      Você não tem permissão para acessar esta página.\n      <br>\n      Contate o administrador do sistema.\n    </p>\n    <PrimeButton\n      label=\"Inicio\"\n      icon=\"pi pi-arrow-left\"\n      @click=\"navigateTo('/sistema/')\"\n    />\n  </div>\n</template>\n\n<script setup>\n  definePageMeta({\n    layout: 'auth',\n    middleware: [],\n  });\n</script>",
-      "start": 1742841399761,
-      "end": 1742841399839,
+      "start": 1742846401007,
+      "end": 1742846401079,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841399839,
-      "end": 1742841399839,
+      "start": 1742846401079,
+      "end": 1742846401079,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { createElementVNode as _createElementVNode, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"text-center\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"h1\", { class: \"text-8xl font-bold text-slate-500\" }, \" 403 \", -1)\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"h3\", { class: \"text-uppercase text-3xl text-slate-500\" }, \" Acesso negado \", -1)\nconst _hoisted_4 = /*#__PURE__*/_createElementVNode(\"p\", { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" }, [\n  /*#__PURE__*/_createTextVNode(\" Você não tem permissão para acessar esta página. \"),\n  /*#__PURE__*/_createElementVNode(\"br\"),\n  /*#__PURE__*/_createTextVNode(\" Contate o administrador do sistema. \")\n], -1)\n\n\nconst _sfc_main = {\n  __name: 'acesso-negado',\n  setup(__props) {\n\n  definePageMeta({\n    layout: 'auth',\n    middleware: [],\n  });\n\nreturn (_ctx, _cache) => {\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _hoisted_2,\n    _hoisted_3,\n    _hoisted_4,\n    _createVNode(_component_PrimeButton, {\n      label: \"Inicio\",\n      icon: \"pi pi-arrow-left\",\n      onClick: _cache[0] || (_cache[0] = $event => (_ctx.navigateTo('/sistema/')))\n    })\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841399839,
-      "end": 1742841399845,
+      "start": 1742846401079,
+      "end": 1742846401084,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,105 +62,105 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841399845,
-      "end": 1742841399845,
+      "start": 1742846401084,
+      "end": 1742846401084,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { definePageMeta } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/pages/runtime/composables';\nimport { navigateTo as __unimport_navigateTo } from '#app/composables/router';\nimport { unref as __unimport_unref_ } from 'vue';import { createElementVNode as _createElementVNode, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"text-center\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"h1\", { class: \"text-8xl font-bold text-slate-500\" }, \" 403 \", -1)\nconst _hoisted_3 = /*#__PURE__*/_createElementVNode(\"h3\", { class: \"text-uppercase text-3xl text-slate-500\" }, \" Acesso negado \", -1)\nconst _hoisted_4 = /*#__PURE__*/_createElementVNode(\"p\", { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" }, [\n  /*#__PURE__*/_createTextVNode(\" Você não tem permissão para acessar esta página. \"),\n  /*#__PURE__*/_createElementVNode(\"br\"),\n  /*#__PURE__*/_createTextVNode(\" Contate o administrador do sistema. \")\n], -1)\n\n\nconst _sfc_main = {\n  __name: 'acesso-negado',\n  setup(__props) {\n\n  definePageMeta({\n    layout: 'auth',\n    middleware: [],\n  });\n\nreturn (_ctx, _cache) => {\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _hoisted_2,\n    _hoisted_3,\n    _hoisted_4,\n    _createVNode(_component_PrimeButton, {\n      label: \"Inicio\",\n      icon: \"pi pi-arrow-left\",\n      onClick: _cache[0] || (_cache[0] = $event => ((\"navigateTo\" in _ctx ? _ctx.navigateTo : __unimport_unref_(__unimport_navigateTo))('/sistema/')))\n    })\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841399845,
-      "end": 1742841399846,
+      "start": 1742846401084,
+      "end": 1742846401085,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -173,15 +173,15 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742841399846,
-      "end": 1742841399847,
+      "start": 1742846401085,
+      "end": 1742846401086,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
       "result": "const __nuxt_page_meta = {\n    layout: 'auth',\n    middleware: [],\n  }\nexport default __nuxt_page_meta",
-      "start": 1742841399847,
-      "end": 1742841399849,
+      "start": 1742846401086,
+      "end": 1742846401088,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -194,38 +194,38 @@
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841399849,
-      "end": 1742841399849,
+      "start": 1742846401088,
+      "end": 1742846401088,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841399849,
-      "end": 1742841399849,
+      "start": 1742846401088,
+      "end": 1742846401088,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841399849,
-      "end": 1742841399849,
+      "start": 1742846401088,
+      "end": 1742846401088,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841399849,
-      "end": 1742841399849,
+      "start": 1742846401088,
+      "end": 1742846401088,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841399849,
-      "end": 1742841399849,
+      "start": 1742846401088,
+      "end": 1742846401088,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841399849,
-      "end": 1742841399849,
+      "start": 1742846401088,
+      "end": 1742846401088,
       "order": "normal"
     }
   ]

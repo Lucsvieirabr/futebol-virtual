@@ -242,7 +242,11 @@ const todasCores = {
 };
 
 function gerarTabelaEGraficos() {
-  const dataInput = dadosAnalise.value.trim();
+  let dadosAnaliseTmp = dadosAnalise.value;
+  dadosAnaliseTmp = dadosAnalise.value.replace(/\r?\n|\r/g, ' ').replace(/\s{2,}/g, ' ');
+  dadosAnaliseTmp = dadosAnaliseTmp.replace(/(\d+)(?=\s)/g, '\n$1');
+  dadosAnaliseTmp = dadosAnaliseTmp.replaceAll("\"", "");
+  const dataInput = dadosAnaliseTmp.trim();
   if (!dataInput) return;
 
   const liga = campeonatoSelecionado.value;

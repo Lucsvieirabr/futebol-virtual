@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n  <div>\n    <CommonSplashScreen v-show=\"showSplashScreen\" />\n    <div\n      v-show=\"!showSplashScreen\"\n      class=\"flex backgroundWallpaper\"\n    >\n      <div class=\"flex-grow min-h-screen\">\n        <CommonCabecalhoSistema\n          @toggle-menu-principal=\"menuPrincipal?.toggleMenuPrincipal\"\n        />\n        <div class=\"w-screen p-6 sm:w-full\">\n          <slot />\n        </div>\n      </div>\n      <PrimeToast />\n      <PrimeConfirmDialog />\n    </div>\n  </div>\n</template>\n\n<script setup>\n  import { Summary, Severity } from \"../composables/common/toastCustom\";\n\n  const showSplashScreen = ref(true);\n  const authRequest = useAuthRequest();\n\n  onBeforeMount(() => {\n    authRequest.validarSessao().then(() => {\n      showSplashScreen.value = false;\n    });\n  });\n</script>\n",
-      "start": 1742841399850,
-      "end": 1742841400028,
+      "start": 1742846401078,
+      "end": 1742846401269,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400028,
-      "end": 1742841400028,
+      "start": 1742846401269,
+      "end": 1742846401269,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, renderSlot as _renderSlot, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex backgroundWallpaper\" }\nconst _hoisted_2 = { class: \"flex-grow min-h-screen\" }\nconst _hoisted_3 = { class: \"w-screen p-6 sm:w-full\" }\n\nimport { Summary, Severity } from \"../composables/common/toastCustom\";\n\n  \nconst _sfc_main = {\n  __name: 'default',\n  setup(__props) {\n\n  const showSplashScreen = ref(true);\n  const authRequest = useAuthRequest();\n\n  onBeforeMount(() => {\n    authRequest.validarSessao().then(() => {\n      showSplashScreen.value = false;\n    });\n  });\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = _resolveComponent(\"CommonSplashScreen\")\n  const _component_CommonCabecalhoSistema = _resolveComponent(\"CommonCabecalhoSistema\")\n  const _component_PrimeToast = _resolveComponent(\"PrimeToast\")\n  const _component_PrimeConfirmDialog = _resolveComponent(\"PrimeConfirmDialog\")\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createVNode(_component_CommonCabecalhoSistema, {\n          onToggleMenuPrincipal: _ctx.menuPrincipal?.toggleMenuPrincipal\n        }, null, 8, [\"onToggleMenuPrincipal\"]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _renderSlot(_ctx.$slots, \"default\")\n        ])\n      ]),\n      _createVNode(_component_PrimeToast),\n      _createVNode(_component_PrimeConfirmDialog)\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen)]\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400028,
-      "end": 1742841400029,
+      "start": 1742846401269,
+      "end": 1742846401270,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,105 +62,105 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401270,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { ref, onBeforeMount } from 'vue';\nimport { useAuthRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/auth/authRequest.ts';\nimport { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, renderSlot as _renderSlot, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex backgroundWallpaper\" }\nconst _hoisted_2 = { class: \"flex-grow min-h-screen\" }\nconst _hoisted_3 = { class: \"w-screen p-6 sm:w-full\" }\n\nimport { Summary, Severity } from \"../composables/common/toastCustom\";\n\n  \nconst _sfc_main = {\n  __name: 'default',\n  setup(__props) {\n\n  const showSplashScreen = ref(true);\n  const authRequest = useAuthRequest();\n\n  onBeforeMount(() => {\n    authRequest.validarSessao().then(() => {\n      showSplashScreen.value = false;\n    });\n  });\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = _resolveComponent(\"CommonSplashScreen\")\n  const _component_CommonCabecalhoSistema = _resolveComponent(\"CommonCabecalhoSistema\")\n  const _component_PrimeToast = _resolveComponent(\"PrimeToast\")\n  const _component_PrimeConfirmDialog = _resolveComponent(\"PrimeConfirmDialog\")\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createVNode(_component_CommonCabecalhoSistema, {\n          onToggleMenuPrincipal: _ctx.menuPrincipal?.toggleMenuPrincipal\n        }, null, 8, [\"onToggleMenuPrincipal\"]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _renderSlot(_ctx.$slots, \"default\")\n        ])\n      ]),\n      _createVNode(_component_PrimeToast),\n      _createVNode(_component_PrimeConfirmDialog)\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen)]\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401270,
+      "end": 1742846401271,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -173,51 +173,51 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/components/common/SplashScreen.vue\";\nimport { default as __nuxt_component_1 } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/components/common/CabecalhoSistema.vue\";\nimport { default as __nuxt_component_2 } from \"primevue/toast\";\nimport { default as __nuxt_component_3 } from \"primevue/confirmdialog\";\nimport { ref, onBeforeMount } from 'vue';\nimport { useAuthRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/auth/authRequest.ts';\nimport { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, renderSlot as _renderSlot, createElementVNode as _createElementVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex backgroundWallpaper\" }\nconst _hoisted_2 = { class: \"flex-grow min-h-screen\" }\nconst _hoisted_3 = { class: \"w-screen p-6 sm:w-full\" }\n\nimport { Summary, Severity } from \"../composables/common/toastCustom\";\n\n  \nconst _sfc_main = {\n  __name: 'default',\n  setup(__props) {\n\n  const showSplashScreen = ref(true);\n  const authRequest = useAuthRequest();\n\n  onBeforeMount(() => {\n    authRequest.validarSessao().then(() => {\n      showSplashScreen.value = false;\n    });\n  });\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = __nuxt_component_0\n  const _component_CommonCabecalhoSistema = __nuxt_component_1\n  const _component_PrimeToast = __nuxt_component_2\n  const _component_PrimeConfirmDialog = __nuxt_component_3\n\n  return (_openBlock(), _createElementBlock(\"div\", null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _createElementVNode(\"div\", _hoisted_2, [\n        _createVNode(_component_CommonCabecalhoSistema, {\n          onToggleMenuPrincipal: _ctx.menuPrincipal?.toggleMenuPrincipal\n        }, null, 8, [\"onToggleMenuPrincipal\"]),\n        _createElementVNode(\"div\", _hoisted_3, [\n          _renderSlot(_ctx.$slots, \"default\")\n        ])\n      ]),\n      _createVNode(_component_PrimeToast),\n      _createVNode(_component_PrimeConfirmDialog)\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen)]\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841400029,
-      "end": 1742841400029,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400029,
-      "end": 1742841400030,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400030,
-      "end": 1742841400030,
+      "start": 1742846401271,
+      "end": 1742846401271,
       "order": "normal"
     }
   ]

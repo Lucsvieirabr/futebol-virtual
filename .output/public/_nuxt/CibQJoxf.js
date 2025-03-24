@@ -1,0 +1,1 @@
+import{aa as r,a8 as t}from"./Bo0c-sWM.js";var a={},n={name:"BaseStepperPanel",extends:t,props:{header:null},style:a,provide:function(){return{$parentInstance:this}}},p={name:"StepperPanel",extends:n};function s(e,o,d,l,i,c){return r(e.$slots,"default")}p.render=s;export{p as default};

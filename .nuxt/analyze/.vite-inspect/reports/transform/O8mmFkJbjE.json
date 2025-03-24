@@ -4,210 +4,210 @@
     {
       "name": "vite:load-fallback",
       "result": "import BaseComponent from 'primevue/basecomponent';\nimport KnobStyle from 'primevue/knob/style';\nimport { openBlock, createElementBlock, mergeProps, createElementVNode, toDisplayString, createCommentVNode } from 'vue';\n\nvar script$1 = {\n  name: 'BaseKnob',\n  \"extends\": BaseComponent,\n  props: {\n    modelValue: {\n      type: Number,\n      \"default\": null\n    },\n    size: {\n      type: Number,\n      \"default\": 100\n    },\n    disabled: {\n      type: Boolean,\n      \"default\": false\n    },\n    readonly: {\n      type: Boolean,\n      \"default\": false\n    },\n    step: {\n      type: Number,\n      \"default\": 1\n    },\n    min: {\n      type: Number,\n      \"default\": 0\n    },\n    max: {\n      type: Number,\n      \"default\": 100\n    },\n    valueColor: {\n      type: String,\n      \"default\": 'var(--primary-color, Black)'\n    },\n    rangeColor: {\n      type: String,\n      \"default\": 'var(--surface-border, LightGray)'\n    },\n    textColor: {\n      type: String,\n      \"default\": 'var(--text-color-secondary, Black)'\n    },\n    strokeWidth: {\n      type: Number,\n      \"default\": 14\n    },\n    showValue: {\n      type: Boolean,\n      \"default\": true\n    },\n    valueTemplate: {\n      type: [String, Function],\n      \"default\": '{value}'\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    },\n    ariaLabelledby: {\n      type: String,\n      \"default\": null\n    },\n    ariaLabel: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: KnobStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\n// Set fix value for SSR.\nvar Math_PI = 3.14159265358979;\nvar script = {\n  name: 'Knob',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:modelValue', 'change'],\n  data: function data() {\n    return {\n      radius: 40,\n      midX: 50,\n      midY: 50,\n      minRadians: 4 * Math_PI / 3,\n      maxRadians: -Math_PI / 3\n    };\n  },\n  methods: {\n    updateValue: function updateValue(offsetX, offsetY) {\n      var dx = offsetX - this.size / 2;\n      var dy = this.size / 2 - offsetY;\n      var angle = Math.atan2(dy, dx);\n      var start = -Math_PI / 2 - Math_PI / 6;\n      this.updateModel(angle, start);\n    },\n    updateModel: function updateModel(angle, start) {\n      var mappedValue;\n      if (angle > this.maxRadians) mappedValue = this.mapRange(angle, this.minRadians, this.maxRadians, this.min, this.max);else if (angle < start) mappedValue = this.mapRange(angle + 2 * Math_PI, this.minRadians, this.maxRadians, this.min, this.max);else return;\n      var newValue = Math.round((mappedValue - this.min) / this.step) * this.step + this.min;\n      this.$emit('update:modelValue', newValue);\n      this.$emit('change', newValue);\n    },\n    updateModelValue: function updateModelValue(newValue) {\n      if (newValue > this.max) this.$emit('update:modelValue', this.max);else if (newValue < this.min) this.$emit('update:modelValue', this.min);else this.$emit('update:modelValue', newValue);\n    },\n    mapRange: function mapRange(x, inMin, inMax, outMin, outMax) {\n      return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;\n    },\n    onClick: function onClick(event) {\n      if (!this.disabled && !this.readonly) {\n        this.updateValue(event.offsetX, event.offsetY);\n      }\n    },\n    onMouseDown: function onMouseDown(event) {\n      if (!this.disabled && !this.readonly) {\n        window.addEventListener('mousemove', this.onMouseMove);\n        window.addEventListener('mouseup', this.onMouseUp);\n        event.preventDefault();\n      }\n    },\n    onMouseUp: function onMouseUp(event) {\n      if (!this.disabled && !this.readonly) {\n        window.removeEventListener('mousemove', this.onMouseMove);\n        window.removeEventListener('mouseup', this.onMouseUp);\n        event.preventDefault();\n      }\n    },\n    onTouchStart: function onTouchStart(event) {\n      if (!this.disabled && !this.readonly) {\n        window.addEventListener('touchmove', this.onTouchMove);\n        window.addEventListener('touchend', this.onTouchEnd);\n        event.preventDefault();\n      }\n    },\n    onTouchEnd: function onTouchEnd(event) {\n      if (!this.disabled && !this.readonly) {\n        window.removeEventListener('touchmove', this.onTouchMove);\n        window.removeEventListener('touchend', this.onTouchEnd);\n        event.preventDefault();\n      }\n    },\n    onMouseMove: function onMouseMove(event) {\n      if (!this.disabled && !this.readonly) {\n        this.updateValue(event.offsetX, event.offsetY);\n        event.preventDefault();\n      }\n    },\n    onTouchMove: function onTouchMove(event) {\n      if (!this.disabled && !this.readonly && event.touches.length == 1) {\n        var rect = this.$el.getBoundingClientRect();\n        var touch = event.targetTouches.item(0);\n        var offsetX = touch.clientX - rect.left;\n        var offsetY = touch.clientY - rect.top;\n        this.updateValue(offsetX, offsetY);\n      }\n    },\n    onKeyDown: function onKeyDown(event) {\n      if (!this.disabled && !this.readonly) {\n        switch (event.code) {\n          case 'ArrowRight':\n          case 'ArrowUp':\n            {\n              event.preventDefault();\n              this.updateModelValue(this.modelValue + this.step);\n              break;\n            }\n          case 'ArrowLeft':\n          case 'ArrowDown':\n            {\n              event.preventDefault();\n              this.updateModelValue(this.modelValue - this.step);\n              break;\n            }\n          case 'Home':\n            {\n              event.preventDefault();\n              this.$emit('update:modelValue', this.min);\n              break;\n            }\n          case 'End':\n            {\n              event.preventDefault();\n              this.$emit('update:modelValue', this.max);\n              break;\n            }\n          case 'PageUp':\n            {\n              event.preventDefault();\n              this.updateModelValue(this.modelValue + 10);\n              break;\n            }\n          case 'PageDown':\n            {\n              event.preventDefault();\n              this.updateModelValue(this.modelValue - 10);\n              break;\n            }\n        }\n      }\n    }\n  },\n  computed: {\n    rangePath: function rangePath() {\n      return \"M \".concat(this.minX, \" \").concat(this.minY, \" A \").concat(this.radius, \" \").concat(this.radius, \" 0 1 1 \").concat(this.maxX, \" \").concat(this.maxY);\n    },\n    valuePath: function valuePath() {\n      return \"M \".concat(this.zeroX, \" \").concat(this.zeroY, \" A \").concat(this.radius, \" \").concat(this.radius, \" 0 \").concat(this.largeArc, \" \").concat(this.sweep, \" \").concat(this.valueX, \" \").concat(this.valueY);\n    },\n    zeroRadians: function zeroRadians() {\n      if (this.min > 0 && this.max > 0) return this.mapRange(this.min, this.min, this.max, this.minRadians, this.maxRadians);else return this.mapRange(0, this.min, this.max, this.minRadians, this.maxRadians);\n    },\n    valueRadians: function valueRadians() {\n      return this.mapRange(this.modelValue, this.min, this.max, this.minRadians, this.maxRadians);\n    },\n    minX: function minX() {\n      return this.midX + Math.cos(this.minRadians) * this.radius;\n    },\n    minY: function minY() {\n      return this.midY - Math.sin(this.minRadians) * this.radius;\n    },\n    maxX: function maxX() {\n      return this.midX + Math.cos(this.maxRadians) * this.radius;\n    },\n    maxY: function maxY() {\n      return this.midY - Math.sin(this.maxRadians) * this.radius;\n    },\n    zeroX: function zeroX() {\n      return this.midX + Math.cos(this.zeroRadians) * this.radius;\n    },\n    zeroY: function zeroY() {\n      return this.midY - Math.sin(this.zeroRadians) * this.radius;\n    },\n    valueX: function valueX() {\n      return this.midX + Math.cos(this.valueRadians) * this.radius;\n    },\n    valueY: function valueY() {\n      return this.midY - Math.sin(this.valueRadians) * this.radius;\n    },\n    largeArc: function largeArc() {\n      return Math.abs(this.zeroRadians - this.valueRadians) < Math_PI ? 0 : 1;\n    },\n    sweep: function sweep() {\n      return this.valueRadians > this.zeroRadians ? 0 : 1;\n    },\n    valueToDisplay: function valueToDisplay() {\n      if (typeof this.valueTemplate === 'string') {\n        return this.valueTemplate.replace(/{value}/g, this.modelValue);\n      } else {\n        return this.valueTemplate(this.modelValue);\n      }\n    }\n  }\n};\n//Derived and forked from https://github.com/kramer99/vue-knob-control\n\nvar _hoisted_1 = [\"width\", \"height\", \"tabindex\", \"aria-valuemin\", \"aria-valuemax\", \"aria-valuenow\", \"aria-labelledby\", \"aria-label\"];\nvar _hoisted_2 = [\"d\", \"stroke-width\", \"stroke\"];\nvar _hoisted_3 = [\"d\", \"stroke-width\", \"stroke\"];\nvar _hoisted_4 = [\"fill\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [(openBlock(), createElementBlock(\"svg\", mergeProps({\n    viewBox: \"0 0 100 100\",\n    role: \"slider\",\n    width: _ctx.size,\n    height: _ctx.size,\n    tabindex: _ctx.readonly || _ctx.disabled ? -1 : _ctx.tabindex,\n    \"aria-valuemin\": _ctx.min,\n    \"aria-valuemax\": _ctx.max,\n    \"aria-valuenow\": _ctx.modelValue,\n    \"aria-labelledby\": _ctx.ariaLabelledby,\n    \"aria-label\": _ctx.ariaLabel,\n    onClick: _cache[0] || (_cache[0] = function () {\n      return $options.onClick && $options.onClick.apply($options, arguments);\n    }),\n    onKeydown: _cache[1] || (_cache[1] = function () {\n      return $options.onKeyDown && $options.onKeyDown.apply($options, arguments);\n    }),\n    onMousedown: _cache[2] || (_cache[2] = function () {\n      return $options.onMouseDown && $options.onMouseDown.apply($options, arguments);\n    }),\n    onMouseup: _cache[3] || (_cache[3] = function () {\n      return $options.onMouseUp && $options.onMouseUp.apply($options, arguments);\n    }),\n    onTouchstartPassive: _cache[4] || (_cache[4] = function () {\n      return $options.onTouchStart && $options.onTouchStart.apply($options, arguments);\n    }),\n    onTouchend: _cache[5] || (_cache[5] = function () {\n      return $options.onTouchEnd && $options.onTouchEnd.apply($options, arguments);\n    })\n  }, _ctx.ptm('svg')), [createElementVNode(\"path\", mergeProps({\n    d: $options.rangePath,\n    \"stroke-width\": _ctx.strokeWidth,\n    stroke: _ctx.rangeColor,\n    \"class\": _ctx.cx('range')\n  }, _ctx.ptm('range')), null, 16, _hoisted_2), createElementVNode(\"path\", mergeProps({\n    d: $options.valuePath,\n    \"stroke-width\": _ctx.strokeWidth,\n    stroke: _ctx.valueColor,\n    \"class\": _ctx.cx('value')\n  }, _ctx.ptm('value')), null, 16, _hoisted_3), _ctx.showValue ? (openBlock(), createElementBlock(\"text\", mergeProps({\n    key: 0,\n    x: 50,\n    y: 57,\n    \"text-anchor\": \"middle\",\n    fill: _ctx.textColor,\n    \"class\": _ctx.cx('label')\n  }, _ctx.ptm('label')), toDisplayString($options.valueToDisplay), 17, _hoisted_4)) : createCommentVNode(\"\", true)], 16, _hoisted_1))], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
-      "start": 1742841398661,
-      "end": 1742841399210,
+      "start": 1742846399830,
+      "end": 1742846400431,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841399210,
-      "end": 1742841399210,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
       "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/knob/knob.esm.js\").then(r => r[\"default\"] || r.default || r))",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "replace",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
       "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/knob/knob.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal",
       "sourcemaps": null
     },
     {
       "name": "vite:reporter",
-      "start": 1742841399211,
-      "end": 1742841399211,
+      "start": 1742846400431,
+      "end": 1742846400431,
       "order": "normal"
     }
   ]

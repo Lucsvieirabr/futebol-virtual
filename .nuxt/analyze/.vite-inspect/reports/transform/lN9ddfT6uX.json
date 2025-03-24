@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n  <div class=\"w-full bg-white border-b border-slate-200 py-1 px-4 flex justify-between\">\n    <PrimeButton\n      icon=\"pi pi-bars\"\n      severity=\"secondary\"\n      text\n      outlined\n      aria-label=\"Menu\"\n      class=\"py-2.5 w-11\"\n      @click=\"$emit('toggleMenuPrincipal')\"\n    />\n    <div>\n      <PrimeButton\n        aria-haspopup=\"true\"\n        aria-controls=\"submenu_perfil\"\n        icon=\"pi pi-user\"\n        severity=\"secondary\"\n        text\n        outlined\n        aria-label=\"Perfil\"\n        class=\"py-2.5 w-11\"\n        @click=\"toggleSubmenuPerfil\"\n      />\n      <PrimeMenu\n        id=\"submenu_perfil\"\n        ref=\"submenuPerfil\"\n        :model=\"itemsSubmenuPerfil\"\n        :popup=\"true\"\n      >\n        <template #item=\"{ item, props }\">\n          <router-link\n            v-if=\"item.route\"\n            v-slot=\"{ href, navigate }\"\n            :to=\"item.route\"\n            custom\n          >\n            <a\n              v-ripple\n              :href=\"href\"\n              v-bind=\"props.action\"\n              @click=\"navigate\"\n            >\n              <span :class=\"item.icon\" />\n              <span class=\"ml-2\">{{ item.label }}</span>\n            </a>\n          </router-link>\n          <a\n            v-else\n            v-ripple\n            :href=\"item.url\"\n            :target=\"item.target\"\n            v-bind=\"props.action\"\n          >\n            <span :class=\"item.icon\" />\n            <span class=\"ml-2\">{{ item.label }}</span>\n          </a>\n        </template>\n      </PrimeMenu>\n    </div>\n  </div>\n</template>\n\n<script setup>\n  /*\n  import { useMenuItems } from '~/data/menuItems';\n\n  const submenuPerfil = ref();\n\n  const { itemsSubmenuPerfil } = useMenuItems();\n\n  const toggleSubmenuPerfil = (event) => {\n    submenuPerfil.value.toggle(event);\n  };\n  */\n</script>",
-      "start": 1742841400211,
-      "end": 1742841400250,
+      "start": 1742846401442,
+      "end": 1742846401477,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400250,
-      "end": 1742841400250,
+      "start": 1742846401477,
+      "end": 1742846401477,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { resolveComponent as _resolveComponent, createVNode as _createVNode, normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, mergeProps as _mergeProps, resolveDirective as _resolveDirective, openBlock as _openBlock, createElementBlock as _createElementBlock, withDirectives as _withDirectives, withCtx as _withCtx, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"w-full bg-white border-b border-slate-200 py-1 px-4 flex justify-between\" }\nconst _hoisted_2 = [\"href\", \"onClick\"]\nconst _hoisted_3 = { class: \"ml-2\" }\nconst _hoisted_4 = [\"href\", \"target\"]\nconst _hoisted_5 = { class: \"ml-2\" }\n\n\nconst _sfc_main = {\n  __name: 'CabecalhoSistema',\n  setup(__props) {\n\n  /*\n  import { useMenuItems } from '~/data/menuItems';\n\n  const submenuPerfil = ref();\n\n  const { itemsSubmenuPerfil } = useMenuItems();\n\n  const toggleSubmenuPerfil = (event) => {\n    submenuPerfil.value.toggle(event);\n  };\n  */\n\nreturn (_ctx, _cache) => {\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")\n  const _component_router_link = _resolveComponent(\"router-link\")\n  const _component_PrimeMenu = _resolveComponent(\"PrimeMenu\")\n  const _directive_ripple = _resolveDirective(\"ripple\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(_component_PrimeButton, {\n      icon: \"pi pi-bars\",\n      severity: \"secondary\",\n      text: \"\",\n      outlined: \"\",\n      \"aria-label\": \"Menu\",\n      class: \"py-2.5 w-11\",\n      onClick: _cache[0] || (_cache[0] = $event => (_ctx.$emit('toggleMenuPrincipal')))\n    }),\n    _createElementVNode(\"div\", null, [\n      _createVNode(_component_PrimeButton, {\n        \"aria-haspopup\": \"true\",\n        \"aria-controls\": \"submenu_perfil\",\n        icon: \"pi pi-user\",\n        severity: \"secondary\",\n        text: \"\",\n        outlined: \"\",\n        \"aria-label\": \"Perfil\",\n        class: \"py-2.5 w-11\",\n        onClick: _ctx.toggleSubmenuPerfil\n      }, null, 8, [\"onClick\"]),\n      _createVNode(_component_PrimeMenu, {\n        id: \"submenu_perfil\",\n        ref: \"submenuPerfil\",\n        model: _ctx.itemsSubmenuPerfil,\n        popup: true\n      }, {\n        item: _withCtx(({ item, props }) => [\n          (item.route)\n            ? (_openBlock(), _createBlock(_component_router_link, {\n                key: 0,\n                to: item.route,\n                custom: \"\"\n              }, {\n                default: _withCtx(({ href, navigate }) => [\n                  _withDirectives((_openBlock(), _createElementBlock(\"a\", _mergeProps({ href: href }, props.action, { onClick: navigate }), [\n                    _createElementVNode(\"span\", {\n                      class: _normalizeClass(item.icon)\n                    }, null, 2),\n                    _createElementVNode(\"span\", _hoisted_3, _toDisplayString(item.label), 1)\n                  ], 16, _hoisted_2)), [\n                    [_directive_ripple]\n                  ])\n                ]),\n                _: 2\n              }, 1032, [\"to\"]))\n            : _withDirectives((_openBlock(), _createElementBlock(\"a\", _mergeProps({\n                key: 1,\n                href: item.url,\n                target: item.target\n              }, props.action), [\n                _createElementVNode(\"span\", {\n                  class: _normalizeClass(item.icon)\n                }, null, 2),\n                _createElementVNode(\"span\", _hoisted_5, _toDisplayString(item.label), 1)\n              ], 16, _hoisted_4)), [\n                [_directive_ripple]\n              ])\n        ]),\n        _: 1\n      }, 8, [\"model\"])\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400250,
-      "end": 1742841400252,
+      "start": 1742846401477,
+      "end": 1742846401480,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,153 +62,153 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400252,
-      "end": 1742841400252,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"primevue/button\";\nimport { default as __nuxt_component_1 } from \"primevue/menu\";\nimport { resolveComponent as _resolveComponent, createVNode as _createVNode, normalizeClass as _normalizeClass, createElementVNode as _createElementVNode, toDisplayString as _toDisplayString, mergeProps as _mergeProps, resolveDirective as _resolveDirective, openBlock as _openBlock, createElementBlock as _createElementBlock, withDirectives as _withDirectives, withCtx as _withCtx, createBlock as _createBlock, createCommentVNode as _createCommentVNode } from \"vue\"\n\nconst _hoisted_1 = { class: \"w-full bg-white border-b border-slate-200 py-1 px-4 flex justify-between\" }\nconst _hoisted_2 = [\"href\", \"onClick\"]\nconst _hoisted_3 = { class: \"ml-2\" }\nconst _hoisted_4 = [\"href\", \"target\"]\nconst _hoisted_5 = { class: \"ml-2\" }\n\n\nconst _sfc_main = {\n  __name: 'CabecalhoSistema',\n  setup(__props) {\n\n  /*\n  import { useMenuItems } from '~/data/menuItems';\n\n  const submenuPerfil = ref();\n\n  const { itemsSubmenuPerfil } = useMenuItems();\n\n  const toggleSubmenuPerfil = (event) => {\n    submenuPerfil.value.toggle(event);\n  };\n  */\n\nreturn (_ctx, _cache) => {\n  const _component_PrimeButton = __nuxt_component_0\n  const _component_router_link = _resolveComponent(\"router-link\")\n  const _component_PrimeMenu = __nuxt_component_1\n  const _directive_ripple = _resolveDirective(\"ripple\")\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createVNode(_component_PrimeButton, {\n      icon: \"pi pi-bars\",\n      severity: \"secondary\",\n      text: \"\",\n      outlined: \"\",\n      \"aria-label\": \"Menu\",\n      class: \"py-2.5 w-11\",\n      onClick: _cache[0] || (_cache[0] = $event => (_ctx.$emit('toggleMenuPrincipal')))\n    }),\n    _createElementVNode(\"div\", null, [\n      _createVNode(_component_PrimeButton, {\n        \"aria-haspopup\": \"true\",\n        \"aria-controls\": \"submenu_perfil\",\n        icon: \"pi pi-user\",\n        severity: \"secondary\",\n        text: \"\",\n        outlined: \"\",\n        \"aria-label\": \"Perfil\",\n        class: \"py-2.5 w-11\",\n        onClick: _ctx.toggleSubmenuPerfil\n      }, null, 8, [\"onClick\"]),\n      _createVNode(_component_PrimeMenu, {\n        id: \"submenu_perfil\",\n        ref: \"submenuPerfil\",\n        model: _ctx.itemsSubmenuPerfil,\n        popup: true\n      }, {\n        item: _withCtx(({ item, props }) => [\n          (item.route)\n            ? (_openBlock(), _createBlock(_component_router_link, {\n                key: 0,\n                to: item.route,\n                custom: \"\"\n              }, {\n                default: _withCtx(({ href, navigate }) => [\n                  _withDirectives((_openBlock(), _createElementBlock(\"a\", _mergeProps({ href: href }, props.action, { onClick: navigate }), [\n                    _createElementVNode(\"span\", {\n                      class: _normalizeClass(item.icon)\n                    }, null, 2),\n                    _createElementVNode(\"span\", _hoisted_3, _toDisplayString(item.label), 1)\n                  ], 16, _hoisted_2)), [\n                    [_directive_ripple]\n                  ])\n                ]),\n                _: 2\n              }, 1032, [\"to\"]))\n            : _withDirectives((_openBlock(), _createElementBlock(\"a\", _mergeProps({\n                key: 1,\n                href: item.url,\n                target: item.target\n              }, props.action), [\n                _createElementVNode(\"span\", {\n                  class: _normalizeClass(item.icon)\n                }, null, 2),\n                _createElementVNode(\"span\", _hoisted_5, _toDisplayString(item.label), 1)\n              ], 16, _hoisted_4)), [\n                [_directive_ripple]\n              ])\n        ]),\n        _: 1\n      }, 8, [\"model\"])\n    ])\n  ]))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400252,
-      "end": 1742841400253,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841400253,
-      "end": 1742841400253,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400253,
-      "end": 1742841400253,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400253,
-      "end": 1742841400253,
+      "start": 1742846401480,
+      "end": 1742846401480,
       "order": "normal"
     }
   ]

@@ -4,159 +4,159 @@
     {
       "name": "virtual",
       "result": "\nimport { defineNuxtPlugin, useRuntimeConfig } from '#imports';\nimport PrimeVue from 'primevue/config';\nimport ConfirmationService from 'primevue/confirmationservice';\nimport DialogService from 'primevue/dialogservice';\nimport ToastService from 'primevue/toastservice';\nimport BadgeDirective from 'primevue/badgedirective';\nimport Tooltip from 'primevue/tooltip';\nimport Ripple from 'primevue/ripple';\nimport StyleClass from 'primevue/styleclass';\nimport FocusTrap from 'primevue/focustrap';\nimport AnimateOnScroll from 'primevue/animateonscroll';\n\n\nexport default defineNuxtPlugin(({ vueApp }) => {\n  const runtimeConfig = useRuntimeConfig();\n  const config = runtimeConfig?.public?.primevue ?? {};\n  const { usePrimeVue = true, options = {} } = config;\n  const pt = {};\n\n  usePrimeVue && vueApp.use(PrimeVue, { ...options, ...pt });\n  vueApp.use(ConfirmationService);\nvueApp.use(DialogService);\nvueApp.use(ToastService);\n  vueApp.directive('badge', BadgeDirective);\nvueApp.directive('tooltip', Tooltip);\nvueApp.directive('ripple', Ripple);\nvueApp.directive('styleclass', StyleClass);\nvueApp.directive('focustrap', FocusTrap);\nvueApp.directive('animateonscroll', AnimateOnScroll);\n});\n        ",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399442,
+      "end": 1742846399442,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841398264,
-      "end": 1742841398264,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841398265,
-      "end": 1742841398265,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841398265,
-      "end": 1742841398265,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841398265,
-      "end": 1742841398265,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841398265,
-      "end": 1742841398265,
+      "start": 1742846399443,
+      "end": 1742846399443,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841398266,
-      "end": 1742841398266,
+      "start": 1742846399444,
+      "end": 1742846399444,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841398267,
-      "end": 1742841398267,
+      "start": 1742846399445,
+      "end": 1742846399446,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841398268,
-      "end": 1742841398268,
+      "start": 1742846399447,
+      "end": 1742846399447,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { usePrimeVue } from 'primevue/config';\nimport { defineNuxtPlugin, useRuntimeConfig } from '#app/nuxt';\n\nimport PrimeVue from 'primevue/config';\nimport ConfirmationService from 'primevue/confirmationservice';\nimport DialogService from 'primevue/dialogservice';\nimport ToastService from 'primevue/toastservice';\nimport BadgeDirective from 'primevue/badgedirective';\nimport Tooltip from 'primevue/tooltip';\nimport Ripple from 'primevue/ripple';\nimport StyleClass from 'primevue/styleclass';\nimport FocusTrap from 'primevue/focustrap';\nimport AnimateOnScroll from 'primevue/animateonscroll';\n\n\nexport default defineNuxtPlugin(({ vueApp }) => {\n  const runtimeConfig = useRuntimeConfig();\n  const config = runtimeConfig?.public?.primevue ?? {};\n  const { usePrimeVue = true, options = {} } = config;\n  const pt = {};\n\n  usePrimeVue && vueApp.use(PrimeVue, { ...options, ...pt });\n  vueApp.use(ConfirmationService);\nvueApp.use(DialogService);\nvueApp.use(ToastService);\n  vueApp.directive('badge', BadgeDirective);\nvueApp.directive('tooltip', Tooltip);\nvueApp.directive('ripple', Ripple);\nvueApp.directive('styleclass', StyleClass);\nvueApp.directive('focustrap', FocusTrap);\nvueApp.directive('animateonscroll', AnimateOnScroll);\n});\n        ",
-      "start": 1742841398268,
-      "end": 1742841398270,
+      "start": 1742846399447,
+      "end": 1742846399449,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -169,50 +169,50 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742841398271,
-      "end": 1742841398272,
+      "start": 1742846399450,
+      "end": 1742846399451,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841398272,
-      "end": 1742841398275,
+      "start": 1742846399451,
+      "end": 1742846399454,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841398275,
-      "end": 1742841398275,
+      "start": 1742846399454,
+      "end": 1742846399454,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841398275,
-      "end": 1742841398275,
+      "start": 1742846399454,
+      "end": 1742846399454,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841398275,
-      "end": 1742841398276,
+      "start": 1742846399454,
+      "end": 1742846399454,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841398276,
-      "end": 1742841398276,
+      "start": 1742846399454,
+      "end": 1742846399454,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841398276,
-      "end": 1742841398276,
+      "start": 1742846399454,
+      "end": 1742846399454,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841398276,
-      "end": 1742841398277,
+      "start": 1742846399454,
+      "end": 1742846399456,
       "order": "normal"
     }
   ]

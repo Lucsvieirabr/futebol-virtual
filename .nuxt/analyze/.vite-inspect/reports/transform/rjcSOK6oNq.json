@@ -4,206 +4,206 @@
     {
       "name": "vite:load-fallback",
       "result": "import * as yup from \"yup\";\nimport { useForm, useField, configure } from \"vee-validate\";\nimport { ptForm } from \"yup-locale-pt\";\nimport { TIPO_PESSOA } from \"~/utils/constants/cadastro/tipoPessoa.js\";\nimport { formatMaskAsNumber } from \"~/utils/functions/formatData.js\";\n\nyup.setLocale(ptForm);\n\nconst schema = yup.object({\n  passo_atual: yup.number().required(),\n\n  tipo_pessoa: yup.string().when(\"passo_atual\", {\n    is: 0,\n    then: (schema) =>\n      schema.required().oneOf(\n        Object.values(TIPO_PESSOA).map((tipo) => tipo.id),\n        \"Selecione um tipo de pessoa válido\",\n      ),\n  }),\n  cpf_cnpj: yup.string().when(\"passo_atual\", {\n    is: 0,\n    then: (schema) =>\n      schema\n        .required()\n        .test(\"cpf_cnpj\", \"Valor inválido\", (value, context) =>\n          validarCpfCnpj(value, context),\n        ),\n  }),\n  nome: yup.string().when(\"passo_atual\", {\n    is: 0,\n    then: (schema) => schema.required(\"Nome/Razão Social é obrigatório\"),\n  }),\n  numero_conselho: yup.string().when(\"passo_atual\", {\n    is: 0,\n    then: (schema) => schema.required(\"Número do Conselho é obrigatório\"),\n  }),\n  email: yup.string().when(\"passo_atual\", {\n    is: 1,\n    then: (schema) =>\n      schema\n        .required()\n        .test(\"email\", \"Valor inválido\", (value) => validarEmail(value)),\n  }),\n  telefone: yup.string().when(\"passo_atual\", {\n    is: 1,\n    then: (schema) => schema.required(\"Telefone é obrigatório\"),\n  }),\n  password: yup.string().when(\"passo_atual\", {\n    is: 2,\n    then: (schema) =>\n      schema\n        .required()\n        .min(8)\n        .matches(\n          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+{}|:<>?/~`\"'\\-=\\\\[\\];,./]).*$/,\n          \"A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial\",\n        ),\n  }),\n});\n\nexport function useCadastroFormValidation() {\n  configure({\n    validateOnModelUpdate: false,\n    bails: false,\n  });\n\n  const { handleSubmit } = useForm({ validationSchema: schema });\n\n  const { value: tipo_pessoa, errorMessage: tipoPessoaError } = useField(\n    \"tipo_pessoa\",\n    schema,\n  );\n  const { value: passo_atual, errorMessage: passoAtualError } = useField(\n    \"passo_atual\",\n    schema,\n    { validateOnValueUpdate: false },\n  );\n  const { value: cpf_cnpj, errorMessage: cpfCnpjError } = useField(\n    \"cpf_cnpj\",\n    schema,\n  );\n  const { value: nome, errorMessage: nomeRazaoSocialError } = useField(\n    \"nome\",\n    schema,\n  );\n  const { value: numero_conselho, errorMessage: numeroConselhoError } =\n    useField(\"numero_conselho\", schema);\n  const { value: email, errorMessage: emailError } = useField(\"email\", schema, {\n    validateOnValueUpdate: false,\n  });\n  const { value: password, errorMessage: passwordError } = useField(\n    \"password\",\n    schema,\n  );\n  const { value: telefone, errorMessage: telefoneError } = useField(\n    \"telefone\",\n    schema,\n  );\n\n  return {\n    passo_atual,\n    tipo_pessoa,\n    cpf_cnpj,\n    nome,\n    numero_conselho,\n    email,\n    password,\n    telefone,\n\n    tipoPessoaError,\n    passoAtualError,\n    cpfCnpjError,\n    nomeRazaoSocialError,\n    numeroConselhoError,\n    emailError,\n    passwordError,\n    telefoneError,\n\n    handleSubmit,\n  };\n}\n\nexport function validarCPF(value) {\n  value = formatMaskAsNumber(value);\n  let soma = 0;\n  let resto;\n  let i;\n\n  if (!value || value == \"00000000000\") return false;\n\n  for (i = 1; i <= 9; i++)\n    soma = soma + parseInt(value.substring(i - 1, i)) * (11 - i);\n  resto = (soma * 10) % 11;\n\n  if (resto == 10 || resto == 11) resto = 0;\n  if (resto != parseInt(value.substring(9, 10))) return false;\n\n  soma = 0;\n  for (i = 1; i <= 10; i++)\n    soma = soma + parseInt(value.substring(i - 1, i)) * (12 - i);\n  resto = (soma * 10) % 11;\n\n  if (resto == 10 || resto == 11) resto = 0;\n  if (resto != parseInt(value.substring(10, 11))) return false;\n  return true;\n}\n\nexport function validarCNPJ(value) {\n  if (!value) return false;\n\n  value = formatMaskAsNumber(value);\n  let tamanho = value.length - 2;\n  let numeros = value.substring(0, tamanho);\n  let digitos = value.substring(tamanho);\n  let soma = 0;\n  let pos = tamanho - 7;\n\n  if (value == \"00000000000000\") return false;\n\n  for (let i = tamanho; i >= 1; i--) {\n    soma += numeros.charAt(tamanho - i) * pos--;\n    if (pos < 2) pos = 9;\n  }\n\n  let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);\n  if (resultado != digitos.charAt(0)) return false;\n\n  tamanho = tamanho + 1;\n  numeros = value.substring(0, tamanho);\n  soma = 0;\n  pos = tamanho - 7;\n\n  for (let i = tamanho; i >= 1; i--) {\n    soma += numeros.charAt(tamanho - i) * pos--;\n    if (pos < 2) pos = 9;\n  }\n\n  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);\n  if (resultado != digitos.charAt(1)) return false;\n\n  return true;\n}\n\nexport function validarCpfCnpj(value, context) {\n  switch (context.parent.tipo_pessoa) {\n    case TIPO_PESSOA.FISICA.id:\n      return validarCPF(value);\n    case TIPO_PESSOA.JURIDICA.id:\n      return validarCNPJ(value);\n  }\n}\nexport function validarEmail(value) {\n  const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return emailRegex.test(value);\n}\n",
-      "start": 1742841400203,
-      "end": 1742841400235,
+      "start": 1742846401434,
+      "end": 1742846401457,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "vite:vue",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401457,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401457,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400235,
-      "end": 1742841400235,
+      "start": 1742846401458,
+      "end": 1742846401458,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
-      "start": 1742841400235,
-      "end": 1742841400236,
+      "start": 1742846401458,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400236,
-      "end": 1742841400236,
+      "start": 1742846401459,
+      "end": 1742846401459,
       "order": "normal"
     }
   ]

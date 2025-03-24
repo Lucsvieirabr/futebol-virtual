@@ -4,57 +4,57 @@
     {
       "name": "vite:load-fallback",
       "result": "<template>\n  <CommonSplashScreen v-show=\"showSplashScreen\" />\n  <div\n    v-show=\"!showSplashScreen && tokenValido\"\n    class=\"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\"\n  >\n    <div class=\"text-center mb-7\">\n      <img\n        src=\"@/assets/images/logo.webp\"\n        alt=\"Logotipo\"\n        class=\"mt-4 mb-8 h-10 mx-auto\"\n      >\n      <div class=\"text-900 text-xl font-medium my-2\">\n        Redefinição de Senha\n      </div>\n      <div class=\"text-gray-600\">\n        Geramos uma senha segura para você, mas você pode alterá-la clicando e editando o campo abaixo!\n      </div>\n    </div>\n\n    <div>\n      <form @submit.prevent=\"onSubmit\">\n        <div class=\"mb-7\">\n          <div class=\"p-inputgroup flex-1 border-solid border border-gray-300 rounded-lg\">\n            <PrimeInputText\n              v-model=\"password\"\n              :class=\"{ 'p-invalid': passwordError }\"\n              class=\"border-none\"\n            />\n            <PrimeButton\n              v-tooltip.top=\"'Gerar senha'\"\n              icon=\"pi pi-sync\"\n              text\n              outlined\n              @click=\"gerarSenha()\"\n            />\n            <PrimeButton\n              v-tooltip.top=\"'Copiar senha'\"\n              icon=\"pi pi-copy\"\n              severity=\"secondary\"\n              @click=\"copiar()\"\n            />\n          </div>\n          <span class=\"p-error text-sm\">{{ passwordError }}</span>\n        </div>\n\n        <PrimeButton\n          type=\"submit\"\n          label=\"Continuar\"\n          class=\"w-full\"\n          :loading=\"loadingForm\"\n        />\n      </form>\n\n      <div class=\"text-center mt-4\">\n        <NuxtLink\n          to=\"/login\"\n          class=\"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n        >\n          Voltar para Login\n        </NuxtLink>\n      </div>  \n    </div>\n  </div>\n\n  <div\n    v-show=\"!showSplashScreen && !tokenValido\"\n    class=\"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\"\n  >\n    <div class=\"text-center mb-7\">\n      <img\n        src=\"@/assets/images/logo.webp\"\n        alt=\"Logotipo\"\n        class=\"mt-4 mb-8 h-10 mx-auto\"\n      >\n      <div class=\"text-900 text-xl font-medium my-2\">\n        Redefinição de Senha\n      </div>\n      <PrimeMessage\n        severity=\"error\"\n        :closable=\"false\"\n        class=\"text-left\"\n      >\n        Lamentamos, este link de redefinição de senha é inválido.\n      </PrimeMessage>\n    </div>\n\n    <div>\n      <div class=\"text-center mt-4\">\n        <NuxtLink to=\"/recuperar-senha\">\n          <PrimeButton\n            label=\"Solicitar nova recuperação de Senha\"\n            class=\"w-full\"\n          />\n        </NuxtLink>\n      </div>\n      <div class=\"text-center mt-4\">\n        <NuxtLink\n          to=\"/login\"\n          class=\"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n        >\n          Voltar para Login\n        </NuxtLink>\n      </div>  \n    </div>\n  </div>\n</template>\n\n<script setup>\n  import * as yup from 'yup';\n  import { ptForm } from 'yup-locale-pt';\n  yup.setLocale(ptForm);\n\n  definePageMeta({\n    layout: 'auth',\n  });\n\n  const showSplashScreen = ref(true);\n  const tokenValido = ref(false);\n  const senhaCopiada = ref(false);\n  const loadingForm = ref(false);\n\n  const toast = useToastCustom();\n  const authRequest = useAuthRequest();\n  const route = useRoute();\n  const { handleSubmit } = useForm();\n\n  onBeforeMount(async () => {\n    const response = await authRequest.validarTokenRedefinicao({\n      token: route.query.token,\n      user: route.query.user,\n    });\n    if (response) {\n      email.value = response.email;\n      token.value = route.query.token;\n      tokenValido.value = true;\n    }\n\n    showSplashScreen.value = false;\n\n  });\n    \n  const { value: email } = useField('email', yup.string());\n  const { value: password, errorMessage: passwordError } = useField('password', yup.string().required());\n  const { value: token } = useField('token', yup.string());\n\n  const onSubmit = handleSubmit(values => {\n    if (!senhaCopiada.value) {\n      toast.show('Antes de continuar', 'Copie a senha gerada e guarde em um local seguro.', Severity.Error);\n      return;\n    }\n    loadingForm.value = true;\n    authRequest.redefinirSenha(values).then((response) => {\n      toast.show(Summary.Success, response.message, Severity.Success);\n      setTimeout(() => {\n        navigateTo('/login');\n      }, 1000);\n    }).finally(() => {\n      loadingForm.value = false;\n    });\n  });\n\n  const copiar = () => {\n    navigator.clipboard.writeText(password.value);\n    toast.show('Senha copiada', 'Salve em um local seguro');\n    senhaCopiada.value = true;\n  };\n\n  const gerarSenha = () => {\n    password.value = authRequest.gerarSenha();\n    senhaCopiada.value = false;\n  };\n  gerarSenha();\n\n</script>",
-      "start": 1742841399822,
-      "end": 1742841400017,
+      "start": 1742846401069,
+      "end": 1742846401253,
       "sourcemaps": null
     },
     {
       "name": "nuxt:layer-aliasing",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "pre"
     },
     {
       "name": "nuxt:server-devonly:transform",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "pre"
     },
     {
       "name": "nuxt:client-fallback-auto-id",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "pre"
     },
     {
       "name": "vite:css",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:esbuild",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:json",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:worker",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:vue",
       "result": "import { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, createElementVNode as _createElementVNode, isRef as _isRef, normalizeClass as _normalizeClass, resolveDirective as _resolveDirective, toDisplayString as _toDisplayString, withModifiers as _withModifiers, createTextVNode as _createTextVNode, withCtx as _withCtx, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '@/assets/images/logo.webp'\n\n\nconst _hoisted_1 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-center mb-7\" }, [\n  /*#__PURE__*/_createElementVNode(\"img\", {\n    src: _imports_0,\n    alt: \"Logotipo\",\n    class: \"mt-4 mb-8 h-10 mx-auto\"\n  }),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \"),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-gray-600\" }, \" Geramos uma senha segura para você, mas você pode alterá-la clicando e editando o campo abaixo! \")\n], -1)\nconst _hoisted_3 = { class: \"mb-7\" }\nconst _hoisted_4 = { class: \"p-inputgroup flex-1 border-solid border border-gray-300 rounded-lg\" }\nconst _hoisted_5 = { class: \"p-error text-sm\" }\nconst _hoisted_6 = { class: \"text-center mt-4\" }\nconst _hoisted_7 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_8 = { class: \"text-center mb-7\" }\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"Logotipo\",\n  class: \"mt-4 mb-8 h-10 mx-auto\"\n}, null, -1)\nconst _hoisted_10 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \", -1)\nconst _hoisted_11 = { class: \"text-center mt-4\" }\nconst _hoisted_12 = { class: \"text-center mt-4\" }\n\nimport * as yup from 'yup';\n  import { ptForm } from 'yup-locale-pt';\n  \nconst _sfc_main = {\n  __name: 'redefinir-senha',\n  setup(__props) {\n\n  yup.setLocale(ptForm);\n\n  definePageMeta({\n    layout: 'auth',\n  });\n\n  const showSplashScreen = ref(true);\n  const tokenValido = ref(false);\n  const senhaCopiada = ref(false);\n  const loadingForm = ref(false);\n\n  const toast = useToastCustom();\n  const authRequest = useAuthRequest();\n  const route = useRoute();\n  const { handleSubmit } = useForm();\n\n  onBeforeMount(async () => {\n    const response = await authRequest.validarTokenRedefinicao({\n      token: route.query.token,\n      user: route.query.user,\n    });\n    if (response) {\n      email.value = response.email;\n      token.value = route.query.token;\n      tokenValido.value = true;\n    }\n\n    showSplashScreen.value = false;\n\n  });\n    \n  const { value: email } = useField('email', yup.string());\n  const { value: password, errorMessage: passwordError } = useField('password', yup.string().required());\n  const { value: token } = useField('token', yup.string());\n\n  const onSubmit = handleSubmit(values => {\n    if (!senhaCopiada.value) {\n      toast.show('Antes de continuar', 'Copie a senha gerada e guarde em um local seguro.', Severity.Error);\n      return;\n    }\n    loadingForm.value = true;\n    authRequest.redefinirSenha(values).then((response) => {\n      toast.show(Summary.Success, response.message, Severity.Success);\n      setTimeout(() => {\n        navigateTo('/login');\n      }, 1000);\n    }).finally(() => {\n      loadingForm.value = false;\n    });\n  });\n\n  const copiar = () => {\n    navigator.clipboard.writeText(password.value);\n    toast.show('Senha copiada', 'Salve em um local seguro');\n    senhaCopiada.value = true;\n  };\n\n  const gerarSenha = () => {\n    password.value = authRequest.gerarSenha();\n    senhaCopiada.value = false;\n  };\n  gerarSenha();\n\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = _resolveComponent(\"CommonSplashScreen\")\n  const _component_PrimeInputText = _resolveComponent(\"PrimeInputText\")\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")\n  const _component_PrimeMessage = _resolveComponent(\"PrimeMessage\")\n  const _directive_tooltip = _resolveDirective(\"tooltip\")\n\n  return (_openBlock(), _createElementBlock(_Fragment, null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _hoisted_2,\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"form\", {\n          onSubmit: _cache[3] || (_cache[3] = _withModifiers((...args) => (_unref(onSubmit) && _unref(onSubmit)(...args)), [\"prevent\"]))\n        }, [\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createVNode(_component_PrimeInputText, {\n                modelValue: _unref(password),\n                \"onUpdate:modelValue\": _cache[0] || (_cache[0] = $event => (_isRef(password) ? (password).value = $event : null)),\n                class: _normalizeClass([{ 'p-invalid': _unref(passwordError) }, \"border-none\"])\n              }, null, 8, [\"modelValue\", \"class\"]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-sync\",\n                text: \"\",\n                outlined: \"\",\n                onClick: _cache[1] || (_cache[1] = $event => (gerarSenha()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Gerar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-copy\",\n                severity: \"secondary\",\n                onClick: _cache[2] || (_cache[2] = $event => (copiar()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Copiar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ])\n            ]),\n            _createElementVNode(\"span\", _hoisted_5, _toDisplayString(_unref(passwordError)), 1)\n          ]),\n          _createVNode(_component_PrimeButton, {\n            type: \"submit\",\n            label: \"Continuar\",\n            class: \"w-full\",\n            loading: _unref(loadingForm)\n          }, null, 8, [\"loading\"])\n        ], 32),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && _unref(tokenValido)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_7, [\n      _createElementVNode(\"div\", _hoisted_8, [\n        _hoisted_9,\n        _hoisted_10,\n        _createVNode(_component_PrimeMessage, {\n          severity: \"error\",\n          closable: false,\n          class: \"text-left\"\n        }, {\n          default: _withCtx(() => [\n            _createTextVNode(\" Lamentamos, este link de redefinição de senha é inválido. \")\n          ]),\n          _: 1\n        })\n      ]),\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_11, [\n          _createVNode(_component_NuxtLink, { to: \"/recuperar-senha\" }, {\n            default: _withCtx(() => [\n              _createVNode(_component_PrimeButton, {\n                label: \"Solicitar nova recuperação de Senha\",\n                class: \"w-full\"\n              })\n            ]),\n            _: 1\n          })\n        ]),\n        _createElementVNode(\"div\", _hoisted_12, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && !_unref(tokenValido)]\n    ])\n  ], 64))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal",
       "sourcemaps": {
         "mappings": ""
@@ -62,105 +62,105 @@
     },
     {
       "name": "vite:vue-jsx",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "nuxt:remove-plugin-metadata",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "nuxt:chunk-error",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "nuxt:components:imports",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "replace",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "ssr-styles",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:define",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:css-post",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:build-html",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:worker-import-meta-url",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:asset-import-meta-url",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "commonjs",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:dynamic-import-vars",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "vite:import-glob",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401253,
       "order": "normal"
     },
     {
       "name": "nuxt:composable-keys",
-      "start": 1742841400017,
-      "end": 1742841400017,
+      "start": 1742846401253,
+      "end": 1742846401254,
       "order": "post"
     },
     {
       "name": "nuxt:imports-transform",
       "result": "import { definePageMeta } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/pages/runtime/composables';\nimport { ref, onBeforeMount } from 'vue';\nimport { useToastCustom, Severity, Summary } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/common/toastCustom.ts';\nimport { useAuthRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/auth/authRequest.ts';\nimport { useRoute, navigateTo } from '#app/composables/router';\nimport { useForm, useField } from 'vee-validate';\nimport { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, createElementVNode as _createElementVNode, isRef as _isRef, normalizeClass as _normalizeClass, resolveDirective as _resolveDirective, toDisplayString as _toDisplayString, withModifiers as _withModifiers, createTextVNode as _createTextVNode, withCtx as _withCtx, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '@/assets/images/logo.webp'\n\n\nconst _hoisted_1 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-center mb-7\" }, [\n  /*#__PURE__*/_createElementVNode(\"img\", {\n    src: _imports_0,\n    alt: \"Logotipo\",\n    class: \"mt-4 mb-8 h-10 mx-auto\"\n  }),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \"),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-gray-600\" }, \" Geramos uma senha segura para você, mas você pode alterá-la clicando e editando o campo abaixo! \")\n], -1)\nconst _hoisted_3 = { class: \"mb-7\" }\nconst _hoisted_4 = { class: \"p-inputgroup flex-1 border-solid border border-gray-300 rounded-lg\" }\nconst _hoisted_5 = { class: \"p-error text-sm\" }\nconst _hoisted_6 = { class: \"text-center mt-4\" }\nconst _hoisted_7 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_8 = { class: \"text-center mb-7\" }\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"Logotipo\",\n  class: \"mt-4 mb-8 h-10 mx-auto\"\n}, null, -1)\nconst _hoisted_10 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \", -1)\nconst _hoisted_11 = { class: \"text-center mt-4\" }\nconst _hoisted_12 = { class: \"text-center mt-4\" }\n\nimport * as yup from 'yup';\n  import { ptForm } from 'yup-locale-pt';\n  \nconst _sfc_main = {\n  __name: 'redefinir-senha',\n  setup(__props) {\n\n  yup.setLocale(ptForm);\n\n  definePageMeta({\n    layout: 'auth',\n  });\n\n  const showSplashScreen = ref(true);\n  const tokenValido = ref(false);\n  const senhaCopiada = ref(false);\n  const loadingForm = ref(false);\n\n  const toast = useToastCustom();\n  const authRequest = useAuthRequest();\n  const route = useRoute();\n  const { handleSubmit } = useForm();\n\n  onBeforeMount(async () => {\n    const response = await authRequest.validarTokenRedefinicao({\n      token: route.query.token,\n      user: route.query.user,\n    });\n    if (response) {\n      email.value = response.email;\n      token.value = route.query.token;\n      tokenValido.value = true;\n    }\n\n    showSplashScreen.value = false;\n\n  });\n    \n  const { value: email } = useField('email', yup.string());\n  const { value: password, errorMessage: passwordError } = useField('password', yup.string().required());\n  const { value: token } = useField('token', yup.string());\n\n  const onSubmit = handleSubmit(values => {\n    if (!senhaCopiada.value) {\n      toast.show('Antes de continuar', 'Copie a senha gerada e guarde em um local seguro.', Severity.Error);\n      return;\n    }\n    loadingForm.value = true;\n    authRequest.redefinirSenha(values).then((response) => {\n      toast.show(Summary.Success, response.message, Severity.Success);\n      setTimeout(() => {\n        navigateTo('/login');\n      }, 1000);\n    }).finally(() => {\n      loadingForm.value = false;\n    });\n  });\n\n  const copiar = () => {\n    navigator.clipboard.writeText(password.value);\n    toast.show('Senha copiada', 'Salve em um local seguro');\n    senhaCopiada.value = true;\n  };\n\n  const gerarSenha = () => {\n    password.value = authRequest.gerarSenha();\n    senhaCopiada.value = false;\n  };\n  gerarSenha();\n\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = _resolveComponent(\"CommonSplashScreen\")\n  const _component_PrimeInputText = _resolveComponent(\"PrimeInputText\")\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")\n  const _component_NuxtLink = _resolveComponent(\"NuxtLink\")\n  const _component_PrimeMessage = _resolveComponent(\"PrimeMessage\")\n  const _directive_tooltip = _resolveDirective(\"tooltip\")\n\n  return (_openBlock(), _createElementBlock(_Fragment, null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _hoisted_2,\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"form\", {\n          onSubmit: _cache[3] || (_cache[3] = _withModifiers((...args) => (_unref(onSubmit) && _unref(onSubmit)(...args)), [\"prevent\"]))\n        }, [\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createVNode(_component_PrimeInputText, {\n                modelValue: _unref(password),\n                \"onUpdate:modelValue\": _cache[0] || (_cache[0] = $event => (_isRef(password) ? (password).value = $event : null)),\n                class: _normalizeClass([{ 'p-invalid': _unref(passwordError) }, \"border-none\"])\n              }, null, 8, [\"modelValue\", \"class\"]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-sync\",\n                text: \"\",\n                outlined: \"\",\n                onClick: _cache[1] || (_cache[1] = $event => (gerarSenha()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Gerar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-copy\",\n                severity: \"secondary\",\n                onClick: _cache[2] || (_cache[2] = $event => (copiar()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Copiar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ])\n            ]),\n            _createElementVNode(\"span\", _hoisted_5, _toDisplayString(_unref(passwordError)), 1)\n          ]),\n          _createVNode(_component_PrimeButton, {\n            type: \"submit\",\n            label: \"Continuar\",\n            class: \"w-full\",\n            loading: _unref(loadingForm)\n          }, null, 8, [\"loading\"])\n        ], 32),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && _unref(tokenValido)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_7, [\n      _createElementVNode(\"div\", _hoisted_8, [\n        _hoisted_9,\n        _hoisted_10,\n        _createVNode(_component_PrimeMessage, {\n          severity: \"error\",\n          closable: false,\n          class: \"text-left\"\n        }, {\n          default: _withCtx(() => [\n            _createTextVNode(\" Lamentamos, este link de redefinição de senha é inválido. \")\n          ]),\n          _: 1\n        })\n      ]),\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_11, [\n          _createVNode(_component_NuxtLink, { to: \"/recuperar-senha\" }, {\n            default: _withCtx(() => [\n              _createVNode(_component_PrimeButton, {\n                label: \"Solicitar nova recuperação de Senha\",\n                class: \"w-full\"\n              })\n            ]),\n            _: 1\n          })\n        ]),\n        _createElementVNode(\"div\", _hoisted_12, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && !_unref(tokenValido)]\n    ])\n  ], 64))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400017,
-      "end": 1742841400018,
+      "start": 1742846401254,
+      "end": 1742846401255,
       "order": "post",
       "sourcemaps": {
         "version": 3,
@@ -173,52 +173,52 @@
     },
     {
       "name": "unctx:transform",
-      "start": 1742841400018,
-      "end": 1742841400019,
+      "start": 1742846401255,
+      "end": 1742846401256,
       "order": "post"
     },
     {
       "name": "nuxt:pages-macros-transform",
-      "start": 1742841400019,
-      "end": 1742841400019,
+      "start": 1742846401256,
+      "end": 1742846401256,
       "order": "post"
     },
     {
       "name": "nuxt:runtime-paths-dep",
-      "start": 1742841400019,
-      "end": 1742841400019,
+      "start": 1742846401256,
+      "end": 1742846401256,
       "order": "post"
     },
     {
       "name": "nuxt:route-injection-plugin",
-      "start": 1742841400019,
-      "end": 1742841400019,
+      "start": 1742846401256,
+      "end": 1742846401256,
       "order": "post"
     },
     {
       "name": "nuxt:components-loader",
       "result": "import { default as __nuxt_component_0 } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/components/common/SplashScreen.vue\";\nimport { default as __nuxt_component_1 } from \"primevue/inputtext\";\nimport { default as __nuxt_component_2 } from \"primevue/button\";\nimport { default as __nuxt_component_3 } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { default as __nuxt_component_4 } from \"primevue/message\";\nimport { definePageMeta } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/pages/runtime/composables';\nimport { ref, onBeforeMount } from 'vue';\nimport { useToastCustom, Severity, Summary } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/common/toastCustom.ts';\nimport { useAuthRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/auth/authRequest.ts';\nimport { useRoute, navigateTo } from '#app/composables/router';\nimport { useForm, useField } from 'vee-validate';\nimport { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, createElementVNode as _createElementVNode, isRef as _isRef, normalizeClass as _normalizeClass, resolveDirective as _resolveDirective, toDisplayString as _toDisplayString, withModifiers as _withModifiers, createTextVNode as _createTextVNode, withCtx as _withCtx, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '@/assets/images/logo.webp'\n\n\nconst _hoisted_1 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-center mb-7\" }, [\n  /*#__PURE__*/_createElementVNode(\"img\", {\n    src: _imports_0,\n    alt: \"Logotipo\",\n    class: \"mt-4 mb-8 h-10 mx-auto\"\n  }),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \"),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-gray-600\" }, \" Geramos uma senha segura para você, mas você pode alterá-la clicando e editando o campo abaixo! \")\n], -1)\nconst _hoisted_3 = { class: \"mb-7\" }\nconst _hoisted_4 = { class: \"p-inputgroup flex-1 border-solid border border-gray-300 rounded-lg\" }\nconst _hoisted_5 = { class: \"p-error text-sm\" }\nconst _hoisted_6 = { class: \"text-center mt-4\" }\nconst _hoisted_7 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_8 = { class: \"text-center mb-7\" }\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"Logotipo\",\n  class: \"mt-4 mb-8 h-10 mx-auto\"\n}, null, -1)\nconst _hoisted_10 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \", -1)\nconst _hoisted_11 = { class: \"text-center mt-4\" }\nconst _hoisted_12 = { class: \"text-center mt-4\" }\n\nimport * as yup from 'yup';\n  import { ptForm } from 'yup-locale-pt';\n  \nconst _sfc_main = {\n  __name: 'redefinir-senha',\n  setup(__props) {\n\n  yup.setLocale(ptForm);\n\n  definePageMeta({\n    layout: 'auth',\n  });\n\n  const showSplashScreen = ref(true);\n  const tokenValido = ref(false);\n  const senhaCopiada = ref(false);\n  const loadingForm = ref(false);\n\n  const toast = useToastCustom();\n  const authRequest = useAuthRequest();\n  const route = useRoute();\n  const { handleSubmit } = useForm();\n\n  onBeforeMount(async () => {\n    const response = await authRequest.validarTokenRedefinicao({\n      token: route.query.token,\n      user: route.query.user,\n    });\n    if (response) {\n      email.value = response.email;\n      token.value = route.query.token;\n      tokenValido.value = true;\n    }\n\n    showSplashScreen.value = false;\n\n  });\n    \n  const { value: email } = useField('email', yup.string());\n  const { value: password, errorMessage: passwordError } = useField('password', yup.string().required());\n  const { value: token } = useField('token', yup.string());\n\n  const onSubmit = handleSubmit(values => {\n    if (!senhaCopiada.value) {\n      toast.show('Antes de continuar', 'Copie a senha gerada e guarde em um local seguro.', Severity.Error);\n      return;\n    }\n    loadingForm.value = true;\n    authRequest.redefinirSenha(values).then((response) => {\n      toast.show(Summary.Success, response.message, Severity.Success);\n      setTimeout(() => {\n        navigateTo('/login');\n      }, 1000);\n    }).finally(() => {\n      loadingForm.value = false;\n    });\n  });\n\n  const copiar = () => {\n    navigator.clipboard.writeText(password.value);\n    toast.show('Senha copiada', 'Salve em um local seguro');\n    senhaCopiada.value = true;\n  };\n\n  const gerarSenha = () => {\n    password.value = authRequest.gerarSenha();\n    senhaCopiada.value = false;\n  };\n  gerarSenha();\n\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = __nuxt_component_0\n  const _component_PrimeInputText = __nuxt_component_1\n  const _component_PrimeButton = __nuxt_component_2\n  const _component_NuxtLink = __nuxt_component_3\n  const _component_PrimeMessage = __nuxt_component_4\n  const _directive_tooltip = _resolveDirective(\"tooltip\")\n\n  return (_openBlock(), _createElementBlock(_Fragment, null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _hoisted_2,\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"form\", {\n          onSubmit: _cache[3] || (_cache[3] = _withModifiers((...args) => (_unref(onSubmit) && _unref(onSubmit)(...args)), [\"prevent\"]))\n        }, [\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createVNode(_component_PrimeInputText, {\n                modelValue: _unref(password),\n                \"onUpdate:modelValue\": _cache[0] || (_cache[0] = $event => (_isRef(password) ? (password).value = $event : null)),\n                class: _normalizeClass([{ 'p-invalid': _unref(passwordError) }, \"border-none\"])\n              }, null, 8, [\"modelValue\", \"class\"]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-sync\",\n                text: \"\",\n                outlined: \"\",\n                onClick: _cache[1] || (_cache[1] = $event => (gerarSenha()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Gerar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-copy\",\n                severity: \"secondary\",\n                onClick: _cache[2] || (_cache[2] = $event => (copiar()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Copiar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ])\n            ]),\n            _createElementVNode(\"span\", _hoisted_5, _toDisplayString(_unref(passwordError)), 1)\n          ]),\n          _createVNode(_component_PrimeButton, {\n            type: \"submit\",\n            label: \"Continuar\",\n            class: \"w-full\",\n            loading: _unref(loadingForm)\n          }, null, 8, [\"loading\"])\n        ], 32),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && _unref(tokenValido)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_7, [\n      _createElementVNode(\"div\", _hoisted_8, [\n        _hoisted_9,\n        _hoisted_10,\n        _createVNode(_component_PrimeMessage, {\n          severity: \"error\",\n          closable: false,\n          class: \"text-left\"\n        }, {\n          default: _withCtx(() => [\n            _createTextVNode(\" Lamentamos, este link de redefinição de senha é inválido. \")\n          ]),\n          _: 1\n        })\n      ]),\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_11, [\n          _createVNode(_component_NuxtLink, { to: \"/recuperar-senha\" }, {\n            default: _withCtx(() => [\n              _createVNode(_component_PrimeButton, {\n                label: \"Solicitar nova recuperação de Senha\",\n                class: \"w-full\"\n              })\n            ]),\n            _: 1\n          })\n        ]),\n        _createElementVNode(\"div\", _hoisted_12, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && !_unref(tokenValido)]\n    ])\n  ], 64))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400019,
-      "end": 1742841400019,
+      "start": 1742846401256,
+      "end": 1742846401256,
       "order": "post"
     },
     {
       "name": "nuxt:tree-shake-composables:transform",
       "result": "import { default as __nuxt_component_0 } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/components/common/SplashScreen.vue\";\nimport { default as __nuxt_component_1 } from \"primevue/inputtext\";\nimport { default as __nuxt_component_2 } from \"primevue/button\";\nimport { default as __nuxt_component_3 } from \"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/app/components/nuxt-link\";\nimport { default as __nuxt_component_4 } from \"primevue/message\";\nimport { definePageMeta } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/pages/runtime/composables';\nimport { ref, onBeforeMount } from 'vue';\nimport { useToastCustom, Severity, Summary } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/common/toastCustom.ts';\nimport { useAuthRequest } from '/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/composables/auth/authRequest.ts';\nimport { useRoute, navigateTo } from '#app/composables/router';\nimport { useForm, useField } from 'vee-validate';\nimport { unref as _unref, resolveComponent as _resolveComponent, vShow as _vShow, createVNode as _createVNode, withDirectives as _withDirectives, createElementVNode as _createElementVNode, isRef as _isRef, normalizeClass as _normalizeClass, resolveDirective as _resolveDirective, toDisplayString as _toDisplayString, withModifiers as _withModifiers, createTextVNode as _createTextVNode, withCtx as _withCtx, Fragment as _Fragment, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\nimport _imports_0 from '@/assets/images/logo.webp'\n\n\nconst _hoisted_1 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_2 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-center mb-7\" }, [\n  /*#__PURE__*/_createElementVNode(\"img\", {\n    src: _imports_0,\n    alt: \"Logotipo\",\n    class: \"mt-4 mb-8 h-10 mx-auto\"\n  }),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \"),\n  /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-gray-600\" }, \" Geramos uma senha segura para você, mas você pode alterá-la clicando e editando o campo abaixo! \")\n], -1)\nconst _hoisted_3 = { class: \"mb-7\" }\nconst _hoisted_4 = { class: \"p-inputgroup flex-1 border-solid border border-gray-300 rounded-lg\" }\nconst _hoisted_5 = { class: \"p-error text-sm\" }\nconst _hoisted_6 = { class: \"text-center mt-4\" }\nconst _hoisted_7 = { class: \"bg-white p-8 drop-shadow-md rounded-lg w-full lg:w-1/3 sm:mx-auto\" }\nconst _hoisted_8 = { class: \"text-center mb-7\" }\nconst _hoisted_9 = /*#__PURE__*/_createElementVNode(\"img\", {\n  src: _imports_0,\n  alt: \"Logotipo\",\n  class: \"mt-4 mb-8 h-10 mx-auto\"\n}, null, -1)\nconst _hoisted_10 = /*#__PURE__*/_createElementVNode(\"div\", { class: \"text-900 text-xl font-medium my-2\" }, \" Redefinição de Senha \", -1)\nconst _hoisted_11 = { class: \"text-center mt-4\" }\nconst _hoisted_12 = { class: \"text-center mt-4\" }\n\nimport * as yup from 'yup';\n  import { ptForm } from 'yup-locale-pt';\n  \nconst _sfc_main = {\n  __name: 'redefinir-senha',\n  setup(__props) {\n\n  yup.setLocale(ptForm);\n\n   false && /*@__PURE__*/ definePageMeta({\n    layout: 'auth',\n  });\n\n  const showSplashScreen = ref(true);\n  const tokenValido = ref(false);\n  const senhaCopiada = ref(false);\n  const loadingForm = ref(false);\n\n  const toast = useToastCustom();\n  const authRequest = useAuthRequest();\n  const route = useRoute();\n  const { handleSubmit } = useForm();\n\n  onBeforeMount(async () => {\n    const response = await authRequest.validarTokenRedefinicao({\n      token: route.query.token,\n      user: route.query.user,\n    });\n    if (response) {\n      email.value = response.email;\n      token.value = route.query.token;\n      tokenValido.value = true;\n    }\n\n    showSplashScreen.value = false;\n\n  });\n    \n  const { value: email } = useField('email', yup.string());\n  const { value: password, errorMessage: passwordError } = useField('password', yup.string().required());\n  const { value: token } = useField('token', yup.string());\n\n  const onSubmit = handleSubmit(values => {\n    if (!senhaCopiada.value) {\n      toast.show('Antes de continuar', 'Copie a senha gerada e guarde em um local seguro.', Severity.Error);\n      return;\n    }\n    loadingForm.value = true;\n    authRequest.redefinirSenha(values).then((response) => {\n      toast.show(Summary.Success, response.message, Severity.Success);\n      setTimeout(() => {\n        navigateTo('/login');\n      }, 1000);\n    }).finally(() => {\n      loadingForm.value = false;\n    });\n  });\n\n  const copiar = () => {\n    navigator.clipboard.writeText(password.value);\n    toast.show('Senha copiada', 'Salve em um local seguro');\n    senhaCopiada.value = true;\n  };\n\n  const gerarSenha = () => {\n    password.value = authRequest.gerarSenha();\n    senhaCopiada.value = false;\n  };\n  gerarSenha();\n\n\nreturn (_ctx, _cache) => {\n  const _component_CommonSplashScreen = __nuxt_component_0\n  const _component_PrimeInputText = __nuxt_component_1\n  const _component_PrimeButton = __nuxt_component_2\n  const _component_NuxtLink = __nuxt_component_3\n  const _component_PrimeMessage = __nuxt_component_4\n  const _directive_tooltip = _resolveDirective(\"tooltip\")\n\n  return (_openBlock(), _createElementBlock(_Fragment, null, [\n    _withDirectives(_createVNode(_component_CommonSplashScreen, null, null, 512), [\n      [_vShow, _unref(showSplashScreen)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_1, [\n      _hoisted_2,\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"form\", {\n          onSubmit: _cache[3] || (_cache[3] = _withModifiers((...args) => (_unref(onSubmit) && _unref(onSubmit)(...args)), [\"prevent\"]))\n        }, [\n          _createElementVNode(\"div\", _hoisted_3, [\n            _createElementVNode(\"div\", _hoisted_4, [\n              _createVNode(_component_PrimeInputText, {\n                modelValue: _unref(password),\n                \"onUpdate:modelValue\": _cache[0] || (_cache[0] = $event => (_isRef(password) ? (password).value = $event : null)),\n                class: _normalizeClass([{ 'p-invalid': _unref(passwordError) }, \"border-none\"])\n              }, null, 8, [\"modelValue\", \"class\"]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-sync\",\n                text: \"\",\n                outlined: \"\",\n                onClick: _cache[1] || (_cache[1] = $event => (gerarSenha()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Gerar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ]),\n              _withDirectives(_createVNode(_component_PrimeButton, {\n                icon: \"pi pi-copy\",\n                severity: \"secondary\",\n                onClick: _cache[2] || (_cache[2] = $event => (copiar()))\n              }, null, 512), [\n                [\n                  _directive_tooltip,\n                  'Copiar senha',\n                  void 0,\n                  { top: true }\n                ]\n              ])\n            ]),\n            _createElementVNode(\"span\", _hoisted_5, _toDisplayString(_unref(passwordError)), 1)\n          ]),\n          _createVNode(_component_PrimeButton, {\n            type: \"submit\",\n            label: \"Continuar\",\n            class: \"w-full\",\n            loading: _unref(loadingForm)\n          }, null, 8, [\"loading\"])\n        ], 32),\n        _createElementVNode(\"div\", _hoisted_6, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && _unref(tokenValido)]\n    ]),\n    _withDirectives(_createElementVNode(\"div\", _hoisted_7, [\n      _createElementVNode(\"div\", _hoisted_8, [\n        _hoisted_9,\n        _hoisted_10,\n        _createVNode(_component_PrimeMessage, {\n          severity: \"error\",\n          closable: false,\n          class: \"text-left\"\n        }, {\n          default: _withCtx(() => [\n            _createTextVNode(\" Lamentamos, este link de redefinição de senha é inválido. \")\n          ]),\n          _: 1\n        })\n      ]),\n      _createElementVNode(\"div\", null, [\n        _createElementVNode(\"div\", _hoisted_11, [\n          _createVNode(_component_NuxtLink, { to: \"/recuperar-senha\" }, {\n            default: _withCtx(() => [\n              _createVNode(_component_PrimeButton, {\n                label: \"Solicitar nova recuperação de Senha\",\n                class: \"w-full\"\n              })\n            ]),\n            _: 1\n          })\n        ]),\n        _createElementVNode(\"div\", _hoisted_12, [\n          _createVNode(_component_NuxtLink, {\n            to: \"/login\",\n            class: \"font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer\"\n          }, {\n            default: _withCtx(() => [\n              _createTextVNode(\" Voltar para Login \")\n            ]),\n            _: 1\n          })\n        ])\n      ])\n    ], 512), [\n      [_vShow, !_unref(showSplashScreen) && !_unref(tokenValido)]\n    ])\n  ], 64))\n}\n}\n\n}\n\n\n\nexport default _sfc_main",
-      "start": 1742841400019,
-      "end": 1742841400020,
+      "start": 1742846401256,
+      "end": 1742846401256,
       "order": "post"
     },
     {
       "name": "vite:build-import-analysis",
-      "start": 1742841400020,
-      "end": 1742841400020,
+      "start": 1742846401257,
+      "end": 1742846401257,
       "order": "normal"
     },
     {
       "name": "vite:reporter",
-      "start": 1742841400020,
-      "end": 1742841400020,
+      "start": 1742846401257,
+      "end": 1742846401257,
       "order": "normal"
     }
   ]

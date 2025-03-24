@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-primevue',
     '@vee-validate/nuxt',
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
   ],
   primevue: {
     options: {
