@@ -1,0 +1,231 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/error.vue?vue&type=script&setup=true&lang.ts",
+  "transforms": [
+    {
+      "name": "vite:vue",
+      "result": "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 loginWallpaper\" }\nconst _hoisted_2 = { class: \"text-center h-full\" }\nconst _hoisted_3 = { class: \"text-8xl font-bold text-slate-500\" }\nconst _hoisted_4 = { class: \"text-uppercase text-3xl text-slate-500\" }\nconst _hoisted_5 = { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" }\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"br\", null, null, -1)\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'error',\n  props: {\n    error: {\n      type: Object,\n      required: true,\n    },\n  },\n  setup(__props) {\n\n  const props = __props;\n\n  const handleError = () => clearError({ redirect: '/' });\n  const tituloErro = computed(() => {\n    const codigoErro = props.error ? props.error.statusCode : null;\n    switch (codigoErro) {\n      case 404:\n        return 'Página não encontrada';\n        break;\n      default:\n        return 'Ocorreu um erro inesperado.';\n        break;\n    }\n  });\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")!\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"h1\", _hoisted_3, _toDisplayString(props.error ? props.error.statusCode : ''), 1),\n      _createElementVNode(\"h3\", _hoisted_4, _toDisplayString(_unref(tituloErro)), 1),\n      _createElementVNode(\"p\", _hoisted_5, [\n        _createTextVNode(_toDisplayString(props.error ? props.error.message : '') + \" \", 1),\n        _hoisted_6,\n        _createTextVNode(\" Contate o administrador do sistema. \")\n      ]),\n      _createVNode(_component_PrimeButton, {\n        label: \"Inicio\",\n        icon: \"pi pi-arrow-left\",\n        onClick: handleError\n      })\n    ])\n  ]))\n}\n}\n\n})",
+      "start": 1742841400273,
+      "end": 1742841400273
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841400273,
+      "end": 1742841400273,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841400273,
+      "end": 1742841400273,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841400273,
+      "end": 1742841400273,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841400273,
+      "end": 1742841400273,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "result": "import { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 loginWallpaper\" };\nconst _hoisted_2 = { class: \"text-center h-full\" };\nconst _hoisted_3 = { class: \"text-8xl font-bold text-slate-500\" };\nconst _hoisted_4 = { class: \"text-uppercase text-3xl text-slate-500\" };\nconst _hoisted_5 = { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" };\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"br\", null, null, -1);\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"error\",\n  props: {\n    error: {\n      type: Object,\n      required: true\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const handleError = () => clearError({ redirect: \"/\" });\n    const tituloErro = computed(() => {\n      const codigoErro = props.error ? props.error.statusCode : null;\n      switch (codigoErro) {\n        case 404:\n          return \"Página não encontrada\";\n          break;\n        default:\n          return \"Ocorreu um erro inesperado.\";\n          break;\n      }\n    });\n    return (_ctx, _cache) => {\n      const _component_PrimeButton = _resolveComponent(\"PrimeButton\");\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"h1\", _hoisted_3, _toDisplayString(props.error ? props.error.statusCode : \"\"), 1),\n          _createElementVNode(\"h3\", _hoisted_4, _toDisplayString(_unref(tituloErro)), 1),\n          _createElementVNode(\"p\", _hoisted_5, [\n            _createTextVNode(_toDisplayString(props.error ? props.error.message : \"\") + \" \", 1),\n            _hoisted_6,\n            _createTextVNode(\" Contate o administrador do sistema. \")\n          ]),\n          _createVNode(_component_PrimeButton, {\n            label: \"Inicio\",\n            icon: \"pi pi-arrow-left\",\n            onClick: handleError\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
+      "start": 1742841400273,
+      "end": 1742841400386,
+      "order": "normal",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/error.vue?vue&type=script&setup=true&lang.ts"
+        ],
+        "sourcesContent": [
+          "import { defineComponent as _defineComponent } from 'vue'\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\"\n\nconst _hoisted_1 = { class: \"flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 loginWallpaper\" }\nconst _hoisted_2 = { class: \"text-center h-full\" }\nconst _hoisted_3 = { class: \"text-8xl font-bold text-slate-500\" }\nconst _hoisted_4 = { class: \"text-uppercase text-3xl text-slate-500\" }\nconst _hoisted_5 = { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" }\nconst _hoisted_6 = /*#__PURE__*/_createElementVNode(\"br\", null, null, -1)\n\n\nexport default /*#__PURE__*/_defineComponent({\n  __name: 'error',\n  props: {\n    error: {\n      type: Object,\n      required: true,\n    },\n  },\n  setup(__props) {\n\n  const props = __props;\n\n  const handleError = () => clearError({ redirect: '/' });\n  const tituloErro = computed(() => {\n    const codigoErro = props.error ? props.error.statusCode : null;\n    switch (codigoErro) {\n      case 404:\n        return 'Página não encontrada';\n        break;\n      default:\n        return 'Ocorreu um erro inesperado.';\n        break;\n    }\n  });\n\nreturn (_ctx: any,_cache: any) => {\n  const _component_PrimeButton = _resolveComponent(\"PrimeButton\")!\n\n  return (_openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n    _createElementVNode(\"div\", _hoisted_2, [\n      _createElementVNode(\"h1\", _hoisted_3, _toDisplayString(props.error ? props.error.statusCode : ''), 1),\n      _createElementVNode(\"h3\", _hoisted_4, _toDisplayString(_unref(tituloErro)), 1),\n      _createElementVNode(\"p\", _hoisted_5, [\n        _createTextVNode(_toDisplayString(props.error ? props.error.message : '') + \" \", 1),\n        _hoisted_6,\n        _createTextVNode(\" Contate o administrador do sistema. \")\n      ]),\n      _createVNode(_component_PrimeButton, {\n        label: \"Inicio\",\n        icon: \"pi pi-arrow-left\",\n        onClick: handleError\n      })\n    ])\n  ]))\n}\n}\n\n})"
+        ],
+        "mappings": "AAAA,SAAS,mBAAmB,wBAAwB;AACpD,SAAS,mBAAmB,kBAAkB,sBAAsB,qBAAqB,SAAS,QAAQ,mBAAmB,kBAAkB,oBAAoB,mBAAmB,eAAe,cAAc,aAAa,YAAY,sBAAsB,2BAA2B;AAE7R,MAAM,aAAa,EAAE,OAAO,qFAAqF;AACjH,MAAM,aAAa,EAAE,OAAO,qBAAqB;AACjD,MAAM,aAAa,EAAE,OAAO,oCAAoC;AAChE,MAAM,aAAa,EAAE,OAAO,yCAAyC;AACrE,MAAM,aAAa,EAAE,OAAO,+CAA+C;AAC3E,MAAM,aAA0B,oCAAoB,MAAM,MAAM,MAAM,EAAE;AAGxE,eAA4B,iCAAiB;AAAA,EAC3C,QAAQ;AAAA,EACR,OAAO;AAAA,IACL,OAAO;AAAA,MACL,MAAM;AAAA,MACN,UAAU;AAAA,IACZ;AAAA,EACF;AAAA,EACA,MAAM,SAAS;AAEf,UAAM,QAAQ;AAEd,UAAM,cAAc,MAAM,WAAW,EAAE,UAAU,IAAI,CAAC;AACtD,UAAM,aAAa,SAAS,MAAM;AAChC,YAAM,aAAa,MAAM,QAAQ,MAAM,MAAM,aAAa;AAC1D,cAAQ,YAAY;AAAA,QAClB,KAAK;AACH,iBAAO;AACP;AAAA,QACF;AACE,iBAAO;AACP;AAAA,MACJ;AAAA,IACF,CAAC;AAEH,WAAO,CAAC,MAAU,WAAgB;AAChC,YAAM,yBAAyB,kBAAkB,aAAa;AAE9D,aAAQ,WAAW,GAAG,oBAAoB,OAAO,YAAY;AAAA,QAC3D,oBAAoB,OAAO,YAAY;AAAA,UACrC,oBAAoB,MAAM,YAAY,iBAAiB,MAAM,QAAQ,MAAM,MAAM,aAAa,EAAE,GAAG,CAAC;AAAA,UACpG,oBAAoB,MAAM,YAAY,iBAAiB,OAAO,UAAU,CAAC,GAAG,CAAC;AAAA,UAC7E,oBAAoB,KAAK,YAAY;AAAA,YACnC,iBAAiB,iBAAiB,MAAM,QAAQ,MAAM,MAAM,UAAU,EAAE,IAAI,KAAK,CAAC;AAAA,YAClF;AAAA,YACA,iBAAiB,uCAAuC;AAAA,UAC1D,CAAC;AAAA,UACD,aAAa,wBAAwB;AAAA,YACnC,OAAO;AAAA,YACP,MAAM;AAAA,YACN,SAAS;AAAA,UACX,CAAC;AAAA,QACH,CAAC;AAAA,MACH,CAAC;AAAA,IACH;AAAA,EACA;AAEA,CAAC;",
+        "names": []
+      }
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841400386,
+      "end": 1742841400386,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "result": "import { clearError } from '#app/composables/error';\nimport { computed } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 loginWallpaper\" };\nconst _hoisted_2 = { class: \"text-center h-full\" };\nconst _hoisted_3 = { class: \"text-8xl font-bold text-slate-500\" };\nconst _hoisted_4 = { class: \"text-uppercase text-3xl text-slate-500\" };\nconst _hoisted_5 = { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" };\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"br\", null, null, -1);\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"error\",\n  props: {\n    error: {\n      type: Object,\n      required: true\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const handleError = () => clearError({ redirect: \"/\" });\n    const tituloErro = computed(() => {\n      const codigoErro = props.error ? props.error.statusCode : null;\n      switch (codigoErro) {\n        case 404:\n          return \"Página não encontrada\";\n          break;\n        default:\n          return \"Ocorreu um erro inesperado.\";\n          break;\n      }\n    });\n    return (_ctx, _cache) => {\n      const _component_PrimeButton = _resolveComponent(\"PrimeButton\");\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"h1\", _hoisted_3, _toDisplayString(props.error ? props.error.statusCode : \"\"), 1),\n          _createElementVNode(\"h3\", _hoisted_4, _toDisplayString(_unref(tituloErro)), 1),\n          _createElementVNode(\"p\", _hoisted_5, [\n            _createTextVNode(_toDisplayString(props.error ? props.error.message : \"\") + \" \", 1),\n            _hoisted_6,\n            _createTextVNode(\" Contate o administrador do sistema. \")\n          ]),\n          _createVNode(_component_PrimeButton, {\n            label: \"Inicio\",\n            icon: \"pi pi-arrow-left\",\n            onClick: handleError\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          ""
+        ],
+        "names": [],
+        "mappings": ";;AAAA,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1D,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnS,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnH,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC7E,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC7E,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACpB,CAAC,CAAC,CAAC,CAAC,CAAC;AACL,CAAC,CAAC,CAAC,CAAC;AACJ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAClB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC1B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5D,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC3B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACjB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC/C,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACP,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC9B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACtE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACnE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChH,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACzF,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChG,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACvB,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACb,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChD,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAC5B,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACrC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AAChC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACZ,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACV,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACT,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC;AACN,CAAC,CAAC,CAAC;AACH,CAAC,CAAC,CAAC;"
+      }
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "result": "import { default as __nuxt_component_0 } from \"primevue/button\";\nimport { clearError } from '#app/composables/error';\nimport { computed } from 'vue';\nimport { defineComponent as _defineComponent } from \"vue\";\nimport { toDisplayString as _toDisplayString, createElementVNode as _createElementVNode, unref as _unref, createTextVNode as _createTextVNode, resolveComponent as _resolveComponent, createVNode as _createVNode, openBlock as _openBlock, createElementBlock as _createElementBlock } from \"vue\";\nconst _hoisted_1 = { class: \"flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 loginWallpaper\" };\nconst _hoisted_2 = { class: \"text-center h-full\" };\nconst _hoisted_3 = { class: \"text-8xl font-bold text-slate-500\" };\nconst _hoisted_4 = { class: \"text-uppercase text-3xl text-slate-500\" };\nconst _hoisted_5 = { class: \"text-muted mb-5 text-lg mt-10 text-slate-500\" };\nconst _hoisted_6 = /* @__PURE__ */ _createElementVNode(\"br\", null, null, -1);\nexport default /* @__PURE__ */ _defineComponent({\n  __name: \"error\",\n  props: {\n    error: {\n      type: Object,\n      required: true\n    }\n  },\n  setup(__props) {\n    const props = __props;\n    const handleError = () => clearError({ redirect: \"/\" });\n    const tituloErro = computed(() => {\n      const codigoErro = props.error ? props.error.statusCode : null;\n      switch (codigoErro) {\n        case 404:\n          return \"Página não encontrada\";\n          break;\n        default:\n          return \"Ocorreu um erro inesperado.\";\n          break;\n      }\n    });\n    return (_ctx, _cache) => {\n      const _component_PrimeButton = __nuxt_component_0;\n      return _openBlock(), _createElementBlock(\"div\", _hoisted_1, [\n        _createElementVNode(\"div\", _hoisted_2, [\n          _createElementVNode(\"h1\", _hoisted_3, _toDisplayString(props.error ? props.error.statusCode : \"\"), 1),\n          _createElementVNode(\"h3\", _hoisted_4, _toDisplayString(_unref(tituloErro)), 1),\n          _createElementVNode(\"p\", _hoisted_5, [\n            _createTextVNode(_toDisplayString(props.error ? props.error.message : \"\") + \" \", 1),\n            _hoisted_6,\n            _createTextVNode(\" Contate o administrador do sistema. \")\n          ]),\n          _createVNode(_component_PrimeButton, {\n            label: \"Inicio\",\n            icon: \"pi pi-arrow-left\",\n            onClick: handleError\n          })\n        ])\n      ]);\n    };\n  }\n});\n",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400387,
+      "end": 1742841400387,
+      "order": "normal"
+    }
+  ]
+}

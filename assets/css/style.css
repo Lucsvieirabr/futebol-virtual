@@ -1,0 +1,271 @@
+html {
+  font-size: 14px;
+  line-height: normal;
+  overflow-x: scroll;
+}
+.loginWallpaper {
+  background-image: url("@/assets/images/loginWallpaper.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.backgroundWallpaper {
+  background: url("@/assets/images/backgroundWallpaper.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+}
+.p-float-label label {
+  margin-top: -0.8rem;
+}
+.primary-color-text {
+  color: var(--primary-color);
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  border: 0;
+}
+.p-inputtext.p-invalid.p-component {
+  border-style: solid;
+}
+.p-panel.no-header .p-panel-header {
+  display: none;
+}
+.p-datatable .p-datatable-thead > tr > th {
+  padding: 0.5rem 1rem !important;
+}
+.p-panel-content {
+  padding: 0.25rem;
+}
+.p-button:not(.p-button-icon-only) {
+  padding: 0.65rem 1.15rem !important;
+}
+.p-datepicker table td {
+  padding: 0.1rem;
+}
+.p-datepicker .p-datepicker-buttonbar,
+.p-datepicker .p-datepicker-header,
+.p-datepicker .p-datepicker-title button {
+  padding: 0.25rem 0;
+}
+.p-button-label {
+  font-weight: 500;
+}
+.p-datatable-footer {
+  padding: 0.5rem 1rem !important;
+  font-weight: 500;
+  font-size: 12px;
+}
+.p-datatable .p-tag-value {
+  font-size: 0.85rem;
+}
+.p-dropdown-panel .p-dropdown-header {
+  padding: 0.5rem !important;
+}
+.p-button.p-button-secondary,
+.p-button-group.p-button-secondary > .p-button,
+.p-splitbutton.p-button-secondary > .p-button {
+  color: #475569;
+  background: #f1f5f9;
+  border: 1px solid #f1f5f9;
+}
+.p-rowgroup-header td,
+.p-rowgroup-footer td {
+  padding: 0.5rem 1rem;
+}
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: #f9fbfd;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box ! important;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+
+tabltable {
+  width: 100% !important;
+  cursor: pointer;
+  table-layout: auto !important;
+  overflow-x: auto; /* Mantém a rolagem horizontal */
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 4px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  color: #ffffff;
+  letter-spacing: 1px;
+  word-wrap: break-word;
+  word-break: break-all; /* Quebra palavras longas em qualquer ponto */
+  white-space: normal;
+  min-width: 60px; /* Reduz a largura mínima */
+  overflow-wrap: break-word;
+}
+
+/* Media Queries para telas menores */
+@media (max-width: 768px) {
+  table th,
+  table td {
+    font-size: 10px !important; /* Reduz o tamanho da fonte */
+    padding: 8px !important; /* Reduz o padding */
+  }
+
+  /* Oculta colunas menos importantes */
+  table td:nth-child(n + 17),
+  table th:nth-child(n + 17) {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  table th,
+  table td {
+    font-size: 10px !important; /* Reduz ainda mais o tamanho da fonte */
+    padding: 5px !important; /* Reduz ainda mais o padding */
+  }
+
+  /* Oculta mais colunas */
+  table td:nth-child(n + 11),
+  table th:nth-child(n + 11) {
+    display: none;
+  }
+}
+
+table th {
+  position: sticky;
+  top: 0;
+  background-color: #3e3d3d;
+  color: #f1f1ff;
+  z-index: 1;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  width: auto;
+}
+
+.table,
+#graficos {
+  position: sticky;
+  width: auto;
+}
+
+#graficos canvas {
+  max-height: 400px;
+  width: auto;
+}
+
+#graficos {
+  display: none;
+}
+
+.firstCollumn {
+  color: #181818 !important;
+}
+
+.btnTables {
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #2e86de;
+  color: #e2e8ee;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.btnTables:hover {
+  background-color: #194877;
+}
+
+table span.pontosGraficos {
+  display: block;
+  right: 1;
+  margin-top: 15px;
+}
+
+.highlight {
+  box-shadow: inset 0 0 5px 6px #000000;
+}
+
+table tr td:nth-last-child(-n + 6) {
+  color: black;
+  font-weight: bold;
+}
+
+table tr:first-child,
+table th:first-child {
+  border: none !important;
+}
+
+table tr:first-child th,
+table tr:first-child td {
+  border: none;
+}
+
+table tr td:nth-child(6),
+table tr td:nth-child(11),
+table tr td:nth-child(16) {
+  border-right: 5px solid #2d0bf1 !important;
+}
+
+table tr th:nth-child(6),
+table tr th:nth-child(11),
+table tr th:nth-child(16) {
+  border-right: 5px solid #2d0bf1 !important;
+}
+
+.percentCell {
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+}
+
+.green {
+  background-color: #28a745;
+}
+
+.red {
+  background-color: #dc3545;
+}
+
+.text-green {
+  color: #28a745 !important;
+  font-size: 0.95rem !important;
+}
+
+.text-red {
+  color: #dc3545 !important;
+  font-size: 0.70rem !important;
+}
+
+#tabelao25mediaColunaPorcentagens,
+#tabelaambasmediaColunaSubidas,
+#tabelao25mediaColunaLateralizacoesOver,
+#tabelao25mediaColunaDescidas,
+#tabelao25mediaColunaLateralizacoesUnder,
+#tabelao25mediaColunaGols {
+  font-size: 0.95rem !important;
+}
+
+.somaGolsCell {
+  color: #000000;
+  font-size: 0.95rem !important;
+  padding: 0;
+}

@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/column/column.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import BaseComponent from 'primevue/basecomponent';\nimport ColumnStyle from 'primevue/column/style';\n\nvar script$1 = {\n  name: 'BaseColumn',\n  \"extends\": BaseComponent,\n  props: {\n    columnKey: {\n      type: null,\n      \"default\": null\n    },\n    field: {\n      type: [String, Function],\n      \"default\": null\n    },\n    sortField: {\n      type: [String, Function],\n      \"default\": null\n    },\n    filterField: {\n      type: [String, Function],\n      \"default\": null\n    },\n    dataType: {\n      type: String,\n      \"default\": 'text'\n    },\n    sortable: {\n      type: Boolean,\n      \"default\": false\n    },\n    header: {\n      type: null,\n      \"default\": null\n    },\n    footer: {\n      type: null,\n      \"default\": null\n    },\n    style: {\n      type: null,\n      \"default\": null\n    },\n    \"class\": {\n      type: String,\n      \"default\": null\n    },\n    headerStyle: {\n      type: null,\n      \"default\": null\n    },\n    headerClass: {\n      type: String,\n      \"default\": null\n    },\n    bodyStyle: {\n      type: null,\n      \"default\": null\n    },\n    bodyClass: {\n      type: String,\n      \"default\": null\n    },\n    footerStyle: {\n      type: null,\n      \"default\": null\n    },\n    footerClass: {\n      type: String,\n      \"default\": null\n    },\n    showFilterMenu: {\n      type: Boolean,\n      \"default\": true\n    },\n    showFilterOperator: {\n      type: Boolean,\n      \"default\": true\n    },\n    showClearButton: {\n      type: Boolean,\n      \"default\": true\n    },\n    showApplyButton: {\n      type: Boolean,\n      \"default\": true\n    },\n    showFilterMatchModes: {\n      type: Boolean,\n      \"default\": true\n    },\n    showAddButton: {\n      type: Boolean,\n      \"default\": true\n    },\n    filterMatchModeOptions: {\n      type: Array,\n      \"default\": null\n    },\n    maxConstraints: {\n      type: Number,\n      \"default\": 2\n    },\n    excludeGlobalFilter: {\n      type: Boolean,\n      \"default\": false\n    },\n    filterHeaderClass: {\n      type: String,\n      \"default\": null\n    },\n    filterHeaderStyle: {\n      type: null,\n      \"default\": null\n    },\n    filterMenuClass: {\n      type: String,\n      \"default\": null\n    },\n    filterMenuStyle: {\n      type: null,\n      \"default\": null\n    },\n    selectionMode: {\n      type: String,\n      \"default\": null\n    },\n    expander: {\n      type: Boolean,\n      \"default\": false\n    },\n    colspan: {\n      type: Number,\n      \"default\": null\n    },\n    rowspan: {\n      type: Number,\n      \"default\": null\n    },\n    rowReorder: {\n      type: Boolean,\n      \"default\": false\n    },\n    rowReorderIcon: {\n      type: String,\n      \"default\": undefined\n    },\n    reorderableColumn: {\n      type: Boolean,\n      \"default\": true\n    },\n    rowEditor: {\n      type: Boolean,\n      \"default\": false\n    },\n    frozen: {\n      type: Boolean,\n      \"default\": false\n    },\n    alignFrozen: {\n      type: String,\n      \"default\": 'left'\n    },\n    exportable: {\n      type: Boolean,\n      \"default\": true\n    },\n    exportHeader: {\n      type: String,\n      \"default\": null\n    },\n    exportFooter: {\n      type: String,\n      \"default\": null\n    },\n    filterMatchMode: {\n      type: String,\n      \"default\": null\n    },\n    hidden: {\n      type: Boolean,\n      \"default\": false\n    }\n  },\n  style: ColumnStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Column',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  inject: ['$columns'],\n  mounted: function mounted() {\n    var _this$$columns;\n    (_this$$columns = this.$columns) === null || _this$$columns === void 0 || _this$$columns.add(this.$);\n  },\n  unmounted: function unmounted() {\n    var _this$$columns2;\n    (_this$$columns2 = this.$columns) === null || _this$$columns2 === void 0 || _this$$columns2[\"delete\"](this.$);\n  },\n  render: function render() {\n    return null;\n  }\n};\n\nexport { script as default };\n",
+      "start": 1742841399473,
+      "end": 1742841399599,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841399599,
+      "end": 1742841399599,
+      "order": "normal"
+    }
+  ]
+}

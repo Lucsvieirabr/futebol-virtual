@@ -1,0 +1,214 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/floatlabel/floatlabel.esm.js?nuxt_component=async&nuxt_component_name=PrimeFloatLabel&nuxt_component_export=default",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import BaseComponent from 'primevue/basecomponent';\nimport FloatLabelStyle from 'primevue/floatlabel/style';\nimport { openBlock, createElementBlock, mergeProps, renderSlot } from 'vue';\n\nvar script$1 = {\n  name: 'BaseFloatLabel',\n  \"extends\": BaseComponent,\n  props: {},\n  style: FloatLabelStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'FloatLabel',\n  \"extends\": script$1,\n  inheritAttrs: false\n};\n\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"span\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [renderSlot(_ctx.$slots, \"default\")], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841398370,
+      "end": 1742841398666,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841398666,
+      "end": 1742841398666,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841398666,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/floatlabel/floatlabel.esm.js\").then(r => r[\"default\"] || r.default || r))",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "replace",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/floatlabel/floatlabel.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841398667,
+      "end": 1742841398667,
+      "order": "normal"
+    }
+  ]
+}

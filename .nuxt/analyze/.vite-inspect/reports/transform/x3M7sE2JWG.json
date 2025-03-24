@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/menu/menu.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import OverlayEventBus from 'primevue/overlayeventbus';\nimport Portal from 'primevue/portal';\nimport { ObjectUtils, UniqueComponentId, ZIndexUtils, DomHandler, ConnectedOverlayScrollHandler } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport MenuStyle from 'primevue/menu/style';\nimport Ripple from 'primevue/ripple';\nimport { mergeProps, resolveDirective, openBlock, createElementBlock, createElementVNode, withDirectives, createBlock, resolveDynamicComponent, normalizeClass, createCommentVNode, toDisplayString, resolveComponent, withCtx, createVNode, Transition, renderSlot, Fragment, renderList, createTextVNode } from 'vue';\n\nvar script$2 = {\n  name: 'BaseMenu',\n  \"extends\": BaseComponent,\n  props: {\n    popup: {\n      type: Boolean,\n      \"default\": false\n    },\n    model: {\n      type: Array,\n      \"default\": null\n    },\n    appendTo: {\n      type: [String, Object],\n      \"default\": 'body'\n    },\n    autoZIndex: {\n      type: Boolean,\n      \"default\": true\n    },\n    baseZIndex: {\n      type: Number,\n      \"default\": 0\n    },\n    tabindex: {\n      type: Number,\n      \"default\": 0\n    },\n    ariaLabel: {\n      type: String,\n      \"default\": null\n    },\n    ariaLabelledby: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: MenuStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script$1 = {\n  name: 'Menuitem',\n  hostName: 'Menu',\n  \"extends\": BaseComponent,\n  inheritAttrs: false,\n  emits: ['item-click', 'item-mousemove'],\n  props: {\n    item: null,\n    templates: null,\n    id: null,\n    focusedOptionId: null,\n    index: null\n  },\n  methods: {\n    getItemProp: function getItemProp(processedItem, name) {\n      return processedItem && processedItem.item ? ObjectUtils.getItemValue(processedItem.item[name]) : undefined;\n    },\n    getPTOptions: function getPTOptions(key) {\n      return this.ptm(key, {\n        context: {\n          item: this.item,\n          index: this.index,\n          focused: this.isItemFocused(),\n          disabled: this.disabled()\n        }\n      });\n    },\n    isItemFocused: function isItemFocused() {\n      return this.focusedOptionId === this.id;\n    },\n    onItemClick: function onItemClick(event) {\n      var command = this.getItemProp(this.item, 'command');\n      command && command({\n        originalEvent: event,\n        item: this.item.item\n      });\n      this.$emit('item-click', {\n        originalEvent: event,\n        item: this.item,\n        id: this.id\n      });\n    },\n    onItemMouseMove: function onItemMouseMove(event) {\n      this.$emit('item-mousemove', {\n        originalEvent: event,\n        item: this.item,\n        id: this.id\n      });\n    },\n    visible: function visible() {\n      return typeof this.item.visible === 'function' ? this.item.visible() : this.item.visible !== false;\n    },\n    disabled: function disabled() {\n      return typeof this.item.disabled === 'function' ? this.item.disabled() : this.item.disabled;\n    },\n    label: function label() {\n      return typeof this.item.label === 'function' ? this.item.label() : this.item.label;\n    },\n    getMenuItemProps: function getMenuItemProps(item) {\n      return {\n        action: mergeProps({\n          \"class\": this.cx('action'),\n          tabindex: '-1',\n          'aria-hidden': true\n        }, this.getPTOptions('action')),\n        icon: mergeProps({\n          \"class\": [this.cx('icon'), item.icon]\n        }, this.getPTOptions('icon')),\n        label: mergeProps({\n          \"class\": this.cx('label')\n        }, this.getPTOptions('label'))\n      };\n    }\n  },\n  directives: {\n    ripple: Ripple\n  }\n};\n\nvar _hoisted_1$1 = [\"id\", \"aria-label\", \"aria-disabled\", \"data-p-focused\", \"data-p-disabled\"];\nvar _hoisted_2$1 = [\"href\", \"target\"];\nfunction render$1(_ctx, _cache, $props, $setup, $data, $options) {\n  var _directive_ripple = resolveDirective(\"ripple\");\n  return $options.visible() ? (openBlock(), createElementBlock(\"li\", mergeProps({\n    key: 0,\n    id: $props.id,\n    \"class\": [_ctx.cx('menuitem'), $props.item[\"class\"]],\n    role: \"menuitem\",\n    style: $props.item.style,\n    \"aria-label\": $options.label(),\n    \"aria-disabled\": $options.disabled()\n  }, $options.getPTOptions('menuitem'), {\n    \"data-p-focused\": $options.isItemFocused(),\n    \"data-p-disabled\": $options.disabled() || false\n  }), [createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('content'),\n    onClick: _cache[0] || (_cache[0] = function ($event) {\n      return $options.onItemClick($event);\n    }),\n    onMousemove: _cache[1] || (_cache[1] = function ($event) {\n      return $options.onItemMouseMove($event);\n    })\n  }, $options.getPTOptions('content')), [!$props.templates.item ? withDirectives((openBlock(), createElementBlock(\"a\", mergeProps({\n    key: 0,\n    href: $props.item.url,\n    \"class\": _ctx.cx('action'),\n    target: $props.item.target,\n    tabindex: \"-1\",\n    \"aria-hidden\": \"true\"\n  }, $options.getPTOptions('action')), [$props.templates.itemicon ? (openBlock(), createBlock(resolveDynamicComponent($props.templates.itemicon), {\n    key: 0,\n    item: $props.item,\n    \"class\": normalizeClass(_ctx.cx('icon'))\n  }, null, 8, [\"item\", \"class\"])) : $props.item.icon ? (openBlock(), createElementBlock(\"span\", mergeProps({\n    key: 1,\n    \"class\": [_ctx.cx('icon'), $props.item.icon]\n  }, $options.getPTOptions('icon')), null, 16)) : createCommentVNode(\"\", true), createElementVNode(\"span\", mergeProps({\n    \"class\": _ctx.cx('label')\n  }, $options.getPTOptions('label')), toDisplayString($options.label()), 17)], 16, _hoisted_2$1)), [[_directive_ripple]]) : $props.templates.item ? (openBlock(), createBlock(resolveDynamicComponent($props.templates.item), {\n    key: 1,\n    item: $props.item,\n    label: $options.label(),\n    props: $options.getMenuItemProps($props.item)\n  }, null, 8, [\"item\", \"label\", \"props\"])) : createCommentVNode(\"\", true)], 16)], 16, _hoisted_1$1)) : createCommentVNode(\"\", true);\n}\n\nscript$1.render = render$1;\n\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && iter[Symbol.iterator] != null || iter[\"@@iterator\"] != null) return Array.from(iter); }\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }\nvar script = {\n  name: 'Menu',\n  \"extends\": script$2,\n  inheritAttrs: false,\n  emits: ['show', 'hide', 'focus', 'blur'],\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      overlayVisible: false,\n      focused: false,\n      focusedOptionIndex: -1,\n      selectedOptionIndex: -1\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    }\n  },\n  target: null,\n  outsideClickListener: null,\n  scrollHandler: null,\n  resizeListener: null,\n  container: null,\n  list: null,\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n    if (!this.popup) {\n      this.bindResizeListener();\n      this.bindOutsideClickListener();\n    }\n  },\n  beforeUnmount: function beforeUnmount() {\n    this.unbindResizeListener();\n    this.unbindOutsideClickListener();\n    if (this.scrollHandler) {\n      this.scrollHandler.destroy();\n      this.scrollHandler = null;\n    }\n    this.target = null;\n    if (this.container && this.autoZIndex) {\n      ZIndexUtils.clear(this.container);\n    }\n    this.container = null;\n  },\n  methods: {\n    itemClick: function itemClick(event) {\n      var item = event.item;\n      if (this.disabled(item)) {\n        return;\n      }\n      if (item.command) {\n        item.command(event);\n      }\n      if (this.overlayVisible) this.hide();\n      if (!this.popup && this.focusedOptionIndex !== event.id) {\n        this.focusedOptionIndex = event.id;\n      }\n    },\n    itemMouseMove: function itemMouseMove(event) {\n      if (this.focused) {\n        this.focusedOptionIndex = event.id;\n      }\n    },\n    onListFocus: function onListFocus(event) {\n      this.focused = true;\n      !this.popup && this.changeFocusedOptionIndex(0);\n      this.$emit('focus', event);\n    },\n    onListBlur: function onListBlur(event) {\n      this.focused = false;\n      this.focusedOptionIndex = -1;\n      this.$emit('blur', event);\n    },\n    onListKeyDown: function onListKeyDown(event) {\n      switch (event.code) {\n        case 'ArrowDown':\n          this.onArrowDownKey(event);\n          break;\n        case 'ArrowUp':\n          this.onArrowUpKey(event);\n          break;\n        case 'Home':\n          this.onHomeKey(event);\n          break;\n        case 'End':\n          this.onEndKey(event);\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n          this.onEnterKey(event);\n          break;\n        case 'Space':\n          this.onSpaceKey(event);\n          break;\n        case 'Escape':\n          if (this.popup) {\n            DomHandler.focus(this.target);\n            this.hide();\n          }\n        case 'Tab':\n          this.overlayVisible && this.hide();\n          break;\n      }\n    },\n    onArrowDownKey: function onArrowDownKey(event) {\n      var optionIndex = this.findNextOptionIndex(this.focusedOptionIndex);\n      this.changeFocusedOptionIndex(optionIndex);\n      event.preventDefault();\n    },\n    onArrowUpKey: function onArrowUpKey(event) {\n      if (event.altKey && this.popup) {\n        DomHandler.focus(this.target);\n        this.hide();\n        event.preventDefault();\n      } else {\n        var optionIndex = this.findPrevOptionIndex(this.focusedOptionIndex);\n        this.changeFocusedOptionIndex(optionIndex);\n        event.preventDefault();\n      }\n    },\n    onHomeKey: function onHomeKey(event) {\n      this.changeFocusedOptionIndex(0);\n      event.preventDefault();\n    },\n    onEndKey: function onEndKey(event) {\n      this.changeFocusedOptionIndex(DomHandler.find(this.container, 'li[data-pc-section=\"menuitem\"][data-p-disabled=\"false\"]').length - 1);\n      event.preventDefault();\n    },\n    onEnterKey: function onEnterKey(event) {\n      var element = DomHandler.findSingle(this.list, \"li[id=\\\"\".concat(\"\".concat(this.focusedOptionIndex), \"\\\"]\"));\n      var anchorElement = element && DomHandler.findSingle(element, 'a[data-pc-section=\"action\"]');\n      this.popup && DomHandler.focus(this.target);\n      anchorElement ? anchorElement.click() : element && element.click();\n      event.preventDefault();\n    },\n    onSpaceKey: function onSpaceKey(event) {\n      this.onEnterKey(event);\n    },\n    findNextOptionIndex: function findNextOptionIndex(index) {\n      var links = DomHandler.find(this.container, 'li[data-pc-section=\"menuitem\"][data-p-disabled=\"false\"]');\n      var matchedOptionIndex = _toConsumableArray(links).findIndex(function (link) {\n        return link.id === index;\n      });\n      return matchedOptionIndex > -1 ? matchedOptionIndex + 1 : 0;\n    },\n    findPrevOptionIndex: function findPrevOptionIndex(index) {\n      var links = DomHandler.find(this.container, 'li[data-pc-section=\"menuitem\"][data-p-disabled=\"false\"]');\n      var matchedOptionIndex = _toConsumableArray(links).findIndex(function (link) {\n        return link.id === index;\n      });\n      return matchedOptionIndex > -1 ? matchedOptionIndex - 1 : 0;\n    },\n    changeFocusedOptionIndex: function changeFocusedOptionIndex(index) {\n      var links = DomHandler.find(this.container, 'li[data-pc-section=\"menuitem\"][data-p-disabled=\"false\"]');\n      var order = index >= links.length ? links.length - 1 : index < 0 ? 0 : index;\n      order > -1 && (this.focusedOptionIndex = links[order].getAttribute('id'));\n    },\n    toggle: function toggle(event) {\n      if (this.overlayVisible) this.hide();else this.show(event);\n    },\n    show: function show(event) {\n      this.overlayVisible = true;\n      this.target = event.currentTarget;\n    },\n    hide: function hide() {\n      this.overlayVisible = false;\n      this.target = null;\n    },\n    onEnter: function onEnter(el) {\n      DomHandler.addStyles(el, {\n        position: 'absolute',\n        top: '0',\n        left: '0'\n      });\n      this.alignOverlay();\n      this.bindOutsideClickListener();\n      this.bindResizeListener();\n      this.bindScrollListener();\n      if (this.autoZIndex) {\n        ZIndexUtils.set('menu', el, this.baseZIndex + this.$primevue.config.zIndex.menu);\n      }\n      if (this.popup) {\n        DomHandler.focus(this.list);\n      }\n      this.$emit('show');\n    },\n    onLeave: function onLeave() {\n      this.unbindOutsideClickListener();\n      this.unbindResizeListener();\n      this.unbindScrollListener();\n      this.$emit('hide');\n    },\n    onAfterLeave: function onAfterLeave(el) {\n      if (this.autoZIndex) {\n        ZIndexUtils.clear(el);\n      }\n    },\n    alignOverlay: function alignOverlay() {\n      DomHandler.absolutePosition(this.container, this.target);\n      var targetWidth = DomHandler.getOuterWidth(this.target);\n      if (targetWidth > DomHandler.getOuterWidth(this.container)) {\n        this.container.style.minWidth = DomHandler.getOuterWidth(this.target) + 'px';\n      }\n    },\n    bindOutsideClickListener: function bindOutsideClickListener() {\n      var _this = this;\n      if (!this.outsideClickListener) {\n        this.outsideClickListener = function (event) {\n          var isOutsideContainer = _this.container && !_this.container.contains(event.target);\n          var isOutsideTarget = !(_this.target && (_this.target === event.target || _this.target.contains(event.target)));\n          if (_this.overlayVisible && isOutsideContainer && isOutsideTarget) {\n            _this.hide();\n          } else if (!_this.popup && isOutsideContainer && isOutsideTarget) {\n            _this.focusedOptionIndex = -1;\n          }\n        };\n        document.addEventListener('click', this.outsideClickListener);\n      }\n    },\n    unbindOutsideClickListener: function unbindOutsideClickListener() {\n      if (this.outsideClickListener) {\n        document.removeEventListener('click', this.outsideClickListener);\n        this.outsideClickListener = null;\n      }\n    },\n    bindScrollListener: function bindScrollListener() {\n      var _this2 = this;\n      if (!this.scrollHandler) {\n        this.scrollHandler = new ConnectedOverlayScrollHandler(this.target, function () {\n          if (_this2.overlayVisible) {\n            _this2.hide();\n          }\n        });\n      }\n      this.scrollHandler.bindScrollListener();\n    },\n    unbindScrollListener: function unbindScrollListener() {\n      if (this.scrollHandler) {\n        this.scrollHandler.unbindScrollListener();\n      }\n    },\n    bindResizeListener: function bindResizeListener() {\n      var _this3 = this;\n      if (!this.resizeListener) {\n        this.resizeListener = function () {\n          if (_this3.overlayVisible && !DomHandler.isTouchDevice()) {\n            _this3.hide();\n          }\n        };\n        window.addEventListener('resize', this.resizeListener);\n      }\n    },\n    unbindResizeListener: function unbindResizeListener() {\n      if (this.resizeListener) {\n        window.removeEventListener('resize', this.resizeListener);\n        this.resizeListener = null;\n      }\n    },\n    visible: function visible(item) {\n      return typeof item.visible === 'function' ? item.visible() : item.visible !== false;\n    },\n    disabled: function disabled(item) {\n      return typeof item.disabled === 'function' ? item.disabled() : item.disabled;\n    },\n    label: function label(item) {\n      return typeof item.label === 'function' ? item.label() : item.label;\n    },\n    onOverlayClick: function onOverlayClick(event) {\n      OverlayEventBus.emit('overlay-click', {\n        originalEvent: event,\n        target: this.target\n      });\n    },\n    containerRef: function containerRef(el) {\n      this.container = el;\n    },\n    listRef: function listRef(el) {\n      this.list = el;\n    }\n  },\n  computed: {\n    focusedOptionId: function focusedOptionId() {\n      return this.focusedOptionIndex !== -1 ? this.focusedOptionIndex : null;\n    }\n  },\n  components: {\n    PVMenuitem: script$1,\n    Portal: Portal\n  }\n};\n\nvar _hoisted_1 = [\"id\"];\nvar _hoisted_2 = [\"id\", \"tabindex\", \"aria-activedescendant\", \"aria-label\", \"aria-labelledby\"];\nvar _hoisted_3 = [\"id\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_PVMenuitem = resolveComponent(\"PVMenuitem\");\n  var _component_Portal = resolveComponent(\"Portal\");\n  return openBlock(), createBlock(_component_Portal, {\n    appendTo: _ctx.appendTo,\n    disabled: !_ctx.popup\n  }, {\n    \"default\": withCtx(function () {\n      return [createVNode(Transition, mergeProps({\n        name: \"p-connected-overlay\",\n        onEnter: $options.onEnter,\n        onLeave: $options.onLeave,\n        onAfterLeave: $options.onAfterLeave\n      }, _ctx.ptm('transition')), {\n        \"default\": withCtx(function () {\n          return [(_ctx.popup ? $data.overlayVisible : true) ? (openBlock(), createElementBlock(\"div\", mergeProps({\n            key: 0,\n            ref: $options.containerRef,\n            id: $data.id,\n            \"class\": _ctx.cx('root'),\n            onClick: _cache[3] || (_cache[3] = function () {\n              return $options.onOverlayClick && $options.onOverlayClick.apply($options, arguments);\n            })\n          }, _ctx.ptmi('root')), [_ctx.$slots.start ? (openBlock(), createElementBlock(\"div\", mergeProps({\n            key: 0,\n            \"class\": _ctx.cx('start')\n          }, _ctx.ptm('start')), [renderSlot(_ctx.$slots, \"start\")], 16)) : createCommentVNode(\"\", true), createElementVNode(\"ul\", mergeProps({\n            ref: $options.listRef,\n            id: $data.id + '_list',\n            \"class\": _ctx.cx('menu'),\n            role: \"menu\",\n            tabindex: _ctx.tabindex,\n            \"aria-activedescendant\": $data.focused ? $options.focusedOptionId : undefined,\n            \"aria-label\": _ctx.ariaLabel,\n            \"aria-labelledby\": _ctx.ariaLabelledby,\n            onFocus: _cache[0] || (_cache[0] = function () {\n              return $options.onListFocus && $options.onListFocus.apply($options, arguments);\n            }),\n            onBlur: _cache[1] || (_cache[1] = function () {\n              return $options.onListBlur && $options.onListBlur.apply($options, arguments);\n            }),\n            onKeydown: _cache[2] || (_cache[2] = function () {\n              return $options.onListKeyDown && $options.onListKeyDown.apply($options, arguments);\n            })\n          }, _ctx.ptm('menu')), [(openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.model, function (item, i) {\n            return openBlock(), createElementBlock(Fragment, {\n              key: $options.label(item) + i.toString()\n            }, [item.items && $options.visible(item) && !item.separator ? (openBlock(), createElementBlock(Fragment, {\n              key: 0\n            }, [item.items ? (openBlock(), createElementBlock(\"li\", mergeProps({\n              key: 0,\n              id: $data.id + '_' + i,\n              \"class\": [_ctx.cx('submenuHeader'), item[\"class\"]],\n              style: item.style,\n              role: \"none\"\n            }, _ctx.ptm('submenuHeader')), [renderSlot(_ctx.$slots, \"submenuheader\", {\n              item: item\n            }, function () {\n              return [createTextVNode(toDisplayString($options.label(item)), 1)];\n            })], 16, _hoisted_3)) : createCommentVNode(\"\", true), (openBlock(true), createElementBlock(Fragment, null, renderList(item.items, function (child, j) {\n              return openBlock(), createElementBlock(Fragment, {\n                key: child.label + i + '_' + j\n              }, [$options.visible(child) && !child.separator ? (openBlock(), createBlock(_component_PVMenuitem, {\n                key: 0,\n                id: $data.id + '_' + i + '_' + j,\n                item: child,\n                templates: _ctx.$slots,\n                focusedOptionId: $options.focusedOptionId,\n                unstyled: _ctx.unstyled,\n                onItemClick: $options.itemClick,\n                onItemMousemove: $options.itemMouseMove,\n                pt: _ctx.pt\n              }, null, 8, [\"id\", \"item\", \"templates\", \"focusedOptionId\", \"unstyled\", \"onItemClick\", \"onItemMousemove\", \"pt\"])) : $options.visible(child) && child.separator ? (openBlock(), createElementBlock(\"li\", mergeProps({\n                key: 'separator' + i + j,\n                \"class\": [_ctx.cx('separator'), item[\"class\"]],\n                style: child.style,\n                role: \"separator\"\n              }, _ctx.ptm('separator')), null, 16)) : createCommentVNode(\"\", true)], 64);\n            }), 128))], 64)) : $options.visible(item) && item.separator ? (openBlock(), createElementBlock(\"li\", mergeProps({\n              key: 'separator' + i.toString(),\n              \"class\": [_ctx.cx('separator'), item[\"class\"]],\n              style: item.style,\n              role: \"separator\"\n            }, _ctx.ptm('separator')), null, 16)) : (openBlock(), createBlock(_component_PVMenuitem, {\n              key: $options.label(item) + i.toString(),\n              id: $data.id + '_' + i,\n              item: item,\n              index: i,\n              templates: _ctx.$slots,\n              focusedOptionId: $options.focusedOptionId,\n              unstyled: _ctx.unstyled,\n              onItemClick: $options.itemClick,\n              onItemMousemove: $options.itemMouseMove,\n              pt: _ctx.pt\n            }, null, 8, [\"id\", \"item\", \"index\", \"templates\", \"focusedOptionId\", \"unstyled\", \"onItemClick\", \"onItemMousemove\", \"pt\"]))], 64);\n          }), 128))], 16, _hoisted_2), _ctx.$slots.end ? (openBlock(), createElementBlock(\"div\", mergeProps({\n            key: 1,\n            \"class\": _ctx.cx('end')\n          }, _ctx.ptm('end')), [renderSlot(_ctx.$slots, \"end\")], 16)) : createCommentVNode(\"\", true)], 16, _hoisted_1)) : createCommentVNode(\"\", true)];\n        }),\n        _: 3\n      }, 16, [\"onEnter\", \"onLeave\", \"onAfterLeave\"])];\n    }),\n    _: 3\n  }, 8, [\"appendTo\", \"disabled\"]);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841399699,
+      "end": 1742841399763,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841399763,
+      "end": 1742841399763,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399763,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841399764,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841399764,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841399764,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841399764,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841399764,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841399764,
+      "end": 1742841399764,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841399764,
+      "end": 1742841399765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841399765,
+      "end": 1742841399765,
+      "order": "normal"
+    }
+  ]
+}

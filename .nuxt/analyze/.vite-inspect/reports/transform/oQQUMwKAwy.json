@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/chips/chips.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import TimesCircleIcon from 'primevue/icons/timescircle';\nimport { UniqueComponentId } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport ChipsStyle from 'primevue/chips/style';\nimport { openBlock, createElementBlock, mergeProps, createElementVNode, Fragment, renderList, renderSlot, normalizeClass, toDisplayString, createBlock, resolveDynamicComponent } from 'vue';\n\nvar script$1 = {\n  name: 'BaseChips',\n  \"extends\": BaseComponent,\n  props: {\n    modelValue: {\n      type: Array,\n      \"default\": null\n    },\n    max: {\n      type: Number,\n      \"default\": null\n    },\n    separator: {\n      type: [String, Object],\n      \"default\": null\n    },\n    addOnBlur: {\n      type: Boolean,\n      \"default\": null\n    },\n    allowDuplicate: {\n      type: Boolean,\n      \"default\": true\n    },\n    placeholder: {\n      type: String,\n      \"default\": null\n    },\n    variant: {\n      type: String,\n      \"default\": null\n    },\n    invalid: {\n      type: Boolean,\n      \"default\": false\n    },\n    disabled: {\n      type: Boolean,\n      \"default\": false\n    },\n    inputId: {\n      type: String,\n      \"default\": null\n    },\n    inputClass: {\n      type: [String, Object],\n      \"default\": null\n    },\n    inputStyle: {\n      type: Object,\n      \"default\": null\n    },\n    inputProps: {\n      type: null,\n      \"default\": null\n    },\n    removeTokenIcon: {\n      type: String,\n      \"default\": undefined\n    },\n    ariaLabelledby: {\n      type: String,\n      \"default\": null\n    },\n    ariaLabel: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: ChipsStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && iter[Symbol.iterator] != null || iter[\"@@iterator\"] != null) return Array.from(iter); }\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }\nvar script = {\n  name: 'Chips',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:modelValue', 'add', 'remove', 'focus', 'blur'],\n  data: function data() {\n    return {\n      id: this.$attrs.id,\n      inputValue: null,\n      focused: false,\n      focusedIndex: null\n    };\n  },\n  watch: {\n    '$attrs.id': function $attrsId(newValue) {\n      this.id = newValue || UniqueComponentId();\n    }\n  },\n  mounted: function mounted() {\n    this.id = this.id || UniqueComponentId();\n  },\n  methods: {\n    onWrapperClick: function onWrapperClick() {\n      this.$refs.input.focus();\n    },\n    onInput: function onInput(event) {\n      this.inputValue = event.target.value;\n      this.focusedIndex = null;\n    },\n    onFocus: function onFocus(event) {\n      this.focused = true;\n      this.focusedIndex = null;\n      this.$emit('focus', event);\n    },\n    onBlur: function onBlur(event) {\n      this.focused = false;\n      this.focusedIndex = null;\n      if (this.addOnBlur) {\n        this.addItem(event, event.target.value, false);\n      }\n      this.$emit('blur', event);\n    },\n    onKeyDown: function onKeyDown(event) {\n      var inputValue = event.target.value;\n      switch (event.code) {\n        case 'Backspace':\n          if (inputValue.length === 0 && this.modelValue && this.modelValue.length > 0) {\n            if (this.focusedIndex !== null) {\n              this.removeItem(event, this.focusedIndex);\n            } else this.removeItem(event, this.modelValue.length - 1);\n          }\n          break;\n        case 'Enter':\n        case 'NumpadEnter':\n          if (inputValue && inputValue.trim().length && !this.maxedOut) {\n            this.addItem(event, inputValue, true);\n          }\n          break;\n        case 'ArrowLeft':\n          if (inputValue.length === 0 && this.modelValue && this.modelValue.length > 0) {\n            this.$refs.container.focus();\n          }\n          break;\n        case 'ArrowRight':\n          event.stopPropagation();\n          break;\n        default:\n          if (this.separator) {\n            if (this.separator === event.key || event.key.match(this.separator)) {\n              this.addItem(event, inputValue, true);\n            }\n          }\n          break;\n      }\n    },\n    onPaste: function onPaste(event) {\n      var _this = this;\n      if (this.separator) {\n        var separator = this.separator.replace('\\\\n', '\\n').replace('\\\\r', '\\r').replace('\\\\t', '\\t');\n        var pastedData = (event.clipboardData || window['clipboardData']).getData('Text');\n        if (pastedData) {\n          var value = this.modelValue || [];\n          var pastedValues = pastedData.split(separator);\n          pastedValues = pastedValues.filter(function (val) {\n            return _this.allowDuplicate || value.indexOf(val) === -1;\n          });\n          value = [].concat(_toConsumableArray(value), _toConsumableArray(pastedValues));\n          this.updateModel(event, value, true);\n        }\n      }\n    },\n    onContainerFocus: function onContainerFocus() {\n      this.focused = true;\n    },\n    onContainerBlur: function onContainerBlur() {\n      this.focusedIndex = -1;\n      this.focused = false;\n    },\n    onContainerKeyDown: function onContainerKeyDown(event) {\n      switch (event.code) {\n        case 'ArrowLeft':\n          this.onArrowLeftKeyOn(event);\n          break;\n        case 'ArrowRight':\n          this.onArrowRightKeyOn(event);\n          break;\n        case 'Backspace':\n          this.onBackspaceKeyOn(event);\n          break;\n      }\n    },\n    onArrowLeftKeyOn: function onArrowLeftKeyOn() {\n      if (this.inputValue.length === 0 && this.modelValue && this.modelValue.length > 0) {\n        this.focusedIndex = this.focusedIndex === null ? this.modelValue.length - 1 : this.focusedIndex - 1;\n        if (this.focusedIndex < 0) this.focusedIndex = 0;\n      }\n    },\n    onArrowRightKeyOn: function onArrowRightKeyOn() {\n      if (this.inputValue.length === 0 && this.modelValue && this.modelValue.length > 0) {\n        if (this.focusedIndex === this.modelValue.length - 1) {\n          this.focusedIndex = null;\n          this.$refs.input.focus();\n        } else {\n          this.focusedIndex++;\n        }\n      }\n    },\n    onBackspaceKeyOn: function onBackspaceKeyOn(event) {\n      if (this.focusedIndex !== null) {\n        this.removeItem(event, this.focusedIndex);\n      }\n    },\n    updateModel: function updateModel(event, value, preventDefault) {\n      var _this2 = this;\n      this.$emit('update:modelValue', value);\n      this.$emit('add', {\n        originalEvent: event,\n        value: value\n      });\n      this.$refs.input.value = '';\n      this.inputValue = '';\n      setTimeout(function () {\n        _this2.maxedOut && (_this2.focused = false);\n      }, 0);\n      if (preventDefault) {\n        event.preventDefault();\n      }\n    },\n    addItem: function addItem(event, item, preventDefault) {\n      if (item && item.trim().length) {\n        var value = this.modelValue ? _toConsumableArray(this.modelValue) : [];\n        if (this.allowDuplicate || value.indexOf(item) === -1) {\n          value.push(item);\n          this.updateModel(event, value, preventDefault);\n        }\n      }\n    },\n    removeItem: function removeItem(event, index) {\n      if (this.disabled) {\n        return;\n      }\n      var values = _toConsumableArray(this.modelValue);\n      var removedItem = values.splice(index, 1);\n      this.focusedIndex = null;\n      this.$refs.input.focus();\n      this.$emit('update:modelValue', values);\n      this.$emit('remove', {\n        originalEvent: event,\n        value: removedItem\n      });\n    }\n  },\n  computed: {\n    maxedOut: function maxedOut() {\n      return this.max && this.modelValue && this.max === this.modelValue.length;\n    },\n    focusedOptionId: function focusedOptionId() {\n      return this.focusedIndex !== null ? \"\".concat(this.id, \"_chips_item_\").concat(this.focusedIndex) : null;\n    }\n  },\n  components: {\n    TimesCircleIcon: TimesCircleIcon\n  }\n};\n\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }\nfunction _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : String(i); }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar _hoisted_1 = [\"aria-labelledby\", \"aria-label\", \"aria-activedescendant\"];\nvar _hoisted_2 = [\"id\", \"aria-label\", \"aria-setsize\", \"aria-posinset\", \"data-p-focused\"];\nvar _hoisted_3 = [\"id\", \"disabled\", \"placeholder\", \"aria-invalid\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, _ctx.ptmi('root')), [createElementVNode(\"ul\", mergeProps({\n    ref: \"container\",\n    \"class\": _ctx.cx('container'),\n    tabindex: \"-1\",\n    role: \"listbox\",\n    \"aria-orientation\": \"horizontal\",\n    \"aria-labelledby\": _ctx.ariaLabelledby,\n    \"aria-label\": _ctx.ariaLabel,\n    \"aria-activedescendant\": $data.focused ? $options.focusedOptionId : undefined,\n    onClick: _cache[5] || (_cache[5] = function ($event) {\n      return $options.onWrapperClick();\n    }),\n    onFocus: _cache[6] || (_cache[6] = function () {\n      return $options.onContainerFocus && $options.onContainerFocus.apply($options, arguments);\n    }),\n    onBlur: _cache[7] || (_cache[7] = function () {\n      return $options.onContainerBlur && $options.onContainerBlur.apply($options, arguments);\n    }),\n    onKeydown: _cache[8] || (_cache[8] = function () {\n      return $options.onContainerKeyDown && $options.onContainerKeyDown.apply($options, arguments);\n    })\n  }, _ctx.ptm('container')), [(openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.modelValue, function (val, i) {\n    return openBlock(), createElementBlock(\"li\", mergeProps({\n      key: \"\".concat(i, \"_\").concat(val),\n      id: $data.id + '_chips_item_' + i,\n      role: \"option\",\n      \"class\": _ctx.cx('token', {\n        index: i\n      }),\n      \"aria-label\": val,\n      \"aria-selected\": true,\n      \"aria-setsize\": _ctx.modelValue.length,\n      \"aria-posinset\": i + 1\n    }, _ctx.ptm('token'), {\n      \"data-p-focused\": $data.focusedIndex === i\n    }), [renderSlot(_ctx.$slots, \"chip\", {\n      \"class\": normalizeClass(_ctx.cx('label')),\n      value: val\n    }, function () {\n      return [createElementVNode(\"span\", mergeProps({\n        \"class\": _ctx.cx('label')\n      }, _ctx.ptm('label')), toDisplayString(val), 17)];\n    }), renderSlot(_ctx.$slots, \"removetokenicon\", {\n      \"class\": normalizeClass(_ctx.cx('removeTokenIcon')),\n      index: i,\n      onClick: function onClick(event) {\n        return $options.removeItem(event, i);\n      },\n      removeCallback: function removeCallback(event) {\n        return $options.removeItem(event, i);\n      }\n    }, function () {\n      return [(openBlock(), createBlock(resolveDynamicComponent(_ctx.removeTokenIcon ? 'span' : 'TimesCircleIcon'), mergeProps({\n        \"class\": [_ctx.cx('removeTokenIcon'), _ctx.removeTokenIcon],\n        onClick: function onClick($event) {\n          return $options.removeItem($event, i);\n        },\n        \"aria-hidden\": \"true\"\n      }, _ctx.ptm('removeTokenIcon')), null, 16, [\"class\", \"onClick\"]))];\n    })], 16, _hoisted_2);\n  }), 128)), createElementVNode(\"li\", mergeProps({\n    \"class\": _ctx.cx('inputToken'),\n    role: \"option\"\n  }, _ctx.ptm('inputToken')), [createElementVNode(\"input\", mergeProps({\n    ref: \"input\",\n    id: _ctx.inputId,\n    type: \"text\",\n    \"class\": _ctx.inputClass,\n    style: _ctx.inputStyle,\n    disabled: _ctx.disabled || $options.maxedOut,\n    placeholder: _ctx.placeholder,\n    \"aria-invalid\": _ctx.invalid || undefined,\n    onFocus: _cache[0] || (_cache[0] = function ($event) {\n      return $options.onFocus($event);\n    }),\n    onBlur: _cache[1] || (_cache[1] = function ($event) {\n      return $options.onBlur($event);\n    }),\n    onInput: _cache[2] || (_cache[2] = function () {\n      return $options.onInput && $options.onInput.apply($options, arguments);\n    }),\n    onKeydown: _cache[3] || (_cache[3] = function ($event) {\n      return $options.onKeyDown($event);\n    }),\n    onPaste: _cache[4] || (_cache[4] = function ($event) {\n      return $options.onPaste($event);\n    })\n  }, _objectSpread(_objectSpread({}, _ctx.inputProps), _ctx.ptm('input'))), null, 16, _hoisted_3)], 16)], 16, _hoisted_1)], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841399376,
+      "end": 1742841399451,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841399451,
+      "end": 1742841399451,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841399451,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841399452,
+      "end": 1742841399452,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841399452,
+      "end": 1742841399453,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841399453,
+      "end": 1742841399453,
+      "order": "normal"
+    }
+  ]
+}

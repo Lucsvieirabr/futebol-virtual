@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/tristatecheckbox/tristatecheckbox.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import CheckIcon from 'primevue/icons/check';\nimport TimesIcon from 'primevue/icons/times';\nimport BaseComponent from 'primevue/basecomponent';\nimport TriStateCheckboxStyle from 'primevue/tristatecheckbox/style';\nimport { resolveComponent, openBlock, createElementBlock, mergeProps, createElementVNode, toDisplayString, renderSlot, normalizeClass, createVNode } from 'vue';\n\nvar script$1 = {\n  name: 'BaseTriStateCheckbox',\n  \"extends\": BaseComponent,\n  props: {\n    modelValue: null,\n    variant: {\n      type: String,\n      \"default\": null\n    },\n    invalid: {\n      type: Boolean,\n      \"default\": false\n    },\n    disabled: {\n      type: Boolean,\n      \"default\": false\n    },\n    readonly: {\n      type: Boolean,\n      \"default\": false\n    },\n    tabindex: {\n      type: Number,\n      \"default\": null\n    },\n    inputId: {\n      type: String,\n      \"default\": null\n    },\n    inputClass: {\n      type: [String, Object],\n      \"default\": null\n    },\n    inputStyle: {\n      type: Object,\n      \"default\": null\n    },\n    ariaLabelledby: {\n      type: String,\n      \"default\": null\n    },\n    ariaLabel: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: TriStateCheckboxStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'TriStateCheckbox',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['update:modelValue', 'change', 'focus', 'blur'],\n  methods: {\n    getPTOptions: function getPTOptions(key) {\n      var _ptm = key === 'root' ? this.ptmi : this.ptm;\n      return _ptm(key, {\n        context: {\n          active: this.active,\n          disabled: this.disabled\n        }\n      });\n    },\n    updateModel: function updateModel() {\n      var newValue;\n      switch (this.modelValue) {\n        case true:\n          newValue = false;\n          break;\n        case false:\n          newValue = null;\n          break;\n        default:\n          newValue = true;\n          break;\n      }\n      this.$emit('update:modelValue', newValue);\n    },\n    onChange: function onChange(event) {\n      if (!this.disabled && !this.readonly) {\n        this.updateModel();\n        this.$emit('change', event);\n      }\n    },\n    onFocus: function onFocus(event) {\n      this.$emit('focus', event);\n    },\n    onBlur: function onBlur(event) {\n      this.$emit('blur', event);\n    }\n  },\n  computed: {\n    active: function active() {\n      return this.modelValue != null;\n    },\n    checked: function checked() {\n      return this.modelValue === true;\n    },\n    ariaValueLabel: function ariaValueLabel() {\n      return this.modelValue ? this.$primevue.config.locale.aria.trueLabel : this.modelValue === false ? this.$primevue.config.locale.aria.falseLabel : this.$primevue.config.locale.aria.nullLabel;\n    }\n  },\n  components: {\n    CheckIcon: CheckIcon,\n    TimesIcon: TimesIcon\n  }\n};\n\nvar _hoisted_1 = [\"data-p-highlight\", \"data-p-disabled\"];\nvar _hoisted_2 = [\"id\", \"value\", \"checked\", \"tabindex\", \"disabled\", \"readonly\", \"aria-labelledby\", \"aria-label\", \"aria-invalid\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_CheckIcon = resolveComponent(\"CheckIcon\");\n  var _component_TimesIcon = resolveComponent(\"TimesIcon\");\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root')\n  }, $options.getPTOptions('root'), {\n    \"data-p-highlight\": $options.active,\n    \"data-p-disabled\": _ctx.disabled\n  }), [createElementVNode(\"input\", mergeProps({\n    id: _ctx.inputId,\n    type: \"checkbox\",\n    \"class\": [_ctx.cx('input'), _ctx.inputClass],\n    style: _ctx.inputStyle,\n    value: _ctx.modelValue,\n    checked: $options.checked,\n    tabindex: _ctx.tabindex,\n    disabled: _ctx.disabled,\n    readonly: _ctx.readonly,\n    \"aria-labelledby\": _ctx.ariaLabelledby,\n    \"aria-label\": _ctx.ariaLabel,\n    \"aria-invalid\": _ctx.invalid || undefined,\n    onFocus: _cache[0] || (_cache[0] = function () {\n      return $options.onFocus && $options.onFocus.apply($options, arguments);\n    }),\n    onBlur: _cache[1] || (_cache[1] = function () {\n      return $options.onBlur && $options.onBlur.apply($options, arguments);\n    }),\n    onChange: _cache[2] || (_cache[2] = function () {\n      return $options.onChange && $options.onChange.apply($options, arguments);\n    })\n  }, $options.getPTOptions('input')), null, 16, _hoisted_2), createElementVNode(\"span\", mergeProps({\n    role: \"status\",\n    \"class\": \"p-hidden-accessible\",\n    \"aria-live\": \"polite\"\n  }, $options.getPTOptions('hiddenValueLabel'), {\n    \"data-p-hidden-accessible\": true\n  }), toDisplayString($options.ariaValueLabel), 17), createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('box')\n  }, $options.getPTOptions('box')), [_ctx.modelValue === true ? renderSlot(_ctx.$slots, \"checkicon\", {\n    key: 0,\n    \"class\": normalizeClass(_ctx.cx('checkIcon'))\n  }, function () {\n    return [createVNode(_component_CheckIcon, mergeProps({\n      \"class\": _ctx.cx('checkIcon')\n    }, $options.getPTOptions('checkIcon')), null, 16, [\"class\"])];\n  }) : _ctx.modelValue === false ? renderSlot(_ctx.$slots, \"uncheckicon\", {\n    key: 1,\n    \"class\": normalizeClass(_ctx.cx('uncheckIcon'))\n  }, function () {\n    return [createVNode(_component_TimesIcon, mergeProps({\n      \"class\": _ctx.cx('uncheckIcon')\n    }, $options.getPTOptions('uncheckIcon')), null, 16, [\"class\"])];\n  }) : renderSlot(_ctx.$slots, \"nullableicon\", {\n    key: 2,\n    \"class\": normalizeClass(_ctx.cx('nullableIcon'))\n  })], 16)], 16, _hoisted_1);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841399464,
+      "end": 1742841399590,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841399590,
+      "end": 1742841399590,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841399590,
+      "end": 1742841399591,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841399591,
+      "end": 1742841399591,
+      "order": "normal"
+    }
+  ]
+}

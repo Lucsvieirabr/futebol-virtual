@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/progressspinner/progressspinner.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import BaseComponent from 'primevue/basecomponent';\nimport ProgressSpinnerStyle from 'primevue/progressspinner/style';\nimport { openBlock, createElementBlock, mergeProps, createElementVNode } from 'vue';\n\nvar script$1 = {\n  name: 'BaseProgressSpinner',\n  \"extends\": BaseComponent,\n  props: {\n    strokeWidth: {\n      type: String,\n      \"default\": '2'\n    },\n    fill: {\n      type: String,\n      \"default\": 'none'\n    },\n    animationDuration: {\n      type: String,\n      \"default\": '2s'\n    }\n  },\n  style: ProgressSpinnerStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'ProgressSpinner',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  computed: {\n    svgStyle: function svgStyle() {\n      return {\n        'animation-duration': this.animationDuration\n      };\n    }\n  }\n};\n\nvar _hoisted_1 = [\"fill\", \"stroke-width\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root'),\n    role: \"progressbar\"\n  }, _ctx.ptmi('root')), [(openBlock(), createElementBlock(\"svg\", mergeProps({\n    \"class\": _ctx.cx('spinner'),\n    viewBox: \"25 25 50 50\",\n    style: $options.svgStyle\n  }, _ctx.ptm('spinner')), [createElementVNode(\"circle\", mergeProps({\n    \"class\": _ctx.cx('circle'),\n    cx: \"50\",\n    cy: \"50\",\n    r: \"20\",\n    fill: _ctx.fill,\n    \"stroke-width\": _ctx.strokeWidth,\n    strokeMiterlimit: \"10\"\n  }, _ctx.ptm('circle')), null, 16, _hoisted_1)], 16))], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841400017,
+      "end": 1742841400053,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841400053,
+      "end": 1742841400053,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841400053,
+      "end": 1742841400054,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400054,
+      "end": 1742841400054,
+      "order": "normal"
+    }
+  ]
+}

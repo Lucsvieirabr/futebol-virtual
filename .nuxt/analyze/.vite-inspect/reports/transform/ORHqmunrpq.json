@@ -1,0 +1,214 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/row/row.esm.js?nuxt_component=async&nuxt_component_name=PrimeRow&nuxt_component_export=default",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import BaseComponent from 'primevue/basecomponent';\n\nvar script = {\n  name: 'Row',\n  \"extends\": BaseComponent,\n  inject: ['$rows'],\n  mounted: function mounted() {\n    var _this$$rows;\n    (_this$$rows = this.$rows) === null || _this$$rows === void 0 || _this$$rows.add(this.$);\n  },\n  unmounted: function unmounted() {\n    var _this$$rows2;\n    (_this$$rows2 = this.$rows) === null || _this$$rows2 === void 0 || _this$$rows2[\"delete\"](this.$);\n  },\n  render: function render() {\n    return null;\n  }\n};\n\nexport { script as default };\n",
+      "start": 1742841399209,
+      "end": 1742841399228,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841399228,
+      "end": 1742841399228,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/row/row.esm.js\").then(r => r[\"default\"] || r.default || r))",
+      "start": 1742841399228,
+      "end": 1742841399229,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "replace",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/row/row.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841399229,
+      "end": 1742841399229,
+      "order": "normal"
+    }
+  ]
+}

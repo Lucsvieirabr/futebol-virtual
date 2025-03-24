@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/image/image.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import FocusTrap from 'primevue/focustrap';\nimport EyeIcon from 'primevue/icons/eye';\nimport RefreshIcon from 'primevue/icons/refresh';\nimport SearchMinusIcon from 'primevue/icons/searchminus';\nimport SearchPlusIcon from 'primevue/icons/searchplus';\nimport TimesIcon from 'primevue/icons/times';\nimport UndoIcon from 'primevue/icons/undo';\nimport Portal from 'primevue/portal';\nimport { ZIndexUtils, DomHandler } from 'primevue/utils';\nimport BaseComponent from 'primevue/basecomponent';\nimport ImageStyle from 'primevue/image/style';\nimport { resolveComponent, resolveDirective, openBlock, createElementBlock, mergeProps, renderSlot, createElementVNode, createBlock, resolveDynamicComponent, createCommentVNode, createVNode, withCtx, withDirectives, normalizeProps, guardReactiveProps, Transition, normalizeClass, normalizeStyle } from 'vue';\n\nvar script$1 = {\n  name: 'BaseImage',\n  \"extends\": BaseComponent,\n  props: {\n    preview: {\n      type: Boolean,\n      \"default\": false\n    },\n    \"class\": {\n      type: null,\n      \"default\": null\n    },\n    style: {\n      type: null,\n      \"default\": null\n    },\n    imageStyle: {\n      type: null,\n      \"default\": null\n    },\n    imageClass: {\n      type: null,\n      \"default\": null\n    },\n    previewButtonProps: {\n      type: null,\n      \"default\": null\n    },\n    indicatorIcon: {\n      type: String,\n      \"default\": undefined\n    },\n    zoomInDisabled: {\n      type: Boolean,\n      \"default\": false\n    },\n    zoomOutDisabled: {\n      type: Boolean,\n      \"default\": false\n    }\n  },\n  style: ImageStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Image',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  emits: ['show', 'hide', 'error'],\n  mask: null,\n  data: function data() {\n    return {\n      maskVisible: false,\n      previewVisible: false,\n      rotate: 0,\n      scale: 1\n    };\n  },\n  beforeUnmount: function beforeUnmount() {\n    if (this.mask) {\n      ZIndexUtils.clear(this.container);\n    }\n  },\n  methods: {\n    maskRef: function maskRef(el) {\n      this.mask = el;\n    },\n    toolbarRef: function toolbarRef(el) {\n      this.toolbarRef = el;\n    },\n    onImageClick: function onImageClick() {\n      var _this = this;\n      if (this.preview) {\n        DomHandler.blockBodyScroll();\n        this.maskVisible = true;\n        setTimeout(function () {\n          _this.previewVisible = true;\n        }, 25);\n      }\n    },\n    onPreviewImageClick: function onPreviewImageClick() {\n      this.previewClick = true;\n    },\n    onMaskClick: function onMaskClick(event) {\n      var isBarActionsClicked = DomHandler.isAttributeEquals(event.target, 'data-pc-section-group', 'action') || event.target.closest('[data-pc-section-group=\"action\"]');\n      if (!this.previewClick && !isBarActionsClicked) {\n        this.previewVisible = false;\n        this.rotate = 0;\n        this.scale = 1;\n      }\n      this.previewClick = false;\n    },\n    onMaskKeydown: function onMaskKeydown(event) {\n      var _this2 = this;\n      switch (event.code) {\n        case 'Escape':\n          this.hidePreview();\n          setTimeout(function () {\n            DomHandler.focus(_this2.$refs.previewButton);\n          }, 200);\n          event.preventDefault();\n          break;\n      }\n    },\n    onError: function onError() {\n      this.$emit('error');\n    },\n    rotateRight: function rotateRight() {\n      this.rotate += 90;\n      this.previewClick = true;\n    },\n    rotateLeft: function rotateLeft() {\n      this.rotate -= 90;\n      this.previewClick = true;\n    },\n    zoomIn: function zoomIn() {\n      this.scale = this.scale + 0.1;\n      this.previewClick = true;\n    },\n    zoomOut: function zoomOut() {\n      this.scale = this.scale - 0.1;\n      this.previewClick = true;\n    },\n    onBeforeEnter: function onBeforeEnter() {\n      ZIndexUtils.set('modal', this.mask, this.$primevue.config.zIndex.modal);\n    },\n    onEnter: function onEnter() {\n      this.focus();\n      this.$emit('show');\n    },\n    onBeforeLeave: function onBeforeLeave() {\n      !this.isUnstyled && DomHandler.addClass(this.mask, 'p-component-overlay-leave');\n    },\n    onLeave: function onLeave() {\n      DomHandler.unblockBodyScroll();\n      this.$emit('hide');\n    },\n    onAfterLeave: function onAfterLeave(el) {\n      ZIndexUtils.clear(el);\n      this.maskVisible = false;\n    },\n    focus: function focus() {\n      var focusTarget = this.mask.querySelector('[autofocus]');\n      if (focusTarget) {\n        focusTarget.focus();\n      }\n    },\n    hidePreview: function hidePreview() {\n      this.previewVisible = false;\n      this.rotate = 0;\n      this.scale = 1;\n      DomHandler.unblockBodyScroll();\n    }\n  },\n  computed: {\n    containerClass: function containerClass() {\n      return [this.cx('root'), this[\"class\"]];\n    },\n    rotateClass: function rotateClass() {\n      return 'p-image-preview-rotate-' + this.rotate;\n    },\n    imagePreviewStyle: function imagePreviewStyle() {\n      return {\n        transform: 'rotate(' + this.rotate + 'deg) scale(' + this.scale + ')'\n      };\n    },\n    isZoomInDisabled: function isZoomInDisabled() {\n      return this.zoomInDisabled || this.scale >= 1.5;\n    },\n    isZoomOutDisabled: function isZoomOutDisabled() {\n      return this.zoomOutDisabled || this.scale <= 0.5;\n    },\n    rightAriaLabel: function rightAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.rotateRight : undefined;\n    },\n    leftAriaLabel: function leftAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.rotateLeft : undefined;\n    },\n    zoomInAriaLabel: function zoomInAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.zoomIn : undefined;\n    },\n    zoomOutAriaLabel: function zoomOutAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.zoomOut : undefined;\n    },\n    zoomImageAriaLabel: function zoomImageAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.zoomImage : undefined;\n    },\n    closeAriaLabel: function closeAriaLabel() {\n      return this.$primevue.config.locale.aria ? this.$primevue.config.locale.aria.close : undefined;\n    }\n  },\n  components: {\n    Portal: Portal,\n    EyeIcon: EyeIcon,\n    RefreshIcon: RefreshIcon,\n    UndoIcon: UndoIcon,\n    SearchMinusIcon: SearchMinusIcon,\n    SearchPlusIcon: SearchPlusIcon,\n    TimesIcon: TimesIcon\n  },\n  directives: {\n    focustrap: FocusTrap\n  }\n};\n\nfunction _typeof(o) { \"@babel/helpers - typeof\"; return _typeof = \"function\" == typeof Symbol && \"symbol\" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && \"function\" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? \"symbol\" : typeof o; }, _typeof(o); }\nfunction ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }\nfunction _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }\nfunction _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\nfunction _toPropertyKey(t) { var i = _toPrimitive(t, \"string\"); return \"symbol\" == _typeof(i) ? i : String(i); }\nfunction _toPrimitive(t, r) { if (\"object\" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || \"default\"); if (\"object\" != _typeof(i)) return i; throw new TypeError(\"@@toPrimitive must return a primitive value.\"); } return (\"string\" === r ? String : Number)(t); }\nvar _hoisted_1 = [\"aria-label\"];\nvar _hoisted_2 = [\"aria-modal\"];\nvar _hoisted_3 = [\"aria-label\"];\nvar _hoisted_4 = [\"aria-label\"];\nvar _hoisted_5 = [\"disabled\", \"aria-label\"];\nvar _hoisted_6 = [\"disabled\", \"aria-label\"];\nvar _hoisted_7 = [\"aria-label\"];\nvar _hoisted_8 = [\"src\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_RefreshIcon = resolveComponent(\"RefreshIcon\");\n  var _component_UndoIcon = resolveComponent(\"UndoIcon\");\n  var _component_SearchMinusIcon = resolveComponent(\"SearchMinusIcon\");\n  var _component_SearchPlusIcon = resolveComponent(\"SearchPlusIcon\");\n  var _component_TimesIcon = resolveComponent(\"TimesIcon\");\n  var _component_Portal = resolveComponent(\"Portal\");\n  var _directive_focustrap = resolveDirective(\"focustrap\");\n  return openBlock(), createElementBlock(\"span\", mergeProps({\n    \"class\": $options.containerClass,\n    style: _ctx.style\n  }, _ctx.ptmi('root')), [renderSlot(_ctx.$slots, \"image\", {\n    onError: $options.onError,\n    errorCallback: $options.onError\n  }, function () {\n    return [createElementVNode(\"img\", mergeProps({\n      style: _ctx.imageStyle,\n      \"class\": [_ctx.cx('image'), _ctx.imageClass],\n      onError: _cache[0] || (_cache[0] = function () {\n        return $options.onError && $options.onError.apply($options, arguments);\n      })\n    }, _objectSpread(_objectSpread({}, _ctx.$attrs), _ctx.ptm('image'))), null, 16)];\n  }), _ctx.preview ? (openBlock(), createElementBlock(\"button\", mergeProps({\n    key: 0,\n    ref: \"previewButton\",\n    \"aria-label\": $options.zoomImageAriaLabel,\n    type: \"button\",\n    \"class\": _ctx.cx('button'),\n    onClick: _cache[1] || (_cache[1] = function () {\n      return $options.onImageClick && $options.onImageClick.apply($options, arguments);\n    })\n  }, _objectSpread(_objectSpread({}, _ctx.previewButtonProps), _ctx.ptm('button'))), [renderSlot(_ctx.$slots, \"indicatoricon\", {}, function () {\n    return [(openBlock(), createBlock(resolveDynamicComponent(_ctx.indicatorIcon ? 'i' : 'EyeIcon'), mergeProps({\n      \"class\": _ctx.cx('icon')\n    }, _ctx.ptm('icon')), null, 16, [\"class\"]))];\n  })], 16, _hoisted_1)) : createCommentVNode(\"\", true), createVNode(_component_Portal, null, {\n    \"default\": withCtx(function () {\n      return [$data.maskVisible ? withDirectives((openBlock(), createElementBlock(\"div\", mergeProps({\n        key: 0,\n        ref: $options.maskRef,\n        role: \"dialog\",\n        \"class\": _ctx.cx('mask'),\n        \"aria-modal\": $data.maskVisible,\n        onClick: _cache[8] || (_cache[8] = function () {\n          return $options.onMaskClick && $options.onMaskClick.apply($options, arguments);\n        }),\n        onKeydown: _cache[9] || (_cache[9] = function () {\n          return $options.onMaskKeydown && $options.onMaskKeydown.apply($options, arguments);\n        })\n      }, _ctx.ptm('mask')), [createElementVNode(\"div\", mergeProps({\n        \"class\": _ctx.cx('toolbar')\n      }, _ctx.ptm('toolbar')), [createElementVNode(\"button\", mergeProps({\n        \"class\": _ctx.cx('rotateRightButton'),\n        onClick: _cache[2] || (_cache[2] = function () {\n          return $options.rotateRight && $options.rotateRight.apply($options, arguments);\n        }),\n        type: \"button\",\n        \"aria-label\": $options.rightAriaLabel\n      }, _ctx.ptm('rotateRightButton'), {\n        \"data-pc-group-section\": \"action\"\n      }), [renderSlot(_ctx.$slots, \"refresh\", {}, function () {\n        return [createVNode(_component_RefreshIcon, normalizeProps(guardReactiveProps(_ctx.ptm('rotateRightIcon'))), null, 16)];\n      })], 16, _hoisted_3), createElementVNode(\"button\", mergeProps({\n        \"class\": _ctx.cx('rotateLeftButton'),\n        onClick: _cache[3] || (_cache[3] = function () {\n          return $options.rotateLeft && $options.rotateLeft.apply($options, arguments);\n        }),\n        type: \"button\",\n        \"aria-label\": $options.leftAriaLabel\n      }, _ctx.ptm('rotateLeftButton'), {\n        \"data-pc-group-section\": \"action\"\n      }), [renderSlot(_ctx.$slots, \"undo\", {}, function () {\n        return [createVNode(_component_UndoIcon, normalizeProps(guardReactiveProps(_ctx.ptm('rotateLeftIcon'))), null, 16)];\n      })], 16, _hoisted_4), createElementVNode(\"button\", mergeProps({\n        \"class\": _ctx.cx('zoomOutButton'),\n        onClick: _cache[4] || (_cache[4] = function () {\n          return $options.zoomOut && $options.zoomOut.apply($options, arguments);\n        }),\n        type: \"button\",\n        disabled: $options.isZoomOutDisabled,\n        \"aria-label\": $options.zoomOutAriaLabel\n      }, _ctx.ptm('zoomOutButton'), {\n        \"data-pc-group-section\": \"action\"\n      }), [renderSlot(_ctx.$slots, \"zoomout\", {}, function () {\n        return [createVNode(_component_SearchMinusIcon, normalizeProps(guardReactiveProps(_ctx.ptm('zoomOutIcon'))), null, 16)];\n      })], 16, _hoisted_5), createElementVNode(\"button\", mergeProps({\n        \"class\": _ctx.cx('zoomInButton'),\n        onClick: _cache[5] || (_cache[5] = function () {\n          return $options.zoomIn && $options.zoomIn.apply($options, arguments);\n        }),\n        type: \"button\",\n        disabled: $options.isZoomInDisabled,\n        \"aria-label\": $options.zoomInAriaLabel\n      }, _ctx.ptm('zoomInButton'), {\n        \"data-pc-group-section\": \"action\"\n      }), [renderSlot(_ctx.$slots, \"zoomin\", {}, function () {\n        return [createVNode(_component_SearchPlusIcon, normalizeProps(guardReactiveProps(_ctx.ptm('zoomInIcon'))), null, 16)];\n      })], 16, _hoisted_6), createElementVNode(\"button\", mergeProps({\n        \"class\": _ctx.cx('closeButton'),\n        type: \"button\",\n        onClick: _cache[6] || (_cache[6] = function () {\n          return $options.hidePreview && $options.hidePreview.apply($options, arguments);\n        }),\n        \"aria-label\": $options.closeAriaLabel,\n        autofocus: \"\"\n      }, _ctx.ptm('closeButton'), {\n        \"data-pc-group-section\": \"action\"\n      }), [renderSlot(_ctx.$slots, \"close\", {}, function () {\n        return [createVNode(_component_TimesIcon, normalizeProps(guardReactiveProps(_ctx.ptm('closeIcon'))), null, 16)];\n      })], 16, _hoisted_7)], 16), createVNode(Transition, mergeProps({\n        name: \"p-image-preview\",\n        onBeforeEnter: $options.onBeforeEnter,\n        onEnter: $options.onEnter,\n        onLeave: $options.onLeave,\n        onBeforeLeave: $options.onBeforeLeave,\n        onAfterLeave: $options.onAfterLeave\n      }, _ctx.ptm('transition')), {\n        \"default\": withCtx(function () {\n          return [$data.previewVisible ? (openBlock(), createElementBlock(\"div\", normalizeProps(mergeProps({\n            key: 0\n          }, _ctx.ptm('previewContainer'))), [renderSlot(_ctx.$slots, \"preview\", {\n            \"class\": normalizeClass(_ctx.cx('preview')),\n            style: normalizeStyle($options.imagePreviewStyle),\n            onClick: $options.onPreviewImageClick,\n            previewCallback: $options.onPreviewImageClick\n          }, function () {\n            return [createElementVNode(\"img\", mergeProps({\n              src: _ctx.$attrs.src,\n              \"class\": _ctx.cx('preview'),\n              style: $options.imagePreviewStyle,\n              onClick: _cache[7] || (_cache[7] = function () {\n                return $options.onPreviewImageClick && $options.onPreviewImageClick.apply($options, arguments);\n              })\n            }, _ctx.ptm('preview')), null, 16, _hoisted_8)];\n          })], 16)) : createCommentVNode(\"\", true)];\n        }),\n        _: 3\n      }, 16, [\"onBeforeEnter\", \"onEnter\", \"onLeave\", \"onBeforeLeave\", \"onAfterLeave\"])], 16, _hoisted_2)), [[_directive_focustrap]]) : createCommentVNode(\"\", true)];\n    }),\n    _: 3\n  })], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841399829,
+      "end": 1742841400022,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841400022,
+      "end": 1742841400022,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841400022,
+      "end": 1742841400023,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400023,
+      "end": 1742841400023,
+      "order": "normal"
+    }
+  ]
+}

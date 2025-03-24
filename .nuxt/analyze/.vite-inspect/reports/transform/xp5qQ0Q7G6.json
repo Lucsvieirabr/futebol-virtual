@@ -1,0 +1,214 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/metergroup/metergroup.esm.js?nuxt_component=async&nuxt_component_name=PrimeMeterGroup&nuxt_component_export=default",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import BaseComponent from 'primevue/basecomponent';\nimport MeterGroupStyle from 'primevue/metergroup/style';\nimport { openBlock, createElementBlock, mergeProps, Fragment, renderList, renderSlot, normalizeClass, createElementVNode, toDisplayString, resolveComponent, createVNode, createCommentVNode } from 'vue';\n\nvar script$2 = {\n  name: 'MeterGroup',\n  \"extends\": BaseComponent,\n  props: {\n    value: {\n      type: Array,\n      \"default\": null\n    },\n    min: {\n      type: Number,\n      \"default\": 0\n    },\n    max: {\n      type: Number,\n      \"default\": 100\n    },\n    orientation: {\n      type: String,\n      \"default\": 'horizontal'\n    },\n    labelPosition: {\n      type: String,\n      \"default\": 'end'\n    },\n    labelOrientation: {\n      type: String,\n      \"default\": 'horizontal'\n    }\n  },\n  style: MeterGroupStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script$1 = {\n  name: 'MeterGroupLabel',\n  hostName: 'MeterGroup',\n  \"extends\": BaseComponent,\n  inheritAttrs: false,\n  props: {\n    value: {\n      type: Array,\n      \"default\": null\n    },\n    labelPosition: {\n      type: String,\n      \"default\": 'end'\n    },\n    labelOrientation: {\n      type: String,\n      \"default\": 'horizontal'\n    }\n  }\n};\n\nfunction render$1(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"ol\", mergeProps({\n    \"class\": _ctx.cx('labellist')\n  }, _ctx.ptm('labellist')), [(openBlock(true), createElementBlock(Fragment, null, renderList($props.value, function (val, index) {\n    return openBlock(), createElementBlock(\"li\", mergeProps({\n      key: index + '_label',\n      \"class\": _ctx.cx('labellistitem')\n    }, _ctx.ptm('labellistitem')), [renderSlot(_ctx.$slots, \"icon\", {\n      value: val,\n      \"class\": normalizeClass(_ctx.cx('labelicon'))\n    }, function () {\n      return [val.icon ? (openBlock(), createElementBlock(\"i\", mergeProps({\n        key: 0,\n        \"class\": [val.icon, _ctx.cx('labelicon')],\n        style: {\n          color: val.color\n        }\n      }, _ctx.ptm('labelicon')), null, 16)) : (openBlock(), createElementBlock(\"span\", mergeProps({\n        key: 1,\n        \"class\": _ctx.cx('labellisttype'),\n        style: {\n          backgroundColor: val.color\n        }\n      }, _ctx.ptm('labellisttype')), null, 16))];\n    }), createElementVNode(\"span\", mergeProps({\n      \"class\": _ctx.cx('label')\n    }, _ctx.ptm('label')), toDisplayString(val.label) + \" (\" + toDisplayString(_ctx.$parentInstance.percentValue(val.value)) + \")\", 17)], 16);\n  }), 128))], 16);\n}\n\nscript$1.render = render$1;\n\nvar script = {\n  name: 'MeterGroup',\n  \"extends\": script$2,\n  inheritAttrs: false,\n  methods: {\n    getPTOptions: function getPTOptions(key, value, index) {\n      return this.ptm(key, {\n        context: {\n          value: value,\n          index: index\n        }\n      });\n    },\n    percent: function percent() {\n      var meter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;\n      var percentOfItem = (meter - this.min) / (this.max - this.min) * 100;\n      return Math.round(Math.max(0, Math.min(100, percentOfItem)));\n    },\n    percentValue: function percentValue(meter) {\n      return this.percent(meter) + '%';\n    },\n    meterCalculatedStyles: function meterCalculatedStyles(val) {\n      return {\n        backgroundColor: val.color,\n        width: this.orientation === 'horizontal' && this.percentValue(val.value),\n        height: this.orientation === 'vertical' && this.percentValue(val.value)\n      };\n    }\n  },\n  computed: {\n    totalPercent: function totalPercent() {\n      return this.percent(this.value.reduce(function (total, val) {\n        return total + val.value;\n      }, 0));\n    },\n    percentages: function percentages() {\n      var sum = 0;\n      var sumsArray = [];\n      this.value.forEach(function (item) {\n        sum += item.value;\n        sumsArray.push(sum);\n      });\n      return sumsArray;\n    }\n  },\n  components: {\n    MeterGroupLabel: script$1\n  }\n};\n\nvar _hoisted_1 = [\"aria-valuemin\", \"aria-valuemax\", \"aria-valuenow\"];\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  var _component_MeterGroupLabel = resolveComponent(\"MeterGroupLabel\");\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root'),\n    role: \"meter\",\n    \"aria-valuemin\": _ctx.min,\n    \"aria-valuemax\": _ctx.max,\n    \"aria-valuenow\": $options.totalPercent\n  }, _ctx.ptmi('root')), [_ctx.labelPosition === 'start' ? renderSlot(_ctx.$slots, \"label\", {\n    key: 0,\n    value: _ctx.value,\n    totalPercent: $options.totalPercent,\n    percentages: $options.percentages\n  }, function () {\n    return [createVNode(_component_MeterGroupLabel, {\n      value: _ctx.value,\n      labelPosition: _ctx.labelPosition,\n      labelOrientation: _ctx.labelOrientation,\n      unstyled: _ctx.unstyled,\n      pt: _ctx.pt\n    }, null, 8, [\"value\", \"labelPosition\", \"labelOrientation\", \"unstyled\", \"pt\"])];\n  }) : createCommentVNode(\"\", true), renderSlot(_ctx.$slots, \"start\", {\n    value: _ctx.value,\n    totalPercent: $options.totalPercent,\n    percentages: $options.percentages\n  }), createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('metercontainer')\n  }, _ctx.ptm('metercontainer')), [(openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.value, function (val, index) {\n    return renderSlot(_ctx.$slots, \"meter\", {\n      key: index,\n      value: val,\n      index: index,\n      \"class\": normalizeClass(_ctx.cx('meter')),\n      orientation: _ctx.orientation,\n      size: $options.percentValue(val.value),\n      totalPercent: $options.totalPercent\n    }, function () {\n      return [$options.percent(val.value) ? (openBlock(), createElementBlock(\"span\", mergeProps({\n        key: 0,\n        \"class\": _ctx.cx('meter'),\n        style: $options.meterCalculatedStyles(val)\n      }, $options.getPTOptions('meter', val, index)), null, 16)) : createCommentVNode(\"\", true)];\n    });\n  }), 128))], 16), renderSlot(_ctx.$slots, \"end\", {\n    value: _ctx.value,\n    totalPercent: $options.totalPercent,\n    percentages: $options.percentages\n  }), _ctx.labelPosition === 'end' ? renderSlot(_ctx.$slots, \"label\", {\n    key: 1,\n    value: _ctx.value,\n    totalPercent: $options.totalPercent,\n    percentages: $options.percentages\n  }, function () {\n    return [createVNode(_component_MeterGroupLabel, {\n      value: _ctx.value,\n      labelPosition: _ctx.labelPosition,\n      labelOrientation: _ctx.labelOrientation,\n      unstyled: _ctx.unstyled,\n      pt: _ctx.pt\n    }, null, 8, [\"value\", \"labelPosition\", \"labelOrientation\", \"unstyled\", \"pt\"])];\n  }) : createCommentVNode(\"\", true)], 16, _hoisted_1);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841399257,
+      "end": 1742841399280,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "result": "import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/metergroup/metergroup.esm.js\").then(r => r[\"default\"] || r.default || r))",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "replace",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "result": "import { __vitePreload } from \"\u0000vite/preload-helper.js\";import { defineAsyncComponent } from \"vue\"\nexport default defineAsyncComponent(() => __vitePreload(() => import(\"/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/metergroup/metergroup.esm.js\"),__VITE_IS_MODERN__?\"__VITE_PRELOAD__\":void 0,import.meta.url).then(r => r[\"default\"] || r.default || r))",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal",
+      "sourcemaps": null
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841399280,
+      "end": 1742841399280,
+      "order": "normal"
+    }
+  ]
+}

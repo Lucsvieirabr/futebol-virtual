@@ -1,0 +1,17 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/nuxt/dist/app/types.js",
+  "transforms": [
+    {
+      "name": "__load__",
+      "result": "",
+      "start": 1742841400069,
+      "end": 1742841400069
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400069,
+      "end": 1742841400069,
+      "order": "normal"
+    }
+  ]
+}

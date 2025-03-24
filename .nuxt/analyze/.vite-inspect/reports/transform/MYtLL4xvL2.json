@@ -1,0 +1,209 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/assets/images/logo.webp",
+  "transforms": [
+    {
+      "name": "vite:asset",
+      "result": "export default \"data:image/webp;base64,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\"",
+      "start": 1742841400201,
+      "end": 1742841400237
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841400237,
+      "end": 1742841400237,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841400237,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400238,
+      "end": 1742841400238,
+      "order": "normal"
+    }
+  ]
+}

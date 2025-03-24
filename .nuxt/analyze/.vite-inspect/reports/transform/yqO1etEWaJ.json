@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/terminal/terminal.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import TerminalService from 'primevue/terminalservice';\nimport BaseComponent from 'primevue/basecomponent';\nimport TerminalStyle from 'primevue/terminal/style';\nimport { openBlock, createElementBlock, mergeProps, normalizeProps, toDisplayString, createCommentVNode, createElementVNode, Fragment, renderList, withDirectives, vModelText } from 'vue';\n\nvar script$1 = {\n  name: 'BaseTerminal',\n  \"extends\": BaseComponent,\n  props: {\n    welcomeMessage: {\n      type: String,\n      \"default\": null\n    },\n    prompt: {\n      type: String,\n      \"default\": null\n    }\n  },\n  style: TerminalStyle,\n  provide: function provide() {\n    return {\n      $parentInstance: this\n    };\n  }\n};\n\nvar script = {\n  name: 'Terminal',\n  \"extends\": script$1,\n  inheritAttrs: false,\n  data: function data() {\n    return {\n      commandText: null,\n      commands: []\n    };\n  },\n  mounted: function mounted() {\n    TerminalService.on('response', this.responseListener);\n    this.$refs.input.focus();\n  },\n  updated: function updated() {\n    this.$el.scrollTop = this.$el.scrollHeight;\n  },\n  beforeUnmount: function beforeUnmount() {\n    TerminalService.off('response', this.responseListener);\n  },\n  methods: {\n    onClick: function onClick() {\n      this.$refs.input.focus();\n    },\n    onKeydown: function onKeydown(event) {\n      if (event.key === 'Enter' && this.commandText) {\n        this.commands.push({\n          text: this.commandText\n        });\n        TerminalService.emit('command', this.commandText);\n        this.commandText = '';\n      }\n    },\n    responseListener: function responseListener(response) {\n      this.commands[this.commands.length - 1].response = response;\n    }\n  }\n};\n\nfunction render(_ctx, _cache, $props, $setup, $data, $options) {\n  return openBlock(), createElementBlock(\"div\", mergeProps({\n    \"class\": _ctx.cx('root'),\n    onClick: _cache[2] || (_cache[2] = function () {\n      return $options.onClick && $options.onClick.apply($options, arguments);\n    })\n  }, _ctx.ptmi('root')), [_ctx.welcomeMessage ? (openBlock(), createElementBlock(\"div\", normalizeProps(mergeProps({\n    key: 0\n  }, _ctx.ptm('welcomeMessage'))), toDisplayString(_ctx.welcomeMessage), 17)) : createCommentVNode(\"\", true), createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('content')\n  }, _ctx.ptm('content')), [(openBlock(true), createElementBlock(Fragment, null, renderList($data.commands, function (command, i) {\n    return openBlock(), createElementBlock(\"div\", mergeProps({\n      key: command.text + i.toString()\n    }, _ctx.ptm('commands')), [createElementVNode(\"span\", mergeProps({\n      \"class\": _ctx.cx('prompt')\n    }, _ctx.ptm('prompt')), toDisplayString(_ctx.prompt), 17), createElementVNode(\"span\", mergeProps({\n      \"class\": _ctx.cx('command')\n    }, _ctx.ptm('command')), toDisplayString(command.text), 17), createElementVNode(\"div\", mergeProps({\n      \"class\": _ctx.cx('response'),\n      \"aria-live\": \"polite\"\n    }, _ctx.ptm('response')), toDisplayString(command.response), 17)], 16);\n  }), 128))], 16), createElementVNode(\"div\", mergeProps({\n    \"class\": _ctx.cx('container')\n  }, _ctx.ptm('container')), [createElementVNode(\"span\", mergeProps({\n    \"class\": _ctx.cx('prompt')\n  }, _ctx.ptm('prompt')), toDisplayString(_ctx.prompt), 17), withDirectives(createElementVNode(\"input\", mergeProps({\n    ref: \"input\",\n    \"onUpdate:modelValue\": _cache[0] || (_cache[0] = function ($event) {\n      return $data.commandText = $event;\n    }),\n    type: \"text\",\n    \"class\": _ctx.cx('commandText'),\n    autocomplete: \"off\",\n    onKeydown: _cache[1] || (_cache[1] = function () {\n      return $options.onKeydown && $options.onKeydown.apply($options, arguments);\n    })\n  }, _ctx.ptm('commandText')), null, 16), [[vModelText, $data.commandText]])], 16)], 16);\n}\n\nscript.render = render;\n\nexport { script as default };\n",
+      "start": 1742841400003,
+      "end": 1742841400048,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400048,
+      "end": 1742841400048,
+      "order": "normal"
+    }
+  ]
+}

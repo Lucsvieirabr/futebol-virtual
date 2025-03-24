@@ -1,0 +1,210 @@
+{
+  "resolvedId": "/Users/leonardohumbert/Downloads/sistema-futebol-online/nuxt/node_modules/primevue/dropdown/style/dropdownstyle.esm.js",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "import BaseStyle from 'primevue/base/style';\n\nvar classes = {\n  root: function root(_ref) {\n    var instance = _ref.instance,\n      props = _ref.props,\n      state = _ref.state;\n    return ['p-dropdown p-component p-inputwrapper', {\n      'p-disabled': props.disabled,\n      'p-invalid': props.invalid,\n      'p-variant-filled': props.variant ? props.variant === 'filled' : instance.$primevue.config.inputStyle === 'filled',\n      'p-dropdown-clearable': props.showClear,\n      'p-focus': state.focused,\n      'p-inputwrapper-filled': instance.hasSelectedOption,\n      'p-inputwrapper-focus': state.focused || state.overlayVisible,\n      'p-overlay-open': state.overlayVisible\n    }];\n  },\n  input: function input(_ref2) {\n    var _instance$label;\n    var instance = _ref2.instance,\n      props = _ref2.props;\n    return ['p-dropdown-label p-inputtext', {\n      'p-placeholder': !props.editable && instance.label === props.placeholder,\n      'p-dropdown-label-empty': !props.editable && !instance.$slots['value'] && (instance.label === 'p-emptylabel' || ((_instance$label = instance.label) === null || _instance$label === void 0 ? void 0 : _instance$label.length) === 0)\n    }];\n  },\n  clearIcon: 'p-dropdown-clear-icon',\n  trigger: 'p-dropdown-trigger',\n  loadingicon: 'p-dropdown-trigger-icon',\n  dropdownIcon: 'p-dropdown-trigger-icon',\n  panel: function panel(_ref3) {\n    _ref3.props;\n      var instance = _ref3.instance;\n    return ['p-dropdown-panel p-component', {\n      'p-ripple-disabled': instance.$primevue.config.ripple === false\n    }];\n  },\n  header: 'p-dropdown-header',\n  filterContainer: 'p-dropdown-filter-container',\n  filterInput: function filterInput(_ref4) {\n    var props = _ref4.props,\n      instance = _ref4.instance;\n    return ['p-dropdown-filter p-inputtext p-component', {\n      'p-variant-filled': props.variant ? props.variant === 'filled' : instance.$primevue.config.inputStyle === 'filled'\n    }];\n  },\n  filterIcon: 'p-dropdown-filter-icon',\n  wrapper: 'p-dropdown-items-wrapper',\n  list: 'p-dropdown-items',\n  itemGroup: 'p-dropdown-item-group',\n  itemGroupLabel: 'p-dropdown-item-group-label',\n  item: function item(_ref5) {\n    var instance = _ref5.instance,\n      props = _ref5.props,\n      state = _ref5.state,\n      option = _ref5.option,\n      focusedOption = _ref5.focusedOption;\n    return ['p-dropdown-item', {\n      'p-highlight': instance.isSelected(option) && props.highlightOnSelect,\n      'p-focus': state.focusedOptionIndex === focusedOption,\n      'p-disabled': instance.isOptionDisabled(option)\n    }];\n  },\n  itemLabel: 'p-dropdown-item-label',\n  checkIcon: 'p-dropdown-check-icon',\n  blankIcon: 'p-dropdown-blank-icon',\n  emptyMessage: 'p-dropdown-empty-message'\n};\nvar DropdownStyle = BaseStyle.extend({\n  name: 'dropdown',\n  classes: classes\n});\n\nexport { DropdownStyle as default };\n",
+      "start": 1742841400083,
+      "end": 1742841400110,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1742841400110,
+      "end": 1742841400110,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1742841400111,
+      "end": 1742841400111,
+      "order": "normal"
+    }
+  ]
+}
