@@ -869,10 +869,12 @@ function calcularMediaSubidas(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
-  mediasTotais.value.subida.media = media;
-  mediasTotais.value.subida.ultimasTresSoma = valores
-    .slice(-3)
-    .reduce((acc, val) => acc + val, 0);
+  if (tabelaId === "tabelao25") {
+    mediasTotais.value.subida.media = media;
+    mediasTotais.value.subida.ultimasTresSoma = valores
+      .slice(-3)
+      .reduce((acc, val) => acc + val, 0);
+  }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaSubidas`
   );
@@ -904,11 +906,12 @@ function calcularMediaLateralizacaoOver(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
-  mediasTotais.value.lateralizacoesOver.media = media;
-  mediasTotais.value.lateralizacoesOver.ultimasTresSoma = valores
-    .slice(-3)
-    .reduce((acc, val) => acc + val, 0);
-
+  if (tabelaId === "tabelao25") {
+    mediasTotais.value.lateralizacoesOver.media = media;
+    mediasTotais.value.lateralizacoesOver.ultimasTresSoma = valores
+      .slice(-3)
+      .reduce((acc, val) => acc + val, 0);
+  }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaLateralizacoesOver`
   );
@@ -938,11 +941,13 @@ function calcularMediaDescidas(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
-  mediasTotais.value.descida.media = media;
-  mediasTotais.value.descida.ultimasTresSoma = valores
-    .slice(-3)
-    .reduce((acc, val) => acc + val, 0);
 
+  if (tabelaId === "tabelao25") {
+    mediasTotais.value.descida.media = media;
+    mediasTotais.value.descida.ultimasTresSoma = valores
+      .slice(-3)
+      .reduce((acc, val) => acc + val, 0);
+  }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaDescidas`
   );
@@ -975,11 +980,12 @@ function calcularMediaLateralizacoesUnder(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
-  mediasTotais.value.lateralizacoesUnder.media = media;
-  mediasTotais.value.lateralizacoesUnder.ultimasTresSoma = valores
-    .slice(-3)
-    .reduce((acc, val) => acc + val, 0);
-
+  if (tabelaId === "tabelao25") {
+    mediasTotais.value.lateralizacoesUnder.media = media;
+    mediasTotais.value.lateralizacoesUnder.ultimasTresSoma = valores
+      .slice(-3)
+      .reduce((acc, val) => acc + val, 0);
+  }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaLateralizacoesUnder`
   );
@@ -1009,10 +1015,12 @@ function calcularMediaGols(tabelaId) {
   }
 
   const media = contador > 0 ? `${Math.ceil(soma / contador)}` : 0;
-  mediasTotais.value.gols.media = media;
-  mediasTotais.value.gols.ultimasTresSoma = valores
-    .slice(-3)
-    .reduce((acc, val) => acc + val, 0);
+  if (tabelaId === "tabelao25") {
+    mediasTotais.value.gols.media = media;
+    mediasTotais.value.gols.ultimasTresSoma = valores
+      .slice(-3)
+      .reduce((acc, val) => acc + val, 0);
+  }
   const mediaColunaGols = document.getElementById(`${tabelaId}mediaColunaGols`);
   mediaColunaGols.innerText = media;
 }
