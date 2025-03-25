@@ -41,16 +41,68 @@
         />
       </div>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-5" v-if="showRanks">
+    <div class="flex items justify-center mt-6" v-if="rankings.length">
+      <PrimeButton
+        type="button"
+        class="btnTables font-bold"
+        @click="showRanksAcc = !showRanksAcc"
+      >
+        Mostrar/Esconder Ranking Gráfico
+      </PrimeButton>
+    </div>
+    <div v-if="showRanksAcc" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div
+        v-for="(rank, rankName) in rankingsGraficoAcc"
+        :key="rankName"
+        class="bg-white rounded shadow p-4"
+      >
+        <h2 class="text-lg font-semibold mb-4">
+          {{ formatarNomeRank(rankName) }}
+        </h2>
+        <PrimeDataTable :value="formatarDadosRank(rank)">
+          <PrimeColumn
+            field="oscilacao"
+            header="P (Oscilação)"
+            class="text-center"
+          />
+          <PrimeColumn
+            field="quantidade"
+            header="Quantidade"
+            class="text-center"
+          />
+        </PrimeDataTable>
+      </div>
+    </div>
+    <div class="flex items justify-center mt-6" v-if="rankings.length">
+      <PrimeButton
+        type="button"
+        class="btnTables font-bold"
+        @click="showRanks = !showRanks"
+      >
+        Mostrar/Esconder Ranking de Mercado
+      </PrimeButton>
+    </div>
+    <div v-if="showRanks" class="grid grid-cols-1 md:grid-cols-4 gap-6 p-5">
       <div
         v-for="(rank, index) in rankings"
         :key="index"
-        class="bg-white shadow-lg rounded-xl p-2"
+        class="bg-white shadow-lg rounded-xl p-2 transition-all duration-300"
+        :class="{
+          'max-h-auto overflow-auto': rank.show_all,
+          'max-h-80': !rank.show_all,
+        }"
       >
         <h2 class="text-lg font-semibold text-gray-700 text-center mb-4">
           {{ rank.title }}
         </h2>
+        <PrimeButton
+          :label="rank.show_all ? 'Mostrar Menos' : 'Mostrar Mais'"
+          class="w-full mb-2"
+          outlined
+          :icon="rank.show_all ? 'pi pi-chevron-up' : 'pi pi-chevron-down'"
+          @click="rank.show_all = !rank.show_all"
+        />
+
         <table class="w-full border-collapse border border-gray-300">
           <thead>
             <tr class="bg-gray-100">
@@ -58,22 +110,31 @@
               <th class="border border-gray-300 px-2 py-2">Time</th>
               <th
                 class="border border-gray-300 px-2 py-2"
-                v-if="rank.title === 'Máxima de Mercado'"
+                v-if="
+                  rank.title === 'Máxima de Mercado 2,5' ||
+                  rank.title === 'Máxima de Mercado 3,5'
+                "
               >
                 Atual
               </th>
               <th
                 class="border border-gray-300 px-2 py-2"
-                v-if="rank.title === 'Máxima de Mercado'"
+                v-if="
+                  rank.title === 'Máxima de Mercado 2,5' ||
+                  rank.title === 'Máxima de Mercado 3,5'
+                "
               >
                 Máxima
               </th>
-              <th class="border border-gray-300 px-2 py-2" v-else>Valor</th>
+              <th class="border border-gray-300 px-2 py-2" v-else>Média</th>
+              <th class="border border-gray-300 px-2 py-2">Total de Jogos</th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="(team, i) in rank.data"
+              v-for="(team, i) in rank.show_all
+                ? rank.data
+                : rank.data.slice(0, 5)"
               :key="team.team"
               class="odd:bg-gray-50 even:bg-white"
             >
@@ -83,18 +144,27 @@
               <td class="border border-gray-300 px-2 py-2">{{ team.team }}</td>
               <td
                 class="border border-gray-300 px-2 py-2 text-center"
-                v-if="rank.title === 'Máxima de Mercado'"
+                v-if="
+                  rank.title === 'Máxima de Mercado 2,5' ||
+                  rank.title === 'Máxima de Mercado 3,5'
+                "
               >
-                {{ team.currentUnder2_5 }}
+                {{ team.currentUnder2_5 || team.currentUnder3_5 }}
               </td>
               <td
                 class="border border-gray-300 px-2 py-2 text-center"
-                v-if="rank.title === 'Máxima de Mercado'"
+                v-if="
+                  rank.title === 'Máxima de Mercado 2,5' ||
+                  rank.title === 'Máxima de Mercado 3,5'
+                "
               >
-                {{ team.maxUnder2_5 }}
+                {{ team.maxUnder2_5 || team.maxUnder3_5 }}
               </td>
               <td class="border border-gray-300 px-2 py-2 text-center" v-else>
                 {{ team.value }}
+              </td>
+              <td class="border border-gray-300 px-2 py-2 text-center">
+                {{ team.totalGames }}
               </td>
             </tr>
           </tbody>
@@ -103,11 +173,11 @@
     </div>
 
     <!-- Tabela e Gráficos -->
-    <div id="graficos">
+    <div id="graficos" class="flex flex-col gap-4">
       <div>
-        <div id="controlesUnderOver" style="margin-bottom: 20px"></div>
+        <div id="controlesUnderOver" class="mb-5"></div>
         <canvas id="graficoUnderOver"></canvas>
-        <div class="table">
+        <div class="table flex flex-col gap-4">
           <PrimeButton
             type="button"
             class="btnTables"
@@ -115,11 +185,40 @@
           >
             Mostrar/Esconder Tabela
           </PrimeButton>
+
+          <div class="overflow-x-auto">
+            <table
+              class="min-w-[200px] border border-gray-300 text-sm text-gray-700 ml-auto"
+            >
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="border px-2 py-1 text-left">Média</th>
+                  <th class="border px-2 py-1 text-left">Soma</th>
+                  <th class="border px-2 py-1 text-left">Mult 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(item, key) in mediasTotais"
+                  :key="key"
+                  class="odd:bg-white even:bg-gray-50"
+                >
+                  <td class="border px-2 py-1 font-medium">
+                    {{ formatarNome(key) }}
+                  </td>
+                  <td class="border px-2 py-1">{{ item.ultimasTresSoma }}</td>
+                  <td class="border px-2 py-1">{{ item.media * 3 }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
           <table id="tabelao25" v-show="showTable1"></table>
         </div>
       </div>
+
       <div>
-        <div id="controlesAmbas" style="margin-bottom: 20px"></div>
+        <div id="controlesAmbas" class="mb-5"></div>
         <canvas id="graficoAmbas"></canvas>
         <div class="table">
           <PrimeButton
@@ -145,6 +244,31 @@ const campeonatoSelecionado = ref(null);
 const showTable1 = ref(true);
 const showTable2 = ref(true);
 const rankings = ref([]);
+const rankingsGraficoAcc = ref([]);
+const dadosFormatados = ref([]);
+const showRanksAcc = ref(false);
+const mediasTotais = ref({
+  subida: {
+    media: 0,
+    ultimasTresSoma: 0,
+  },
+  descida: {
+    media: 0,
+    ultimasTresSoma: 0,
+  },
+  lateralizacoesOver: {
+    media: 0,
+    ultimasTresSoma: 0,
+  },
+  lateralizacoesUnder: {
+    media: 0,
+    ultimasTresSoma: 0,
+  },
+  gols: {
+    media: 0,
+    ultimasTresSoma: 0,
+  },
+});
 const campeonatos = ref([
   { label: "Copa", value: "copa" },
   { label: "Euro", value: "euro" },
@@ -152,37 +276,61 @@ const campeonatos = ref([
   { label: "Premier", value: "premier" },
 ]);
 
-function extrairGols(partida) {
-  const placar = partida.match(/(\d+)-(\d+)/);
-  if (placar) {
-    return parseInt(placar[1]) + parseInt(placar[2]);
-  }
-  return 0;
+definePageMeta({
+  layout: "home",
+  middleware: [],
+});
+
+function formatarNome(key) {
+  const mapeamentoNomes = {
+    subida: "Subida",
+    descida: "Descida",
+    lateralizacoesOver: "Lat. Over",
+    lateralizacoesUnder: "Lat. Under",
+    gols: "Gols",
+  };
+  return mapeamentoNomes[key] || key;
 }
 const calculateChamaGol = (matches) => {
-  const resultados = matches.map((rodada) =>
-    rodada.slice(1).map((partida) => {
-      const times = partida.split(" x ");
-      return { team: times[0], goals: extrairGols(partida) };
-    })
-  );
+  const teamStats = {};
 
-  const golsPorTime = {};
-  resultados.forEach((rodada) => {
-    rodada.forEach((partida) => {
-      if (!golsPorTime[partida.team]) {
-        golsPorTime[partida.team] = [];
+  matches.forEach((rodada) => {
+    rodada.slice(1).forEach((partida) => {
+      const regex = /(.*?)\s+x\s+(.*?)\s+(\d+)-(\d+)/;
+      const match = partida.match(regex);
+
+      if (!match) return;
+
+      const [, team1, team2, score1, score2] = match;
+      const gols1 = Number(score1);
+      const gols2 = Number(score2);
+
+      // Inicializando estatísticas para os times, caso ainda não existam
+      if (!teamStats[team1]) {
+        teamStats[team1] = { totalGoals: 0, gamesPlayed: 0 };
       }
-      golsPorTime[partida.team].push(partida.goals);
+      if (!teamStats[team2]) {
+        teamStats[team2] = { totalGoals: 0, gamesPlayed: 0 };
+      }
+
+      // Atualizando estatísticas
+      teamStats[team1].totalGoals += gols1;
+      teamStats[team1].gamesPlayed++;
+
+      teamStats[team2].totalGoals += gols2;
+      teamStats[team2].gamesPlayed++;
     });
   });
 
-  const medias = Object.entries(golsPorTime).map(([time, gols]) => {
-    const soma = gols.reduce((acc, gol) => acc + gol, 0);
-    return { team: time, value: (soma / gols.length).toFixed(2) };
-  });
+  // Calculando médias e formatando saída
+  const medias = Object.entries(teamStats).map(([team, stats]) => ({
+    team,
+    value: (stats.totalGoals / stats.gamesPlayed).toFixed(2),
+    totalGames: stats.gamesPlayed,
+  }));
 
-  return medias.sort((a, b) => b.value - a.value).slice(0, 5);
+  // Ordenação pelo maior value primeiro
+  return medias.sort((a, b) => b.value - a.value);
 };
 
 const calculateMaximaMercado = (matches) => {
@@ -191,17 +339,17 @@ const calculateMaximaMercado = (matches) => {
   // Processar os jogos
   matches.forEach((rodada) => {
     rodada.slice(1).forEach((partida) => {
-      console.log(partida.split(" x "));
-      const [teams, score] = partida.split(" ");
-      const [team1, team2] = teams.split(" x ");
-      const [score1, score2] = score.split("-").map(Number);
-      const totalGols = score1 + score2;
-
+      const regex = /(.*?)\s+x\s+(.*?)\s+(\d+)-(\d+)/;
+      const match = partida.match(regex);
+      const [, team1, team2, score1, score2] = match;
+      const totalGols = Number(score1) + Number(score2);
       // Inicializando estatísticas para os times, caso ainda não existam
       if (!teamStats[team1]) {
         teamStats[team1] = {
           currentUnder2_5: 0,
           maxUnder2_5: 0,
+          currentUnder3_5: 0,
+          maxUnder3_5: 0,
           gamesPlayed: 0,
         };
       }
@@ -209,6 +357,8 @@ const calculateMaximaMercado = (matches) => {
         teamStats[team2] = {
           currentUnder2_5: 0,
           maxUnder2_5: 0,
+          currentUnder3_5: 0,
+          maxUnder3_5: 0,
           gamesPlayed: 0,
         };
       }
@@ -237,65 +387,215 @@ const calculateMaximaMercado = (matches) => {
         teamStats[team1].currentUnder2_5 = 0;
         teamStats[team2].currentUnder2_5 = 0;
       }
+
+      // Atualizando estatísticas de Under 3.5
+      if (totalGols < 3.5) {
+        // Incrementa a quantidade de jogos consecutivos "under 3.5"
+        teamStats[team1].currentUnder3_5++;
+        teamStats[team2].currentUnder3_5++;
+
+        // Atualiza o máximo de jogos consecutivos "under 3.5"
+        teamStats[team1].maxUnder3_5 = Math.max(
+          teamStats[team1].maxUnder3_5,
+          teamStats[team1].currentUnder3_5
+        );
+        teamStats[team2].maxUnder3_5 = Math.max(
+          teamStats[team2].maxUnder3_5,
+          teamStats[team2].currentUnder3_5
+        );
+      } else {
+        // Resetar os contadores de jogos consecutivos "under 3.5"
+        teamStats[team1].currentUnder3_5 = 0;
+        teamStats[team2].currentUnder3_5 = 0;
+      }
     });
   });
 
-  // Transformando as estatísticas em formato de resultados
-  const medias = Object.entries(teamStats).map(([team, stats]) => {
-    const currentUnder2_5 = stats.currentUnder2_5;
-    const maxUnder2_5 = stats.maxUnder2_5;
-
+  const medias2_5 = Object.entries(teamStats).map(([team, stats]) => {
     return {
       team,
-      currentUnder2_5,
-      maxUnder2_5,
+      currentUnder2_5: stats.currentUnder2_5,
+      maxUnder2_5: stats.maxUnder2_5,
+      totalGames: stats.gamesPlayed,
     };
   });
 
-  // Ordenando e retornando as 5 melhores equipes com base na "Máxima < 2.5"
-  return medias.sort((a, b) => b.maxUnder2_5 - a.maxUnder2_5).slice(0, 5);
+  const medias3_5 = Object.entries(teamStats).map(([team, stats]) => {
+    return {
+      team,
+      currentUnder3_5: stats.currentUnder3_5,
+      maxUnder3_5: stats.maxUnder3_5,
+      totalGames: stats.gamesPlayed,
+    };
+  });
+  return [
+    medias2_5.sort((a, b) => b.currentUnder2_5 - a.currentUnder2_5),
+    medias3_5.sort((a, b) => b.currentUnder3_5 - a.currentUnder3_5),
+  ];
 };
 
-const calculateAncoraMercado = (matches) => {
-  const resultados = matches.map((rodada) =>
-    rodada.slice(1).map((partida) => {
-      const times = partida.split(" x ");
-      return { team: times[0], goals: extrairGols(partida) };
-    })
-  );
+function gerarRankings(dados) {
+  const rankingsGrafico = {
+    over2_5: {},
+    over3_5: {},
+    subida2_5: {},
+    lateralizacao2_5: {},
+    subida3_5: {},
+  };
 
-  const pontosPorTime = {};
-  resultados.forEach((rodada) => {
-    rodada.forEach((partida) => {
-      if (!pontosPorTime[partida.team]) {
-        pontosPorTime[partida.team] = 0;
+  for (let i = 0; i < dados.length; i++) {
+    const resultados = dados[i];
+
+    for (let j = 0; j < resultados.length; j++) {
+      const partida = resultados[j];
+      const oscilacao = partida.oscilacao;
+      const totalGols = partida.totalGols;
+
+      // rankingsGrafico Over 2.5 e 3.5
+      if (totalGols >= 2.5) {
+        if (!rankingsGrafico.over2_5[oscilacao]) {
+          rankingsGrafico.over2_5[oscilacao] = 0;
+        }
+        rankingsGrafico.over2_5[oscilacao]++;
       }
-      pontosPorTime[partida.team] += partida.goals >= 5 ? 1 : 0;
+      if (totalGols >= 3.5) {
+        if (!rankingsGrafico.over3_5[oscilacao]) {
+          rankingsGrafico.over3_5[oscilacao] = 0;
+        }
+        rankingsGrafico.over3_5[oscilacao]++;
+      }
+
+      // rankingsGrafico Subida e Lateralização
+      if (i < dados.length - 1) {
+        const proximaLinha = dados[i + 1];
+        if (j < proximaLinha.length) {
+          const proximaPartida = proximaLinha[j];
+          if (partida.tipo === "over" && proximaPartida.tipo === "under") {
+            if (!rankingsGrafico.subida2_5[proximaPartida.oscilacao]) {
+              rankingsGrafico.subida2_5[proximaPartida.oscilacao] = 0;
+            }
+            rankingsGrafico.subida2_5[proximaPartida.oscilacao]++;
+
+            if (proximaPartida.totalGols >= 3.5) {
+              if (!rankingsGrafico.subida3_5[proximaPartida.oscilacao]) {
+                rankingsGrafico.subida3_5[proximaPartida.oscilacao] = 0;
+              }
+              rankingsGrafico.subida3_5[proximaPartida.oscilacao]++;
+            }
+          } else if (
+            partida.tipo === "over" &&
+            proximaPartida.tipo === "over"
+          ) {
+            if (!rankingsGrafico.lateralizacao2_5[proximaPartida.oscilacao]) {
+              rankingsGrafico.lateralizacao2_5[proximaPartida.oscilacao] = 0;
+            }
+            rankingsGrafico.lateralizacao2_5[proximaPartida.oscilacao]++;
+          }
+        }
+      }
+    }
+  }
+
+  return rankingsGrafico;
+}
+
+const formatarDadosRank = (rank) => {
+  const rankMapeado = Object.entries(rank)
+    .sort(([oscilacaoA], [oscilacaoB]) => oscilacaoB - oscilacaoA)
+    .map(([oscilacao, quantidade]) => ({ oscilacao, quantidade }))
+    .filter((item) => item.oscilacao !== "undefined"); // Agora o filter realmente remove os itens inválidos
+  return rankMapeado;
+};
+const formatarNomeRank = (nome) => {
+  const mapeamentoNomes = {
+    over2_5: "Ranking Over 2.5",
+    over3_5: "Ranking Over 3.5",
+    subida2_5: "Ranking Subida (2.5)",
+    lateralizacao2_5: "Ranking Lateralização (2.5)",
+    subida3_5: "Ranking Subida (3.5)",
+  };
+  return mapeamentoNomes[nome] || nome;
+};
+const calculateAncoraMercado = (matches) => {
+  const teamStats = {};
+  const rodadaGols = [];
+
+  // 1. Calcular o total de gols de cada partida individualmente
+  matches.forEach((rodada) => {
+    rodada.slice(1).forEach((partida, index) => {
+      const regex = /(.*?)\s+x\s+(.*?)\s+(\d+)-(\d+)/;
+      const match = partida.match(regex);
+
+      if (!match) return;
+
+      const [, team1, team2, score1, score2] = match;
+      const gols1 = Number(score1);
+      const gols2 = Number(score2);
+
+      // Se a soma de gols for maior que 5, marca as rodadas
+      // Inicializar estatísticas dos times, caso ainda não existam
+      if (!teamStats[team1]) {
+        teamStats[team1] = {
+          points: 0,
+          gamesPlayed: 0,
+        };
+      }
+      if (!teamStats[team2]) {
+        teamStats[team2] = {
+          points: 0,
+          gamesPlayed: 0,
+        };
+      }
+
+      // Contabilizando as partidas jogadas
+      teamStats[team1].gamesPlayed++;
+      teamStats[team2].gamesPlayed++;
+
+      // Armazenando os gols da partida e o total de gols dessa partida
+      rodadaGols.push({
+        team1,
+        team2,
+        gols1,
+        gols2,
+        totalGols: gols1 + gols2,
+      });
     });
   });
 
-  const pontos = Object.entries(pontosPorTime).map(([time, pontos]) => ({
-    team: time,
-    value: pontos,
+  // 2. Atribuir pontos baseados nas rodadas
+  rodadaGols.forEach(({ team1, team2, totalGols }, index) => {
+    // Verificar rodada anterior e próxima com base no total de gols já calculado
+    const rodadaAnterior = rodadaGols[index - 1] || {};
+    const rodadaProxima = rodadaGols[index + 1] || {};
+
+    // Se a rodada anterior, atual ou próxima tiverem gols > 5, todos os times pontuam
+    if (totalGols >= 5) {
+      teamStats[team1].points++;
+      teamStats[team2].points++;
+      teamStats[rodadaAnterior.team1].points++;
+      teamStats[rodadaAnterior.team2].points++;
+      teamStats[rodadaProxima.team1].points++;
+      teamStats[rodadaProxima.team2].points++;
+    }
+  });
+
+  // 3. Formatar o resultado
+  const pontos = Object.entries(teamStats).map(([team]) => ({
+    team,
+    value: teamStats[team].points,
+    totalGames: teamStats[team].gamesPlayed,
   }));
 
-  return pontos.sort((a, b) => b.value - a.value).slice(0, 5);
-};
-
-definePageMeta({
-  layout: "home",
-  middleware: [],
-});
-
-const handleFileUpload = (event) => {
-  console.log("Arquivo selecionado:", event.files);
+  return pontos.sort((a, b) => b.value - a.value);
 };
 
 // Função dos graficos
 
 const onClickAnalisar = () => {
   const resultadoAnalise = document.getElementById("graficos");
+  dadosFormatados.value = [];
   showRanks.value = true;
+  showRanksAcc.value = true;
   if (!resultadoAnalise) {
     console.error("Elemento #graficos não encontrado.");
     return;
@@ -307,13 +607,6 @@ const onClickAnalisar = () => {
 
 let chartUnderOver = null;
 let chartAmbas = null;
-
-// for (let index = 0; index < tables.length; index++) {
-//   buttons[index].addEventListener("click", () => {
-//     mostrarEsconderTabela(tables[index]);
-//   });
-// }
-
 const mercadosUnderOver = ["under25", "over25"];
 const mercadosAmbas = ["ambasNao", "ambas"];
 
@@ -337,10 +630,24 @@ function gerarTabelaEGraficos() {
   const liga = campeonatoSelecionado.value;
   const minutos = gerarMinutosPorLiga(liga);
   const mosaico = sanitizarDados(dataInput);
+  const maximasDeMercado = calculateMaximaMercado(mosaico);
   rankings.value = [
-    { title: "Chama Gol", data: calculateChamaGol(mosaico) },
-    { title: "Máxima de Mercado", data: calculateMaximaMercado(mosaico) },
-    { title: "Âncora de Mercado", data: calculateAncoraMercado(mosaico) },
+    { title: "Chama Gol", data: calculateChamaGol(mosaico), show_all: false },
+    {
+      title: "Máxima de Mercado 2,5",
+      data: maximasDeMercado[0],
+      show_all: false,
+    },
+    {
+      title: "Máxima de Mercado 3,5",
+      data: maximasDeMercado[1],
+      show_all: false,
+    },
+    {
+      title: "Âncora de Mercado",
+      data: calculateAncoraMercado(mosaico),
+      show_all: false,
+    },
   ];
   const resultadosMercados = {};
   [...mercadosUnderOver, ...mercadosAmbas].forEach((mercado) => {
@@ -466,70 +773,6 @@ function calcularOscilacaoPorMercadoEspecifico(
   return oscilacoesMercado;
 }
 
-function gerarContagensTabela(resultadosMercados, tabelas) {
-  tabelas.forEach((mercadoTabela) => {
-    const table = document.getElementById(mercadoTabela);
-    const linhas = table.querySelectorAll("tr");
-
-    linhas.forEach((linha, rowIndex) => {
-      // Ignora o cabeçalho
-      if (rowIndex === 0) return;
-
-      // Obtém as células da linha atual
-      const cells = linha.querySelectorAll("td");
-      const hora = cells[0].innerText;
-
-      let overCount = 0;
-      let subidaCount = 0;
-      let lateralOverCount = 0;
-      let descidaCount = 0;
-      let lateralUnderCount = 0;
-
-      // Faz as contagens com base nos resultadosMercados
-      for (let colIndex = 1; colIndex < cells.length - 5; colIndex++) {
-        const atualOver = resultadosMercados.over25[rowIndex - 1]?.[colIndex];
-        const anteriorOver = resultadosMercados.over25[rowIndex]?.[colIndex];
-        const atualAmbas = resultadosMercados.ambas[rowIndex - 1]?.[colIndex];
-        const anteriorAmbas = resultadosMercados.ambas[rowIndex]?.[colIndex];
-
-        // Porcentagem over
-        if (atualOver) overCount++;
-
-        // Subidas: Over25 em cima de Under25
-        if (atualOver && !anteriorOver) subidaCount++;
-
-        // Lateralizações Over25: Over25 em cima de Over25
-        if (atualOver && anteriorOver) lateralOverCount++;
-
-        // Descidas: Under25 em cima de Over25
-        if (!atualOver && anteriorOver) descidaCount++;
-
-        // Lateralizações Under25: Under25 em cima de Under25
-        if (!atualOver && !anteriorOver) lateralUnderCount++;
-      }
-
-      // Atualiza as células extras para contagens
-      const porcentagemCell = cells[cells.length - 5];
-      porcentagemCell.innerText = `${(
-        (overCount / (cells.length - 6)) *
-        100
-      ).toFixed(0)}%`;
-
-      const subidaCell = cells[cells.length - 4];
-      subidaCell.innerText = subidaCount;
-
-      const lateralOverCell = cells[cells.length - 3];
-      lateralOverCell.innerText = lateralOverCount;
-
-      const descidaCell = cells[cells.length - 2];
-      descidaCell.innerText = descidaCount;
-
-      const lateralUnderCell = cells[cells.length - 1];
-      lateralUnderCell.innerText = lateralUnderCount;
-    });
-  });
-}
-
 function calcularPorcentagemColunas(mosaico, mercado, resultadosMercados) {
   const porcentagens = [];
   const totalLinhas = mosaico.length - 1;
@@ -608,7 +851,7 @@ function calcularMediaSubidas(tabelaId) {
   const linhas = Array.from(tabela.getElementsByClassName("subidasCell"));
   let soma = 0;
   let contador = 0;
-
+  let valores = [];
   linhas.forEach((linha, index) => {
     if (index > 0) {
       const celulaSubida = linha.innerText;
@@ -616,6 +859,7 @@ function calcularMediaSubidas(tabelaId) {
         const valor = parseInt(celulaSubida.trim(), 10);
 
         if (!isNaN(valor)) {
+          valores.push(valor);
           soma += valor;
           contador++;
         }
@@ -625,7 +869,10 @@ function calcularMediaSubidas(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
-
+  mediasTotais.value.subida.media = media;
+  mediasTotais.value.subida.ultimasTresSoma = valores
+    .slice(-3)
+    .reduce((acc, val) => acc + val, 0);
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaSubidas`
   );
@@ -639,7 +886,7 @@ function calcularMediaLateralizacaoOver(tabelaId) {
   );
   let soma = 0;
   let contador = 0;
-
+  let valores = [];
   linhas.forEach((linha, index) => {
     if (index > 0) {
       const celulaSubida = linha.innerText;
@@ -647,6 +894,7 @@ function calcularMediaLateralizacaoOver(tabelaId) {
         const valor = parseInt(celulaSubida.trim(), 10);
 
         if (!isNaN(valor)) {
+          valores.push(valor);
           soma += valor;
           contador++;
         }
@@ -656,19 +904,23 @@ function calcularMediaLateralizacaoOver(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
+  mediasTotais.value.lateralizacoesOver.media = media;
+  mediasTotais.value.lateralizacoesOver.ultimasTresSoma = valores
+    .slice(-3)
+    .reduce((acc, val) => acc + val, 0);
 
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaLateralizacoesOver`
   );
   mediaColunaSubidas.innerText = media;
 }
-
+//volta
 function calcularMediaDescidas(tabelaId) {
   const tabela = document.getElementById(tabelaId);
   const linhas = Array.from(tabela.getElementsByClassName("descidasCell"));
   let soma = 0;
   let contador = 0;
-
+  let valores = [];
   linhas.forEach((linha, index) => {
     if (index > 0) {
       const celulaSubida = linha.innerText;
@@ -676,6 +928,7 @@ function calcularMediaDescidas(tabelaId) {
         const valor = parseInt(celulaSubida.trim(), 10);
 
         if (!isNaN(valor)) {
+          valores.push(valor);
           soma += valor;
           contador++;
         }
@@ -685,6 +938,10 @@ function calcularMediaDescidas(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
+  mediasTotais.value.descida.media = media;
+  mediasTotais.value.descida.ultimasTresSoma = valores
+    .slice(-3)
+    .reduce((acc, val) => acc + val, 0);
 
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaDescidas`
@@ -699,6 +956,7 @@ function calcularMediaLateralizacoesUnder(tabelaId) {
   );
   let soma = 0;
   let contador = 0;
+  let valores = [];
 
   linhas.forEach((linha, index) => {
     if (index > 0) {
@@ -707,6 +965,7 @@ function calcularMediaLateralizacoesUnder(tabelaId) {
         const valor = parseInt(celulaSubida.trim(), 10);
 
         if (!isNaN(valor)) {
+          valores.push(valor);
           soma += valor;
           contador++;
         }
@@ -716,6 +975,10 @@ function calcularMediaLateralizacoesUnder(tabelaId) {
 
   const media =
     contador > 0 ? `${Math.ceil((soma / (contador - 1)).toFixed(2))}` : 0;
+  mediasTotais.value.lateralizacoesUnder.media = media;
+  mediasTotais.value.lateralizacoesUnder.ultimasTresSoma = valores
+    .slice(-3)
+    .reduce((acc, val) => acc + val, 0);
 
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaLateralizacoesUnder`
@@ -728,15 +991,17 @@ function calcularMediaGols(tabelaId) {
   const linhas = Array.from(tabela.getElementsByTagName("tr")); // Pega todas as linhas da tabela
   let soma = 0;
   let contador = 0;
+  let valores = [];
 
   // Itera sobre as linhas, pulando o cabeçalho e a soma de gols
-  for (let i = 1; i < linhas.length - 1; i++) {
+  for (let i = 1; i < linhas.length; i++) {
     const celulaGols = linhas[i].querySelector(".golsCell"); // Pega a célula de gols da linha
 
     if (celulaGols) {
       const valor = parseInt(celulaGols.innerText.trim(), 10);
 
       if (!isNaN(valor)) {
+        valores.push(valor);
         soma += valor;
         contador++;
       }
@@ -744,7 +1009,10 @@ function calcularMediaGols(tabelaId) {
   }
 
   const media = contador > 0 ? `${Math.ceil(soma / contador)}` : 0;
-
+  mediasTotais.value.gols.media = media;
+  mediasTotais.value.gols.ultimasTresSoma = valores
+    .slice(-3)
+    .reduce((acc, val) => acc + val, 0);
   const mediaColunaGols = document.getElementById(`${tabelaId}mediaColunaGols`);
   mediaColunaGols.innerText = media;
 }
@@ -792,76 +1060,6 @@ function adicionarLinhaSomaGols(tabelaId, mosaico) {
   }
 
   tabela.insertBefore(linhaSoma, tabela.querySelector("tr:nth-child(3)"));
-}
-function adicionarLinhaOscilacaoColunas(tabelaId, mosaico) {
-  const tabela = document.getElementById(tabelaId);
-
-  // Cria uma nova linha para a oscilação
-  const LinhaOscilacaoColunasPorcentagem = document.createElement("tr");
-  const LinhaOscilacaoColunasPorcentagemIcone = document.createElement("td");
-  LinhaOscilacaoColunasPorcentagemIcone.innerHTML = "📈"; // Ícone de gráfico
-  LinhaOscilacaoColunasPorcentagem.appendChild(
-    LinhaOscilacaoColunasPorcentagemIcone
-  );
-
-  // Insere a linha logo abaixo da linha de porcentagens
-  const linhas = tabela.getElementsByTagName("tr");
-  const porcentagens = Array.from(linhas[1].querySelectorAll("td")).slice(1); // Obtém porcentagens da linha
-  const resultados = mosaico[0].slice(1); // Obtém os resultados da primeira linha do mosaico
-
-  let acumulado = 0; // Variável para acumular os valores de oscilação
-
-  porcentagens.forEach((porcentagemCelula, index) => {
-    const porcentagem = parseFloat(
-      porcentagemCelula.innerText.replace("%", "").trim()
-    ); // Obtém a porcentagem como número
-    const resultado = resultados[index]; // Resultado atual da coluna
-    const cell = document.createElement("td"); // Nova célula para a linha de oscilação
-
-    if (resultado) {
-      const partes = resultado.split(" "); // Divide por espaço
-      const placar = partes[partes.length - 1]; // Obtém o último elemento (exemplo: "2-1")
-      const [golsTime1, golsTime2] = placar.split("-").map(Number); // Converte em números
-
-      if (!isNaN(golsTime1) && !isNaN(golsTime2)) {
-        const totalGols = golsTime1 + golsTime2;
-        const isOver = totalGols > 2.5; // Verifica se o total de gols é maior que 2.5
-
-        if (isOver && porcentagem > 42) {
-          // Over com porcentagem Over -> lateraliza
-          cell.innerText = acumulado;
-          cell.classList.add("green");
-        } else if (!isOver && porcentagem <= 42) {
-          // Under com porcentagem Under -> lateraliza
-          cell.innerText = acumulado;
-          cell.classList.add("red");
-        } else if (isOver && porcentagem <= 42) {
-          // Over com porcentagem Under -> sobe
-          acumulado++; // Incrementa acumulado
-          cell.innerText = acumulado;
-          cell.classList.add("green");
-        } else if (!isOver && porcentagem > 42) {
-          // Under com porcentagem Over -> desce
-          acumulado--; // Decrementa acumulado
-          cell.innerText = acumulado;
-          cell.classList.add("red");
-        }
-      } else {
-        // Se houver erro na extração dos gols, mantemos o acumulado sem alteração
-        cell.innerText = acumulado;
-      }
-    } else {
-      // Caso não tenha resultado, mantém vazio
-      cell.innerText = "";
-    }
-
-    LinhaOscilacaoColunasPorcentagem.appendChild(cell);
-  });
-
-  tabela.insertBefore(
-    LinhaOscilacaoColunasPorcentagem,
-    tabela.querySelector("tr:nth-child(3)")
-  );
 }
 
 function gerarTabela(
@@ -1005,7 +1203,52 @@ function gerarTabela(
       // Adiciona células para os resultados
       row.slice(1).forEach((value, colIndex) => {
         const cell = document.createElement("td");
-        cell.innerText = value || "";
+
+        const regex = /(.*?)\s+x\s+(.*?)\s+(\d+)-(\d+)/;
+        const match = value.match(regex);
+        const [, team1, team2, score1, score2] = match;
+
+        if (!dadosFormatados.value[rowIndex]) {
+          dadosFormatados.value[rowIndex] = [];
+        }
+
+        dadosFormatados.value[rowIndex][colIndex] = {
+          time1: team1,
+          time2: team2,
+          score1: Number(score1),
+          score2: Number(score2),
+          totalGols: Number(score1) + Number(score2),
+        };
+
+        const spanTeam1 = document.createElement("span");
+        spanTeam1.innerText = team1;
+        spanTeam1.classList.add("timesSpan");
+        cell.appendChild(spanTeam1);
+
+        const br = document.createElement("br");
+        cell.appendChild(br);
+
+        const spanX = document.createElement("span");
+        spanX.innerText = "x";
+        spanX.classList.add("spanX");
+        cell.appendChild(spanX);
+
+        const br2 = document.createElement("br");
+        cell.appendChild(br2);
+
+        const spanTeam2 = document.createElement("span");
+        spanTeam2.innerText = team2;
+        spanTeam2.classList.add("timesSpan");
+        cell.appendChild(spanTeam2);
+
+        const br3 = document.createElement("br");
+        cell.appendChild(br3);
+
+        const matchPlacar = `${score1}-${score2}`;
+        const spanPlacar = document.createElement("span");
+        spanPlacar.classList.add("placarJogos");
+        spanPlacar.innerText = matchPlacar;
+        cell.appendChild(spanPlacar);
 
         // Cor para os mercados
         const placar = value.match(/(\d+)-(\d+)/);
@@ -1020,7 +1263,20 @@ function gerarTabela(
           }
           if (rodadaClasse) {
             cell.classList.add(rodadaClasse);
+            dadosFormatados.value[rowIndex][colIndex].tipo =
+              rodadaClasse === "green" ? "over" : "under";
           }
+        }
+        if (
+          oscilacoesPorMercado[mercado][rowIndex] &&
+          oscilacoesPorMercado[mercado][rowIndex][colIndex] !== undefined
+        ) {
+          const oscilacao = oscilacoesPorMercado[mercado][rowIndex][colIndex];
+          const spanOscilacao = document.createElement("span");
+          dadosFormatados.value[rowIndex][colIndex].oscilacao = oscilacao;
+          spanOscilacao.classList.add("pontosGraficos");
+          spanOscilacao.innerText = `p: ${oscilacao}`;
+          cell.appendChild(spanOscilacao);
         }
 
         tableRow.appendChild(cell);
@@ -1100,10 +1356,10 @@ function gerarTabela(
     calcularMediaLateralizacoesUnder(mercadoTabela);
     calcularMediaGols(mercadoTabela);
     adicionarLinhaSomaGols(mercadoTabela, mosaico);
-    adicionarLinhaOscilacaoColunas(mercadoTabela, mosaico);
+    mercadoTabela, mosaico;
   });
-
   ativarDestaquePontos();
+  rankingsGraficoAcc.value = gerarRankings(dadosFormatados.value);
 }
 
 // Funções auxiliares
@@ -1194,10 +1450,6 @@ function calcularMovimentosLinha(
   });
 
   return contador;
-}
-
-function gerarDadosContagem(resultados) {
-  console.log(resultados);
 }
 
 function calcularOscilacaoPorMercado(mosaico, resultadosMercados) {
@@ -1354,7 +1606,7 @@ function geraGraficosPorCategoria(
       x: {
         title: {
           display: true,
-          text: "HorÃ¡rio",
+          text: "Horários",
         },
         ticks: {
           maxRotation: 0,
