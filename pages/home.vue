@@ -186,31 +186,91 @@
             Mostrar/Esconder Tabela
           </PrimeButton>
 
-          <div class="overflow-x-auto">
-            <table
-              class="min-w-[200px] border border-gray-300 text-sm text-gray-700 ml-auto"
-            >
-              <thead class="bg-gray-100">
-                <tr>
-                  <th class="border px-2 py-1 text-left">Média</th>
-                  <th class="border px-2 py-1 text-left">Soma</th>
-                  <th class="border px-2 py-1 text-left">Mult 3</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="(item, key) in mediasTotais"
-                  :key="key"
-                  class="odd:bg-white even:bg-gray-50"
+          <div
+            id="tabelasGolsCalculos"
+            class="flex flex-wrap justify-between overflow-x-auto w-full px-12"
+          >
+            <!-- Tabelas geradas a partir de somaDeGolsPorBloco -->
+            <div class="flex flex-wrap gap-32">
+              <div
+                v-for="(bloco, index) in somaDeGolsPorBloco"
+                :key="'bloco-' + index"
+              >
+                <table
+                  class="min-w-[200px] border border-gray-300 text-sm text-gray-700"
                 >
-                  <td class="border px-2 py-1 font-medium">
-                    {{ formatarNome(key) }}
-                  </td>
-                  <td class="border px-2 py-1">{{ item.ultimasTresSoma }}</td>
-                  <td class="border px-2 py-1">{{ item.media * 3 }}</td>
-                </tr>
-              </tbody>
-            </table>
+                  <thead class="bg-gray-100">
+                    <tr>
+                      <th class="border px-2 py-1 text-left">
+                        Bloco {{ index + 1 }}
+                      </th>
+                      <th class="border px-2 py-1 text-left">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(soma, i) in bloco.somaPorLinha" :key="i">
+                      <td class="border px-2 py-1">Soma Linha</td>
+                      <td
+                        class="border px-2 py-1"
+                        :class="
+                          soma > bloco.mediaGolColunas
+                            ? 'red'
+                            : 'green'
+                        "
+                      >
+                        {{ soma }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border px-2 py-1">Média Gols Linhas</td>
+                      <td class="border px-2 py-1" :class="
+                          soma > bloco.mediaGolColunas
+                            ? 'red'
+                            : 'green'
+                        ">
+                        {{ bloco.media.toFixed(2) }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border px-2 py-1">Média Gols Colunas</td>
+                      <td class="border px-2 py-1">
+                        {{ bloco.mediaGolColunas.toFixed(2) }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tabela de Médias Totais alinhada à direita -->
+            <div class="ml-auto">
+              <table
+                class="min-w-[200px] border border-gray-300 text-sm text-gray-700"
+              >
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="border px-2 py-1 text-left">Média</th>
+                    <th class="border px-2 py-1 text-left">Soma</th>
+                    <th class="border px-2 py-1 text-left">Mult 3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(item, key) in mediasTotais"
+                    :key="key"
+                    class="odd:bg-white even:bg-gray-50"
+                  >
+                    <td class="border px-2 py-1 font-medium">
+                      {{ formatarNome(key) }}
+                    </td>
+                    <td class="border px-2 py-1" :class="item.class">
+                      {{ item.ultimasTresSoma }}
+                    </td>
+                    <td class="border px-2 py-1">{{ item.mult3 || "-" }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <table id="tabelao25" v-show="showTable1"></table>
@@ -245,28 +305,42 @@ const showTable1 = ref(true);
 const showTable2 = ref(true);
 const rankings = ref([]);
 const rankingsGraficoAcc = ref([]);
+const blocosJogos = ref([]);
+const somaDeGolsPorBloco = ref([]);
 const dadosFormatados = ref([]);
 const showRanksAcc = ref(false);
+const porcentagensMedias = ref([]);
+const somaDeGolsPorColuna = ref([]);
 const mediasTotais = ref({
   subida: {
     media: 0,
     ultimasTresSoma: 0,
+    mult3: 0,
+    class: "",
   },
   descida: {
     media: 0,
     ultimasTresSoma: 0,
+    mult3: 0,
+    class: "",
   },
   lateralizacoesOver: {
     media: 0,
     ultimasTresSoma: 0,
+    mult3: 0,
+    class: "",
   },
   lateralizacoesUnder: {
     media: 0,
     ultimasTresSoma: 0,
+    mult3: 0,
+    class: "",
   },
   gols: {
     media: 0,
     ultimasTresSoma: 0,
+    mult3: 0,
+    class: "",
   },
 });
 const campeonatos = ref([
@@ -798,7 +872,23 @@ function calcularPorcentagemColunas(mosaico, mercado, resultadosMercados) {
 
   return porcentagens;
 }
-
+function getPorcentagensMedias(porcentagens) {
+  const porcentagensMedias = {};
+  //duas medias, dos 10 primeiros, e dos outros 10 ultimos
+  const primeiraMedia =
+    porcentagens.slice(0, 10).reduce((a, b) => Number(a) + Number(b), 0) / 10;
+  const segundaMedia =
+    porcentagens.slice(-10).reduce((a, b) => Number(a) + Number(b), 0) / 10;
+  porcentagensMedias.primeiraMedia = {
+    media: primeiraMedia.toFixed(2),
+    class: primeiraMedia.toFixed(2) >= 42 ? "green" : "red",
+  };
+  porcentagensMedias.segundaMedia = {
+    media: segundaMedia.toFixed(2),
+    class: segundaMedia.toFixed(2) >= 42 ? "green" : "red",
+  };
+  return porcentagensMedias;
+}
 function calcularPorcentagemPorBlocos(porcentagens) {
   const blocos = [];
   let soma = 0;
@@ -811,7 +901,8 @@ function calcularPorcentagemPorBlocos(porcentagens) {
       soma = 0; // Reseta a soma para o próximo bloco
     }
   });
-
+  const mediasObj = getPorcentagensMedias(porcentagens);
+  porcentagensMedias.value = mediasObj;
   return blocos;
 }
 
@@ -874,6 +965,12 @@ function calcularMediaSubidas(tabelaId) {
     mediasTotais.value.subida.ultimasTresSoma = valores
       .slice(-3)
       .reduce((acc, val) => acc + val, 0);
+    mediasTotais.value.subida.mult3 = media * 3;
+    mediasTotais.value.subida.class =
+      mediasTotais.value.subida.mult3 >
+      mediasTotais.value.subida.ultimasTresSoma
+        ? "green"
+        : "red";
   }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaSubidas`
@@ -911,6 +1008,12 @@ function calcularMediaLateralizacaoOver(tabelaId) {
     mediasTotais.value.lateralizacoesOver.ultimasTresSoma = valores
       .slice(-3)
       .reduce((acc, val) => acc + val, 0);
+    mediasTotais.value.lateralizacoesOver.mult3 = media * 3;
+    mediasTotais.value.lateralizacoesOver.class =
+      mediasTotais.value.lateralizacoesOver.mult3 >
+      mediasTotais.value.lateralizacoesOver.ultimasTresSoma
+        ? "green"
+        : "red";
   }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaLateralizacoesOver`
@@ -947,6 +1050,12 @@ function calcularMediaDescidas(tabelaId) {
     mediasTotais.value.descida.ultimasTresSoma = valores
       .slice(-3)
       .reduce((acc, val) => acc + val, 0);
+    mediasTotais.value.descida.mult3 = media * 3;
+    mediasTotais.value.descida.class =
+      mediasTotais.value.descida.mult3 >
+      mediasTotais.value.descida.ultimasTresSoma
+        ? "green"
+        : "red";
   }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaDescidas`
@@ -985,6 +1094,12 @@ function calcularMediaLateralizacoesUnder(tabelaId) {
     mediasTotais.value.lateralizacoesUnder.ultimasTresSoma = valores
       .slice(-3)
       .reduce((acc, val) => acc + val, 0);
+    mediasTotais.value.lateralizacoesUnder.mult3 = media * 3;
+    mediasTotais.value.lateralizacoesUnder.class =
+      mediasTotais.value.lateralizacoesUnder.mult3 >
+      mediasTotais.value.lateralizacoesUnder.ultimasTresSoma
+        ? "green"
+        : "red";
   }
   const mediaColunaSubidas = document.getElementById(
     `${tabelaId}mediaColunaLateralizacoesUnder`
@@ -1013,13 +1128,17 @@ function calcularMediaGols(tabelaId) {
       }
     }
   }
-
   const media = contador > 0 ? `${Math.ceil(soma / contador)}` : 0;
   if (tabelaId === "tabelao25") {
     mediasTotais.value.gols.media = media;
     mediasTotais.value.gols.ultimasTresSoma = valores
       .slice(-3)
       .reduce((acc, val) => acc + val, 0);
+    mediasTotais.value.gols.mult3 = media * 3;
+    mediasTotais.value.gols.class =
+      mediasTotais.value.gols.mult3 > mediasTotais.value.gols.ultimasTresSoma
+        ? "green"
+        : "red";
   }
   const mediaColunaGols = document.getElementById(`${tabelaId}mediaColunaGols`);
   mediaColunaGols.innerText = media;
@@ -1048,7 +1167,7 @@ function adicionarLinhaSomaGols(tabelaId, mosaico) {
       });
     }
   });
-
+  somaDeGolsPorColuna.value = somaGolsPorColuna;
   const linhaSoma = document.createElement("tr");
   const headerCell = document.createElement("td");
   headerCell.innerText = "⚽";
@@ -1068,6 +1187,56 @@ function adicionarLinhaSomaGols(tabelaId, mosaico) {
   }
 
   tabela.insertBefore(linhaSoma, tabela.querySelector("tr:nth-child(3)"));
+}
+
+function dividirRodadasEmBlocos(dados) {
+  let blocos = [];
+  let totalColunas = dados[0].length;
+  let totalLinhas = dados.length;
+
+  for (let colStart = 0; colStart < totalColunas; colStart += 5) {
+    for (let linhaStart = 0; linhaStart < totalLinhas; linhaStart += 3) {
+      let bloco = [];
+
+      for (let i = 0; i < 3 && linhaStart + i < totalLinhas; i++) {
+        let linha = [];
+        for (let j = colStart; j < colStart + 5 && j < totalColunas; j++) {
+          linha.push(dados[linhaStart + i][j]);
+        }
+        bloco.push(linha);
+      }
+
+      blocos.push(bloco);
+    }
+  }
+
+  return blocos;
+}
+
+function calcularSomaDeGolsBlocos(blocosJogos, somaGolsPorColuna) {
+  return blocosJogos.map((bloco, index) => {
+    // Soma dos gols por linha dentro do bloco
+    const somaPorLinha = bloco.map((linha) =>
+      linha.reduce((soma, jogo) => soma + jogo.totalGols, 0)
+    );
+
+    // Média da soma das linhas dentro do bloco
+    const media =
+      somaPorLinha.length > 0
+        ? somaPorLinha.reduce((a, b) => a + b, 0) / somaPorLinha.length
+        : 0;
+
+    // Cálculo da média dos gols por colunas para esse bloco
+    const startIndex = index * 5; // Índice inicial do bloco no array de colunas
+    const colunasBloco = somaGolsPorColuna.slice(startIndex, startIndex + 5);
+
+    const mediaGolColunas =
+      colunasBloco.length > 0
+        ? colunasBloco.reduce((a, b) => a + b, 0) / 5 / 2.5
+        : 0;
+
+    return { somaPorLinha, media, mediaGolColunas };
+  });
 }
 
 function gerarTabela(
@@ -1368,6 +1537,11 @@ function gerarTabela(
   });
   ativarDestaquePontos();
   rankingsGraficoAcc.value = gerarRankings(dadosFormatados.value);
+  blocosJogos.value = dividirRodadasEmBlocos(dadosFormatados.value);
+  somaDeGolsPorBloco.value = calcularSomaDeGolsBlocos(
+    blocosJogos.value,
+    somaDeGolsPorColuna.value
+  );
 }
 
 // Funções auxiliares
